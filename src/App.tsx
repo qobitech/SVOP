@@ -1,25 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Suspense } from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+} from 'react-router-dom';
+import './assets/style/main.scss';
+
+import Unapproved from './components/pages/unapproved';
+import Approved from './components/pages/approved';
+import Login from './components/pages/auth/login';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router basename={process.env.PUBLIC_URL}>
+      <Suspense fallback={<></>}>
+        <Routes>
+          <Route path={'/unapproved'} element={<Unapproved />}/>
+          <Route path={'/approved'} element={<Approved />}/>
+          <Route path={'/'} element={<Login />}/>
+        </Routes>
+      </Suspense>
+    </Router>
   );
 }
 

@@ -1,0 +1,11 @@
+@use './font' as *;
+
+$min_width: 300px;
+$max_width: 1200px;
+$min_font: 14px;
+$max_font: 16px;
+// $sefwe: font.$;
+
+html {
+    @include fluid-type($min_width, $max_width, $min_font, $max_font);
+}

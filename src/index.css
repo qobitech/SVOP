@@ -1,6 +1,86 @@
+@font-face {
+  font-family: 'IBX_Regular';
+  src: url('./assets/fonts/IBMPlexSans-Regular.ttf') format('ttf');
+  font-weight: normal;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'IBX_Bold';
+  src: url('./assets/fonts/IBMPlexSans-Bold.ttf') format('ttf');
+  font-weight: normal;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'IBX_Medium';
+  src: url('./assets/fonts/IBMPlexSans-Medium.ttf') format('ttf');
+  font-weight: normal;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'IBX_SemiBold';
+  src: url('./assets/fonts/IBMPlexSans-SemiBold.ttf') format('ttf');
+  font-weight: normal;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'IBX_Light';
+  src: url('./assets/fonts/IBMPlexSans-Light.ttf') format('ttf');
+  font-weight: normal;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Outfit_Bold';
+  src: url('./assets/fonts/Outfit-Bold.ttf') format('ttf');
+  font-weight: normal;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Outfit_Medium';
+  src: url('./assets/fonts/Outfit-Medium.ttf') format('ttf');
+  font-weight: normal;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Outfit_Regular';
+  src: url('./assets/fonts/Outfit-Regular.ttf') format('ttf');
+  font-weight: normal;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Outfit_SemiBold';
+  src: url('./assets/fonts/Outfit-SemiBold.ttf') format('ttf');
+  font-weight: normal;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Outfit_Light';
+  src: url('./assets/fonts/Outfit-Light.ttf') format('ttf');
+  font-weight: normal;
+  font-display: swap;
+  font-style: normal;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'IBX_Regular', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
