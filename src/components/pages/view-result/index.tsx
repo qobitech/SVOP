@@ -30,7 +30,8 @@ import {
   TotalResultValueTextMini,
   CTAApproveButton,
   CTARejectButton,
-  CTABtnSection
+  CTABtnSection,
+  CTAInnerVoteSection
 } from './styled'
 
 import { useParams } from 'react-router-dom'
@@ -168,15 +169,17 @@ const UnapprovedChild = () => {
                         </BodySectionProfileDate>
                     </BodySectionProfile> */}
                     <CTAVoteSection>
-                        <TotalResultTitleText>
-                            Total Result&nbsp;&nbsp;&nbsp;
-                        </TotalResultTitleText>
-                        <TotalResultValueText>
-                            3000
-                        </TotalResultValueText>
-                        <TotalResultValueTextMini>
-                            votes
-                        </TotalResultValueTextMini>
+                        <CTAInnerVoteSection>
+                            <TotalResultTitleText>
+                                Total Result&nbsp;&nbsp;&nbsp;
+                            </TotalResultTitleText>
+                            <TotalResultValueText>
+                                3000
+                            </TotalResultValueText>
+                            <TotalResultValueTextMini>
+                                votes
+                            </TotalResultValueTextMini>
+                        </CTAInnerVoteSection>
                         <CTABtnSection>
                             <CTAApproveButton>
                                 Approve

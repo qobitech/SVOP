@@ -213,9 +213,26 @@ export const VoteCountGridSection = styled('div')({
 
 export const CTAVoteSection = styled('div')({
   display: 'flex',
+  flexDirection: 'row',
   flexWrap: 'wrap',
   boxSizing: 'border-box',
-  alignItems: 'flex-end'
+  alignItems: 'flex-end',
+  justifyContent: 'flex-start',
+  [down('md')]: {
+    alignItems: 'center',
+    flexDirection: 'column'
+  }
+})
+
+export const CTAInnerVoteSection = styled('div')({
+  display: 'flex',
+  flexWrap: 'wrap',
+  boxSizing: 'border-box',
+  alignItems: 'flex-end',
+  justifyContent: 'flex-start',
+  [down('md')]: {
+    justifyContent: 'center'
+  }
 })
 
 export const TotalResultTitleText = styled('p')({
@@ -245,7 +262,12 @@ export const CTABtnSection = styled('div')({
   display: 'flex',
   alignItems: 'center',
   flexWrap: 'wrap',
-  marginLeft: 'auto'
+  marginLeft: 'auto',
+  marginTop: 0,
+  [down('md')]: {
+    marginTop: 30,
+    marginLeft: 0
+  }
 })
 
 export const CTAApproveButton = styled('button')({

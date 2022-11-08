@@ -29,8 +29,28 @@ export const tableRecord: IResult[] = [
     DocumentUrl: '',
     results: [
       {
-        partyName: '',
+        partyName: 'PDP',
         Votes: 5
+      },
+      {
+        partyName: 'APC',
+        Votes: 2
+      },
+      {
+        partyName: 'LP',
+        Votes: 10
+      },
+      {
+        partyName: 'NPP',
+        Votes: 12
+      },
+      {
+        partyName: 'SDP',
+        Votes: 9
+      },
+      {
+        partyName: 'AP',
+        Votes: 7
       }
     ]
   }
