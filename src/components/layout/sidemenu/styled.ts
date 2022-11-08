@@ -1,4 +1,5 @@
 import { styled, Typography } from '@material-ui/core'
+import { down } from '../../../assets/style/breakpointHelpers'
 
 import { Link } from 'react-router-dom'
 
@@ -21,7 +22,10 @@ export const SideMenuContainer = styled('div')({
   overflow: 'auto',
   boxSizing: 'border-box',
   display: 'flex',
-  flexDirection: 'column'
+  flexDirection: 'column',
+  [down('sm')]: {
+    height: '90vh'
+  }
 })
 
 export const ProfileContainer = styled('div')({
