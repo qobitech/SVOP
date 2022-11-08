@@ -1,16 +1,24 @@
 import React from 'react'
-import Dashboard from '../../layout'
+import DataWrapper from '../../../wrapper/data-wrapper'
 
 import {
-    HeaderContainer,
-    HeaderText,
-    HeaderTextNumbers,
-    BodyContainer
+  HeaderContainer,
+  HeaderText,
+  HeaderTextNumbers,
+  BodyContainer
 } from './styled'
 
-const UnApproved = () => {
-    return(
-        <Dashboard>
+const Approved: () => JSX.Element = () => {
+  return (
+        <DataWrapper>
+            <ApprovedChild />
+        </DataWrapper>
+  )
+}
+
+const ApprovedChild: () => JSX.Element = () => {
+  return (
+        <>
             <HeaderContainer>
                 <HeaderText>
                     Approved Results
@@ -20,10 +28,10 @@ const UnApproved = () => {
                 </HeaderTextNumbers>
             </HeaderContainer>
             <BodyContainer>
-                
+
             </BodyContainer>
-        </Dashboard>
-    )
+        </>
+  )
 }
 
-export default UnApproved;
+export default Approved

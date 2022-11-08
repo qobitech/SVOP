@@ -1,16 +1,31 @@
 import React from 'react'
-import Dashboard from '../../layout'
+import DataWrapper from '../../../wrapper/data-wrapper'
+import Filter from '../../filter'
 
 import {
-    HeaderContainer,
-    HeaderText,
-    HeaderTextNumbers,
-    BodyContainer
+  HeaderContainer,
+  HeaderText,
+  HeaderTextNumbers,
+  BodyContainer
 } from './styled'
+import ResultTable from '../../table'
 
-const UnApproved = () => {
-    return(
-        <Dashboard>
+import {
+  tableRecord,
+  tableHeader
+} from './mock-data'
+
+const Unapproved = () => {
+  return (
+        <DataWrapper>
+            <UnapprovedChild />
+        </DataWrapper>
+  )
+}
+
+const UnapprovedChild = () => {
+  return (
+        <>
             <HeaderContainer>
                 <HeaderText>
                     Unapproved Results
@@ -20,10 +35,14 @@ const UnApproved = () => {
                 </HeaderTextNumbers>
             </HeaderContainer>
             <BodyContainer>
-                
+                <Filter />
+                <ResultTable
+                    header={tableHeader}
+                    record={tableRecord}
+                />
             </BodyContainer>
-        </Dashboard>
-    )
+        </>
+  )
 }
 
-export default UnApproved;
+export default Unapproved

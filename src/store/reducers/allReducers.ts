@@ -1,5 +1,5 @@
-import authReducer from './users/authReducer';
+import authReducer from './users/authReducer'
 
 export {
-    authReducer
-};
+  authReducer
+}

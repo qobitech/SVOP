@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'IBX_Regular';
-  src: url('./assets/fonts/IBMPlexSans-Regular.ttf') format('ttf');
+  src: url('./assets/fonts/IBMPlexSans-Regular.ttf') format('truetype');
   font-weight: normal;
   font-display: swap;
   font-style: normal;
@@ -8,7 +8,7 @@
 
 @font-face {
   font-family: 'IBX_Bold';
-  src: url('./assets/fonts/IBMPlexSans-Bold.ttf') format('ttf');
+  src: url('./assets/fonts/IBMPlexSans-Bold.ttf') format('truetype');
   font-weight: normal;
   font-display: swap;
   font-style: normal;
@@ -16,7 +16,7 @@
 
 @font-face {
   font-family: 'IBX_Medium';
-  src: url('./assets/fonts/IBMPlexSans-Medium.ttf') format('ttf');
+  src: url('./assets/fonts/IBMPlexSans-Medium.ttf') format('truetype');
   font-weight: normal;
   font-display: swap;
   font-style: normal;
@@ -24,7 +24,7 @@
 
 @font-face {
   font-family: 'IBX_SemiBold';
-  src: url('./assets/fonts/IBMPlexSans-SemiBold.ttf') format('ttf');
+  src: url('./assets/fonts/IBMPlexSans-SemiBold.ttf') format('truetype');
   font-weight: normal;
   font-display: swap;
   font-style: normal;
@@ -32,7 +32,7 @@
 
 @font-face {
   font-family: 'IBX_Light';
-  src: url('./assets/fonts/IBMPlexSans-Light.ttf') format('ttf');
+  src: url('./assets/fonts/IBMPlexSans-Light.ttf') format('truetype');
   font-weight: normal;
   font-display: swap;
   font-style: normal;
@@ -40,7 +40,7 @@
 
 @font-face {
   font-family: 'Outfit_Bold';
-  src: url('./assets/fonts/Outfit-Bold.ttf') format('ttf');
+  src: url('./assets/fonts/Outfit-Bold.ttf') format('truetype');
   font-weight: normal;
   font-display: swap;
   font-style: normal;
@@ -48,7 +48,7 @@
 
 @font-face {
   font-family: 'Outfit_Medium';
-  src: url('./assets/fonts/Outfit-Medium.ttf') format('ttf');
+  src: url('./assets/fonts/Outfit-Medium.ttf') format('truetype');
   font-weight: normal;
   font-display: swap;
   font-style: normal;
@@ -56,7 +56,7 @@
 
 @font-face {
   font-family: 'Outfit_Regular';
-  src: url('./assets/fonts/Outfit-Regular.ttf') format('ttf');
+  src: url('./assets/fonts/Outfit-Regular.ttf') format('truetype');
   font-weight: normal;
   font-display: swap;
   font-style: normal;
@@ -64,7 +64,7 @@
 
 @font-face {
   font-family: 'Outfit_SemiBold';
-  src: url('./assets/fonts/Outfit-SemiBold.ttf') format('ttf');
+  src: url('./assets/fonts/Outfit-SemiBold.ttf') format('truetype');
   font-weight: normal;
   font-display: swap;
   font-style: normal;
@@ -72,7 +72,7 @@
 
 @font-face {
   font-family: 'Outfit_Light';
-  src: url('./assets/fonts/Outfit-Light.ttf') format('ttf');
+  src: url('./assets/fonts/Outfit-Light.ttf') format('truetype');
   font-weight: normal;
   font-display: swap;
   font-style: normal;
@@ -87,7 +87,19 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+table {
+  font-family: 'IBX_Regular' !important;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.MuiOutlinedInput-notchedOutline {
+  border-color: #286439 !important;
+}
+
+.Mui-focused {
+  color: #286439 !important;
 }

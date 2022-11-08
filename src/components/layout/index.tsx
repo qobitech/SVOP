@@ -1,25 +1,24 @@
 import React, { useState } from 'react'
 import Header from './header'
-import SideMenu from './sidemenu';
+import SideMenu from './sidemenu'
 
-import { 
-    OverLay, 
-    HeaderBackgroundOverLay, 
-    ChildrenContainer,
-    MainContainer
+import {
+  OverLay,
+  HeaderBackgroundOverLay,
+  ChildrenContainer,
+  MainContainer
 } from './styled'
-import profile from '../../assets/images/profile.svg'
+import profile from '../../assets/images/user.svg'
+import { userData } from '../../constants/global'
 
+const Dashboard = ({ children }: { children?: any }) => {
+  const [openSideMenu, setOpenSideMenu] = useState(false)
 
-const Dashboard = ({children}:{children?: any}) => {
+  const setMenu = () => {
+    setOpenSideMenu(!openSideMenu)
+  }
 
-    const [openSideMenu, setOpenSideMenu] = useState(false);
-
-    const setMenu = () => {
-        setOpenSideMenu(!openSideMenu)
-    }
-
-    return(
+  return (
         <MainContainer>
            <Header setMenu={setMenu} />
            <HeaderBackgroundOverLay />
@@ -27,20 +26,18 @@ const Dashboard = ({children}:{children?: any}) => {
             <ChildrenContainer>
                 {children}
             </ChildrenContainer>
-           {openSideMenu ? 
-                <>
-                    <SideMenu 
-                        name='Badamosi John'
-                        role='Presiding Officer'
-                        imageSrc={profile}
+           {openSideMenu
+             ? <>
+                    <SideMenu
+                        name={userData.user?.firstName + ' ' + userData.user?.lastName}
+                        role={userData.token?.role || ''}
+                        imageSrc={userData.user?.profileUrl || profile}
                     />
                     <OverLay onClick={setMenu} />
-                </> 
-           : null}
+                </>
+             : null}
         </MainContainer>
-    )
+  )
 }
 
-export default Dashboard;
-
-
+export default Dashboard

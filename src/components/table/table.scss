@@ -1,0 +1,59 @@
+.resultTable {
+    border-collapse: separate;
+    border-spacing: 0 8px;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 1px solid #DAEFE0;
+    border-radius: 5px;
+    tr {
+        border-radius: 6px;
+        display: table-row;
+        border-bottom: 1px solid #DAEFE0;
+        text-align: left;
+    }
+    td {
+        font-size: 11;
+        font-weight: 300 !important;
+    }
+    td,
+    th {
+        border: none;
+        display: table-cell;
+        vertical-align: middle;
+        padding: 10px 15px;
+        font-size: 13;
+        border-bottom: 1px solid #DAEFE0;
+    }
+    th {
+        padding: 15px;
+        font-size: 13px;
+    }
+    .thead_blue {
+        background: #fff !important;
+        background-color: #fff !important;
+        color: #000;
+        min-width: 100%;
+        margin: 0;
+        padding: 0;
+        border: 1px solid black;
+    }
+    tbody tr {
+        background-color: #fff;
+        box-shadow: 0px 4px 4px rgba(240, 235, 235, 0.25);
+    }
+    .notactive {
+        background-color: green !important;
+        box-shadow: none !important;
+    }
+    .tel_input {
+        height: 52px !important;
+        font-size: 18px !important;
+    }
+    .tel_input input {
+        height: 100% !important;
+        max-width: 310px !important;
+        width: 100% !important;
+        border: 1px solid darkgrey !important;
+    }
+}

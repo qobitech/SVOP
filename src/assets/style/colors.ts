@@ -39,5 +39,5 @@ export const COLORS = {
   brightRed: '#FF432F',
   textMain: '#000',
   textSecondary: '#27303E',
-  textSecondaryLight: '#27303E',
+  textSecondaryLight: '#27303E'
 }

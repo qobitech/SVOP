@@ -1,33 +1,22 @@
-// import { applyMiddleware, createStore, compose } from 'redux';
-// import thunkMiddleware from 'redux-thunk';
+import { applyMiddleware, createStore, compose, StoreEnhancer } from 'redux'
+import thunkMiddleware from 'redux-thunk'
+import monitorReducerEnhancer from './enhancers/monitorReducer'
+import loggerMiddleware from './middleware/logger'
+import reducers from './reducers/rootreducer'
 
-// import monitorReducerEnhancer from './enhancers/monitorReducer';
-// import loggerMiddleware from './middleware/logger';
-import reducers from './reducers/rootreducer';
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+export default function configureStore (preloadedState?: any) {
+  const middlewares = [loggerMiddleware, thunkMiddleware]
+  const middlewareEnhancer = applyMiddleware(...middlewares)
 
-import { configureStore } from '@reduxjs/toolkit';
+  const enhancers = [middlewareEnhancer, monitorReducerEnhancer]
+  const composedEnhancers = compose(...enhancers)
 
-export const store = configureStore({
-    reducer: {
-      ...reducers,
-    },
-  })
+  const store = createStore(reducers, preloadedState, composedEnhancers as StoreEnhancer<unknown, {}>)
 
-// import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
+  // if (process.env.NODE_ENV !== 'production' && module.hot) {
+  //     module?.hot?.accept('./reducers', () => store.replaceReducer(reducers));
+  // }
 
-// export default function configureStore(preloadedState: any) {
-//     const middlewares = [loggerMiddleware, thunkMiddleware];
-//     const middlewareEnhancer = applyMiddleware(...middlewares);
-
-//     const enhancers = [middlewareEnhancer, monitorReducerEnhancer];
-//     // const composedEnhancers = composeWithDevTools(...enhancers);
-//     const composedEnhancers = compose(...enhancers);
-
-//     const store = createStore(reducers, preloadedState, composedEnhancers);
-
-//     if (process.env.NODE_ENV !== 'production' && module.hot) {
-//         module.hot.accept('./reducers', () => store.replaceReducer(reducers));
-//     }
-
-//     return store;
-// }
+  return store
+}
