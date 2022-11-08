@@ -100,7 +100,7 @@ export const BodySectionRow = styled('div')({
 })
 
 export const BodySectionLeft = styled('p')({
-  fontFamily: ['IBX_Light', 'Arial', 'sans-serif'].join(','),
+  fontFamily: ['IBX_Regular', 'Arial', 'sans-serif'].join(','),
   fontSize: 14,
   margin: 0,
   color: '#286439'
