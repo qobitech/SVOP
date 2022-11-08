@@ -78,18 +78,18 @@ const SideMenu = ({ name, role, imageSrc }: ISideMenu) => {
                         key={i.id}
                     />
                 ))}
-                <LogoutSection
+            </MenuContainer>
+            <LogoutSection
                     onClick={() => {
                       localStorage.clear()
                       window.open(pageurl.LOGIN, '_self')
                     }}
                 >
-                    <ParentMenuIcon src={logout_icon} />
-                    <LogoutText>
-                        Logout
-                    </LogoutText>
-                </LogoutSection>
-            </MenuContainer>
+                <ParentMenuIcon src={logout_icon} />
+                <LogoutText>
+                    Logout
+                </LogoutText>
+            </LogoutSection>
         </SideMenuContainer>
   )
 }

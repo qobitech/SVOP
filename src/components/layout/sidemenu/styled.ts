@@ -19,7 +19,9 @@ export const SideMenuContainer = styled('div')({
   width: 'max-content',
   zIndex: 5,
   overflow: 'auto',
-  boxSizing: 'border-box'
+  boxSizing: 'border-box',
+  display: 'flex',
+  flexDirection: 'column'
 })
 
 export const ProfileContainer = styled('div')({
@@ -56,7 +58,7 @@ export const ProfileRole = styled(Typography)({
 
 export const MenuContainer = styled('ul')({
   padding: 5,
-  height: '80%',
+  height: 'auto',
   display: 'flex',
   flexDirection: 'column',
   boxSizing: 'border-box'
