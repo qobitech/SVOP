@@ -18,7 +18,8 @@ export const SideMenuContainer = styled('div')({
   background: '#fff',
   width: 'max-content',
   zIndex: 5,
-  overflow: 'auto'
+  overflow: 'auto',
+  boxSizing: 'border-box'
 })
 
 export const ProfileContainer = styled('div')({
@@ -57,7 +58,8 @@ export const MenuContainer = styled('ul')({
   padding: 5,
   height: '80%',
   display: 'flex',
-  flexDirection: 'column'
+  flexDirection: 'column',
+  boxSizing: 'border-box'
 })
 
 export const ParentMenuContainer = styled('div')({
@@ -67,7 +69,8 @@ export const ParentMenuContainer = styled('div')({
   display: 'flex',
   alignItems: 'center',
   padding: '0 10px',
-  cursor: 'pointer'
+  cursor: 'pointer',
+  boxSizing: 'border-box'
 })
 
 export const ParentMenuIcon = styled('img')({
