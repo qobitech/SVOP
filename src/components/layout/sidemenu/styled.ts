@@ -10,11 +10,20 @@ export const LinkContainer = styled(Link)({
   textDecoration: 'none'
 })
 
-export const SideMenuContainer = styled('div')({
+export const MainMenuContainer = styled('div')({
   position: 'fixed',
   left: 0,
   top: 0,
-  padding: '10px 5px',
+  padding: 0,
+  height: '100vh',
+  background: '#fff',
+  width: 'max-content',
+  zIndex: 5,
+  overflow: 'auto',
+  boxSizing: 'border-box'
+})
+
+export const SideMenuContainer = styled('div')({
   height: '100vh',
   background: '#fff',
   width: 'max-content',

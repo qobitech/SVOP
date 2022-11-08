@@ -16,7 +16,8 @@ import {
   SubMenuNumbers,
   LogoutSection,
   LogoutText,
-  LinkContainer
+  LinkContainer,
+  MainMenuContainer
 } from './styled'
 
 import result_icon from '../../../assets/images/results-icon.svg'
@@ -56,41 +57,43 @@ const menuData = [
 
 const SideMenu = ({ name, role, imageSrc }: ISideMenu) => {
   return (
-        <SideMenuContainer>
-            <LinkContainer to={pageurl.PROFILE}>
-                <ProfileContainer>
-                    <ProfileImage src={imageSrc} />
-                        <ProfileName>
-                            {name}
-                        </ProfileName>
-                    <ProfileRole>
-                        {role}
-                    </ProfileRole>
-                </ProfileContainer>
-            </LinkContainer>
-            <MenuContainer>
-                {menuData.map(i => (
-                    <MenuComponent
-                        id={i.id}
-                        title={i.title}
-                        sub={i.sub}
-                        url={i.url}
-                        key={i.id}
-                    />
-                ))}
-            </MenuContainer>
-            <LogoutSection
-                    onClick={() => {
-                      localStorage.clear()
-                      window.open(pageurl.LOGIN, '_self')
-                    }}
-                >
-                <ParentMenuIcon src={logout_icon} />
-                <LogoutText>
-                    Logout
-                </LogoutText>
-            </LogoutSection>
-        </SideMenuContainer>
+        <MainMenuContainer>
+          <SideMenuContainer>
+              <LinkContainer to={pageurl.PROFILE}>
+                  <ProfileContainer>
+                      <ProfileImage src={imageSrc} />
+                          <ProfileName>
+                              {name}
+                          </ProfileName>
+                      <ProfileRole>
+                          {role}
+                      </ProfileRole>
+                  </ProfileContainer>
+              </LinkContainer>
+              <MenuContainer>
+                  {menuData.map(i => (
+                      <MenuComponent
+                          id={i.id}
+                          title={i.title}
+                          sub={i.sub}
+                          url={i.url}
+                          key={i.id}
+                      />
+                  ))}
+              </MenuContainer>
+              <LogoutSection
+                      onClick={() => {
+                        localStorage.clear()
+                        window.open(pageurl.LOGIN, '_self')
+                      }}
+                  >
+                  <ParentMenuIcon src={logout_icon} />
+                  <LogoutText>
+                      Logout
+                  </LogoutText>
+              </LogoutSection>
+          </SideMenuContainer>
+        </MainMenuContainer>
   )
 }
 
