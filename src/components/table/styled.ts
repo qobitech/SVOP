@@ -14,6 +14,11 @@ export const TableContainer = styled('div')({
   overflow: 'auto'
 })
 
+export const PaginationContainer = styled('div')({
+  display: 'flex',
+  justifyContent: 'center'
+})
+
 export const FilterButton = styled('button')({
   width: 'max-content',
   height: 43,
