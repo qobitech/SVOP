@@ -63,17 +63,12 @@ const OverviewChild: React.FC<IOverviewPageChild> = ({
     },
     {
       title: 'Approved',
-      value: data?.total || 1,
-      url: pageurl.APPROVED
-    },
-    {
-      title: 'Pending',
-      value: data?.total || 1,
+      value: 0,
       url: pageurl.APPROVED
     },
     {
       title: 'Rejected',
-      value: data?.total || 1,
+      value: 0,
       url: pageurl.APPROVED
     }
   ]

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import {
   SideMenuContainer,
@@ -10,25 +10,24 @@ import {
   ParentMenuContainer,
   ParentMenuIcon,
   ParentMenuText,
-  ParentMenuToggleIcon,
   SubMenuContainer,
   SubMenuText,
-  SubMenuNumbers,
   LogoutSection,
   LogoutText,
   LinkContainer,
   MainMenuContainer
 } from './styled'
 
-import result_icon from '../../../assets/images/results-icon.svg'
-import toogle_icon from '../../../assets/images/toogle-icon.svg'
 import logout_icon from '../../../assets/images/logout.svg'
 import { pageurl } from '../../../constants/pageurl'
+
+import './style.scss'
 
 interface ISideMenu {
   name: string
   role: string
   imageSrc: string
+  isOpen: boolean
 }
 
 const menuData = [
@@ -36,7 +35,8 @@ const menuData = [
     id: 1,
     title: 'Overview',
     url: pageurl.OVERVIEW,
-    sub: []
+    sub: [],
+    isParent: false
   },
   {
     id: 2,
@@ -57,13 +57,14 @@ const menuData = [
         menuNumber: 3,
         selected: true
       }
-    ]
+    ],
+    isParent: true
   }
 ]
 
-const SideMenu = ({ name, role, imageSrc }: ISideMenu) => {
+const SideMenu = ({ name, role, imageSrc, isOpen }: ISideMenu) => {
   return (
-        <MainMenuContainer>
+        <MainMenuContainer className={!isOpen ? 'side_menu_close' : 'side_menu_open'}>
           <SideMenuContainer>
               <LinkContainer to={pageurl.PROFILE}>
                   <ProfileContainer>
@@ -84,6 +85,7 @@ const SideMenu = ({ name, role, imageSrc }: ISideMenu) => {
                           sub={i.sub}
                           url={i.url}
                           key={i.id}
+                          isParent={i.isParent}
                       />
                   ))}
               </MenuContainer>
@@ -114,33 +116,42 @@ interface IMenuComponent {
     menuNumber: number
     selected: boolean
   }>
-
+  isParent: boolean
 }
 
 const MenuComponent = ({
   id,
   title,
-  sub
+  sub,
+  isParent,
+  url
 }: IMenuComponent) => {
+  const [isSubOpen, setIsSubOpen] = useState(false)
   return (
         <MenuContainer key={id}>
-            <ParentMenuContainer>
-                <ParentMenuIcon src={result_icon} />
+            {!isParent
+              ? <LinkContainer to={url}>
+              <ParentMenuContainer>
+                  <i className='fa fa-list-alt mr-2' />
+                  <ParentMenuText>
+                      {title}
+                  </ParentMenuText>
+              </ParentMenuContainer>
+            </LinkContainer>
+              : <ParentMenuContainer onClick={() => setIsSubOpen(!isSubOpen)}>
+                <i className='fas fa-check mr-2' />
                 <ParentMenuText>
                     {title}
                 </ParentMenuText>
-                <ParentMenuToggleIcon src={toogle_icon} />
-            </ParentMenuContainer>
-            {sub.map(i => (
+                <i className={ isSubOpen ? 'fa fa-angle-down toggle_open ml-auto mr-3' : 'fa fa-angle-down toggle_close ml-auto mr-3' } />
+              </ParentMenuContainer>}
+            {isSubOpen && sub.map(i => (
                 <SubMenuContainer key={i.id}>
                     <LinkContainer to={i.url}>
                         <SubMenuText selected={i.selected}>
                             {i.title}
                         </SubMenuText>
                     </LinkContainer>
-                    <SubMenuNumbers>
-                        {i.menuNumber}
-                    </SubMenuNumbers>
                 </SubMenuContainer>
             ))}
         </MenuContainer>

@@ -7,17 +7,20 @@ export const LinkContainer = styled(Link)({
   fontFamily: 'inherit',
   fontSize: 'inherit',
   color: 'inherit',
-  textDecoration: 'none'
+  textDecoration: 'none',
+  '&:hover': {
+    color: 'inherit',
+    textDecoration: 'none'
+  }
 })
 
 export const MainMenuContainer = styled('div')({
   position: 'fixed',
-  left: 0,
   top: 0,
   padding: 0,
   height: '100vh',
   background: '#fff',
-  width: 'max-content',
+  minWidth: 200,
   zIndex: 5,
   overflow: 'auto',
   boxSizing: 'border-box'
@@ -26,7 +29,7 @@ export const MainMenuContainer = styled('div')({
 export const SideMenuContainer = styled('div')({
   height: '100vh',
   background: '#fff',
-  width: 'max-content',
+  width: '100%',
   zIndex: 5,
   overflow: 'auto',
   boxSizing: 'border-box',
@@ -40,15 +43,15 @@ export const SideMenuContainer = styled('div')({
 export const ProfileContainer = styled('div')({
   display: 'flex',
   flexDirection: 'column',
-  padding: 10,
+  padding: '20px 10px',
   justifyContent: 'start',
   alignItems: 'center'
 })
 
 export const ProfileImage = styled('img')({
   borderRadius: '50%',
-  width: 53,
-  height: 53,
+  width: 30,
+  height: 30,
   marginBottom: 5
 })
 
@@ -70,23 +73,28 @@ export const ProfileRole = styled(Typography)({
 })
 
 export const MenuContainer = styled('ul')({
-  padding: 5,
+  padding: 0,
   height: 'auto',
   display: 'flex',
   flexDirection: 'column',
   boxSizing: 'border-box'
 })
 
-export const ParentMenuContainer = styled('div')({
+export const ParentMenuContainer = styled('div')(({ isselected }: { isselected?: 'true' | 'false' }) => ({
   height: 37,
-  borderRadius: 5,
-  background: '#286439',
+  borderRadius: 0,
+  background: isselected === 'true' ? '#286439' : '#fff',
+  borderBottom: '1px solid #e7e7e7',
   display: 'flex',
   alignItems: 'center',
   padding: '0 10px',
   cursor: 'pointer',
-  boxSizing: 'border-box'
-})
+  boxSizing: 'border-box',
+  transition: '.2s ease',
+  '&:hover': {
+    background: '#F4FFF8'
+  }
+}))
 
 export const ParentMenuIcon = styled('img')({
   width: 12,
@@ -106,13 +114,17 @@ export const LogoutText = styled('p')({
   cursor: 'pointer'
 })
 
-export const ParentMenuText = styled(Typography)({
-  fontFamily: ['Outfit_SemiBold', 'Arial', 'sans-serif'].join(','),
+export const ParentMenuText = styled(Typography)(({ isselected }: { isselected?: 'true' | 'false' }) => ({
+  fontFamily: ['Outfit_Medium', 'Arial', 'sans-serif'].join(','),
   textTransform: 'capitalize',
   fontSize: 14,
   margin: 0,
-  color: '#fff'
-})
+  color: isselected === 'true' ? '#fff' : '#286439',
+  transition: '.2s ease'
+  // '&:hover': {
+  //   color: '#fff'
+  // }
+}))
 
 export const SubMenuContainer = styled('div')({
   width: 159,
@@ -121,12 +133,13 @@ export const SubMenuContainer = styled('div')({
   background: 'none',
   display: 'flex',
   alignItems: 'center',
-  paddingLeft: 30,
-  cursor: 'pointer'
+  paddingLeft: 40,
+  cursor: 'pointer',
+  justifyContent: 'space-between'
 })
 
 export const SubMenuText = styled(Typography)(({ selected }: { selected: boolean }) => ({
-  fontFamily: [selected ? 'Outfit_Medium' : 'Outfit_Regular', 'Arial', 'sans-serif'].join(','),
+  fontFamily: [selected ? 'Outfit_Light' : 'Outfit_Regular', 'Arial', 'sans-serif'].join(','),
   textTransform: 'capitalize',
   fontSize: 14,
   margin: 0,
@@ -139,7 +152,6 @@ export const SubMenuNumbers = styled(Typography)({
   fontSize: 10,
   margin: 0,
   marginLeft: 'auto',
-  marginRight: 27,
   color: '#286439',
   width: 'max-content',
   height: 17.15,

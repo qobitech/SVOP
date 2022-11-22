@@ -28,16 +28,13 @@ const Dashboard = ({ children }: { children?: any }) => {
                   {children}
               </ChildrenContainer>
             </ScrollIntoViewController>
-           {openSideMenu
-             ? <>
-                    <SideMenu
-                        name={userData.user?.firstName + ' ' + userData.user?.lastName}
-                        role={userData.token?.role || ''}
-                        imageSrc={userData.user?.profileUrl || profile}
-                    />
-                    <OverLay onClick={setMenu} />
-                </>
-             : null}
+            <SideMenu
+                name={userData.user?.firstName + ' ' + userData.user?.lastName}
+                role={userData.token?.role || ''}
+                imageSrc={userData.user?.profileUrl || profile}
+                isOpen={openSideMenu}
+            />
+           {openSideMenu ? <OverLay onClick={setMenu} /> : null}
         </MainContainer>
   )
 }

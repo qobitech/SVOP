@@ -162,7 +162,7 @@ export const OverViewSectionColumns = styled('div')(({ noborder }: { noborder?: 
 
 export const OverViewSectionColumnsHeaderText = styled(Typography)({
   fontFamily: ['IBX_Regular', 'Arial', 'sans-serif'].join(','),
-  fontSize: 12,
+  fontSize: 14,
   margin: 0,
   marginBottom: 5,
   textTransform: 'uppercase'
@@ -170,7 +170,7 @@ export const OverViewSectionColumnsHeaderText = styled(Typography)({
 
 export const OverViewSectionColumnsBodyText = styled(Typography)({
   fontFamily: ['IBX_Medium', 'Arial', 'sans-serif'].join(','),
-  fontSize: 25
+  fontSize: 40
 })
 
 export const LinkContainer = styled(Link)({
