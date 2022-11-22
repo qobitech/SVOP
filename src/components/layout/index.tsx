@@ -10,6 +10,7 @@ import {
 } from './styled'
 import profile from '../../assets/images/user.svg'
 import { userData } from '../../constants/global'
+import ScrollIntoViewController from './ScrollIntoViewController'
 
 const Dashboard = ({ children }: { children?: any }) => {
   const [openSideMenu, setOpenSideMenu] = useState(false)
@@ -22,10 +23,11 @@ const Dashboard = ({ children }: { children?: any }) => {
         <MainContainer>
            <Header setMenu={setMenu} />
            <HeaderBackgroundOverLay />
-
-            <ChildrenContainer>
-                {children}
-            </ChildrenContainer>
+            <ScrollIntoViewController>
+              <ChildrenContainer>
+                  {children}
+              </ChildrenContainer>
+            </ScrollIntoViewController>
            {openSideMenu
              ? <>
                     <SideMenu

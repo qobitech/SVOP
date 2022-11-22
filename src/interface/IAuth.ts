@@ -9,6 +9,10 @@ export interface IUser {
   phoneNumber: string
   mobile: string
 }
+export interface IOTP {
+  message: string
+  isSuccessful: boolean
+}
 export interface IToken {
   email: string
   exp: number

@@ -30,5 +30,10 @@ export const ChildrenContainer = styled('div')({
   zIndex: 2,
   position: 'relative',
   padding: 15,
-  height: '100vh'
+  height: '100vh',
+  margin: '0 auto',
+  boxSizing: 'border-box',
+  paddingTop: 70,
+  maxWidth: 1440,
+  width: '100%'
 })

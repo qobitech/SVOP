@@ -15,13 +15,13 @@ export const HeaderContainer = styled('div')({
   marginBottom: 20
 })
 
-export const BodyContainer = styled('div')({
+export const BodyContainer = styled('div')(({ nopadding }: { nopadding?: 'true' | 'false' }) => ({
   width: '100%',
   maxWidth: '100%',
   height: 'auto',
   borderRadius: 5,
   background: '#fff',
-  padding: 20,
+  padding: nopadding === 'true' ? 0 : 20,
   boxSizing: 'border-box',
   display: 'flex',
   flexDirection: 'row',
@@ -31,6 +31,15 @@ export const BodyContainer = styled('div')({
   [down('md')]: {
     flexDirection: 'column-reverse'
   }
+}))
+
+export const BodyContainerRow = styled('div')({
+  width: '100%',
+  height: 'auto',
+  boxSizing: 'border-box',
+  display: 'flex',
+  flexDirection: 'row',
+  marginBottom: 20
 })
 
 export const HeaderText = styled(Typography)({
@@ -118,7 +127,16 @@ export const BodySectionComponentImage = styled('div')({
   height: '90%',
   border: '1px solid #DAEFE0',
   borderRadius: 5,
-  marginTop: 20
+  marginTop: 20,
+  boxSizing: 'border-box',
+  padding: 20
+})
+
+export const BodySectionComponentImageTag = styled('img')({
+  maxWidth: 600,
+  width: '100%',
+  height: '100%',
+  objectFit: 'cover'
 })
 
 export const BodySectionProfile = styled('div')({

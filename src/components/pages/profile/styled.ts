@@ -15,6 +15,43 @@ export const BodyContainer = styled('div')({
   justifyContent: 'space-between'
 })
 
+export const LoggedUserSectionRow = styled('div')(({ nomargin }: { nomargin?: 'true' | 'false' }) => ({
+  width: '100%',
+  height: 'auto',
+  boxSizing: 'border-box',
+  marginBottom: nomargin === 'true' ? 0 : 30,
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+  justifyContent: 'flex-start'
+}))
+
+export const LoggedUserSectionRowHeaderText = styled(Typography)({
+  fontFamily: ['IBX_Regular', 'Arial', 'sans-serif'].join(','),
+  fontSize: 12,
+  margin: 0,
+  marginBottom: 5,
+  textTransform: 'uppercase',
+  color: '#616161'
+})
+
+export const LoggedUserSectionRowBodyText = styled(Typography)({
+  fontFamily: ['IBX_Medium', 'Arial', 'sans-serif'].join(','),
+  fontSize: 16
+})
+
+export const ProfileUserSection = styled('div')({
+  width: '100%',
+  height: '100%',
+  padding: 0,
+  boxSizing: 'border-box',
+  borderRadius: 5,
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+  justifyContent: 'flex-start'
+})
+
 export const HeaderText = styled(Typography)({
   fontFamily: ['IBX_Bold', 'Arial', 'sans-serif'].join(','),
   textTransform: 'capitalize',
@@ -47,8 +84,8 @@ export const BodySectionComponent = styled('div')({
 })
 
 export const ProfileImageSection = styled('img')({
-  maxWidth: 300,
-  maxHeight: 300,
+  maxWidth: 500,
+  maxHeight: 500,
   width: '100%',
   height: '100%',
   margin: '0 auto'

@@ -34,6 +34,12 @@ interface ISideMenu {
 const menuData = [
   {
     id: 1,
+    title: 'Overview',
+    url: pageurl.OVERVIEW,
+    sub: []
+  },
+  {
+    id: 2,
     title: 'Results',
     url: '',
     sub: [

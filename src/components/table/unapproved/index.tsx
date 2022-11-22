@@ -1,5 +1,5 @@
 import React from 'react'
-import './table.scss'
+import '../table.scss'
 
 import {
   FilterButton,
@@ -8,20 +8,29 @@ import {
   PaginationContainer
 } from './styled'
 
-import { pageurl } from '../../constants/pageurl'
-import { IResult } from '../../interface/IResult'
+import { pageurl } from '../../../constants/pageurl'
+import { IResult } from '../../../interface/IResults'
 
-import { TypeCheckbox } from '../utils/checkbox'
+import { TypeCheckbox } from '../../utils/checkbox'
 
 import ReactPaginate from 'react-paginate'
 
-const ResultTable = ({
-  header,
-  record
-}: {
+interface IResultTable {
   header: string[]
   record: IResult[]
+  pageCount: number
+  handlePagination: (selectedItem: { selected: number }) => void
+  page: number
+}
+
+const ResultTable: React.FC<IResultTable> = ({
+  header,
+  record,
+  pageCount,
+  handlePagination,
+  page
 }) => {
+  const isRecord = record.length > 0
   return (
         <TableContainer>
             <table className='resultTable'>
@@ -38,30 +47,32 @@ const ResultTable = ({
                     </tr>
                 </thead>
                 <tbody>
-                    {record.map((i, index) => (
+                    {isRecord &&
+                    record.map((i, index) => (
                         <tr key={index} >
                             <td style={{ padding: '10px 0px 10px 15px' }}><TypeCheckbox /></td>
-                            <td>{i.Election}</td>
-                            <td>{i.State}</td>
-                            <td>{i.LocalGovernment}</td>
-                            <td>{i.PoolingUnit}</td>
-                            <td>{i.PresidingOfficer?.Name}</td>
-                            <td><LinkContainer to={`${pageurl.UNAPPROVED}/${i.Election}`}><FilterButton>View Result</FilterButton></LinkContainer></td>
+                            <td>{i.election}</td>
+                            <td>{i.state}</td>
+                            <td>{i.localGovernment}</td>
+                            <td>{i.poolingUnit}</td>
+                            <td>{i.presidingOfficer.name}</td>
+                            <td><LinkContainer to={`${pageurl.UNAPPROVED}/${i.id}`}><FilterButton>View Result</FilterButton></LinkContainer></td>
                         </tr>
                     ))}
                 </tbody>
             </table>
+            {!isRecord && <p className='margin-auto text-center py-4 color-light font-small'>No Data</p>}
             <PaginationContainer>
                 <ReactPaginate
                     breakLabel='...'
                     previousLabel='<<'
                     nextLabel='>>'
-                    pageCount={1}
-                    onPageChange={undefined}
+                    pageCount={pageCount}
+                    onPageChange={handlePagination}
                     containerClassName={'pagination'}
                     activeClassName={'active'}
                     renderOnZeroPageCount={undefined}
-                    forcePage={1}
+                    forcePage={page - 1}
                 />
             </PaginationContainer>
         </TableContainer>

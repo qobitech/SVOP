@@ -57,7 +57,7 @@ export const LoginForm = styled('form')({
   maxWidth: '90%',
   width: 350,
   margin: '0 auto',
-  marginTop: 250,
+  marginTop: 170,
   [down('md')]: {
     marginTop: 150
   }

@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import * as states from '../interface'
 import { actions } from '../store/actions'
 import Dashboard from '../components/layout'
 
@@ -42,13 +41,9 @@ const MainWrapper: React.FC<{
   )
 }
 
-type checkstateType = (states: any, i: string, state: any) => any
-
 type mapStateProps = (state: any) => { states: any }
 
-const checkState: checkstateType = (states: any, i: string, state: any) => typeof states[i] === 'function' ? states[i](state) : undefined
-
-const mapStateToProps: mapStateProps = (state: any) => ({ states: Object.assign({}, ...Object.keys(states).map(i => ({ [i]: checkState(states, i, state) }))) })
+const mapStateToProps: mapStateProps = (state: any) => ({ states: Object.assign({}, state) })
 
 const mapDispatchToProps = { ...actions }
 

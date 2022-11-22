@@ -1,8 +1,10 @@
 import axios from 'axios'
 
 export const header = () => ({
-  'Content-Type': 'application/json',
-  'Access-Control-Allow-Origin': '*'
+  // 'Content-type': 'application/json',
+  // 'Referrer-Policy': 'strict-origin-when-cross-origin'
+  // 'Referrer-Policy': 'no-referrer-when-downgrade'
+  // 'Access-Control-Allow-Origin': '*'
   // Authorization: localStorage.getItem('FMLBearerToken'),
 })
 
@@ -19,7 +21,7 @@ const cancelRequest = () => {
 const TIMEOUT = 1000 * 30
 
 type I_API_REQUEST = (
-  url: string | undefined,
+  url: RequestInfo | URL,
   headers: { [key: string]: any },
   data: any,
   method: 'get' | 'post' | 'put' | 'delete' | 'patch',
@@ -29,14 +31,21 @@ type I_API_REQUEST = (
 
 const apiRequest: I_API_REQUEST = async (url, headers, data, method, timeout, validateStatus) => {
   cancelRequest()
-  return await axios({
-    url,
+  // return await axios({
+  //   url,
+  //   method,
+  //   data,
+  //   timeout: timeout || 0,
+  //   validateStatus,
+  //   headers
+  // }).then(res => res.data)
+  return await fetch(url, {
+    headers,
+    mode: 'cors',
     method,
-    data,
-    timeout: timeout || 0,
-    validateStatus,
-    headers
-  }).then(res => res.data)
+    body: data
+  }).then(async res => await res.json())
+    .then(res => res)
 }
 
 export const getErrMsg = (error: any) => {
@@ -56,15 +65,10 @@ const statusFunction = (onStatus?: (res: any) => void, res?: any) => {
 }
 
 const apiRespond = (dispatch: any, type: any, payload: any, onStatus?: (res: any) => void) => {
-  const { message } = payload || {}
-  if (message) {
-    // logout
-  } else {
-    setTimeout(() => {
-      dispatch({ type, payload })
-      statusFunction(onStatus, payload)
-    }, 2000)
-  }
+  // setTimeout(() => {
+  dispatch({ type, payload })
+  statusFunction(onStatus, payload)
+  // }, 1000)
 }
 
 export interface I_ACTION_TYPE {
@@ -100,7 +104,7 @@ export const httpGetMethod = ({
           dispatch,
           dataAction,
           resp,
-          resp.success ? onSuccess : onFailure
+          onSuccess
         )
       })
       .catch((error) => {

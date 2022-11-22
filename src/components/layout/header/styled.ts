@@ -5,8 +5,12 @@ export const HeaderContainer = styled('div')({
   display: 'flex',
   padding: '15px',
   alignItems: 'center',
-  zIndex: 2,
-  position: 'relative'
+  zIndex: 4,
+  position: 'fixed',
+  background: '#E5F9EB',
+  width: '100%',
+  top: 0,
+  left: 0
 })
 
 export const Logo = styled('img')({

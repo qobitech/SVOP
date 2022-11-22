@@ -27,9 +27,9 @@ export const HeaderText = styled(Typography)({
 })
 
 export const HeaderTextNumbers = styled(Typography)({
-  fontFamily: ['Outfit_Medium', 'Arial', 'sans-serif'].join(','),
+  fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
   textTransform: 'capitalize',
-  fontSize: 10,
+  fontSize: 14,
   margin: 0,
   color: '#286439',
   width: 'max-content',
@@ -40,4 +40,14 @@ export const HeaderTextNumbers = styled(Typography)({
   alignItems: 'center',
   justifyContent: 'center',
   padding: '0 8px'
+})
+
+export const HeaderBodyText = styled(Typography)({
+  fontFamily: ['IBX_Light', 'Arial', 'sans-serif'].join(','),
+  textTransform: 'capitalize',
+  fontSize: 25,
+  fontWeight: 600,
+  margin: 0,
+  marginRight: 25,
+  color: '#286439'
 })
