@@ -71,6 +71,7 @@ const UnapprovedChild: React.FC<IUnapprovedPageChild> = ({
   }, [])
 
   const data = states?.result.getResultById
+  const load = states?.result.getResultById_Loading
 
   const locationData = {
     State: data?.state,
@@ -115,8 +116,9 @@ const UnapprovedChild: React.FC<IUnapprovedPageChild> = ({
                 <BodyContainerRow>
                     <HeaderContainer>
                         <HeaderBodyText>
-                            {data?.election}
+                            {data?.election || ''}
                         </HeaderBodyText>
+                        {load && <i className="fa fa-spinner fa-spin mx-3" aria-hidden="true"></i>}
                         <CTAApproveButton>
                             Approve
                         </CTAApproveButton>

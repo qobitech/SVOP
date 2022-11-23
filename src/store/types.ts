@@ -24,3 +24,16 @@ export const resultType = {
     dataError: 'GET_RESULTS_BY_ID_ERROR'
   }
 }
+
+export const otherType = {
+  menuOpen: {
+    dataAction: 'MENU_OPEN',
+    dataLoading: 'MENU_OPEN_LOADING',
+    dataError: 'MENU_OPEN_ERROR'
+  },
+  subMenuOpen: {
+    dataAction: 'SUB_MENU_OPEN',
+    dataLoading: 'SUB_MENU_OPEN_LOADING',
+    dataError: 'SUB_MENU_OPEN_ERROR'
+  }
+}

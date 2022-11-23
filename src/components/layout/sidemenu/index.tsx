@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import {
   SideMenuContainer,
@@ -8,17 +8,14 @@ import {
   ProfileRole,
   MenuContainer,
   ParentMenuContainer,
-  ParentMenuIcon,
   ParentMenuText,
   SubMenuContainer,
   SubMenuText,
   LogoutSection,
-  LogoutText,
   LinkContainer,
   MainMenuContainer
 } from './styled'
 
-import logout_icon from '../../../assets/images/logout.svg'
 import { pageurl } from '../../../constants/pageurl'
 
 import './style.scss'
@@ -28,6 +25,8 @@ interface ISideMenu {
   role: string
   imageSrc: string
   isOpen: boolean
+  setSubMenuOpen: (subMenuOpen: number) => (dispatch: any) => void
+  subMenuOpen: number
 }
 
 const menuData = [
@@ -36,7 +35,8 @@ const menuData = [
     title: 'Overview',
     url: pageurl.OVERVIEW,
     sub: [],
-    isParent: false
+    isParent: false,
+    icon: 'fa fa-list-alt mr-2'
   },
   {
     id: 2,
@@ -58,11 +58,49 @@ const menuData = [
         selected: true
       }
     ],
-    isParent: true
+    isParent: true,
+    icon: 'fas fa-check mr-2'
+  },
+  {
+    id: 3,
+    title: 'Settings',
+    url: '',
+    sub: [
+      {
+        id: 1,
+        title: 'Update Profile',
+        url: pageurl.PROFILE,
+        menuNumber: 2,
+        selected: true
+      },
+      {
+        id: 2,
+        title: 'Update Password',
+        url: pageurl.PROFILE,
+        menuNumber: 3,
+        selected: true
+      },
+      {
+        id: 2,
+        title: 'Assign Role',
+        url: pageurl.PROFILE,
+        menuNumber: 3,
+        selected: true
+      }
+    ],
+    isParent: true,
+    icon: 'fas fa-cog mr-2'
   }
 ]
 
-const SideMenu = ({ name, role, imageSrc, isOpen }: ISideMenu) => {
+const SideMenu: React.FC<ISideMenu> = ({
+  name,
+  role,
+  imageSrc,
+  isOpen,
+  setSubMenuOpen,
+  subMenuOpen
+}) => {
   return (
         <MainMenuContainer className={!isOpen ? 'side_menu_close' : 'side_menu_open'}>
           <SideMenuContainer>
@@ -86,6 +124,9 @@ const SideMenu = ({ name, role, imageSrc, isOpen }: ISideMenu) => {
                           url={i.url}
                           key={i.id}
                           isParent={i.isParent}
+                          icon={i.icon}
+                          setSubMenuOpen={setSubMenuOpen}
+                          subMenuOpen={subMenuOpen}
                       />
                   ))}
               </MenuContainer>
@@ -95,10 +136,12 @@ const SideMenu = ({ name, role, imageSrc, isOpen }: ISideMenu) => {
                         window.open(pageurl.LOGIN, '_self')
                       }}
                   >
-                  <ParentMenuIcon src={logout_icon} />
-                  <LogoutText>
-                      Logout
-                  </LogoutText>
+                  <ParentMenuContainer>
+                    <i className='fa fa-sign-out mr-2' />
+                    <ParentMenuText>
+                        Logout
+                    </ParentMenuText>
+                  </ParentMenuContainer>
               </LogoutSection>
           </SideMenuContainer>
         </MainMenuContainer>
@@ -117,35 +160,40 @@ interface IMenuComponent {
     selected: boolean
   }>
   isParent: boolean
+  icon: string
+  setSubMenuOpen: (subMenuOpen: number) => (dispatch: any) => void
+  subMenuOpen: number
 }
 
-const MenuComponent = ({
+const MenuComponent: React.FC<IMenuComponent> = ({
   id,
   title,
   sub,
   isParent,
-  url
-}: IMenuComponent) => {
-  const [isSubOpen, setIsSubOpen] = useState(false)
+  url,
+  icon,
+  setSubMenuOpen,
+  subMenuOpen
+}) => {
   return (
         <MenuContainer key={id}>
             {!isParent
               ? <LinkContainer to={url}>
               <ParentMenuContainer>
-                  <i className='fa fa-list-alt mr-2' />
+                  <i className={icon} />
                   <ParentMenuText>
                       {title}
                   </ParentMenuText>
               </ParentMenuContainer>
             </LinkContainer>
-              : <ParentMenuContainer onClick={() => setIsSubOpen(!isSubOpen)}>
-                <i className='fas fa-check mr-2' />
+              : <ParentMenuContainer onClick={() => setSubMenuOpen(subMenuOpen === id ? 0 : id)}>
+                <i className={icon} />
                 <ParentMenuText>
                     {title}
                 </ParentMenuText>
-                <i className={ isSubOpen ? 'fa fa-angle-down toggle_open ml-auto mr-3' : 'fa fa-angle-down toggle_close ml-auto mr-3' } />
+                <i className={ subMenuOpen === id ? 'fa fa-angle-down toggle_open ml-auto mr-3' : 'fa fa-angle-down toggle_close ml-auto mr-3' } />
               </ParentMenuContainer>}
-            {isSubOpen && sub.map(i => (
+            {subMenuOpen === id && sub.map(i => (
                 <SubMenuContainer key={i.id}>
                     <LinkContainer to={i.url}>
                         <SubMenuText selected={i.selected}>

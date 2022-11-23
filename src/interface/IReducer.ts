@@ -17,8 +17,17 @@ export interface IResultsReducer {
   getResultById_Loading: boolean
   getResultById_Error: any
 }
+export interface IOtherReducer {
+  menuOpen: boolean
+  menuOpen_Loading: boolean
+  menuOpen_Error: any
+  subMenuOpen: number
+  subMenuOpen_Loading: boolean
+  subMenuOpen_Error: any
+}
 
 export interface IStates {
   auth: IAuthReducer
   result: IResultsReducer
+  other: IOtherReducer
 }

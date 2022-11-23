@@ -29,11 +29,11 @@ export const HeaderText = styled(Typography)({
 export const HeaderTextNumbers = styled(Typography)({
   fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
   textTransform: 'capitalize',
-  fontSize: 14,
+  fontSize: 16,
   margin: 0,
   color: '#286439',
   width: 'max-content',
-  height: 17.15,
+  height: 'max-content',
   background: '#D2E9D9',
   borderRadius: 3,
   display: 'flex',

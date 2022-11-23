@@ -2,17 +2,18 @@ import { styled } from '@material-ui/core'
 
 import { Link } from 'react-router-dom'
 
-export const LinkContainer = styled(Link)({
+export const LinkContainer = styled(Link)(({ nounderline, color }: { nounderline?: 'true' | 'false', color?: string }) => ({
   fontFamily: 'inherit',
   fontSize: 'inherit',
   color: 'inherit',
-  textDecoration: 'underlined',
+  textDecoration: nounderline === 'true' ? 'none' : 'underlined',
   display: 'flex',
   cursor: 'pointer',
   '&:hover': {
-    color: '#286439'
+    color: color || '#286439',
+    textDecoration: nounderline === 'true' ? 'none' : 'underlined'
   }
-})
+}))
 
 export const TableContainer = styled('div')({
   overflow: 'auto'
@@ -55,16 +56,18 @@ export const FilterButton = styled('button')({
   cursor: 'pointer'
 })
 
-export const TableButton = styled('button')(({ color, nomargin }: { color?: string, nomargin?: 'true' | 'false' }) => ({
+export const TableButton = styled('button')(({ background, color, nomargin }: { background?: string, color?: string, nomargin?: 'true' | 'false' }) => ({
   height: 'auto',
-  background: 'none',
+  background,
   color,
   border: 'none',
-  fontFamily: ['IBX_Medium', 'Arial', 'sans-serif'].join(','),
-  fontSize: 13,
+  fontFamily: ['IBX_Regular', 'Arial', 'sans-serif'].join(','),
+  fontSize: 16,
   cursor: 'pointer',
   borderRadius: 3,
   padding: '5px 10px',
   marginRight: nomargin === 'true' ? 0 : 20,
-  display: 'flex'
+  display: 'flex',
+  width: 'max-content',
+  textDecoration: 'none'
 }))

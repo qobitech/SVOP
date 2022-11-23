@@ -2,12 +2,14 @@ import { combineReducers } from 'redux'
 
 import {
   authReducer,
-  resultReducer
+  resultReducer,
+  otherReducer
 } from './allReducers'
 
 const rootreducer = combineReducers({
   auth: authReducer,
-  result: resultReducer
+  result: resultReducer,
+  other: otherReducer
 })
 
 export default rootreducer

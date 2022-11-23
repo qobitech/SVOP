@@ -91,6 +91,7 @@ export const ParentMenuContainer = styled('div')(({ isselected }: { isselected?:
   cursor: 'pointer',
   boxSizing: 'border-box',
   transition: '.2s ease',
+  width: '100%',
   '&:hover': {
     background: '#F4FFF8'
   }
@@ -117,13 +118,10 @@ export const LogoutText = styled('p')({
 export const ParentMenuText = styled(Typography)(({ isselected }: { isselected?: 'true' | 'false' }) => ({
   fontFamily: ['Outfit_Medium', 'Arial', 'sans-serif'].join(','),
   textTransform: 'capitalize',
-  fontSize: 14,
+  fontSize: 16,
   margin: 0,
   color: isselected === 'true' ? '#fff' : '#286439',
   transition: '.2s ease'
-  // '&:hover': {
-  //   color: '#fff'
-  // }
 }))
 
 export const SubMenuContainer = styled('div')({
@@ -133,7 +131,7 @@ export const SubMenuContainer = styled('div')({
   background: 'none',
   display: 'flex',
   alignItems: 'center',
-  paddingLeft: 40,
+  paddingLeft: 35,
   cursor: 'pointer',
   justifyContent: 'space-between'
 })
@@ -169,7 +167,7 @@ export const LogoutSection = styled('div')({
   background: 'none',
   display: 'flex',
   alignItems: 'center',
-  padding: '0 10px',
+  padding: '0',
   marginTop: 'auto',
   cursor: 'pointer'
 })

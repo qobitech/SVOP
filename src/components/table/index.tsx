@@ -25,6 +25,8 @@ export interface ICell {
 export interface ICellAction extends ICell {
   icon?: string
   color?: string
+  view?: 'text' | 'icon'
+  background?: string
 }
 
 interface IResultTable {
@@ -104,15 +106,17 @@ const ResultTable: React.FC<IResultTable> = ({
                             <td style={{ padding: '10px 0px 10px 10px' }}><p style={{ margin: 0 }}>{(jindex + 1) + ((currentPage - 1) * PAGE_SIZE)}</p></td>
                             {i?.row?.map((j, index) => {
                               if (index === 0) {
-                                return <td key={index} style={{ display: 'flex', alignItems: 'center' }}>
-                                  <div style={{ marginRight: 25 }}>
-                                    <TypeCheckbox
-                                        onChange={handleCheckedRows}
-                                        checked={checkAll || isCheckedRow(i?.id)}
-                                        id={i.id}
-                                    />
+                                return <td key={index}>
+                                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                                    <div style={{ marginRight: 25 }}>
+                                      <TypeCheckbox
+                                          onChange={handleCheckedRows}
+                                          checked={checkAll || isCheckedRow(i?.id)}
+                                          id={i.id}
+                                      />
+                                    </div>
+                                    <CellValueComponent {...j} />
                                   </div>
-                                  <CellValueComponent {...j} />
                                 </td>
                               } else {
                                 return <td key={index}>
@@ -179,19 +183,25 @@ const CellValueActionComponent: React.FC<ICVAC> = ({
   action,
   icon,
   nomargin,
-  color
+  color,
+  view,
+  background
 }) => {
   return (
     <>
         {isLink
-          ? <LinkContainer to={url || ''} title={value as string}>
-              <TableButton nomargin={nomargin} color={color}>
-                <i className={icon} />
+          ? <LinkContainer to={url || ''} title={value as string} nounderline='true'>
+              <TableButton nomargin={nomargin} color={color} background={background} >
+                {view === 'icon'
+                  ? <i className={icon} />
+                  : value}
               </TableButton>
             </LinkContainer>
           : <div onClick={action} title={value as string}>
-              <TableButton nomargin={nomargin} color={color}>
-                <i className={icon} />
+              <TableButton nomargin={nomargin} color={color} background={background}>
+              {view === 'icon'
+                ? <i className={icon} />
+                : value}
               </TableButton>
             </div>
         }

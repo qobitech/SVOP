@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import DataWrapper from '../../../wrapper/data-wrapper'
 import Filter from '../../filter'
 
-import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 import { useLocation } from 'react-router-dom'
@@ -14,7 +13,7 @@ import {
   HeaderBodyText
 } from './styled'
 
-import MainTable, { ICell, ICellAction } from '../../table-main'
+import MainTable, { ICell, ICellAction } from '../../table'
 
 import { tableHeader } from './mock-data'
 
@@ -54,8 +53,8 @@ const UnapprovedChild: React.FC<IUnapprovedPageChild> = ({
   const { p } = values || {}
 
   const data = states?.result.getAllResults
-  // const load = states?.result.getAllResults_Loading
-  const error = states?.result.getAllResults_Error
+  const load = states?.result.getAllResults_Loading
+  // const error = states?.result.getAllResults_Error
 
   useEffect(() => {
     if (!p) {
@@ -66,20 +65,6 @@ const UnapprovedChild: React.FC<IUnapprovedPageChild> = ({
       }
     }
   }, [])
-
-  useEffect(() => {
-    if (error) {
-      toast(error, {
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: false,
-        draggable: false,
-        progress: undefined,
-        theme: 'light'
-      })
-    }
-  }, [error])
 
   const handlePagination = (selectedItem: { selected: number }) => {
     if ((selectedItem.selected + 1) !== data?.currentPage) {
@@ -117,7 +102,7 @@ const UnapprovedChild: React.FC<IUnapprovedPageChild> = ({
         },
         {
           value: i.presidingOfficer.name,
-          isLink: true,
+          isLink: false,
           url: '',
           action: () => {}
         }
@@ -129,7 +114,9 @@ const UnapprovedChild: React.FC<IUnapprovedPageChild> = ({
           url: pageurl.UNAPPROVED + '/' + i.id + '?p=' + data.currentPage,
           action: () => {},
           icon: 'fas fa-eye',
-          color: ''
+          color: '#286439',
+          view: 'text',
+          background: '#D2E9D9'
         }
       ] as unknown as ICellAction[]
     }))
@@ -182,11 +169,12 @@ const UnapprovedChild: React.FC<IUnapprovedPageChild> = ({
           <BodyContainer>
             <HeaderContainer>
               <HeaderBodyText>
-                    Unapproved Results
+                Unapproved Results
               </HeaderBodyText>
               <HeaderTextNumbers>
-                    {data?.total}
-                </HeaderTextNumbers>
+                {data?.total}
+              </HeaderTextNumbers>
+              {load && <i className="fa fa-spinner fa-spin ml-3" aria-hidden="true"></i>}
             </HeaderContainer>
             <Filter />
             <MainTable
@@ -204,7 +192,6 @@ const UnapprovedChild: React.FC<IUnapprovedPageChild> = ({
               currentPage={data?.currentPage || 1}
             />
           </BodyContainer>
-          <ToastContainer position='top-right'/>
         </>
   )
 }
