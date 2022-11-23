@@ -35,8 +35,8 @@ function App () {
           <Route path={pageurl.APPROVED} element={<ProtectedRoute />} >
             <Route path={pageurl.APPROVED} element={<Approved />} />
           </Route>
-          <Route path={pageurl.UNAPPROVED + '/:id'} element={<ProtectedRoute />} >
-            <Route path={pageurl.UNAPPROVED + '/:id'} element={<ViewResult />} />
+          <Route path={'/:page/:id'} element={<ProtectedRoute />} >
+            <Route path={'/:page/:id'} element={<ViewResult />} />
           </Route>
           <Route path={pageurl.PROFILE} element={<ProtectedRoute />} >
             <Route path={pageurl.PROFILE} element={<Profile />} />

@@ -101,7 +101,7 @@ const ResultAssessmentOTP: React.FC<IResultAssessmentOTP> = ({
           />
           {!isApprove && <TypeInput
             label='Enter Comment'
-            placeholder="Reason why you're rejecting the document"
+            placeholder="Reason for rejection"
             type='text'
             error={errors.comment?.message}
             {...register('otp')}

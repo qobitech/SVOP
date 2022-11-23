@@ -54,25 +54,51 @@ export const HeaderText = styled(Typography)({
   flexWrap: 'wrap'
 })
 
-export const BodySection = styled('div')(({ width }: { width: string }) => ({
+export const BodySection = styled('div')(({ width, isborder }: { width: string, isborder?: 'true' | 'false' }) => ({
   width,
   height: 'auto',
   margin: 0,
   textAlign: 'center',
+  border: isborder === 'true' ? '1px solid #DAEFE0' : 'none',
+  boxSizing: 'border-box',
+  display: 'flex',
+  flexDirection: 'column',
+  borderRadius: 5,
   [down('md')]: {
     width: '100%',
     margin: '20px 0'
   }
 }))
 
-export const BodySectionComponent = styled('div')({
+export const BodySectionComponent = styled('div')(({ noborder }: { noborder?: 'true' | 'false' }) => ({
   width: '100%',
   height: 'auto',
   border: '1px solid #DAEFE0',
   borderRadius: 5,
-  marginBottom: 35,
+  marginBottom: noborder === 'true' ? 0 : 35,
   boxSizing: 'border-box',
   padding: 30
+}))
+
+export const BodyCTASection = styled('div')({
+  marginTop: '5px',
+  height: '100%',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center'
+})
+
+export const BodyCTASectionComponent = styled(Typography)({
+  fontFamily: ['IBX_Regular', 'Arial', 'sans-serif'].join(','),
+  fontSize: 14,
+  transition: '.2s ease-in-out',
+  padding: '5px 10px',
+  color: '#286439',
+  cursor: 'pointer',
+  '&:hover': {
+    background: '#D2E9D9',
+    borderRadius: 3
+  }
 })
 
 export const BodySectionDoubleComponent = styled('div')({
@@ -124,7 +150,7 @@ export const BodySectionRight = styled('p')({
 
 export const BodySectionComponentImage = styled('div')({
   width: '100%',
-  height: '90%',
+  minHeight: '90%',
   border: '1px solid #DAEFE0',
   borderRadius: 5,
   marginTop: 20,

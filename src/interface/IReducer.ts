@@ -10,9 +10,12 @@ export interface IAuthReducer {
   sendOtp_Error: any
 }
 export interface IResultsReducer {
-  getAllResults: IResults
-  getAllResults_Loading: boolean
-  getAllResults_Error: any
+  getAllApprovedResults: IResults
+  getAllApprovedResults_Loading: boolean
+  getAllApprovedResults_Error: any
+  getAllUnApprovedResults: IResults
+  getAllUnApprovedResults_Loading: boolean
+  getAllUnApprovedResults_Error: any
   getResultById: IResult
   getResultById_Loading: boolean
   getResultById_Error: any

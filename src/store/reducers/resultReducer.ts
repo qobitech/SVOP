@@ -5,20 +5,35 @@ const initialState = {} as unknown as IResultsReducer
 
 export default function resultReducer (state = initialState, action: any) {
   switch (action.type) {
-    case resultType.getAll.dataAction:
+    case resultType.getAllApproved.dataAction:
       return {
         ...state,
-        getAllResults: action.payload
+        getAllApprovedResults: action.payload
       }
-    case resultType.getAll.dataLoading:
+    case resultType.getAllApproved.dataLoading:
       return {
         ...state,
-        getAllResults_Loading: action.payload
+        getAllApprovedResults_Loading: action.payload
       }
-    case resultType.getAll.dataError:
+    case resultType.getAllApproved.dataError:
       return {
         ...state,
-        getAllResults_Error: action.payload
+        getAllApprovedResults_Error: action.payload
+      }
+    case resultType.getAllUnapproved.dataAction:
+      return {
+        ...state,
+        getAllUnApprovedResults: action.payload
+      }
+    case resultType.getAllUnapproved.dataLoading:
+      return {
+        ...state,
+        getAllUnApprovedResults_Loading: action.payload
+      }
+    case resultType.getAllUnapproved.dataError:
+      return {
+        ...state,
+        getAllUnApprovedResults_Error: action.payload
       }
     case resultType.getById.dataAction:
       return {

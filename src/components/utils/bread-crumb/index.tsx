@@ -1,13 +1,11 @@
 import React from 'react'
 import { pageurl } from '../../../constants/pageurl'
-// import { pageurl } from '../../../constants/pageurl'
 
 import homeicon from '../../../assets/images/home.png'
 
 import {
   HeaderContainer,
   HeaderImage,
-  // HeaderImage,
   HeaderText,
   LinkContainer
 } from './styled'
@@ -44,7 +42,7 @@ const BreadCrumb: React.FC<IBreadCrumb> = ({
                       } else {
                         return (
                                 <HeaderText key={index}>
-                                    {i.title}
+                                    {i.title || (<i className='fa fa-spinner fa-spin' />)}
                                 </HeaderText>
                         )
                       }

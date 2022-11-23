@@ -13,10 +13,15 @@ export const authType = {
 }
 
 export const resultType = {
-  getAll: {
-    dataAction: 'GET_ALL_RESULTS',
-    dataLoading: 'GET_ALL_RESULTS_LOADING',
-    dataError: 'GET_ALL_RESULTS_ERROR'
+  getAllApproved: {
+    dataAction: 'GET_ALL_APPROVED_RESULTS',
+    dataLoading: 'GET_ALL_APPROVED_RESULTS_LOADING',
+    dataError: 'GET_ALL_APPROVED_RESULTS_ERROR'
+  },
+  getAllUnapproved: {
+    dataAction: 'GET_ALL_UNAPPROVED_RESULTS',
+    dataLoading: 'GET_ALL_UNAPPROVED_RESULTS_LOADING',
+    dataError: 'GET_ALL_UNAPPROVED_RESULTS_ERROR'
   },
   getById: {
     dataAction: 'GET_RESULTS_BY_ID',

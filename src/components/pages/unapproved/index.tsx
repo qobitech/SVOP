@@ -43,7 +43,7 @@ const UnapprovedChild: React.FC<IUnapprovedPageChild> = ({
   ...props
 }) => {
   const {
-    getAllResultsAction
+    getUnapprovedResultsAction
   } = props as unknown as IActions
 
   const location = useLocation()
@@ -53,23 +53,23 @@ const UnapprovedChild: React.FC<IUnapprovedPageChild> = ({
 
   const { p } = values || {}
 
-  const data = states?.result.getAllResults
-  const load = states?.result.getAllResults_Loading
+  const data = states?.result.getAllUnApprovedResults
+  const load = states?.result.getAllUnApprovedResults_Loading
   // const error = states?.result.getAllResults_Error
 
   useEffect(() => {
     if (!p) {
-      getAllResultsAction(PAGE_SIZE, 1)
+      getUnapprovedResultsAction(PAGE_SIZE, 1)
     } else {
       if (!data) {
-        getAllResultsAction(PAGE_SIZE, parseInt(p as string))
+        getUnapprovedResultsAction(PAGE_SIZE, parseInt(p as string))
       }
     }
   }, [])
 
   const handlePagination = (selectedItem: { selected: number }) => {
     if ((selectedItem.selected + 1) !== data?.currentPage) {
-      getAllResultsAction(PAGE_SIZE, selectedItem.selected + 1)
+      getUnapprovedResultsAction(PAGE_SIZE, selectedItem.selected + 1)
     }
   }
 

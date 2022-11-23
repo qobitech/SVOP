@@ -44,26 +44,29 @@ const OverviewChild: React.FC<IOverviewPageChild> = ({
   ...props
 }) => {
   const {
-    getAllResultsAction
+    getUnapprovedResultsAction,
+    getApprovedResultsAction
   } = props as unknown as IActions
 
   useEffect(() => {
-    getAllResultsAction(PAGE_SIZE, 1)
+    getUnapprovedResultsAction(PAGE_SIZE, 1)
+    getApprovedResultsAction(PAGE_SIZE, 1)
   }, [])
 
-  const data = states?.result.getAllResults
+  const approvedData = states?.result.getAllApprovedResults
+  const unapprovedData = states?.result.getAllUnApprovedResults
   // const load = states?.resultState?.result.getAllResults_Loading
   // const error = states?.zoneState?.zone.getAllZones_Error
 
   const overviewSectionData = [
     {
       title: 'Un-approved',
-      value: data?.total || 1,
+      value: unapprovedData?.total || 0,
       url: pageurl.UNAPPROVED
     },
     {
       title: 'Approved',
-      value: 0,
+      value: approvedData?.total || 1,
       url: pageurl.APPROVED
     },
     {

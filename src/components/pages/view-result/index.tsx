@@ -26,7 +26,9 @@ import {
   CTAApproveButton,
   CTARejectButton,
   BodySectionComponentImageTag,
-  BodyContainerRow
+  BodyContainerRow,
+  BodyCTASection,
+  BodyCTASectionComponent
 } from './styled'
 
 import { useParams, useLocation } from 'react-router-dom'
@@ -37,6 +39,7 @@ import BreadCrumb from '../../utils/bread-crumb'
 import { HeaderBodyText } from '../unapproved/styled'
 import { resultType } from '../../../store/types'
 import ResultAssessmentOTP from './otp'
+import { HeaderTextNumbers } from '../approved/styled'
 
 const Unapproved = () => {
   return (
@@ -61,11 +64,21 @@ const UnapprovedChild: React.FC<IUnapprovedPageChild> = ({
     rejectResultAction
   } = props as unknown as IActions
 
-  const { id } = useParams()
+  const { id, page } = useParams()
 
   useEffect(() => {
     getResultByIdAction(id || '')
   }, [])
+
+  const getPageParam = (() => {
+    if (page === 'approved') {
+      return { text: 'Approved Results', url: pageurl.APPROVED, isApproved: true }
+    } else if (page === 'unapproved') {
+      return { text: 'Unapproved Results', url: pageurl.UNAPPROVED, isApproved: false }
+    } else {
+      return { text: '', url: '', isApproved: false }
+    }
+  })()
 
   useEffect(() => {
     return () => {
@@ -109,11 +122,11 @@ const UnapprovedChild: React.FC<IUnapprovedPageChild> = ({
             <BreadCrumb
                 crumbs={[
                   {
-                    title: 'Unapproved Results',
-                    url: pageurl.UNAPPROVED + '?p=' + p
+                    title: getPageParam.text || '',
+                    url: getPageParam.url + '?p=' + p
                   },
                   {
-                    title: data?.election || '___',
+                    title: data?.election || '',
                     url: pageurl.UNAPPROVED
                   }
                 ]}
@@ -124,19 +137,27 @@ const UnapprovedChild: React.FC<IUnapprovedPageChild> = ({
                         <HeaderBodyText>
                             {data?.election || ''}
                         </HeaderBodyText>
-                        {load && <i className="fa fa-spinner fa-spin mx-3" aria-hidden="true"></i>}
-                        <CTAApproveButton onClick={() => {
-                          setOpenModal(true)
-                          setIsApprove(true)
-                        }}>
-                            Approve
-                        </CTAApproveButton>
-                        <CTARejectButton onClick={() => {
-                          setOpenModal(true)
-                          setIsApprove(false)
-                        }}>
-                            Reject
-                        </CTARejectButton>
+                        {load
+                          ? <i className="fa fa-spinner fa-spin" aria-hidden="true"></i>
+                          : data &&
+                            <>{!getPageParam.isApproved
+                              ? <>
+                                    <CTAApproveButton onClick={() => {
+                                      setOpenModal(true)
+                                      setIsApprove(true)
+                                    }}>
+                                        Approve
+                                    </CTAApproveButton>
+                                    <CTARejectButton onClick={() => {
+                                      setOpenModal(true)
+                                      setIsApprove(false)
+                                    }}>
+                                        Reject
+                                    </CTARejectButton>
+                                </>
+                              : <HeaderTextNumbers>Approved<span><i className='fas fa-check-circle ml-2' /></span></HeaderTextNumbers>}
+                            </>
+                        }
                     </HeaderContainer>
                 </BodyContainerRow>
                 <BodyContainer nopadding='true' >
@@ -175,7 +196,7 @@ const UnapprovedChild: React.FC<IUnapprovedPageChild> = ({
                         <BodySectionHeader>
                             VOTES COUNTED
                         </BodySectionHeader>
-                        <BodySectionComponent>
+                        <BodySectionComponent noborder='true'>
                             <VoteCountGridSection>
                                 {data?.results?.map((i, index) => (
                                     <VoteCountSection key={index}>
@@ -232,6 +253,14 @@ const UnapprovedChild: React.FC<IUnapprovedPageChild> = ({
                         <BodySectionComponentImage>
                             <BodySectionComponentImageTag src={data?.documentUrl}/>
                         </BodySectionComponentImage>
+                        <BodyCTASection>
+                          <BodyCTASectionComponent className='mx-2'>
+                            <i className='fas fa-share' />&nbsp;Share
+                          </BodyCTASectionComponent>
+                          <BodyCTASectionComponent className='mx-2'>
+                            <i className='fas fa-download' />&nbsp;Download
+                          </BodyCTASectionComponent>
+                        </BodyCTASection>
                     </BodySection>
                 </BodyContainer>
             </BodyContainer>
