@@ -25,6 +25,8 @@ import mapimage from '../../../assets/images/map.png'
 import { _handleTh } from '../../utils/helper'
 import { HeaderImage } from '../../utils/bread-crumb/styled'
 
+import { userData } from '../../../constants/global'
+
 const PAGE_SIZE = 20
 
 const Overview: React.FC = () => {
@@ -79,23 +81,23 @@ const OverviewChild: React.FC<IOverviewPageChild> = ({
   const usersectiondata = [
     {
       title: 'Full Name',
-      value: 'User'
+      value: userData?.user?.firstName + ' ' + userData?.user?.lastName
     },
     {
       title: 'Email',
-      value: 'user@email.com'
+      value: userData?.token?.email
     },
     {
       title: 'Phone',
-      value: '08063432345'
+      value: userData?.user?.mobile
     },
     {
       title: 'Role',
-      value: 'Collation Officer'
+      value: userData?.token?.role
     },
     {
-      title: 'State of Origin',
-      value: 'Adamawa'
+      title: 'User Name',
+      value: userData?.token?.unique_name[0]
     },
     {
       title: 'Gender',

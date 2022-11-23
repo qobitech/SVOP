@@ -13,7 +13,7 @@ import {
 } from './styled'
 
 import profile from '../../../assets/images/user.svg'
-// import { userData } from '../../../constants/global'
+import { userData } from '../../../constants/global'
 
 import BreadCrumb from '../../utils/bread-crumb'
 import { pageurl } from '../../../constants/pageurl'
@@ -30,23 +30,23 @@ const ProfileChild = () => {
   const usersectiondata = [
     {
       title: 'Full Name',
-      value: 'User'
+      value: userData?.user?.firstName + ' ' + userData?.user?.lastName
     },
     {
       title: 'Email',
-      value: 'user@email.com'
+      value: userData?.token?.email
     },
     {
       title: 'Phone',
-      value: '08063432345'
+      value: userData?.user?.mobile
     },
     {
       title: 'Role',
-      value: 'Collation Officer'
+      value: userData?.token?.role
     },
     {
-      title: 'State of Origin',
-      value: 'Adamawa'
+      title: 'User Name',
+      value: userData?.token?.unique_name[0]
     },
     {
       title: 'Gender',
