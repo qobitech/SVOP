@@ -61,7 +61,7 @@ const DashboardChild: React.FC<IDashboardChild> = ({
             <SideMenu
                 name={userData.user?.firstName + ' ' + userData.user?.lastName}
                 role={userData.token?.role || ''}
-                imageSrc={userData.user?.profileUrl || profile}
+                imageSrc={profile}
                 isOpen={menuOpen || false}
                 setSubMenuOpen={setSubMenuOpen}
                 subMenuOpen={subMenuOpen || 0}

@@ -1,14 +1,13 @@
 import React from 'react'
 import {
-  // Navigate,
+  Navigate,
   Outlet
 } from 'react-router-dom'
-// import { isLogged } from '../constants/global'
-// import { pageurl } from '../constants/pageurl'
+import { isLogged } from '../constants/global'
+import { pageurl } from '../constants/pageurl'
 
 const AuthRoute = () => {
-  // return !isLogged ? <Outlet/> : <Navigate to={pageurl.UNAPPROVED}/>
-  return <Outlet />
+  return !isLogged ? <Outlet/> : <Navigate to={pageurl.UNAPPROVED}/>
 }
 
 export default AuthRoute

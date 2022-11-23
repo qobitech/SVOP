@@ -80,6 +80,7 @@ const LoginOTP: React.FC<ILoginOTP> = ({
             placeholder='****'
             type='password'
             error={errors.otp?.message}
+            defaultValue={states?.auth?.sendOtp?.otp}
             {...register('otp')}
           />
           <CTABtnSection>

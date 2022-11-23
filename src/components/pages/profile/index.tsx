@@ -13,7 +13,7 @@ import {
 } from './styled'
 
 import profile from '../../../assets/images/user.svg'
-import { userData } from '../../../constants/global'
+// import { userData } from '../../../constants/global'
 
 import BreadCrumb from '../../utils/bread-crumb'
 import { pageurl } from '../../../constants/pageurl'
@@ -68,7 +68,7 @@ const ProfileChild = () => {
             <BodyContainer>
                 <BodySection>
                     <BodySectionComponent>
-                        <ProfileImageSection src={userData.user?.profileUrl || profile} />
+                        <ProfileImageSection src={profile} />
                     </BodySectionComponent>
                 </BodySection>
                 <BodySection>

@@ -3,15 +3,17 @@ import { ILogin, IToken, IUser } from '../interface/IAuth'
 import jwtDecode from 'jwt-decode'
 interface IResponse {
   user: IUser
-  token: string
+  token: IToken
 }
 
 const data = localStorage.getItem('userData')
-const user: IResponse = data ? JSON.parse(data) : {} as IResponse
+const user: ILogin = data ? JSON.parse(data) : {} as ILogin
 
-export const userData: ILogin = {
-  user: user.user,
-  token: user.token ? jwtDecode(user.token) : {} as IToken
+const { token, ...userDataProps } = user
+
+export const userData: IResponse = {
+  user: userDataProps,
+  token: token ? jwtDecode(token) : {} as IToken
 }
 
 export const isLogged = userData.token?.exp ? !(userData?.token?.exp * 1000 < Date.now()) : false

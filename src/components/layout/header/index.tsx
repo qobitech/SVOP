@@ -36,7 +36,7 @@ const Header = ({ setMenu }: IHeader) => {
         <ProfileNotification src={notification} title='Notification' />
         <LinkContainer to={pageurl.PROFILE}>
           <ProfileImage
-            src={userData.user?.profileUrl || profile}
+            src={profile}
             title={userData.user?.firstName + ' ' + userData.user?.lastName}
           />
         </LinkContainer>

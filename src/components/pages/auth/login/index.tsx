@@ -82,7 +82,7 @@ const LoginPageChild: React.FC<ILoginPageChild> = ({
   useEffect(() => {
     if (data?.isSuccessful) {
       setOpenOTP(true)
-      clearAction(authType.sendOtp)
+      // clearAction(authType.sendOtp)
     }
   }, [data?.isSuccessful])
 

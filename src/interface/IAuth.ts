@@ -1,17 +1,15 @@
 
 export interface IUser {
-  id: number
   userName: string
   firstName: string
   lastName: string
   middleName: string
-  profileUrl: string | null
-  phoneNumber: string
   mobile: string
 }
 export interface IOTP {
   message: string
   isSuccessful: boolean
+  otp: string
 }
 export interface IToken {
   email: string
@@ -24,8 +22,11 @@ export interface IToken {
   role: string
   unique_name: string[]
 }
-
 export interface ILogin {
-  user: IUser | undefined
-  token: IToken | undefined
+  userName: string
+  firstName: string
+  lastName: string
+  middleName: string
+  mobile: string
+  token: string
 }

@@ -10,7 +10,7 @@ export const getUnapprovedResultsAction = (pageSize?: number, pageNumber?: numbe
     apiData: {
       url: '',
       customurl: 'https://query-erms.herokuapp.com/api/v1/Result/get-all-paged' + checkReturned(returnValue('pageSize=', pageSize) + returnValue('&pageNumber=', pageNumber) + returnValue('&sort=', sort)) + '&status=pending',
-      header: utils.header()
+      header: utils.headerNoAuth()
     },
     actionType: resultType.getAllUnapproved
   })
@@ -21,7 +21,7 @@ export const getApprovedResultsAction = (pageSize?: number, pageNumber?: number,
     apiData: {
       url: '',
       customurl: 'https://query-erms.herokuapp.com/api/v1/Result/get-all-paged' + checkReturned(returnValue('pageSize=', pageSize) + returnValue('&pageNumber=', pageNumber) + returnValue('&sort=', sort)) + '&status=approved',
-      header: utils.header()
+      header: utils.headerNoAuth()
     },
     actionType: resultType.getAllApproved
   })
@@ -32,7 +32,7 @@ export const getResultByIdAction = (id: string) => {
     apiData: {
       url: '',
       customurl: 'https://query-erms.herokuapp.com/api/v1/Result/' + (id || ''),
-      header: utils.header()
+      header: utils.headerNoAuth()
     },
     actionType: resultType.getById
   })
@@ -43,7 +43,7 @@ export const approveResultAction = (data: { otp: string }) => {
     apiData: {
       url: '',
       customurl: 'https://query-erms.herokuapp.com/api/v1/Result/approve',
-      header: utils.header(),
+      header: utils.headerNoAuth(),
       data
     },
     actionType: resultType.approve
@@ -55,7 +55,7 @@ export const rejectResultAction = (data: { otp: string, comment: string }) => {
     apiData: {
       url: '',
       customurl: 'https://query-erms.herokuapp.com/api/v1/Result/reject',
-      header: utils.header(),
+      header: utils.headerNoAuth(),
       data
     },
     actionType: resultType.reject

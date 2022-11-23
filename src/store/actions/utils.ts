@@ -1,6 +1,11 @@
 import axios from 'axios'
 
 export const header = () => ({
+  'Content-type': 'application/json',
+  'Access-Control-Allow-Origin': '*'
+})
+
+export const headerNoAuth = () => ({
   // 'Content-type': 'application/json',
   // 'Referrer-Policy': 'strict-origin-when-cross-origin'
   // 'Referrer-Policy': 'no-referrer-when-downgrade'
