@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import DataWrapper from '../../../wrapper/data-wrapper'
 
 import queryString from 'query-string'
@@ -36,6 +36,7 @@ import { IActions } from '../../../interface/IAction'
 import BreadCrumb from '../../utils/bread-crumb'
 import { HeaderBodyText } from '../unapproved/styled'
 import { resultType } from '../../../store/types'
+import ResultAssessmentOTP from './otp'
 
 const Unapproved = () => {
   return (
@@ -55,7 +56,9 @@ const UnapprovedChild: React.FC<IUnapprovedPageChild> = ({
 }) => {
   const {
     getResultByIdAction,
-    clearAction
+    clearAction,
+    approveResultAction,
+    rejectResultAction
   } = props as unknown as IActions
 
   const { id } = useParams()
@@ -98,6 +101,9 @@ const UnapprovedChild: React.FC<IUnapprovedPageChild> = ({
 
   const { p } = values || {}
 
+  const [openModal, setOpenModal] = useState(false)
+  const [isApprove, setIsApprove] = useState(false)
+
   return (
         <>
             <BreadCrumb
@@ -119,10 +125,16 @@ const UnapprovedChild: React.FC<IUnapprovedPageChild> = ({
                             {data?.election || ''}
                         </HeaderBodyText>
                         {load && <i className="fa fa-spinner fa-spin mx-3" aria-hidden="true"></i>}
-                        <CTAApproveButton>
+                        <CTAApproveButton onClick={() => {
+                          setOpenModal(true)
+                          setIsApprove(true)
+                        }}>
                             Approve
                         </CTAApproveButton>
-                        <CTARejectButton>
+                        <CTARejectButton onClick={() => {
+                          setOpenModal(true)
+                          setIsApprove(false)
+                        }}>
                             Reject
                         </CTARejectButton>
                     </HeaderContainer>
@@ -223,6 +235,15 @@ const UnapprovedChild: React.FC<IUnapprovedPageChild> = ({
                     </BodySection>
                 </BodyContainer>
             </BodyContainer>
+            <ResultAssessmentOTP
+                approveResultAction={approveResultAction}
+                rejectResultAction={rejectResultAction}
+                clearAction={clearAction}
+                isApprove={isApprove}
+                openModal={openModal}
+                setOpenModal={setOpenModal}
+                states={states}
+            />
         </>
   )
 }

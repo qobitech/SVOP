@@ -10,7 +10,8 @@ import {
   HeaderContainer,
   HeaderTextNumbers,
   BodyContainer,
-  HeaderBodyText
+  HeaderBodyText,
+  SelectedTableActionsSection
 } from './styled'
 
 import MainTable, { ICell, ICellAction } from '../../table'
@@ -150,13 +151,13 @@ const UnapprovedChild: React.FC<IUnapprovedPageChild> = ({
     setCheckedRows({ ...temp })
   }
 
-  // const getSelectedRowLength = (() => {
-  //   if (Object.keys(checkedRows).length > 0) {
-  //     return '(' + Object.keys(checkedRows).length + ')'
-  //   } else {
-  //     return ''
-  //   }
-  // })()
+  const getSelectedRowLength = (() => {
+    if (Object.keys(checkedRows).length > 0) {
+      return '' + Object.keys(checkedRows).length + ''
+    } else {
+      return ''
+    }
+  })()
 
   return (
         <>
@@ -176,7 +177,11 @@ const UnapprovedChild: React.FC<IUnapprovedPageChild> = ({
               </HeaderTextNumbers>
               {load && <i className="fa fa-spinner fa-spin ml-3" aria-hidden="true"></i>}
             </HeaderContainer>
-            <Filter />
+            <Filter>
+              <SelectedTableActionsSection>
+                <p style={{ margin: 0, fontSize: '13px', color: '#286439' }}>{getSelectedRowLength || '0'} {parseInt(getSelectedRowLength) === 1 ? 'row' : 'rows' } selected</p>
+              </SelectedTableActionsSection>
+            </Filter>
             <MainTable
               header={tableHeader}
               record={recordData() || [] as Array<{ id: string, row: ICell[], rowActions: ICellAction[] }>}

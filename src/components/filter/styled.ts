@@ -1,4 +1,5 @@
 import { styled } from '@material-ui/core'
+import { down } from '../../assets/style/breakpointHelpers'
 
 export const FilterContainer = styled('div')({
   border: 'none',
@@ -20,8 +21,23 @@ export const FilterContentContainer = styled('div')({
 
 export const FilterButtonSection = styled('div')({
   display: 'flex',
-  alignItems: 'center'
+  flexWrap: 'wrap',
+  alignItems: 'center',
+  [down('sm')]: {
+    flexDirection: 'column-reverse',
+    alignItems: 'flex-start'
+  }
 })
+
+export const FilterButtonLeftSection = styled('div')({
+  display: 'flex',
+  flexWrap: 'wrap',
+  alignItems: 'center',
+  [down('sm')]: {
+    marginTop: 10
+  }
+})
+
 export const FilterButtonIcon = styled('img')({
   width: 15,
   height: 15

@@ -8,4 +8,6 @@ export interface IActions {
   getResultByIdAction: (id: string) => (dispatch: any) => void
   setMenuOpen: (menuOpen: boolean) => (dispatch: any) => void
   setSubMenuOpen: (subMenuOpen: number) => (dispatch: any) => void
+  approveResultAction: (data: { otp: string }) => (dispatch: any) => void
+  rejectResultAction: (data: { otp: string, comment: string }) => (dispatch: any) => void
 }

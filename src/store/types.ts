@@ -22,6 +22,16 @@ export const resultType = {
     dataAction: 'GET_RESULTS_BY_ID',
     dataLoading: 'GET_RESULTS_BY_ID_LOADING',
     dataError: 'GET_RESULTS_BY_ID_ERROR'
+  },
+  approve: {
+    dataAction: 'APPROVE_RESULT',
+    dataLoading: 'APPROVE_RESULT_LOADING',
+    dataError: 'APPROVE_RESULT_ERROR'
+  },
+  reject: {
+    dataAction: 'REJECT_RESULT',
+    dataLoading: 'REJECT_RESULT_LOADING',
+    dataError: 'REJECT_RESULT_ERROR'
   }
 }
 

@@ -16,6 +16,12 @@ export interface IResultsReducer {
   getResultById: IResult
   getResultById_Loading: boolean
   getResultById_Error: any
+  approveResult: IResult
+  approveResult_Loading: boolean
+  approveResult_Error: any
+  rejectResult: IResult
+  rejectResult_Loading: boolean
+  rejectResult_Error: any
 }
 export interface IOtherReducer {
   menuOpen: boolean

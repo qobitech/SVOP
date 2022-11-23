@@ -35,6 +35,36 @@ export default function resultReducer (state = initialState, action: any) {
         ...state,
         getResultById_Error: action.payload
       }
+    case resultType.approve.dataAction:
+      return {
+        ...state,
+        approveResult: action.payload
+      }
+    case resultType.approve.dataLoading:
+      return {
+        ...state,
+        approveResult_Loading: action.payload
+      }
+    case resultType.approve.dataError:
+      return {
+        ...state,
+        approveResult_Error: action.payload
+      }
+    case resultType.reject.dataAction:
+      return {
+        ...state,
+        rejectResult: action.payload
+      }
+    case resultType.reject.dataLoading:
+      return {
+        ...state,
+        rejectResult_Loading: action.payload
+      }
+    case resultType.reject.dataError:
+      return {
+        ...state,
+        rejectResult_Error: action.payload
+      }
     default:
       return state
   }

@@ -1,4 +1,5 @@
 import { styled, Typography } from '@material-ui/core'
+import { down } from '../../../assets/style/breakpointHelpers'
 
 export const HeaderContainer = styled('div')({
   display: 'flex',
@@ -50,4 +51,15 @@ export const HeaderBodyText = styled(Typography)({
   margin: 0,
   marginRight: 25,
   color: '#286439'
+})
+
+export const SelectedTableActionsSection = styled('div')({
+  display: 'flex',
+  alignItems: 'center',
+  marginLeft: 'auto',
+  paddingTop: 3,
+  [down('md')]: {
+    marginLeft: 0,
+    marginTop: 10
+  }
 })
