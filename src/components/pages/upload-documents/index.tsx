@@ -85,7 +85,7 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({
                 Drop your document here, or &nbsp;<span><LinkContainer to={''}>browse</LinkContainer></span>
               </UploadSectionTextHeader>
               <UploadSectionTextSubHeader>
-                Supports .xlsx
+                Supports .xlsx .xls
               </UploadSectionTextSubHeader>
             </UploadSection>
           </BodyContainer>

@@ -27,7 +27,7 @@ const BreadCrumb: React.FC<IBreadCrumb> = ({
                         <LinkContainer to={pageurl.OVERVIEW}>
                           <HeaderImage src={homeicon} />
                         </LinkContainer>
-                        &nbsp;&nbsp;{' > '}&nbsp;
+                        &nbsp;&nbsp;<i className='fas fa-angle-right d-flex align-items-center mx-2' />&nbsp;
                     </HeaderText>
                     {crumbs.map((i, index) => {
                       if (index !== (crumbs.length - 1)) {
@@ -36,7 +36,7 @@ const BreadCrumb: React.FC<IBreadCrumb> = ({
                                     <LinkContainer to={i.url}>
                                         {i.title}
                                     </LinkContainer>
-                                    &nbsp;&nbsp;{' > '}&nbsp;
+                                    &nbsp;&nbsp;<i className='fas fa-angle-right d-flex align-items-center mx-2' />&nbsp;
                                 </HeaderText>
                         )
                       } else {
