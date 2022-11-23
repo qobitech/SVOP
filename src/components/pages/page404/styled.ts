@@ -15,7 +15,7 @@ export const ImgContainer = styled('img')({
 })
 
 export const TxtContainer = styled('p')({
-  fontFamily: ['IBX_Bold', 'Arial', 'sans-serif'].join(','),
+  fontFamily: ['Outfit_Medium', 'Arial', 'sans-serif'].join(','),
   fontSize: 18,
   margin: 0,
   marginBottom: 10

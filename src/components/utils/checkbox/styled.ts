@@ -7,7 +7,7 @@ export const FormControlContainer = styled('div')({
 })
 
 export const InputError = styled('p')({
-  fontFamily: ['IBX_Regular', 'Arial', 'sans-serif'].join(','),
+  fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
   fontSize: 11,
   color: 'red',
   margin: 0

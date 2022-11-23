@@ -8,21 +8,21 @@ export const FormControlContainer = styled('div')({
 })
 
 export const InputLabelComponent = styled('label')({
-  fontFamily: ['IBX_Regular', 'Arial', 'sans-serif'].join(','),
+  fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
   fontSize: 12,
   color: '#286439',
   marginBottom: 10
 })
 
 export const InputError = styled('p')({
-  fontFamily: ['IBX_Regular', 'Arial', 'sans-serif'].join(','),
+  fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
   fontSize: 11,
   color: 'red',
   margin: 0
 })
 
 export const TextInput = styled('input')(({ iserror }: { iserror?: string }) => ({
-  fontFamily: ['IBX_Regular', 'Arial', 'sans-serif'].join(','),
+  fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
   fontSize: 16,
   outline: '#286439',
   borderRadius: 3,

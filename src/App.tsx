@@ -17,6 +17,7 @@ import Overview from './components/pages/overview'
 import ViewResult from './components/pages/view-result'
 import Login from './components/pages/auth/login'
 import Profile from './components/pages/profile'
+import UploadDocument from './components/pages/upload-documents'
 import Page404 from './components/pages/page404'
 
 import { pageurl } from './constants/pageurl'
@@ -40,6 +41,9 @@ function App () {
           </Route>
           <Route path={pageurl.PROFILE} element={<ProtectedRoute />} >
             <Route path={pageurl.PROFILE} element={<Profile />} />
+          </Route>
+          <Route path={pageurl.UPLOAD} element={<ProtectedRoute />} >
+            <Route path={pageurl.UPLOAD} element={<UploadDocument />} />
           </Route>
           <Route path={pageurl.LOGIN} element={<AuthRoute />} >
             <Route path={pageurl.LOGIN} element={<Login />} />

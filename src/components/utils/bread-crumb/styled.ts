@@ -25,7 +25,7 @@ export const HeaderContainer = styled('div')({
 })
 
 export const HeaderText = styled(Typography)({
-  fontFamily: ['IBX_Light', 'Arial', 'sans-serif'].join(','),
+  fontFamily: ['Outfit_Light', 'Arial', 'sans-serif'].join(','),
   textTransform: 'capitalize',
   fontSize: 14,
   fontWeight: 600,

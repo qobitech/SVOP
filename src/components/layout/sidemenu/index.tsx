@@ -56,6 +56,13 @@ const menuData = [
         url: pageurl.APPROVED,
         menuNumber: 3,
         selected: true
+      },
+      {
+        id: 3,
+        title: 'Upload Result',
+        url: pageurl.UPLOAD,
+        menuNumber: 3,
+        selected: true
       }
     ],
     isParent: true,
@@ -76,13 +83,6 @@ const menuData = [
       {
         id: 2,
         title: 'Update Password',
-        url: pageurl.PROFILE,
-        menuNumber: 3,
-        selected: true
-      },
-      {
-        id: 2,
-        title: 'Assign Role',
         url: pageurl.PROFILE,
         menuNumber: 3,
         selected: true

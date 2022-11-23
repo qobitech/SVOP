@@ -44,7 +44,7 @@ export const HeaderTextNumbers = styled(Typography)({
 })
 
 export const HeaderBodyText = styled(Typography)({
-  fontFamily: ['Outfit_Light', 'Arial', 'sans-serif'].join(','),
+  fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
   textTransform: 'capitalize',
   fontSize: 25,
   fontWeight: 600,
@@ -62,4 +62,44 @@ export const SelectedTableActionsSection = styled('div')({
     marginLeft: 0,
     marginTop: 10
   }
+})
+
+export const UploadSection = styled('div')({
+  border: '1px dotted black',
+  borderRadius: '5px',
+  width: '100%',
+  height: 400,
+  boxSizing: 'border-box',
+  padding: '40px 30px',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center'
+})
+
+export const UploadSectionTextIcon = styled('i')({
+  fontSize: 40,
+  fontWeight: 600,
+  margin: 0,
+  color: '#286439',
+  marginBottom: 20
+})
+
+export const UploadSectionTextHeader = styled(Typography)({
+  fontFamily: ['Outfit_Medium', 'Arial', 'sans-serif'].join(','),
+  fontSize: 16,
+  fontWeight: 600,
+  margin: 0,
+  color: '#286439',
+  marginBottom: 20,
+  whiteSpace: 'nowrap',
+  display: 'flex'
+})
+
+export const UploadSectionTextSubHeader = styled(Typography)({
+  fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
+  fontSize: 14,
+  fontWeight: 600,
+  margin: 0,
+  color: '#b9b9b9'
 })

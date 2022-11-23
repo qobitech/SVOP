@@ -59,7 +59,7 @@ export const ProfileImage = styled('img')({
 })
 
 export const ProfileName = styled(Typography)({
-  fontFamily: ['IBX_Medium', 'Arial', 'sans-serif'].join(','),
+  fontFamily: ['Outfit_Medium', 'Arial', 'sans-serif'].join(','),
   textTransform: 'capitalize',
   fontSize: 14,
   margin: 0,
@@ -67,7 +67,7 @@ export const ProfileName = styled(Typography)({
 })
 
 export const ProfileRole = styled(Typography)({
-  fontFamily: ['IBX_Regular', 'Arial', 'sans-serif'].join(','),
+  fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
   textTransform: 'capitalize',
   fontSize: 11,
   margin: 0,
@@ -115,7 +115,7 @@ export const ParentMenuToggleIcon = styled('img')({
 })
 
 export const LogoutText = styled('p')({
-  fontFamily: ['IBX_Regular', 'Arial', 'sans-serif'].join(','),
+  fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
   fontSize: 14,
   margin: 0,
   cursor: 'pointer'

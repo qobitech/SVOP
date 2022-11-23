@@ -18,7 +18,7 @@ export const BodyContainer = styled('div')({
 })
 
 export const HeaderText = styled(Typography)({
-  fontFamily: ['IBX_Bold', 'Arial', 'sans-serif'].join(','),
+  fontFamily: ['Outfit_Medium', 'Arial', 'sans-serif'].join(','),
   textTransform: 'capitalize',
   fontSize: 16,
   fontWeight: 600,
@@ -44,7 +44,7 @@ export const HeaderTextNumbers = styled(Typography)({
 })
 
 export const HeaderBodyText = styled(Typography)({
-  fontFamily: ['IBX_Light', 'Arial', 'sans-serif'].join(','),
+  fontFamily: ['Outfit_Light', 'Arial', 'sans-serif'].join(','),
   textTransform: 'capitalize',
   fontSize: 25,
   fontWeight: 600,

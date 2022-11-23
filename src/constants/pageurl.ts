@@ -4,5 +4,6 @@ export const pageurl = {
   APPROVED: '/approved',
   LOGIN: '/',
   PROFILE: '/view-profile',
-  OVERVIEW: '/overview'
+  OVERVIEW: '/overview',
+  UPLOAD: '/upload'
 }

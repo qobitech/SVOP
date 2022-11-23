@@ -43,7 +43,7 @@ export const BodyContainerRow = styled('div')({
 })
 
 export const HeaderText = styled(Typography)({
-  fontFamily: ['IBX_Bold', 'Arial', 'sans-serif'].join(','),
+  fontFamily: ['Outfit_Medium', 'Arial', 'sans-serif'].join(','),
   textTransform: 'capitalize',
   fontSize: 16,
   fontWeight: 600,
@@ -89,7 +89,7 @@ export const BodyCTASection = styled('div')({
 })
 
 export const BodyCTASectionComponent = styled(Typography)({
-  fontFamily: ['IBX_Regular', 'Arial', 'sans-serif'].join(','),
+  fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
   fontSize: 14,
   transition: '.2s ease-in-out',
   padding: '5px 10px',
@@ -135,14 +135,14 @@ export const BodySectionRow = styled('div')({
 })
 
 export const BodySectionLeft = styled('p')({
-  fontFamily: ['IBX_Regular', 'Arial', 'sans-serif'].join(','),
+  fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
   fontSize: 14,
   margin: 0,
   color: '#286439'
 })
 
 export const BodySectionRight = styled('p')({
-  fontFamily: ['IBX_Medium', 'Arial', 'sans-serif'].join(','),
+  fontFamily: ['Outfit_Medium', 'Arial', 'sans-serif'].join(','),
   fontSize: 14,
   margin: 0,
   textTransform: 'uppercase'
@@ -195,14 +195,14 @@ export const ProfileImage = styled('img')({
 export const BodySectionHeader = styled('h5')({
   fontSize: 12,
   color: '#286439',
-  fontFamily: ['IBX_Light', 'Arial', 'sans-serif'].join(','),
+  fontFamily: ['Outfit_Light', 'Arial', 'sans-serif'].join(','),
   margin: '0px 0 10px'
 })
 
 export const BodySectionProfileName = styled('p')({
   fontSize: 16,
   color: '#286439',
-  fontFamily: ['IBX_Regular', 'Arial', 'sans-serif'].join(','),
+  fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
   margin: 0,
   marginBottom: 3
 
@@ -211,7 +211,7 @@ export const BodySectionProfileName = styled('p')({
 export const BodySectionProfileRole = styled('p')({
   fontSize: 12,
   color: '#5C5C5C',
-  fontFamily: ['IBX_Light', 'Arial', 'sans-serif'].join(','),
+  fontFamily: ['Outfit_Light', 'Arial', 'sans-serif'].join(','),
   margin: 0,
   [down('sm')]: {
     color: '#000'
@@ -222,7 +222,7 @@ export const MobileBodySectionProfileDate = styled('p')({
   display: 'none',
   fontSize: 10,
   color: '#5C5C5C',
-  fontFamily: ['IBX_Light', 'Arial', 'sans-serif'].join(','),
+  fontFamily: ['Outfit_Light', 'Arial', 'sans-serif'].join(','),
   margin: 0,
   [down('sm')]: {
     display: 'block',
@@ -233,7 +233,7 @@ export const MobileBodySectionProfileDate = styled('p')({
 export const BodySectionProfileDate = styled('p')({
   fontSize: 13,
   color: '#5C5C5C',
-  fontFamily: ['IBX_Light', 'Arial', 'sans-serif'].join(','),
+  fontFamily: ['Outfit_Light', 'Arial', 'sans-serif'].join(','),
   margin: 0,
   marginLeft: 'auto',
   [down('sm')]: {
@@ -280,21 +280,21 @@ export const CTAInnerVoteSection = styled('div')({
 })
 
 export const TotalResultTitleText = styled('p')({
-  fontFamily: ['IBX_Light', 'Arial', 'sans-serif'].join(','),
+  fontFamily: ['Outfit_Light', 'Arial', 'sans-serif'].join(','),
   fontSize: 20,
   color: '#5C5C5C',
   margin: 0
 })
 
 export const TotalResultValueText = styled('p')({
-  fontFamily: ['IBX_Medium', 'Arial', 'sans-serif'].join(','),
+  fontFamily: ['Outfit_Medium', 'Arial', 'sans-serif'].join(','),
   fontSize: 20,
   color: '#286439',
   margin: 0
 })
 
 export const TotalResultValueTextMini = styled('p')({
-  fontFamily: ['IBX_Medium', 'Arial', 'sans-serif'].join(','),
+  fontFamily: ['Outfit_Medium', 'Arial', 'sans-serif'].join(','),
   fontSize: 14,
   color: '#286439',
   margin: 0,
@@ -319,7 +319,7 @@ export const CTAApproveButton = styled('button')({
   height: 43,
   fontSize: 14,
   padding: '0 15px',
-  fontFamily: ['IBX_Medium', 'Arial', 'sans-serif'].join(','),
+  fontFamily: ['Outfit_Medium', 'Arial', 'sans-serif'].join(','),
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -337,7 +337,7 @@ export const CTARejectButton = styled('button')({
   height: 43,
   fontSize: 14,
   padding: '0 15px',
-  fontFamily: ['IBX_Medium', 'Arial', 'sans-serif'].join(','),
+  fontFamily: ['Outfit_Medium', 'Arial', 'sans-serif'].join(','),
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',

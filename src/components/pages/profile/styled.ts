@@ -27,7 +27,7 @@ export const LoggedUserSectionRow = styled('div')(({ nomargin }: { nomargin?: 't
 }))
 
 export const LoggedUserSectionRowHeaderText = styled(Typography)({
-  fontFamily: ['IBX_Regular', 'Arial', 'sans-serif'].join(','),
+  fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
   fontSize: 12,
   margin: 0,
   marginBottom: 5,
@@ -36,7 +36,7 @@ export const LoggedUserSectionRowHeaderText = styled(Typography)({
 })
 
 export const LoggedUserSectionRowBodyText = styled(Typography)({
-  fontFamily: ['IBX_Medium', 'Arial', 'sans-serif'].join(','),
+  fontFamily: ['Outfit_Medium', 'Arial', 'sans-serif'].join(','),
   fontSize: 16
 })
 
@@ -53,7 +53,7 @@ export const ProfileUserSection = styled('div')({
 })
 
 export const HeaderText = styled(Typography)({
-  fontFamily: ['IBX_Bold', 'Arial', 'sans-serif'].join(','),
+  fontFamily: ['Outfit_Medium', 'Arial', 'sans-serif'].join(','),
   textTransform: 'capitalize',
   fontSize: 16,
   fontWeight: 600,

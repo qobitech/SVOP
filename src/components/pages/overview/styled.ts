@@ -116,7 +116,7 @@ export const AboutSectionRow = styled('div')(({ nomargin }: { nomargin?: 'true' 
 }))
 
 export const LoggedUserSectionRowHeaderText = styled(Typography)({
-  fontFamily: ['IBX_Regular', 'Arial', 'sans-serif'].join(','),
+  fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
   fontSize: 12,
   margin: 0,
   marginBottom: 5,
@@ -125,7 +125,7 @@ export const LoggedUserSectionRowHeaderText = styled(Typography)({
 })
 
 export const LoggedUserSectionRowHeaderLinkText = styled(Typography)({
-  fontFamily: ['IBX_Regular', 'Arial', 'sans-serif'].join(','),
+  fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
   fontSize: 12,
   margin: 0,
   marginBottom: 5,
@@ -144,7 +144,7 @@ export const HeaderRowSection = styled('div')({
 })
 
 export const LoggedUserSectionRowBodyText = styled(Typography)({
-  fontFamily: ['IBX_Medium', 'Arial', 'sans-serif'].join(','),
+  fontFamily: ['Outfit_Medium', 'Arial', 'sans-serif'].join(','),
   fontSize: 16
 })
 
@@ -162,7 +162,7 @@ export const OverViewSectionColumns = styled('div')(({ noborder }: { noborder?: 
 }))
 
 export const OverViewSectionColumnsHeaderText = styled(Typography)({
-  fontFamily: ['IBX_Regular', 'Arial', 'sans-serif'].join(','),
+  fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
   fontSize: 14,
   margin: 0,
   marginBottom: 5,
@@ -170,7 +170,7 @@ export const OverViewSectionColumnsHeaderText = styled(Typography)({
 })
 
 export const OverViewSectionColumnsBodyText = styled(Typography)({
-  fontFamily: ['IBX_Medium', 'Arial', 'sans-serif'].join(','),
+  fontFamily: ['Outfit_Medium', 'Arial', 'sans-serif'].join(','),
   fontSize: 40
 })
 

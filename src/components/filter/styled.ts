@@ -47,7 +47,7 @@ export const FilterButton = styled('button')(({ isclicked }: { isclicked?: strin
   width: 86,
   height: 43,
   fontSize: 12,
-  fontFamily: [isclicked === 'true' ? 'IBX_Medium' : 'IBX_Regular', 'Arial', 'sans-serif'].join(','),
+  fontFamily: [isclicked === 'true' ? 'Outfit_Medium' : 'Outfit_Regular', 'Arial', 'sans-serif'].join(','),
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -58,7 +58,7 @@ export const FilterButton = styled('button')(({ isclicked }: { isclicked?: strin
   color: isclicked === 'true' ? '#286439' : '#000',
   cursor: 'pointer',
   '&:hover': {
-    fontFamily: ['IBX_Medium', 'Arial', 'sans-serif'].join(','),
+    fontFamily: ['Outfit_Medium', 'Arial', 'sans-serif'].join(','),
     color: '#286439',
     border: '1px solid \'#286439\''
   }
