@@ -99,7 +99,7 @@ export const ParentMenuContainer = styled('div')(({ isselected }: { isselected?:
     background: '#F4FFF8'
   },
   [down('md')]: {
-    padding: '0 10px 0 25px'
+    padding: '25px 10px 25px 25px'
   }
 }))
 
@@ -139,7 +139,10 @@ export const SubMenuContainer = styled('div')({
   alignItems: 'center',
   paddingLeft: 35,
   cursor: 'pointer',
-  justifyContent: 'space-between'
+  justifyContent: 'space-between',
+  [down('md')]: {
+    paddingLeft: 45
+  }
 })
 
 export const SubMenuText = styled(Typography)(({ selected }: { selected: boolean }) => ({
