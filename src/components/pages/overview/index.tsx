@@ -6,26 +6,29 @@ import 'react-toastify/dist/ReactToastify.css'
 import { IStates } from '../../../interface/IReducer'
 import { IActions } from '../../../interface/IAction'
 
-import { BodyContainer } from '../profile/styled'
-import { HeaderContainer } from '../view-result/styled'
+import {
+  BodyContainer,
+  BodyContainerRow,
+  HeaderContainer
+} from '../view-result/styled'
 import {
   BodyColumnLeft, BodyColumnRight, OverViewSection,
   OverViewSectionColumns, OverViewSectionColumnsBodyText,
   OverViewSectionColumnsHeaderText, LinkContainer, LoggedUserSection,
   LoggedUserSectionRow, LoggedUserSectionRowBodyText, LoggedUserSectionRowHeaderText,
-  MapViewSection, MapViewImage, AboutSectionRow, AboutSectionColumn,
-  LoggedUserSectionRowHeaderLinkText, HeaderRowSection
+  MapViewSection, MapViewImage, AboutSectionRow, AboutSectionColumn, CTAApproveButton
 } from './styled'
 
 import homeicon from '../../../assets/images/home.png'
 
 import { pageurl } from '../../../constants/pageurl'
 
-import mapimage from '../../../assets/images/map.png'
+import mapimage from '../../../assets/images/upload-doc.jpg'
 import { _handleTh } from '../../utils/helper'
 import { HeaderImage } from '../../utils/bread-crumb/styled'
 
 import { userData } from '../../../constants/global'
+import { HeaderBodyText } from '../approved/styled'
 
 const PAGE_SIZE = 20
 
@@ -57,24 +60,27 @@ const OverviewChild: React.FC<IOverviewPageChild> = ({
 
   const approvedData = states?.result.getAllApprovedResults
   const unapprovedData = states?.result.getAllUnApprovedResults
-  // const load = states?.resultState?.result.getAllResults_Loading
-  // const error = states?.zoneState?.zone.getAllZones_Error
+  const approvedDataload = states?.result?.getAllApprovedResults_Loading
+  const unapprovedDataload = states?.result?.getAllUnApprovedResults_Loading
 
   const overviewSectionData = [
     {
-      title: 'Un-approved',
+      title: 'Un-approved Results',
       value: unapprovedData?.total || 0,
-      url: pageurl.UNAPPROVED
+      url: pageurl.UNAPPROVED,
+      load: unapprovedDataload
     },
     {
-      title: 'Approved',
+      title: 'Approved Results',
       value: approvedData?.total || 1,
-      url: pageurl.APPROVED
+      url: pageurl.APPROVED,
+      load: approvedDataload
     },
     {
-      title: 'Rejected',
+      title: 'Rejected Results',
       value: 0,
-      url: pageurl.APPROVED
+      url: pageurl.APPROVED,
+      load: false
     }
   ]
 
@@ -98,26 +104,7 @@ const OverviewChild: React.FC<IOverviewPageChild> = ({
     {
       title: 'User Name',
       value: userData?.token?.unique_name[0]
-    },
-    {
-      title: 'Gender',
-      value: 'Male'
-    },
-    {
-      title: 'State of Origin',
-      value: 'Adamawa'
-    },
-    {
-      title: 'Last Login',
-      value: '22nd October, 2022 | 12:48pm WAT'
     }
-  ]
-
-  const electionData = [
-    { title: 'Presidential Election', url: '' },
-    { title: 'State Election', url: '' },
-    { title: 'House of Reps Election', url: '' },
-    { title: 'LGA Election', url: '' }
   ]
 
   return (
@@ -126,91 +113,69 @@ const OverviewChild: React.FC<IOverviewPageChild> = ({
         <HeaderImage src={homeicon} />
       </HeaderContainer>
       <BodyContainer>
-        <BodyColumnLeft>
-          <OverViewSection>
-            {overviewSectionData.map((i, index) => (
-              <OverViewSectionColumns key={index} noborder={index === (overviewSectionData.length - 1) ? 'true' : 'false'} >
-                <OverViewSectionColumnsHeaderText>
-                  {i.title}
-                </OverViewSectionColumnsHeaderText>
-                <OverViewSectionColumnsBodyText>
-                  <LinkContainer to={i.url}>
-                    {_handleTh(i?.value?.toString())}
-                  </LinkContainer>
-                </OverViewSectionColumnsBodyText>
-              </OverViewSectionColumns>
-            ))}
-          </OverViewSection>
-          <MapViewSection>
-            <MapViewImage src={mapimage} />
-            <AboutSectionColumn>
-              <AboutSectionRow>
-                <LoggedUserSectionRowHeaderText>
-                  COUNTRY
-                </LoggedUserSectionRowHeaderText>
-                <LoggedUserSectionRowBodyText>
-                  Nigeria
-                </LoggedUserSectionRowBodyText>
-              </AboutSectionRow>
-              <AboutSectionRow>
-                <LoggedUserSectionRowHeaderText>
-                  ELECTORAL BODY
-                </LoggedUserSectionRowHeaderText>
-                <LoggedUserSectionRowBodyText>
-                  INEC - <i>Mahmood Yakubu (President)</i>
-                </LoggedUserSectionRowBodyText>
-              </AboutSectionRow>
-              <AboutSectionRow>
-                <HeaderRowSection>
-                  <LoggedUserSectionRowHeaderText>
-                    UPCOMING ELECTION
-                  </LoggedUserSectionRowHeaderText>
-                  <LoggedUserSectionRowHeaderLinkText>
-                    <LinkContainer to={''}>
-                      Create New Election +
-                    </LinkContainer>
-                  </LoggedUserSectionRowHeaderLinkText>
-                </HeaderRowSection>
-                {electionData.map((i, index) => (
-                <LoggedUserSectionRowBodyText key={index}>
-                  <LinkContainer to={i.url}>
+        <BodyContainerRow>
+          <HeaderBodyText>
+            Elections Results App
+          </HeaderBodyText>
+        </BodyContainerRow>
+        <BodyContainer nopadding='true'>
+          <BodyColumnLeft>
+            <OverViewSection>
+              {overviewSectionData.map((i, index) => (
+                <OverViewSectionColumns key={index} noborder={index === (overviewSectionData.length - 1) ? 'true' : 'false'} >
+                  <OverViewSectionColumnsHeaderText>
                     {i.title}
-                  </LinkContainer >
-                </LoggedUserSectionRowBodyText>
-                ))}
-              </AboutSectionRow>
-              <AboutSectionRow>
-                <HeaderRowSection>
+                  </OverViewSectionColumnsHeaderText>
+                  <OverViewSectionColumnsBodyText>
+                    {i.load
+                      ? <i className="fa fa-spinner fa-spin" aria-hidden="true" />
+                      : <LinkContainer to={i.url}>
+                      {_handleTh(i?.value?.toString())}
+                    </LinkContainer>}
+                  </OverViewSectionColumnsBodyText>
+                </OverViewSectionColumns>
+              ))}
+            </OverViewSection>
+            <MapViewSection>
+              <MapViewImage src={mapimage} />
+              <AboutSectionColumn>
+                <AboutSectionRow>
                   <LoggedUserSectionRowHeaderText>
-                    POLITICAL PARTIES
+                    DOCUMENT UPLOAD
                   </LoggedUserSectionRowHeaderText>
-                  <LoggedUserSectionRowHeaderLinkText>
-                      <LinkContainer to={''}>
-                        Add New Political Party +
-                      </LinkContainer>
-                  </LoggedUserSectionRowHeaderLinkText>
-                </HeaderRowSection>
+                  <LoggedUserSectionRowBodyText>
+                    Upload Election Results
+                  </LoggedUserSectionRowBodyText>
+                  <CTAApproveButton className='mt-4' onClick={() => window.open(pageurl.UPLOAD, '_self')}>
+                    Proceed
+                  </CTAApproveButton>
+                </AboutSectionRow>
+                <AboutSectionRow>
+                  <LoggedUserSectionRowHeaderText>
+                    Number of Uploaded Results
+                  </LoggedUserSectionRowHeaderText>
+                  <LoggedUserSectionRowBodyText>
+                    0
+                  </LoggedUserSectionRowBodyText>
+                </AboutSectionRow>
+              </AboutSectionColumn>
+            </MapViewSection>
+          </BodyColumnLeft>
+          <BodyColumnRight>
+            <LoggedUserSection>
+              {usersectiondata.map((i, index) => (
+              <LoggedUserSectionRow key={index} nomargin={index === (usersectiondata.length - 1) ? 'true' : 'false'}>
+                <LoggedUserSectionRowHeaderText>
+                  {i.title}
+                </LoggedUserSectionRowHeaderText>
                 <LoggedUserSectionRowBodyText>
-                  18
+                  {i.value}
                 </LoggedUserSectionRowBodyText>
-              </AboutSectionRow>
-            </AboutSectionColumn>
-          </MapViewSection>
-        </BodyColumnLeft>
-        <BodyColumnRight>
-          <LoggedUserSection>
-            {usersectiondata.map((i, index) => (
-            <LoggedUserSectionRow key={index} nomargin={index === (usersectiondata.length - 1) ? 'true' : 'false'}>
-              <LoggedUserSectionRowHeaderText>
-                {i.title}
-              </LoggedUserSectionRowHeaderText>
-              <LoggedUserSectionRowBodyText>
-                {i.value}
-              </LoggedUserSectionRowBodyText>
-            </LoggedUserSectionRow>
-            ))}
-          </LoggedUserSection>
-        </BodyColumnRight>
+              </LoggedUserSectionRow>
+              ))}
+            </LoggedUserSection>
+          </BodyColumnRight>
+        </BodyContainer>
       </BodyContainer>
     </>
   )

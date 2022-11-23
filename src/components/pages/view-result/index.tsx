@@ -28,7 +28,8 @@ import {
   BodySectionComponentImageTag,
   BodyContainerRow,
   BodyCTASection,
-  BodyCTASectionComponent
+  BodyCTASectionComponent,
+  HeaderBodyText
 } from './styled'
 
 import { useParams, useLocation } from 'react-router-dom'
@@ -36,7 +37,6 @@ import { pageurl } from '../../../constants/pageurl'
 import { IStates } from '../../../interface/IReducer'
 import { IActions } from '../../../interface/IAction'
 import BreadCrumb from '../../utils/bread-crumb'
-import { HeaderBodyText } from '../unapproved/styled'
 import { resultType } from '../../../store/types'
 import ResultAssessmentOTP from './otp'
 import { HeaderTextNumbers } from '../approved/styled'

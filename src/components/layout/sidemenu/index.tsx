@@ -56,13 +56,6 @@ const menuData = [
         url: pageurl.APPROVED,
         menuNumber: 3,
         selected: true
-      },
-      {
-        id: 3,
-        title: 'Upload Result',
-        url: pageurl.UPLOAD,
-        menuNumber: 3,
-        selected: true
       }
     ],
     isParent: true,
@@ -70,6 +63,22 @@ const menuData = [
   },
   {
     id: 3,
+    title: 'Documents',
+    url: '',
+    sub: [
+      {
+        id: 1,
+        title: 'Upload Result',
+        url: pageurl.UPLOAD,
+        menuNumber: 2,
+        selected: true
+      }
+    ],
+    isParent: true,
+    icon: 'fas fa-file mr-2'
+  },
+  {
+    id: 4,
     title: 'Settings',
     url: '',
     sub: [

@@ -97,9 +97,32 @@ export const AboutSectionColumn = styled('div')(({ nomargin }: { nomargin?: 'tru
   justifyContent: 'flex-start',
   paddingLeft: 30,
   [down('md')]: {
-    justifyContent: 'center'
+    justifyContent: 'center',
+    paddingLeft: 0,
+    marginBottom: 0
   }
 }))
+
+export const CTAApproveButton = styled('button')({
+  width: 'max-content',
+  height: 35,
+  fontSize: 14,
+  padding: '0 10px',
+  fontFamily: ['Outfit_Medium', 'Arial', 'sans-serif'].join(','),
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  background: '#369B53',
+  margin: 0,
+  marginRight: 20,
+  border: '1px solid #369B53',
+  borderRadius: 5,
+  color: '#fff',
+  cursor: 'pointer',
+  [down('md')]: {
+    marginRight: 0
+  }
+})
 
 export const AboutSectionRow = styled('div')(({ nomargin }: { nomargin?: 'true' | 'false' }) => ({
   width: '100%',
@@ -111,7 +134,8 @@ export const AboutSectionRow = styled('div')(({ nomargin }: { nomargin?: 'true' 
   alignItems: 'flex-start',
   justifyContent: 'flex-start',
   [down('md')]: {
-    justifyContent: 'center'
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 }))
 
@@ -145,7 +169,7 @@ export const HeaderRowSection = styled('div')({
 
 export const LoggedUserSectionRowBodyText = styled(Typography)({
   fontFamily: ['Outfit_Medium', 'Arial', 'sans-serif'].join(','),
-  fontSize: 16
+  fontSize: 20
 })
 
 export const OverViewSectionColumns = styled('div')(({ noborder }: { noborder?: 'true' | 'false' }) => ({
@@ -171,7 +195,13 @@ export const OverViewSectionColumnsHeaderText = styled(Typography)({
 
 export const OverViewSectionColumnsBodyText = styled(Typography)({
   fontFamily: ['Outfit_Medium', 'Arial', 'sans-serif'].join(','),
-  fontSize: 40
+  fontSize: 50,
+  [down('md')]: {
+    fontSize: 40
+  },
+  [down('sm')]: {
+    fontSize: 25
+  }
 })
 
 export const LinkContainer = styled(Link)({
@@ -179,7 +209,7 @@ export const LinkContainer = styled(Link)({
   fontSize: 'inherit',
   color: 'inherit',
   display: 'flex',
-  textDecoration: 'underline',
+  textDecoration: 'none',
   '&:hover': {
     color: 'inherit'
   }

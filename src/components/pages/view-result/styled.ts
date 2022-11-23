@@ -12,7 +12,8 @@ export const LinkContainer = styled(Link)({
 export const HeaderContainer = styled('div')({
   display: 'flex',
   alignItems: 'center',
-  marginBottom: 20
+  marginBottom: 20,
+  flexWrap: 'wrap'
 })
 
 export const BodyContainer = styled('div')(({ nopadding }: { nopadding?: 'true' | 'false' }) => ({
@@ -27,11 +28,21 @@ export const BodyContainer = styled('div')(({ nopadding }: { nopadding?: 'true' 
   flexDirection: 'row',
   flexWrap: 'wrap',
   alignItems: 'stretch',
-  justifyContent: 'space-between',
-  [down('md')]: {
-    flexDirection: 'column-reverse'
-  }
+  justifyContent: 'space-between'
 }))
+
+export const HeaderBodyText = styled(Typography)({
+  fontFamily: ['Outfit_Light', 'Arial', 'sans-serif'].join(','),
+  textTransform: 'capitalize',
+  fontSize: 25,
+  fontWeight: 600,
+  margin: 0,
+  marginRight: 25,
+  color: '#286439',
+  [down('sm')]: {
+    marginBottom: 15
+  }
+})
 
 export const BodyContainerRow = styled('div')({
   width: '100%',
@@ -316,9 +327,9 @@ export const CTABtnSection = styled('div')({
 
 export const CTAApproveButton = styled('button')({
   width: 'max-content',
-  height: 43,
+  height: 35,
   fontSize: 14,
-  padding: '0 15px',
+  padding: '0 10px',
   fontFamily: ['Outfit_Medium', 'Arial', 'sans-serif'].join(','),
   display: 'flex',
   alignItems: 'center',
@@ -334,9 +345,9 @@ export const CTAApproveButton = styled('button')({
 
 export const CTARejectButton = styled('button')({
   width: 'max-content',
-  height: 43,
+  height: 35,
   fontSize: 14,
-  padding: '0 15px',
+  padding: '0 10px',
   fontFamily: ['Outfit_Medium', 'Arial', 'sans-serif'].join(','),
   display: 'flex',
   alignItems: 'center',
