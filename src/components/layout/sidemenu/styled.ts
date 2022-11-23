@@ -23,7 +23,10 @@ export const MainMenuContainer = styled('div')({
   minWidth: 200,
   zIndex: 5,
   overflow: 'auto',
-  boxSizing: 'border-box'
+  boxSizing: 'border-box',
+  [down('md')]: {
+    minWidth: '70%'
+  }
 })
 
 export const SideMenuContainer = styled('div')({
@@ -94,6 +97,9 @@ export const ParentMenuContainer = styled('div')(({ isselected }: { isselected?:
   width: '100%',
   '&:hover': {
     background: '#F4FFF8'
+  },
+  [down('md')]: {
+    padding: '0 10px 0 25px'
   }
 }))
 
