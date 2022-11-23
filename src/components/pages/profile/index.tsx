@@ -47,18 +47,6 @@ const ProfileChild = () => {
     {
       title: 'User Name',
       value: userData?.token?.unique_name[0]
-    },
-    {
-      title: 'Gender',
-      value: 'Male'
-    },
-    {
-      title: 'State of Origin',
-      value: 'Adamawa'
-    },
-    {
-      title: 'Last Login',
-      value: '22nd October, 2022 | 12:48pm WAT'
     }
   ]
 
