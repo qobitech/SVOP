@@ -59,7 +59,7 @@ export const ProfileImage = styled('img')({
 })
 
 export const ProfileName = styled(Typography)({
-  fontFamily: ['Outfit_Medium', 'Arial', 'sans-serif'].join(','),
+  fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
   textTransform: 'capitalize',
   fontSize: 14,
   margin: 0,

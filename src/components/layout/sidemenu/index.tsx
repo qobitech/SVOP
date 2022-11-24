@@ -79,26 +79,19 @@ const menuData = [
   },
   {
     id: 4,
-    title: 'Settings',
+    title: 'Profile',
     url: '',
     sub: [
       {
         id: 1,
-        title: 'Update Profile',
+        title: 'View Profile',
         url: pageurl.PROFILE,
         menuNumber: 2,
-        selected: true
-      },
-      {
-        id: 2,
-        title: 'Update Password',
-        url: pageurl.PROFILE,
-        menuNumber: 3,
         selected: true
       }
     ],
     isParent: true,
-    icon: 'fas fa-cog mr-2'
+    icon: 'fas fa-user mr-2'
   },
   {
     id: 5,
@@ -122,15 +115,15 @@ const SideMenu: React.FC<ISideMenu> = ({
         <MainMenuContainer className={!isOpen ? 'side_menu_close' : 'side_menu_open'}>
           <SideMenuContainer>
               <LinkContainer to={pageurl.PROFILE}>
-                  <ProfileContainer>
-                      <ProfileImage src={imageSrc} />
-                          <ProfileName>
-                              {name}
-                          </ProfileName>
-                      <ProfileRole>
-                          {role}
-                      </ProfileRole>
-                  </ProfileContainer>
+                <ProfileContainer>
+                  <ProfileImage src={imageSrc} />
+                  <ProfileName>
+                    {name}
+                  </ProfileName>
+                  <ProfileRole>
+                    {role}
+                  </ProfileRole>
+                </ProfileContainer>
               </LinkContainer>
               <MenuContainer>
                   {menuData.map(i => (
