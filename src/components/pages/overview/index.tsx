@@ -113,7 +113,7 @@ const OverviewChild: React.FC<IOverviewPageChild> = ({
       <BodyContainer>
         <BodyContainerRow>
           <HeaderBodyText>
-            Elections Results App
+            Election Result Validation
           </HeaderBodyText>
         </BodyContainerRow>
         <BodyContainer nopadding='true'>
