@@ -103,6 +103,8 @@ const OverviewChild: React.FC<IOverviewPageChild> = ({
     }
   ]
 
+  const isPending = unapprovedData?.total === 1
+
   return (
     <>
       <HeaderContainer>
@@ -177,9 +179,13 @@ const OverviewChild: React.FC<IOverviewPageChild> = ({
                 <LoggedUserSectionRowBodyText>
                   {unapprovedDataload ? <i className="fa fa-spinner fa-spin" aria-hidden="true" /> : (unapprovedData?.total || 0)}
                 </LoggedUserSectionRowBodyText>
-                <CTAApproveButton className='mt-4' onClick={() => window.open(pageurl.UNAPPROVED, '_self')}>
-                  <span><i className='fas fa-check-circle' />&nbsp;&nbsp;</span>
-                  Approve {(unapprovedData?.total || 0) === 1 ? 'Result' : 'Results'}
+                <CTAApproveButton className='mt-4' onClick={() => window.open(isPending ? pageurl.UNAPPROVED : pageurl.APPROVED, '_self')}>
+                  {!unapprovedDataload && <span><i className='fas fa-check-circle' />&nbsp;&nbsp;</span>}
+                  {!unapprovedDataload
+                    ? isPending
+                      ? (unapprovedData?.total || 0) === 1 ? 'Approve Result' : 'Approve Results'
+                      : 'View Approved Results'
+                    : <i className="fa fa-spinner fa-spin" aria-hidden="true" />}
                 </CTAApproveButton>
               </LoggedUserSection>
           </BodyColumnRight>
