@@ -27,7 +27,7 @@ interface IHeader {
 const Header = ({ setMenu }: IHeader) => {
   return (
     <HeaderContainer>
-      <LinkContainer to={pageurl.OVERVIEW}>
+      <LinkContainer to={pageurl.OVERVIEW} className='d-none d-md-block'>
         <Logo src={logo} />
       </LinkContainer>
       <Hamburger src={hamburger} onClick={setMenu}/>
