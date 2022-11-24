@@ -5,5 +5,6 @@ export const pageurl = {
   LOGIN: '/',
   PROFILE: '/view-profile',
   OVERVIEW: '/overview',
-  UPLOAD: '/upload'
+  UPLOAD: '/upload',
+  INSTRUCTIONS: '/instructions'
 }

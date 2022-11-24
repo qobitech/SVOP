@@ -99,6 +99,14 @@ const menuData = [
     ],
     isParent: true,
     icon: 'fas fa-cog mr-2'
+  },
+  {
+    id: 5,
+    title: 'Instructions',
+    url: pageurl.INSTRUCTIONS,
+    sub: [],
+    isParent: false,
+    icon: 'fa fa-pen mr-2'
   }
 ]
 
