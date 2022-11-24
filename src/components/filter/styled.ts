@@ -1,4 +1,4 @@
-import { styled } from '@material-ui/core'
+import { styled, Typography } from '@material-ui/core'
 import { down } from '../../assets/style/breakpointHelpers'
 
 export const FilterContainer = styled('div')({
@@ -42,6 +42,33 @@ export const FilterButtonIcon = styled('img')({
   width: 15,
   height: 15
 })
+
+export const SortText = styled(Typography)({
+  fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
+  fontSize: 16
+})
+
+export const SortIconTag = styled('i')(({
+  color,
+  isselected,
+  background
+}:
+{
+  color?: string
+  isselected?: 'true' | 'false'
+  background?: string
+}) => ({
+  color: isselected === 'true' ? color : '',
+  background: isselected === 'true' ? background : '',
+  transition: '.2s ease-in-out',
+  cursor: 'pointer',
+  fontSize: 10,
+  border: '1px solid ' + background,
+  '&:hover': {
+    background,
+    color
+  }
+}))
 
 export const FilterButton = styled('button')(({ isclicked }: { isclicked?: string }) => ({
   width: 86,

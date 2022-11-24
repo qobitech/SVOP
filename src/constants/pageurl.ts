@@ -7,5 +7,5 @@ export const pageurl = {
   OVERVIEW: '/overview',
   UPLOAD: '/upload',
   INSTRUCTIONS: '/instructions',
-  REJECTED: '/instructions'
+  REJECTED: '/rejected'
 }

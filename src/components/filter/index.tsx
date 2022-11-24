@@ -11,6 +11,7 @@ import {
 import filterIcon from '../../assets/images/filter.svg'
 import sortIcon from '../../assets/images/sort.svg'
 import CustomFilter, { IFilterParam } from './components'
+import SortComponent, { ISortParam } from './sort-component'
 
 interface IFilter {
   children?: any
@@ -28,7 +29,13 @@ const Filter: React.FC<IFilter> = ({ children }) => {
   }
   const [isFilter, setIsFilter] = useState(false)
   const [isSort, setIsSort] = useState(false)
+  const [checkId, setCheckId] = useState('')
   const [customInfo, setCustomInfo] = useState<{ [key: string]: any }>({
+    [initQuery.ward]: '',
+    [initQuery.polling]: '',
+    [initQuery.presidingOfficer]: ''
+  })
+  const [sortInfo, setSortInfo] = useState<{ [key: string]: any }>({
     [initQuery.ward]: '',
     [initQuery.polling]: '',
     [initQuery.presidingOfficer]: ''
@@ -92,6 +99,35 @@ const Filter: React.FC<IFilter> = ({ children }) => {
     console.log(temp, 'juju')
   }
 
+  const sendSortQuery = (state: { [key: string]: string }) => {
+    let temp = ''
+    Object.keys(state).forEach(i => {
+      if (state[i]) {
+        temp += (temp ? '&' : '?') + queryKey(i) + '=' + state[i]
+      }
+    })
+    console.log(temp, 'juju')
+  }
+
+  const sortParams: ISortParam[] = [
+    {
+      id: 'election',
+      title: 'Election'
+    },
+    {
+      id: 'ward',
+      title: 'Ward'
+    },
+    {
+      id: 'pollingunit',
+      title: 'Polling Unit'
+    },
+    {
+      id: 'presidingofficer',
+      title: 'Presiding Officer'
+    }
+  ]
+
   return (
         <FilterContainer>
             <FilterButtonSection>
@@ -119,7 +155,15 @@ const Filter: React.FC<IFilter> = ({ children }) => {
             </FilterContentContainer>}
             {isSort &&
             <FilterContentContainer>
-                Sort
+              <SortComponent
+                checkId={checkId}
+                isSort={true}
+                sendQuery={sendSortQuery}
+                setCheckId={setCheckId}
+                setSortInfo={setSortInfo}
+                sortInfo={sortInfo}
+                sortParams={sortParams}
+              />
             </FilterContentContainer>}
         </FilterContainer>
   )
