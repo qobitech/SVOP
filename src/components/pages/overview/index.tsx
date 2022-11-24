@@ -14,7 +14,8 @@ import {
   OverViewSectionColumns, OverViewSectionColumnsBodyText,
   OverViewSectionColumnsHeaderText, LinkContainer, LoggedUserSection,
   LoggedUserSectionRow, LoggedUserSectionRowBodyText, LoggedUserSectionRowHeaderText,
-  MapViewSection, MapViewImage, AboutSectionRow, AboutSectionColumn, CTAApproveButton, LoggedUserProfileSectionRowBodyText, Separator
+  MapViewSection, MapViewImage, AboutSectionRow, AboutSectionColumn, CTAApproveButton,
+  LoggedUserProfileSectionRowBodyText, Separator
 } from './styled'
 
 import homeicon from '../../../assets/images/home.png'
@@ -101,7 +102,7 @@ const OverviewChild: React.FC<IOverviewPageChild> = ({
     }
   ]
 
-  const isPending = unapprovedData?.total === 1
+  const isPending = (unapprovedData?.total || 0) > 1
 
   return (
     <>
