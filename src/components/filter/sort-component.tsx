@@ -37,17 +37,17 @@ const SortComponent: React.FC<ISortComponent> = ({
         <div className='bg-white py-2' style={{ overflow: 'auto' }}>
             <div className='w-100 fml-grid justify-content-center justify-content-md-between'>
                 {sortParams.map((i) => (
-                    <div key={i.id} className='d-flex justify-content-start align-items-center px-3'>
+                    <div key={i.id} className='d-flex justify-content-start align-items-center p-3'>
                         {/* <TypeCheckbox
                           onChange={onHandleChange}
                           checked={checkId === i.title}
                           id={i.title}
                         /> */}
-                        <SortText className='m-0 mx-3'>{i.title}</SortText>
                         <div>
                             <SortIconTag className='fas fa-arrow-up mx-3 p-2 rounded' background='#D2E9D9' color='#286439' />
                             <SortIconTag className='fas fa-arrow-down mx-3 p-2 rounded' background='#D2E9D9' color='#286439' />
                         </div>
+                        <SortText className='m-0 mx-3'>{i.title}</SortText>
                     </div>
                 ))}
             </div>
