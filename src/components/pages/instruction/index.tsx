@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import DataWrapper from '../../../wrapper/data-wrapper'
 
-import 'react-toastify/dist/ReactToastify.css'
-
 import { useLocation } from 'react-router-dom'
 
 import {

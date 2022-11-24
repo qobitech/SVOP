@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react'
 import DataWrapper from '../../../wrapper/data-wrapper'
 
-import 'react-toastify/dist/ReactToastify.css'
-
 import { IStates } from '../../../interface/IReducer'
 import { IActions } from '../../../interface/IAction'
 
