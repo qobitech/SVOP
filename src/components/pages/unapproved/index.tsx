@@ -36,7 +36,7 @@ interface IUnapprovedPageChild {
   states?: IStates
 }
 
-const tableHeader = ['Election', 'State', 'LGA', 'Polling Unit', 'Presiding Officer', 'Actions']
+const tableHeader = ['Election', 'State', 'LGA', 'Ward', 'Polling Unit', 'Presiding Officer', 'Actions']
 
 const UnapprovedChild: React.FC<IUnapprovedPageChild> = ({
   states,
@@ -91,6 +91,12 @@ const UnapprovedChild: React.FC<IUnapprovedPageChild> = ({
         },
         {
           value: i.localGovernment,
+          isLink: false,
+          url: '',
+          action: () => {}
+        },
+        {
+          value: i.ward,
           isLink: false,
           url: '',
           action: () => {}
