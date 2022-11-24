@@ -53,10 +53,7 @@ export const ProfileImage = styled('img')({
   borderRadius: '50%',
   width: 34,
   height: 34,
-  marginRight: 10,
-  [down('sm')]: {
-    display: 'none'
-  }
+  marginRight: 10
 })
 
 export const ProfileNotification = styled('img')({

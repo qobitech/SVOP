@@ -16,8 +16,6 @@ import {
 
 import MainTable, { ICell, ICellAction } from '../../table'
 
-import { tableHeader } from './mock-data'
-
 import { IStates } from '../../../interface/IReducer'
 import { IActions } from '../../../interface/IAction'
 import { pageurl } from '../../../constants/pageurl'
@@ -37,6 +35,8 @@ const Unapproved: React.FC = () => {
 interface IUnapprovedPageChild {
   states?: IStates
 }
+
+const tableHeader = ['Election', 'State', 'LGA', 'Polling Unit', 'Presiding Officer', 'Actions']
 
 const UnapprovedChild: React.FC<IUnapprovedPageChild> = ({
   states,

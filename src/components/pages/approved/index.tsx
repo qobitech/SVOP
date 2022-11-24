@@ -16,8 +16,6 @@ import {
 
 import MainTable, { ICell, ICellAction } from '../../table'
 
-import { tableHeader } from './mock-data'
-
 import { IStates } from '../../../interface/IReducer'
 import { IActions } from '../../../interface/IAction'
 import { pageurl } from '../../../constants/pageurl'
@@ -34,6 +32,8 @@ const Approved: React.FC = () => {
         </DataWrapper>
   )
 }
+
+const tableHeader = ['Election', 'State', 'LGA', 'Polling Unit', 'Presiding Officer', 'Actions']
 interface IApprovedPageChild {
   states?: IStates
 }
