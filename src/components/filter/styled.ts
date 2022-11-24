@@ -43,10 +43,11 @@ export const FilterButtonIcon = styled('img')({
   height: 15
 })
 
-export const SortText = styled(Typography)({
+export const SortText = styled(Typography)(({ isselected }: { isselected: 'true' | 'false' }) => ({
   fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
-  fontSize: 16
-})
+  fontSize: 16,
+  color: isselected === 'true' ? '#286439' : ''
+}))
 
 export const SortIconTag = styled('i')(({
   color,
