@@ -16,6 +16,8 @@ import { IStates } from '../../interface/IReducer'
 import { IActions } from '../../interface/IAction'
 // import Footer from './footer'
 
+import bgimg from '../../assets/images/bg_img.jpg'
+
 const Dashboard = ({ children }: { children?: any }) => {
   return (
     <DataWrapper nowrapper='true'>
@@ -51,7 +53,7 @@ const DashboardChild: React.FC<IDashboardChild> = ({
   }
 
   return (
-        <MainContainer>
+        <MainContainer bgimg={bgimg}>
            <Header setMenu={setMenu} />
            <HeaderBackgroundOverLay />
             <ScrollIntoViewController>

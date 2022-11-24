@@ -16,7 +16,7 @@ import {
   OverViewSectionColumns, OverViewSectionColumnsBodyText,
   OverViewSectionColumnsHeaderText, LinkContainer, LoggedUserSection,
   LoggedUserSectionRow, LoggedUserSectionRowBodyText, LoggedUserSectionRowHeaderText,
-  MapViewSection, MapViewImage, AboutSectionRow, AboutSectionColumn, CTAApproveButton
+  MapViewSection, MapViewImage, AboutSectionRow, AboutSectionColumn, CTAApproveButton, LoggedUserProfileSectionRowBodyText, Separator
 } from './styled'
 
 import homeicon from '../../../assets/images/home.png'
@@ -65,14 +65,14 @@ const OverviewChild: React.FC<IOverviewPageChild> = ({
 
   const overviewSectionData = [
     {
-      title: 'Un-approved Results',
+      title: 'Pending Results',
       value: unapprovedData?.total || 0,
       url: pageurl.UNAPPROVED,
       load: unapprovedDataload
     },
     {
       title: 'Approved Results',
-      value: approvedData?.total || 1,
+      value: approvedData?.total || 0,
       url: pageurl.APPROVED,
       load: approvedDataload
     },
@@ -90,20 +90,16 @@ const OverviewChild: React.FC<IOverviewPageChild> = ({
       value: userData?.user?.firstName + ' ' + userData?.user?.lastName
     },
     {
-      title: 'Email',
-      value: userData?.token?.email
-    },
-    {
-      title: 'Phone',
-      value: userData?.user?.mobile
-    },
-    {
       title: 'Role',
       value: userData?.token?.role
     },
     {
       title: 'User Name',
       value: userData?.token?.unique_name[0]
+    },
+    {
+      title: 'Email',
+      value: userData?.token?.email
     }
   ]
 
@@ -147,6 +143,7 @@ const OverviewChild: React.FC<IOverviewPageChild> = ({
                     Upload Election Results
                   </LoggedUserSectionRowBodyText>
                   <CTAApproveButton className='mt-4' onClick={() => window.open(pageurl.UPLOAD, '_self')}>
+                  <span><i className='fas fa-upload' />&nbsp;&nbsp;</span>
                     Proceed
                   </CTAApproveButton>
                 </AboutSectionRow>
@@ -168,12 +165,23 @@ const OverviewChild: React.FC<IOverviewPageChild> = ({
                 <LoggedUserSectionRowHeaderText>
                   {i.title}
                 </LoggedUserSectionRowHeaderText>
-                <LoggedUserSectionRowBodyText>
+                <LoggedUserProfileSectionRowBodyText>
                   {i.value}
-                </LoggedUserSectionRowBodyText>
+                </LoggedUserProfileSectionRowBodyText>
               </LoggedUserSectionRow>
               ))}
-            </LoggedUserSection>
+              <Separator />
+              <LoggedUserSectionRowHeaderText>
+                  PENDING RESULTS AWAITING YOUR APPROVAL
+                </LoggedUserSectionRowHeaderText>
+                <LoggedUserSectionRowBodyText>
+                  {unapprovedDataload ? <i className="fa fa-spinner fa-spin" aria-hidden="true" /> : (unapprovedData?.total || 0)}
+                </LoggedUserSectionRowBodyText>
+                <CTAApproveButton className='mt-4' onClick={() => window.open(pageurl.UNAPPROVED, '_self')}>
+                  <span><i className='fas fa-check-circle' />&nbsp;&nbsp;</span>
+                  Approve {(unapprovedData?.total || 0) === 1 ? 'Result' : 'Results'}
+                </CTAApproveButton>
+              </LoggedUserSection>
           </BodyColumnRight>
         </BodyContainer>
       </BodyContainer>

@@ -20,11 +20,14 @@ export const HeaderBackgroundOverLay = styled('div')({
   left: 0
 })
 
-export const MainContainer = styled('div')({
+export const MainContainer = styled('div')(({ bgimg }: { bgimg: string }) => ({
   width: '100%',
   height: '100vh',
   background: '#F9F9F9'
-})
+  // backgroundImage: 'url(' + bgimg + ')',
+  // backgroundRepeat: 'no-repeat',
+  // backgroundPosition: 'top',
+}))
 
 export const ChildrenContainer = styled('div')({
   zIndex: 2,

@@ -172,6 +172,18 @@ export const LoggedUserSectionRowBodyText = styled(Typography)({
   fontSize: 20
 })
 
+export const Separator = styled('div')({
+  margin: '25px 0',
+  width: '100%',
+  background: '#e5e5e5',
+  height: 1
+})
+
+export const LoggedUserProfileSectionRowBodyText = styled(Typography)({
+  fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
+  fontSize: 16
+})
+
 export const OverViewSectionColumns = styled('div')(({ noborder }: { noborder?: 'true' | 'false' }) => ({
   height: 'auto',
   padding: 0,
