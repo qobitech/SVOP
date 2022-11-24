@@ -1,5 +1,4 @@
 import { styled, Typography } from '@material-ui/core'
-import { down } from '../../../assets/style/breakpointHelpers'
 
 export const HeaderContainer = styled('div')({
   display: 'flex',
@@ -17,6 +16,83 @@ export const BodyContainer = styled('div')({
   boxSizing: 'border-box'
 })
 
+export const AccordionSection = styled('div')({
+  width: '100%',
+  borderRadius: 5,
+  border: '1px solid #DAEFE0',
+  boxSizing: 'border-box'
+})
+
+export const AccordionRow = styled('div')(({ noborder }: { noborder?: 'true' | 'false' }) => ({
+  width: '100%',
+  borderBottom: noborder === 'true' ? 'none' : '1px solid #DAEFE0',
+  boxSizing: 'border-box',
+  padding: '3px 20px',
+  display: 'flex',
+  flexDirection: 'column'
+}))
+
+export const AccordionRowHeader = styled('div')({
+  width: '100%',
+  boxSizing: 'border-box',
+  height: 'auto',
+  padding: '10px 0',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  cursor: 'pointer'
+})
+
+export const AccordionRowBody = styled('div')({
+  width: '100%',
+  boxSizing: 'border-box',
+  height: 'auto',
+  padding: '10px 50px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between'
+})
+
+export const AccordionHeaderTextNumber = styled(Typography)({
+  fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
+  textTransform: 'capitalize',
+  fontSize: 14,
+  margin: 0,
+  color: '#286439',
+  width: 30
+})
+
+export const AccordionHeaderText = styled(Typography)({
+  fontFamily: ['Outfit_Medium', 'Arial', 'sans-serif'].join(','),
+  textTransform: 'capitalize',
+  fontSize: 16,
+  margin: 0,
+  color: '#286439'
+})
+
+export const AccordionHeaderTextLeft = styled('div')({
+  display: 'flex',
+  alignItems: 'center'
+})
+
+export const AccordionBodyText = styled(Typography)({
+  fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
+  fontSize: 14,
+  margin: 0
+})
+
+export const AccordionHeaderIcon = styled('i')({
+  fontSize: 12,
+  margin: 0,
+  color: '#286439',
+  padding: 5,
+  borderRadius: 3,
+  transition: '.2s ease-in-out',
+  '&:hover': {
+    background: '#DAEFE0'
+  }
+})
+
 export const HeaderText = styled(Typography)({
   fontFamily: ['Outfit_Medium', 'Arial', 'sans-serif'].join(','),
   textTransform: 'capitalize',
@@ -27,22 +103,6 @@ export const HeaderText = styled(Typography)({
   color: '#286439'
 })
 
-export const HeaderTextNumbers = styled(Typography)({
-  fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
-  textTransform: 'capitalize',
-  fontSize: 16,
-  margin: 0,
-  color: '#286439',
-  width: 'max-content',
-  height: 'max-content',
-  background: '#D2E9D9',
-  borderRadius: 3,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  padding: '0 8px'
-})
-
 export const HeaderBodyText = styled(Typography)({
   fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
   textTransform: 'capitalize',
@@ -51,55 +111,4 @@ export const HeaderBodyText = styled(Typography)({
   margin: 0,
   marginRight: 25,
   color: '#286439'
-})
-
-export const SelectedTableActionsSection = styled('div')({
-  display: 'flex',
-  alignItems: 'center',
-  marginLeft: 'auto',
-  paddingTop: 3,
-  [down('md')]: {
-    marginLeft: 0,
-    marginTop: 10
-  }
-})
-
-export const UploadSection = styled('div')({
-  border: '1px dotted black',
-  borderRadius: '5px',
-  width: '100%',
-  height: 400,
-  boxSizing: 'border-box',
-  padding: '40px 30px',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'center'
-})
-
-export const UploadSectionTextIcon = styled('i')({
-  fontSize: 40,
-  fontWeight: 600,
-  margin: 0,
-  color: '#286439',
-  marginBottom: 20
-})
-
-export const UploadSectionTextHeader = styled(Typography)({
-  fontFamily: ['Outfit_Medium', 'Arial', 'sans-serif'].join(','),
-  fontSize: 16,
-  fontWeight: 600,
-  margin: 0,
-  color: '#286439',
-  marginBottom: 20,
-  whiteSpace: 'nowrap',
-  display: 'flex'
-})
-
-export const UploadSectionTextSubHeader = styled(Typography)({
-  fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
-  fontSize: 14,
-  fontWeight: 600,
-  margin: 0,
-  color: '#b9b9b9'
 })

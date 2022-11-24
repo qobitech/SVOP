@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import DataWrapper from '../../../wrapper/data-wrapper'
 
 import 'react-toastify/dist/ReactToastify.css'
@@ -8,7 +8,16 @@ import { useLocation } from 'react-router-dom'
 import {
   HeaderContainer,
   BodyContainer,
-  HeaderBodyText
+  HeaderBodyText,
+  AccordionRow,
+  AccordionRowHeader,
+  AccordionSection,
+  AccordionHeaderText,
+  AccordionHeaderIcon,
+  AccordionRowBody,
+  AccordionBodyText,
+  AccordionHeaderTextLeft,
+  AccordionHeaderTextNumber
 } from './styled'
 
 import { IStates } from '../../../interface/IReducer'
@@ -59,6 +68,26 @@ const InstructionChild: React.FC<IInstructionChild> = ({
     }
   }, [])
 
+  const instructiondata = [
+    {
+      id: 1,
+      header: 'How to Approve a Result ?',
+      answer: 'no content'
+    },
+    {
+      id: 2,
+      header: 'How to Reject a Result ?',
+      answer: 'no content'
+    },
+    {
+      id: 3,
+      header: 'How to Upload a Document ?',
+      answer: 'no content'
+    }
+  ]
+
+  const [openAccordion, setOpenAccordion] = useState(0)
+
   return (
         <>
           <BreadCrumb crumbs={[
@@ -74,9 +103,65 @@ const InstructionChild: React.FC<IInstructionChild> = ({
               </HeaderBodyText>
               {load && <i className="fa fa-spinner fa-spin ml-3" aria-hidden="true"></i>}
             </HeaderContainer>
+            <AccordionSection>
+              {instructiondata.map((i, index) => (
+                <AccordionPageSection
+                  answer={i.answer}
+                  header={i.header}
+                  id={i.id}
+                  key={i.id}
+                  index={index + 1}
+                  noborder={index === (instructiondata.length - 1) ? 'true' : 'false'}
+                  setOpenAccordion={setOpenAccordion}
+                  openAccordion={openAccordion}
+                />
+              ))}
+            </AccordionSection>
           </BodyContainer>
         </>
   )
 }
 
 export default Instruction
+
+const AccordionPageSection = ({
+  id,
+  header,
+  answer,
+  noborder,
+  openAccordion,
+  setOpenAccordion,
+  index
+}:
+{
+  id: number
+  header: string
+  answer: string
+  noborder: 'true' | 'false'
+  setOpenAccordion: React.Dispatch<React.SetStateAction<number>>
+  openAccordion: number
+  index: number
+}) => {
+  const isId = openAccordion === id
+  return (
+    <AccordionRow noborder={noborder} >
+      <AccordionRowHeader onClick={() => setOpenAccordion(isId ? 0 : id)}>
+        <AccordionHeaderTextLeft>
+          <AccordionHeaderTextNumber>
+            {index}
+          </AccordionHeaderTextNumber>
+          <AccordionHeaderText>
+            {header}
+          </AccordionHeaderText>
+        </AccordionHeaderTextLeft>
+        <AccordionHeaderIcon className={isId ? 'fas fa-minus' : 'fas fa-plus'}/>
+      </AccordionRowHeader>
+      {isId &&
+      <AccordionRowBody>
+        <AccordionBodyText>
+          {answer}
+        </AccordionBodyText>
+      </AccordionRowBody>}
+    </AccordionRow>
+  )
+}
