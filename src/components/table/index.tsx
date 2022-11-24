@@ -6,13 +6,11 @@ import {
   TableContainer,
   // TableCheckBoxColumn,
   TableCellActionSection,
-  TableButton,
-  PaginationContainer
+  TableButton
 } from './styled'
 
 import { TypeCheckbox } from '../utils/checkbox'
 
-import ReactPaginate from 'react-paginate'
 import { PAGE_SIZE } from '../pages/unapproved'
 
 export interface ICell {
@@ -32,9 +30,6 @@ export interface ICellAction extends ICell {
 interface IResultTable {
   header: string[]
   record: Array<{ id: string, row: ICell[], rowActions: ICellAction[] }>
-  pageCount: number
-  handlePagination: (selectedItem: { selected: number }) => void
-  page: number
   checkedRows: { [key: string]: any }
   handleCheckedRows: ({ target }: { target: any }) => void
   clearCheckedRows: () => void
@@ -47,9 +42,6 @@ interface IResultTable {
 const ResultTable: React.FC<IResultTable> = ({
   header,
   record,
-  pageCount,
-  handlePagination,
-  page,
   checkedRows,
   handleCheckedRows,
   clearCheckedRows,
@@ -139,19 +131,6 @@ const ResultTable: React.FC<IResultTable> = ({
                 </tbody>
             </table>
             {!isRecord && <p className='margin-auto text-center py-4 color-light font-small'>No Data</p>}
-            <PaginationContainer>
-                <ReactPaginate
-                    breakLabel='...'
-                    previousLabel='<<'
-                    nextLabel='>>'
-                    pageCount={pageCount}
-                    onPageChange={handlePagination}
-                    containerClassName={'pagination'}
-                    activeClassName={'active'}
-                    renderOnZeroPageCount={undefined}
-                    forcePage={page - 1}
-                />
-            </PaginationContainer>
         </TableContainer>
   )
 }

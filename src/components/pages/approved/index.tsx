@@ -20,6 +20,8 @@ import { pageurl } from '../../../constants/pageurl'
 
 import queryString from 'query-string'
 import BreadCrumb from '../../utils/bread-crumb'
+import { PaginationContainer } from '../../table/styled'
+import ReactPaginate from 'react-paginate'
 
 export const PAGE_SIZE = 10
 
@@ -31,7 +33,7 @@ const Approved: React.FC = () => {
   )
 }
 
-const tableHeader = ['Election', 'State', 'LGA', 'Polling Unit', 'Presiding Officer', 'Actions']
+const tableHeader = ['Election', 'State', 'LGA', 'Ward', 'Polling Unit', 'Presiding Officer', 'Actions']
 interface IApprovedPageChild {
   states?: IStates
 }
@@ -89,6 +91,12 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({
         },
         {
           value: i.localGovernment,
+          isLink: false,
+          url: '',
+          action: () => {}
+        },
+        {
+          value: i.ward || '__',
           isLink: false,
           url: '',
           action: () => {}
@@ -183,9 +191,6 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({
             <MainTable
               header={tableHeader}
               record={recordData() || [] as Array<{ id: string, row: ICell[], rowActions: ICellAction[] }>}
-              pageCount={(data?.total || 1) / PAGE_SIZE}
-              page={data?.currentPage || 1}
-              handlePagination={handlePagination}
               checkedRows={checkedRows}
               handleCheckedRows={handleCheckedRows}
               clearCheckedRows={clearCheckedRows}
@@ -194,6 +199,19 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({
               checkAll={checkAll}
               currentPage={data?.currentPage || 1}
             />
+            <PaginationContainer>
+                <ReactPaginate
+                    breakLabel='...'
+                    previousLabel='<<'
+                    nextLabel='>>'
+                    pageCount={(data?.total || 1) / PAGE_SIZE}
+                    onPageChange={handlePagination}
+                    containerClassName={'pagination'}
+                    activeClassName={'active'}
+                    renderOnZeroPageCount={undefined}
+                    forcePage={(data?.currentPage || 1) - 1}
+                />
+            </PaginationContainer>
           </BodyContainer>
         </>
   )

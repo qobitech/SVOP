@@ -20,6 +20,8 @@ import { pageurl } from '../../../constants/pageurl'
 
 import queryString from 'query-string'
 import BreadCrumb from '../../utils/bread-crumb'
+import ReactPaginate from 'react-paginate'
+import { PaginationContainer } from '../../table/styled'
 
 export const PAGE_SIZE = 10
 
@@ -183,9 +185,6 @@ const UnapprovedChild: React.FC<IUnapprovedPageChild> = ({
             <MainTable
               header={tableHeader}
               record={recordData() || [] as Array<{ id: string, row: ICell[], rowActions: ICellAction[] }>}
-              pageCount={(data?.total || 1) / PAGE_SIZE}
-              page={data?.currentPage || 1}
-              handlePagination={handlePagination}
               checkedRows={checkedRows}
               handleCheckedRows={handleCheckedRows}
               clearCheckedRows={clearCheckedRows}
@@ -194,6 +193,19 @@ const UnapprovedChild: React.FC<IUnapprovedPageChild> = ({
               checkAll={checkAll}
               currentPage={data?.currentPage || 1}
             />
+            <PaginationContainer>
+                <ReactPaginate
+                    breakLabel='...'
+                    previousLabel='<<'
+                    nextLabel='>>'
+                    pageCount={(data?.total || 1) / PAGE_SIZE}
+                    onPageChange={handlePagination}
+                    containerClassName={'pagination'}
+                    activeClassName={'active'}
+                    renderOnZeroPageCount={undefined}
+                    forcePage={(data?.currentPage || 1) - 1}
+                />
+            </PaginationContainer>
           </BodyContainer>
         </>
   )
