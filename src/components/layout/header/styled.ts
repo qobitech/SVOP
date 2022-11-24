@@ -1,9 +1,10 @@
-import { styled } from '@material-ui/core'
+import { styled, Typography } from '@material-ui/core'
+import { Link } from 'react-router-dom'
 import { down } from '../../../assets/style/breakpointHelpers'
 
 export const HeaderContainer = styled('div')({
   display: 'flex',
-  padding: '15px',
+  padding: '5px 15px',
   alignItems: 'center',
   zIndex: 4,
   position: 'fixed',
@@ -29,11 +30,30 @@ export const ProfileContainer = styled('div')({
   marginLeft: 'auto'
 })
 
+export const ProfileSection = styled('div')({
+  display: 'flex',
+  flexDirection: 'column'
+})
+
+export const ProfileName = styled(Typography)({
+  fontFamily: ['Outfit_Medium', 'Arial', 'sans-serif'].join(','),
+  fontSize: 16,
+  margin: 0,
+  paddingRight: 30
+})
+
+export const ProfileRole = styled(Typography)({
+  fontFamily: ['Outfit_Medium', 'Arial', 'sans-serif'].join(','),
+  fontSize: 12,
+  margin: 0,
+  color: '#a9a9a9'
+})
+
 export const ProfileImage = styled('img')({
   borderRadius: '50%',
-  width: 25,
-  height: 25,
-  marginRight: 30,
+  width: 34,
+  height: 34,
+  marginRight: 10,
   [down('sm')]: {
     display: 'none'
   }
@@ -53,4 +73,16 @@ export const ProfileEllippis = styled('img')({
   width: 15,
   height: 15,
   cursor: 'pointer'
+})
+
+export const LinkContainer = styled(Link)({
+  fontFamily: 'inherit',
+  fontSize: 'inherit',
+  color: 'inherit',
+  display: 'flex',
+  textDecoration: 'none',
+  '&:hover': {
+    textDecoration: 'none',
+    color: 'inherit'
+  }
 })

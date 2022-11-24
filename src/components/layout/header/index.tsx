@@ -2,7 +2,6 @@ import React from 'react'
 import logo from '../../../assets/images/logo.svg'
 import hamburger from '../../../assets/images/hamburger.svg'
 import profile from '../../../assets/images/user.svg'
-import notification from '../../../assets/images/notification.svg'
 import ellipsis from '../../../assets/images/ellipsis.svg'
 import { userData } from '../../../constants/global'
 
@@ -12,13 +11,13 @@ import {
   Hamburger,
   ProfileContainer,
   ProfileImage,
-  ProfileNotification,
-  ProfileEllippis
+  ProfileEllippis,
+  ProfileName,
+  ProfileRole,
+  ProfileSection,
+  LinkContainer
 } from './styled'
 
-import {
-  LinkContainer
-} from '../../utils/reusable/styled'
 import { pageurl } from '../../../constants/pageurl'
 
 interface IHeader {
@@ -33,12 +32,21 @@ const Header = ({ setMenu }: IHeader) => {
       </LinkContainer>
       <Hamburger src={hamburger} onClick={setMenu}/>
       <ProfileContainer>
-        <ProfileNotification src={notification} title='Notification' />
         <LinkContainer to={pageurl.PROFILE}>
           <ProfileImage
             src={profile}
             title={userData.user?.firstName + ' ' + userData.user?.lastName}
           />
+        </LinkContainer>
+        <LinkContainer to={pageurl.PROFILE}>
+          <ProfileSection>
+            <ProfileName className='m-0'>
+              {userData.user?.firstName + ' ' + userData.user?.lastName}
+            </ProfileName>
+            <ProfileRole>
+              {userData?.token?.role}
+            </ProfileRole>
+          </ProfileSection>
         </LinkContainer>
         <ProfileEllippis src={ellipsis} title='More Options'/>
       </ProfileContainer>
