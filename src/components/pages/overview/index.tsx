@@ -49,18 +49,22 @@ const OverviewChild: React.FC<IOverviewPageChild> = ({
 }) => {
   const {
     getUnapprovedResultsAction,
-    getApprovedResultsAction
+    getApprovedResultsAction,
+    getRejectedResultsAction
   } = props as unknown as IActions
 
   useEffect(() => {
     getUnapprovedResultsAction(PAGE_SIZE, 1)
     getApprovedResultsAction(PAGE_SIZE, 1)
+    getRejectedResultsAction(PAGE_SIZE, 1)
   }, [])
 
   const approvedData = states?.result.getAllApprovedResults
   const unapprovedData = states?.result.getAllUnApprovedResults
+  const rejectedData = states?.result.getAllRejectedResults
   const approvedDataload = states?.result?.getAllApprovedResults_Loading
   const unapprovedDataload = states?.result?.getAllUnApprovedResults_Loading
+  const rejectedDataload = states?.result?.getAllRejectedResults_Loading
 
   const overviewSectionData = [
     {
@@ -77,9 +81,9 @@ const OverviewChild: React.FC<IOverviewPageChild> = ({
     },
     {
       title: 'Rejected Results',
-      value: 0,
-      url: pageurl.APPROVED,
-      load: false
+      value: rejectedData?.total || 0,
+      url: pageurl.REJECTED,
+      load: rejectedDataload
     }
   ]
 

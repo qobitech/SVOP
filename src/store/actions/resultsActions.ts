@@ -27,6 +27,17 @@ export const getApprovedResultsAction = (pageSize?: number, pageNumber?: number,
   })
 }
 
+export const getRejectedResultsAction = (pageSize?: number, pageNumber?: number, sort?: string) => {
+  return utils.httpGetMethod({
+    apiData: {
+      url: '',
+      customurl: 'https://query-erms.herokuapp.com/api/v1/Result/get-all-paged' + checkReturned(returnValue('pageSize=', pageSize) + returnValue('&pageNumber=', pageNumber) + returnValue('&sort=', sort)) + '&status=rejected',
+      header: utils.headerNoAuth()
+    },
+    actionType: resultType.getAllRejected
+  })
+}
+
 export const getResultByIdAction = (id: string) => {
   return utils.httpGetMethod({
     apiData: {

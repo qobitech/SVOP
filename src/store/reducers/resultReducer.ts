@@ -1,10 +1,25 @@
 import { resultType } from '../types'
 import { IResultsReducer } from '../../interface/IReducer'
 
-const initialState = {} as unknown as IResultsReducer
+const initialState = {} as IResultsReducer
 
 export default function resultReducer (state = initialState, action: any) {
   switch (action.type) {
+    case resultType.getAllRejected.dataAction:
+      return {
+        ...state,
+        getAllRejectedResults: action.payload
+      }
+    case resultType.getAllRejected.dataLoading:
+      return {
+        ...state,
+        getAllRejectedResults_Loading: action.payload
+      }
+    case resultType.getAllRejected.dataError:
+      return {
+        ...state,
+        getAllRejectedResults_Error: action.payload
+      }
     case resultType.getAllApproved.dataAction:
       return {
         ...state,

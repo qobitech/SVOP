@@ -6,5 +6,6 @@ export const pageurl = {
   PROFILE: '/view-profile',
   OVERVIEW: '/overview',
   UPLOAD: '/upload',
-  INSTRUCTIONS: '/instructions'
+  INSTRUCTIONS: '/instructions',
+  REJECTED: '/instructions'
 }

@@ -13,6 +13,9 @@ export interface IResultsReducer {
   getAllApprovedResults: IResults
   getAllApprovedResults_Loading: boolean
   getAllApprovedResults_Error: any
+  getAllRejectedResults: IResults
+  getAllRejectedResults_Loading: boolean
+  getAllRejectedResults_Error: any
   getAllUnApprovedResults: IResults
   getAllUnApprovedResults_Loading: boolean
   getAllUnApprovedResults_Error: any

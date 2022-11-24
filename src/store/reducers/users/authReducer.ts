@@ -1,7 +1,7 @@
 import { authType } from '../../types'
 import { IAuthReducer } from '../../../interface/IReducer'
 
-const initialState: IAuthReducer = {} as unknown as IAuthReducer
+const initialState: IAuthReducer = {} as IAuthReducer
 
 export default function authReducer (state = initialState, action: any) {
   switch (action.type) {

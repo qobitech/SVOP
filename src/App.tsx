@@ -13,6 +13,7 @@ import {
 
 import Unapproved from './components/pages/unapproved'
 import Approved from './components/pages/approved'
+import Rejected from './components/pages/rejected'
 import Overview from './components/pages/overview'
 import ViewResult from './components/pages/view-result'
 import Login from './components/pages/auth/login'
@@ -36,6 +37,9 @@ function App () {
           </Route>
           <Route path={pageurl.APPROVED} element={<ProtectedRoute />} >
             <Route path={pageurl.APPROVED} element={<Approved />} />
+          </Route>
+          <Route path={pageurl.REJECTED} element={<ProtectedRoute />} >
+            <Route path={pageurl.REJECTED} element={<Rejected />} />
           </Route>
           <Route path={'/:page/:id'} element={<ProtectedRoute />} >
             <Route path={'/:page/:id'} element={<ViewResult />} />

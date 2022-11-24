@@ -1,7 +1,7 @@
 import { otherType } from '../types'
 import { IOtherReducer } from '../../interface/IReducer'
 
-const initialState = {} as unknown as IOtherReducer
+const initialState = {} as IOtherReducer
 
 export default function otherReducer (state = initialState, action: any) {
   switch (action.type) {

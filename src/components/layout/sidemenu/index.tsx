@@ -56,6 +56,13 @@ const menuData = [
         url: pageurl.APPROVED,
         menuNumber: 3,
         selected: true
+      },
+      {
+        id: 3,
+        title: 'Rejected',
+        url: pageurl.REJECTED,
+        menuNumber: 3,
+        selected: true
       }
     ],
     isParent: true,

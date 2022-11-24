@@ -18,6 +18,11 @@ export const resultType = {
     dataLoading: 'GET_ALL_APPROVED_RESULTS_LOADING',
     dataError: 'GET_ALL_APPROVED_RESULTS_ERROR'
   },
+  getAllRejected: {
+    dataAction: 'GET_ALL_REJECTED_RESULTS',
+    dataLoading: 'GET_ALL_REJECTED_RESULTS_LOADING',
+    dataError: 'GET_ALL_REJECTED_RESULTS_ERROR'
+  },
   getAllUnapproved: {
     dataAction: 'GET_ALL_UNAPPROVED_RESULTS',
     dataLoading: 'GET_ALL_UNAPPROVED_RESULTS_LOADING',
