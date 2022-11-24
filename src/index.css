@@ -1,44 +1,4 @@
 @font-face {
-  font-family: 'Outfit_Regular';
-  src: url('./assets/fonts/IBMPlexSans-Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-display: swap;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Outfit_Medium';
-  src: url('./assets/fonts/IBMPlexSans-Bold.ttf') format('truetype');
-  font-weight: normal;
-  font-display: swap;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Outfit_Medium';
-  src: url('./assets/fonts/IBMPlexSans-Medium.ttf') format('truetype');
-  font-weight: normal;
-  font-display: swap;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Outfit_Medium';
-  src: url('./assets/fonts/IBMPlexSans-SemiBold.ttf') format('truetype');
-  font-weight: normal;
-  font-display: swap;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Outfit_Light';
-  src: url('./assets/fonts/IBMPlexSans-Light.ttf') format('truetype');
-  font-weight: normal;
-  font-display: swap;
-  font-style: normal;
-}
-
-@font-face {
   font-family: 'Outfit_Bold';
   src: url('./assets/fonts/Outfit-Bold.ttf') format('truetype');
   font-weight: normal;
@@ -111,6 +71,7 @@ code {
   padding-left: 0;
   margin: 20px 0;
   border-radius: 4px;
+  font-family: 'Outfit_Regular';
 }
 .pagination > li {
   display: inline;
