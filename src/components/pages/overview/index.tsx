@@ -174,7 +174,7 @@ const OverviewChild: React.FC<IOverviewPageChild> = ({
               ))}
               <Separator />
               <LoggedUserSectionRowHeaderText>
-                  PENDING RESULTS AWAITING YOUR APPROVAL
+                  PENDING RESULTS AWAITING VALIDATION
                 </LoggedUserSectionRowHeaderText>
                 <LoggedUserSectionRowBodyText>
                   {unapprovedDataload ? <i className="fa fa-spinner fa-spin" aria-hidden="true" /> : (unapprovedData?.total || 0)}
@@ -183,7 +183,7 @@ const OverviewChild: React.FC<IOverviewPageChild> = ({
                   {!unapprovedDataload && <span><i className='fas fa-check-circle' />&nbsp;&nbsp;</span>}
                   {!unapprovedDataload
                     ? isPending
-                      ? (unapprovedData?.total || 0) === 1 ? 'Approve Result' : 'Approve Results'
+                      ? (unapprovedData?.total || 0) === 1 ? 'Validate Result' : 'Validate Results'
                       : 'View Approved Results'
                     : <i className="fa fa-spinner fa-spin" aria-hidden="true" />}
                 </CTAApproveButton>
