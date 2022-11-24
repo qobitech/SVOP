@@ -46,7 +46,7 @@ const approveOTPSchema = yup.object().shape({
 
 const rejectOTPSchema = yup.object().shape({
   otp: yup.string().required('OTP is required'),
-  comment: yup.string().required('OTP is required')
+  comment: yup.string().required('Comment is required')
 })
 
 interface IResultAssessmentOTPForm {
@@ -75,7 +75,8 @@ const ResultAssessmentOTP: React.FC<IResultAssessmentOTP> = ({
   const {
     formState: { errors },
     handleSubmit,
-    register
+    register,
+    clearErrors
   } = useForm<IResultAssessmentOTPForm>({
     resolver: yupResolver(isApprove ? approveOTPSchema : rejectOTPSchema)
   })
@@ -110,7 +111,12 @@ const ResultAssessmentOTP: React.FC<IResultAssessmentOTP> = ({
             <CTAApproveButton type='submit'>
                 {states?.auth.signin_Loading ? <ButtonLoader /> : (isApprove ? 'Approve' : 'Reject')}
             </CTAApproveButton>
-            <CTARejectButton>
+            <CTARejectButton onClick={() => {
+              setOpenModal(false)
+              clearErrors('otp')
+              clearErrors('comment')
+            }}
+            >
                 Cancel
             </CTARejectButton>
           </CTABtnSection>

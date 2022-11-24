@@ -187,3 +187,11 @@ code {
 .font-small{
   font-size: small;
 }
+
+.fml-grid {
+  border-radius: 5px;
+  display: grid;
+  grid-row: auto;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  justify-content: space-between;
+}

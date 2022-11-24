@@ -33,7 +33,7 @@ const Approved: React.FC = () => {
   )
 }
 
-const tableHeader = ['Election', 'State', 'LGA', 'Ward', 'Polling Unit', 'Presiding Officer', 'Actions']
+const tableHeader = ['Election', 'Ward', 'Polling Unit', 'Presiding Officer', 'Actions']
 interface IApprovedPageChild {
   states?: IStates
 }
@@ -81,18 +81,6 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({
           value: i.election,
           isLink: true,
           url: pageurl.APPROVED + '/' + i.id + '?p=' + data.currentPage,
-          action: () => {}
-        },
-        {
-          value: i.state,
-          isLink: false,
-          url: '',
-          action: () => {}
-        },
-        {
-          value: i.localGovernment,
-          isLink: false,
-          url: '',
           action: () => {}
         },
         {
