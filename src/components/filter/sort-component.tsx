@@ -26,7 +26,7 @@ const SortComponent: React.FC<ISortComponent> = ({
   setCheckId
 }) => {
   const onHandleChange = (id: string, name: string, value: 'ascend' | 'descend') => {
-    setCheckId(id === checkId ? '' : id)
+    setCheckId((id === checkId && sortInfo[name] === value) ? '' : id)
     setSortInfo({ ...sortInfo, [name]: value })
     sendQuery({ ...sortInfo })
   }
