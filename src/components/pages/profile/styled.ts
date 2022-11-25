@@ -12,7 +12,8 @@ export const BodyContainer = styled('div')({
   display: 'flex',
   flexWrap: 'wrap',
   alignItems: 'stretch',
-  justifyContent: 'space-between'
+  justifyContent: 'space-between',
+  paddingBottom: 140
 })
 
 export const LoggedUserSectionRow = styled('div')(({ nomargin }: { nomargin?: 'true' | 'false' }) => ({

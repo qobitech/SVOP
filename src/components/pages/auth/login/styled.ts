@@ -33,8 +33,8 @@ export const ImageSection = styled('div')(({ imgsrc }: { imgsrc: string }) => ({
 }))
 
 export const LogoSection = styled('img')({
-  maxWidth: 215,
-  width: '80%',
+  // maxWidth: 215,
+  width: '100%',
   margin: '0 auto',
   marginTop: 40
 })

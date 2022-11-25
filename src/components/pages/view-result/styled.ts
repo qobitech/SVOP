@@ -28,7 +28,8 @@ export const BodyContainer = styled('div')(({ nopadding }: { nopadding?: 'true' 
   flexDirection: 'row',
   flexWrap: 'wrap',
   alignItems: 'stretch',
-  justifyContent: 'space-between'
+  justifyContent: 'space-between',
+  paddingBottom: 140
 }))
 
 export const HeaderBodyText = styled(Typography)({

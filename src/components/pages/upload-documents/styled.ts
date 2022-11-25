@@ -7,16 +7,6 @@ export const HeaderContainer = styled('div')({
   marginBottom: 20
 })
 
-export const BodyContainer = styled('div')({
-  width: '100%',
-  maxWidth: '100%',
-  height: 'auto',
-  borderRadius: 5,
-  background: '#fff',
-  padding: 20,
-  boxSizing: 'border-box'
-})
-
 export const HeaderText = styled(Typography)({
   fontFamily: ['Outfit_Medium', 'Arial', 'sans-serif'].join(','),
   textTransform: 'capitalize',

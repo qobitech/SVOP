@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from '../../../assets/images/logo.svg'
+import logo from '../../../assets/images/header_logo.svg'
 import hamburger from '../../../assets/images/hamburger.svg'
 import profile from '../../../assets/images/user.svg'
 import ellipsis from '../../../assets/images/ellipsis.svg'

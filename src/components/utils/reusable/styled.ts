@@ -22,7 +22,8 @@ export const BodyContainer = styled('div')({
   borderRadius: 5,
   background: '#fff',
   padding: 20,
-  boxSizing: 'border-box'
+  boxSizing: 'border-box',
+  paddingBottom: 140
 })
 
 export const HeaderText = styled(Typography)({

@@ -1,4 +1,4 @@
-import { styled } from '@material-ui/core'
+import { styled, Typography } from '@material-ui/core'
 
 export const FooterContainer = styled('div')({
   display: 'flex',
@@ -13,8 +13,13 @@ export const FooterContainer = styled('div')({
   left: 0
 })
 
+export const Copyright = styled(Typography)({
+  fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
+  fontSize: 16,
+  margin: 0
+})
+
 export const Logo = styled('img')({
   marginRight: 20,
-  width: 125,
-  height: 75
+  height: 70
 })

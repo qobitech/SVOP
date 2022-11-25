@@ -23,7 +23,10 @@ export const HeaderBackgroundOverLay = styled('div')({
 export const MainContainer = styled('div')(({ bgimg }: { bgimg: string }) => ({
   width: '100%',
   height: '100vh',
-  background: '#F9F9F9'
+  background: '#F9F9F9',
+  overflow: 'auto',
+  display: 'flex',
+  flexDirection: 'column'
   // backgroundImage: 'url(' + bgimg + ')',
   // backgroundRepeat: 'no-repeat',
   // backgroundPosition: 'top',
@@ -39,4 +42,5 @@ export const ChildrenContainer = styled('div')({
   paddingTop: 70,
   maxWidth: 1440,
   width: '100%'
+  // marginBottom: 400
 })

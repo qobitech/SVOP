@@ -7,7 +7,6 @@ import { useLocation } from 'react-router-dom'
 import {
   HeaderContainer,
   HeaderTextNumbers,
-  BodyContainer,
   HeaderBodyText,
   SelectedTableActionsSection
 } from './styled'
@@ -22,6 +21,7 @@ import queryString from 'query-string'
 import BreadCrumb from '../../utils/bread-crumb'
 import ReactPaginate from 'react-paginate'
 import { PaginationContainer } from '../../table/styled'
+import { BodyContainer } from '../../utils/reusable/styled'
 
 export const PAGE_SIZE = 10
 

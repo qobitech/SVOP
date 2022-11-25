@@ -5,7 +5,6 @@ import { useLocation } from 'react-router-dom'
 
 import {
   HeaderContainer,
-  BodyContainer,
   HeaderBodyText,
   AccordionRow,
   AccordionRowHeader,
@@ -23,6 +22,7 @@ import { IActions } from '../../../interface/IAction'
 
 import queryString from 'query-string'
 import BreadCrumb from '../../utils/bread-crumb'
+import { BodyContainer } from '../../utils/reusable/styled'
 
 export const PAGE_SIZE = 10
 
