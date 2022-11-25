@@ -15,7 +15,7 @@ import { pageurl } from '../../../constants/pageurl'
 const Footer = () => {
   return (
     <FooterContainer>
-      <div><Copyright>Copyright &#169; 2022</Copyright></div>
+      <div><Copyright>Copyright &#169; {new Date().getFullYear()}</Copyright></div>
       <LinkContainer to={pageurl.OVERVIEW}>
         <Logo src={dai} />
       </LinkContainer>
