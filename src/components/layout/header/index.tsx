@@ -1,20 +1,20 @@
 import React from 'react'
 import logo from '../../../assets/images/header_logo.svg'
-import hamburger from '../../../assets/images/hamburger.svg'
-import profile from '../../../assets/images/user.svg'
-import ellipsis from '../../../assets/images/ellipsis.svg'
-import { userData } from '../../../constants/global'
+// import hamburger from '../../../assets/images/hamburger.svg'
+// import profile from '../../../assets/images/user.svg'
+// import ellipsis from '../../../assets/images/ellipsis.svg'
+// import { userData } from '../../../constants/global'
 
 import {
   HeaderContainer,
   Logo,
-  Hamburger,
-  ProfileContainer,
-  ProfileImage,
-  ProfileEllippis,
-  ProfileName,
-  ProfileRole,
-  ProfileSection,
+  // Hamburger,
+  // ProfileContainer,
+  // ProfileImage,
+  // ProfileEllippis,
+  // ProfileName,
+  // ProfileRole,
+  // ProfileSection,
   LinkContainer
 } from './styled'
 
@@ -27,18 +27,18 @@ interface IHeader {
 const Header = ({ setMenu }: IHeader) => {
   return (
     <HeaderContainer>
-      <LinkContainer to={pageurl.OVERVIEW} className='d-none d-md-block'>
+      <LinkContainer to={pageurl.APPROVED} className='d-none d-md-block'>
         <Logo src={logo} />
       </LinkContainer>
-      <Hamburger src={hamburger} onClick={setMenu}/>
-      <ProfileContainer>
-        <LinkContainer to={pageurl.PROFILE}>
-          <ProfileImage
+      {/* <Hamburger src={hamburger} onClick={setMenu}/> */}
+      {/* <ProfileContainer> */}
+        {/* <LinkContainer to={pageurl.PROFILE}> */}
+          {/* <ProfileImage
             src={profile}
             title={userData.user?.firstName + ' ' + userData.user?.lastName}
           />
-        </LinkContainer>
-        <LinkContainer to={pageurl.PROFILE}>
+        </LinkContainer> */}
+        {/* <LinkContainer to={pageurl.PROFILE}>
           <ProfileSection>
             <ProfileName className='m-0'>
               {userData.user?.firstName + ' ' + userData.user?.lastName}
@@ -47,9 +47,9 @@ const Header = ({ setMenu }: IHeader) => {
               {userData?.token?.role}
             </ProfileRole>
           </ProfileSection>
-        </LinkContainer>
-        <ProfileEllippis src={ellipsis} title='More Options'/>
-      </ProfileContainer>
+        </LinkContainer> */}
+        {/* <ProfileEllippis src={ellipsis} title='More Options'/> */}
+      {/* </ProfileContainer> */}
     </HeaderContainer>
   )
 }

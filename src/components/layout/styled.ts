@@ -23,7 +23,7 @@ export const HeaderBackgroundOverLay = styled('div')({
 export const MainContainer = styled('div')(({ bgimg }: { bgimg: string }) => ({
   width: '100%',
   height: '100vh',
-  background: '#F9F9F9',
+  background: '#E5F9EB',
   overflow: 'auto',
   display: 'flex',
   flexDirection: 'column'

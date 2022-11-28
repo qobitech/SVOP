@@ -16,7 +16,7 @@ const Footer = () => {
   return (
     <FooterContainer>
       <div><Copyright>Copyright &#169; {new Date().getFullYear()}</Copyright></div>
-      <LinkContainer to={pageurl.OVERVIEW}>
+      <LinkContainer to={pageurl.APPROVED}>
         <Logo src={dai} />
       </LinkContainer>
     </FooterContainer>

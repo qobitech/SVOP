@@ -4,7 +4,7 @@ import { down } from '../../../assets/style/breakpointHelpers'
 
 export const HeaderContainer = styled('div')({
   display: 'flex',
-  padding: '5px 15px',
+  padding: '10px 15px',
   alignItems: 'center',
   zIndex: 4,
   position: 'fixed',

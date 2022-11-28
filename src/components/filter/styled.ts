@@ -71,8 +71,10 @@ export const SortIconTag = styled('i')(({
   }
 }))
 
-export const FilterButton = styled('button')(({ isclicked }: { isclicked?: string }) => ({
-  width: 86,
+export const FilterButton = styled('button')(({ isclicked, nomargin }: { isclicked?: string, nomargin?: 'true' | 'false' }) => ({
+  minWidth: 86,
+  width: 'max-content',
+  padding: '0 20px',
   height: 43,
   fontSize: 12,
   fontFamily: [isclicked === 'true' ? 'Outfit_Medium' : 'Outfit_Regular', 'Arial', 'sans-serif'].join(','),
@@ -80,7 +82,7 @@ export const FilterButton = styled('button')(({ isclicked }: { isclicked?: strin
   alignItems: 'center',
   justifyContent: 'center',
   background: 'none',
-  marginRight: 20,
+  marginRight: nomargin === 'true' ? 0 : 20,
   border: `1px solid ${isclicked === 'true' ? '#286439' : '#DAEFE0'}`,
   borderRadius: 5,
   color: isclicked === 'true' ? '#286439' : '#000',

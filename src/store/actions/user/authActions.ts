@@ -13,7 +13,7 @@ export const loginUserAction = (data: { email: string, password: string, otp: st
     actionType: authType.login,
     onSuccess: (res: ILogin) => {
       localStorage.setItem('userData', JSON.stringify(res))
-      window.open(pageurl.OVERVIEW, '_self')
+      window.open(pageurl.APPROVED, '_self')
     }
   })
 }

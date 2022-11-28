@@ -30,60 +30,60 @@ interface ISideMenu {
 }
 
 const menuData = [
-  {
-    id: 1,
-    title: 'Overview',
-    url: pageurl.OVERVIEW,
-    sub: [],
-    isParent: false,
-    icon: 'fa fa-list-alt mr-2'
-  },
+  // {
+  //   id: 1,
+  //   title: 'Overview',
+  //   url: pageurl.OVERVIEW,
+  //   sub: [],
+  //   isParent: false,
+  //   icon: 'fa fa-list-alt mr-2'
+  // },
   {
     id: 2,
     title: 'Results',
     url: '',
     sub: [
-      {
-        id: 1,
-        title: 'Unapproved',
-        url: pageurl.UNAPPROVED,
-        menuNumber: 2,
-        selected: true
-      },
+      // {
+      //   id: 1,
+      //   title: 'Unapproved',
+      //   url: pageurl.UNAPPROVED,
+      //   menuNumber: 2,
+      //   selected: true
+      // },
       {
         id: 2,
         title: 'Approved',
         url: pageurl.APPROVED,
         menuNumber: 3,
         selected: true
-      },
-      {
-        id: 3,
-        title: 'Rejected',
-        url: pageurl.REJECTED,
-        menuNumber: 3,
-        selected: true
       }
+      // {
+      //   id: 3,
+      //   title: 'Rejected',
+      //   url: pageurl.REJECTED,
+      //   menuNumber: 3,
+      //   selected: true
+      // }
     ],
     isParent: true,
     icon: 'fas fa-check mr-2'
   },
-  {
-    id: 3,
-    title: 'Documents',
-    url: '',
-    sub: [
-      {
-        id: 1,
-        title: 'Upload Result',
-        url: pageurl.UPLOAD,
-        menuNumber: 2,
-        selected: true
-      }
-    ],
-    isParent: true,
-    icon: 'fas fa-file mr-2'
-  },
+  // {
+  //   id: 3,
+  //   title: 'Documents',
+  //   url: '',
+  //   sub: [
+  //     {
+  //       id: 1,
+  //       title: 'Upload Result',
+  //       url: pageurl.UPLOAD,
+  //       menuNumber: 2,
+  //       selected: true
+  //     }
+  //   ],
+  //   isParent: true,
+  //   icon: 'fas fa-file mr-2'
+  // },
   {
     id: 4,
     title: 'Profile',

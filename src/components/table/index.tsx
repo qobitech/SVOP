@@ -11,7 +11,7 @@ import {
 
 import { TypeCheckbox } from '../utils/checkbox'
 
-import { PAGE_SIZE } from '../pages/unapproved'
+const PAGE_SIZE = 20
 
 export interface ICell {
   value?: string | number

@@ -53,3 +53,61 @@ export const SelectedTableActionsSection = styled('div')({
     marginTop: 10
   }
 })
+
+export const ToggleSection = styled('div')({
+  display: 'flex',
+  alignItems: 'center',
+  margin: '0 auto',
+  paddingTop: 3,
+  flex: 1,
+  justifyContent: 'center'
+})
+
+export const TopMenuContainer = styled('div')(({ isselected }: { isselected?: 'true' | 'false' }) => ({
+  height: 'auto',
+  MozBoxSizing: 'border-box',
+  borderRadius: '5px 5px 0 0',
+  background: isselected === 'true' ? '#fff' : 'none',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  padding: '10px 20px',
+  boxSizing: 'border-box',
+  width: 'max-content',
+  cursor: 'pointer',
+  margin: '0 auto',
+  transition: '.2s ease-in'
+}))
+
+export const TopMenuText = styled(Typography)(({ isselected }: { isselected?: 'true' | 'false' }) => ({
+  fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
+  textTransform: 'capitalize',
+  fontSize: 12,
+  margin: 0,
+  marginRight: 9,
+  color: isselected === 'true' ? '#fff' : '#286439',
+  transition: '.2s ease'
+}))
+
+export const BodyContainer = styled('div')({
+  width: '100%',
+  maxWidth: '100%',
+  height: 'auto',
+  borderRadius: 5,
+  background: '#fff',
+  padding: 20,
+  boxSizing: 'border-box',
+  marginBottom: 20,
+  transition: '.2s ease'
+})
+
+export const BodySectionComponent = styled('div')({
+  width: '100%',
+  height: '100%',
+  // border: '1px solid #DAEFE0',
+  borderRadius: 5,
+  padding: '10px 10px',
+  boxSizing: 'border-box',
+  display: 'flex',
+  flexDirection: 'column'
+})

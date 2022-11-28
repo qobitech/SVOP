@@ -8,7 +8,12 @@ import {
   HeaderContainer,
   HeaderTextNumbers,
   HeaderBodyText,
-  SelectedTableActionsSection
+  SelectedTableActionsSection,
+  TopMenuContainer,
+  TopMenuText,
+  BodyContainer,
+  BodySectionComponent,
+  ToggleSection
 } from './styled'
 
 import MainTable, { ICell, ICellAction } from '../../table'
@@ -18,10 +23,15 @@ import { IActions } from '../../../interface/IAction'
 import { pageurl } from '../../../constants/pageurl'
 
 import queryString from 'query-string'
-import BreadCrumb from '../../utils/bread-crumb'
 import { PaginationContainer } from '../../table/styled'
+import { FilterButton } from '../../filter/styled'
 import ReactPaginate from 'react-paginate'
-import { BodyContainer } from '../../utils/reusable/styled'
+
+import '../../layout/sidemenu/style.scss'
+import { BodySectionRow, BodySectionLeft, BodySectionRight } from '../view-result/styled'
+import { ToggleButton } from '../../utils/toggle'
+
+import Chart from '../../chart'
 
 export const PAGE_SIZE = 10
 
@@ -145,26 +155,61 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({
     setCheckedRows({ ...temp })
   }
 
-  const getSelectedRowLength = (() => {
-    if (Object.keys(checkedRows).length > 0) {
-      return '' + Object.keys(checkedRows).length + ''
-    } else {
-      return ''
-    }
-  })()
+  // const getSelectedRowLength = (() => {
+  //   if (Object.keys(checkedRows).length > 0) {
+  //     return '' + Object.keys(checkedRows).length + ''
+  //   } else {
+  //     return ''
+  //   }
+  // })()
+
+  const [subMenuOpen, setSubMenuOpen] = useState({
+    electionInfo: false
+  })
+
+  const handleElectionInfo = (info: boolean) => {
+    setSubMenuOpen({ ...subMenuOpen, electionInfo: !info })
+  }
+
+  const electionInfoData = {
+    Category: 'FEDERAL',
+    Election: 'PRESENTIAL ELECTION',
+    'Election Cycle': '2023'
+  }
+
+  const [toggle, setToggle] = useState<'chart' | 'table'>('table')
+
+  const handleToggle = (status: boolean) => {
+    setToggle(status ? 'chart' : 'table')
+  }
 
   return (
         <>
-          <BreadCrumb crumbs={[
-            {
-              title: 'Approved Results',
-              url: ''
-            }
-          ]}/>
+          <MenuComponent
+            setSubMenuOpen={handleElectionInfo}
+            subMenuOpen={subMenuOpen?.electionInfo}
+            title={subMenuOpen?.electionInfo ? 'Hide Election Info' : 'View Election Info'}
+          />
+          {subMenuOpen.electionInfo &&
+          <BodyContainer>
+            <BodySectionComponent>
+              {Object.keys(electionInfoData).map((i, index) => (
+                  <BodySectionRow key={index}>
+                      <BodySectionLeft>
+                          {i}
+                      </BodySectionLeft>
+                      <BodySectionRight>
+                          {Object.values(electionInfoData)[index] || '___'}
+                      </BodySectionRight>
+                  </BodySectionRow>
+              ))}
+                        </BodySectionComponent>
+          </BodyContainer>}
+
           <BodyContainer>
             <HeaderContainer>
               <HeaderBodyText>
-                Approved Results
+                Election Results
               </HeaderBodyText>
               <HeaderTextNumbers>
                 {data?.total}
@@ -172,10 +217,29 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({
               {load && <i className="fa fa-spinner fa-spin ml-3" aria-hidden="true"></i>}
             </HeaderContainer>
             <Filter>
+              <ToggleSection>
+                <ToggleButton
+                  handleClick={handleToggle}
+                  toggleTextOn='Chart'
+                  toggleTextOff='Table'
+                />
+              </ToggleSection>
               <SelectedTableActionsSection>
-                <p style={{ margin: 0, fontSize: '13px', color: '#286439' }}>{getSelectedRowLength || '0'} {parseInt(getSelectedRowLength) === 1 ? 'row' : 'rows' } selected</p>
+                <FilterButton>
+                  <i className='fas fa-share-alt' />
+                  &nbsp;&nbsp;Share
+                </FilterButton>
+                <FilterButton>
+                  <i className='fas fa-print' />
+                  &nbsp;&nbsp;Print
+                </FilterButton>
+                <FilterButton nomargin='true'>
+                  <i className='fas fa-download' />
+                  &nbsp;&nbsp;Download
+                </FilterButton>
               </SelectedTableActionsSection>
             </Filter>
+            {toggle === 'table' &&
             <MainTable
               header={tableHeader}
               record={recordData() || [] as Array<{ id: string, row: ICell[], rowActions: ICellAction[] }>}
@@ -186,7 +250,11 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({
               setCheckAll={setCheckAll}
               checkAll={checkAll}
               currentPage={data?.currentPage || 1}
-            />
+            />}
+
+            {toggle === 'chart' &&
+            <Chart />}
+
             <PaginationContainer>
                 <ReactPaginate
                     breakLabel='...'
@@ -201,8 +269,30 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({
                 />
             </PaginationContainer>
           </BodyContainer>
+          <div style={{ paddingBottom: '100px' }}/>
         </>
   )
 }
 
 export default Approved
+
+interface IMenuComponent {
+  setSubMenuOpen: (menu: boolean) => void
+  subMenuOpen: boolean
+  title: string
+}
+
+const MenuComponent: React.FC<IMenuComponent> = ({
+  title,
+  setSubMenuOpen,
+  subMenuOpen
+}) => {
+  return (
+        <TopMenuContainer onClick={() => setSubMenuOpen(subMenuOpen)} isselected={subMenuOpen ? 'true' : 'false'}>
+          <TopMenuText>
+              {title}
+          </TopMenuText>
+          <i className={ subMenuOpen ? 'fa fa-angle-down toggle_open ml-auto' : 'fa fa-angle-down toggle_close ml-auto' } />
+        </TopMenuContainer>
+  )
+}
