@@ -93,3 +93,26 @@ export const FilterButton = styled('button')(({ isclicked, nomargin }: { isclick
     border: '1px solid \'#286439\''
   }
 }))
+
+export const FilterSubButton = styled('button')(({ isclicked, nomargin }: { isclicked?: string, nomargin?: 'true' | 'false' }) => ({
+  minWidth: 60,
+  width: 'max-content',
+  padding: '0 15px',
+  height: 35,
+  fontSize: 11,
+  fontFamily: [isclicked === 'true' ? 'Outfit_Medium' : 'Outfit_Regular', 'Arial', 'sans-serif'].join(','),
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  background: 'none',
+  marginRight: nomargin === 'true' ? 0 : 15,
+  border: `1px solid ${isclicked === 'true' ? '#286439' : '#DAEFE0'}`,
+  borderRadius: 5,
+  color: isclicked === 'true' ? '#286439' : '#000',
+  cursor: 'pointer',
+  '&:hover': {
+    fontFamily: ['Outfit_Medium', 'Arial', 'sans-serif'].join(','),
+    color: '#286439',
+    border: '1px solid \'#286439\''
+  }
+}))
