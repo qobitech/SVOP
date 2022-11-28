@@ -12,6 +12,7 @@ export interface IFilterParam {
   initoption: { label: string, value: string | number }
   placeholder: string
   show: boolean
+  hide: boolean
 }
 
 interface ICustomFilter {
@@ -56,7 +57,7 @@ const CustomFilter: React.FC<ICustomFilter> = ({
             {isFilter &&
             <div className='bg-white py-2' style={{ overflow: 'auto' }}>
                 <div className='w-100 fml-grid justify-content-center justify-content-md-between'>
-                    {filterParams?.map((i) => (
+                    {filterParams?.filter(i => i.hide).map((i) => (
                         <div key={i.id} className='d-flex justify-content-center align-items-center'>
                             {i.type === 'select' &&
                             <CustomSelect

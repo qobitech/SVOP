@@ -1,11 +1,11 @@
 import { styled } from '@material-ui/core'
 
-export const FormControlContainer = styled('div')({
-  marginBottom: 15,
+export const FormControlContainer = styled('div')(({ nomargin }: { nomargin?: 'true' | 'false' }) => ({
+  marginBottom: nomargin === 'true' ? 0 : 15,
   display: 'flex',
   flexDirection: 'column',
   padding: '5px 0'
-})
+}))
 
 export const InputLabelComponent = styled('label')({
   fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
@@ -21,15 +21,15 @@ export const InputError = styled('p')({
   margin: 0
 })
 
-export const SelectInput = styled('select')(({ iserror }: { iserror?: string }) => ({
+export const SelectInput = styled('select')(({ iserror, minw }: { iserror?: string, minw?: number }) => ({
   fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
   fontSize: 16,
   outline: '#286439',
   borderRadius: 3,
-  marginBottom: 7,
+  // marginBottom: 7,
   height: 40,
   paddingLeft: 10,
-  minWidth: 280,
+  minWidth: minw || 280,
   border: `1px solid ${iserror ? 'red' : '#e6e6e6'}`,
   '&:focus': {
     border: `1px solid ${iserror ? 'red' : '#286439'}`

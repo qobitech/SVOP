@@ -11,6 +11,8 @@ interface ISelect extends React.ComponentPropsWithoutRef<'select'> {
   error?: string | undefined
   optionsdata?: Array<{ id: number, label: string, value: string | number }>
   initoption: { label: string, value: string | number }
+  nomargin?: 'true' | 'false'
+  minw?: number
 }
 
 // eslint-disable-next-line react/display-name
@@ -19,17 +21,21 @@ export const TypeSelect = React.forwardRef(({
   error,
   optionsdata,
   initoption,
+  nomargin,
+  minw,
   ...props
 }: ISelect, ref) => {
   return (
-        <FormControlContainer>
+        <FormControlContainer nomargin={nomargin}>
+            {(label || '').length > 0 &&
             <InputLabelComponent htmlFor={props.id || props.name} >
                 {label}
-            </InputLabelComponent>
+            </InputLabelComponent>}
             <SelectInput
                 {...props}
                 iserror={error}
                 ref={ref as React.LegacyRef<HTMLSelectElement> | undefined}
+                minw={minw}
             >
               <option value={initoption.value}>
                 {initoption.label}

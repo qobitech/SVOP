@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import DataWrapper from '../../../wrapper/data-wrapper'
 import Filter from '../../filter'
 
-import { useLocation } from 'react-router-dom'
+// import { useLocation } from 'react-router-dom'
 
 import {
   HeaderContainer,
@@ -13,7 +13,8 @@ import {
   TopMenuText,
   BodyContainer,
   BodySectionComponent,
-  ToggleSection
+  ToggleSection,
+  Separator
 } from './styled'
 
 import MainTable, { ICell, ICellAction } from '../../table'
@@ -22,7 +23,7 @@ import { IStates } from '../../../interface/IReducer'
 import { IActions } from '../../../interface/IAction'
 import { pageurl } from '../../../constants/pageurl'
 
-import queryString from 'query-string'
+// import queryString from 'query-string'
 import { PaginationContainer } from '../../table/styled'
 import { FilterButton } from '../../filter/styled'
 import ReactPaginate from 'react-paginate'
@@ -32,6 +33,7 @@ import { BodySectionRow, BodySectionLeft, BodySectionRight } from '../view-resul
 import { ToggleButton } from '../../utils/toggle'
 
 import Chart from '../../chart'
+import { TypeSelect } from '../../utils/select'
 
 export const PAGE_SIZE = 10
 
@@ -43,7 +45,7 @@ const Approved: React.FC = () => {
   )
 }
 
-const tableHeader = ['Election', 'Ward', 'Polling Unit', 'Presiding Officer', 'Actions']
+const tableHeader = ['Party', 'Candidate', 'Vice Candidate', 'Total Votes', 'Accredited Votes']
 interface IApprovedPageChild {
   states?: IStates
 }
@@ -56,26 +58,26 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({
     getApprovedResultsAction
   } = props as unknown as IActions
 
-  const location = useLocation()
+  // const location = useLocation()
 
-  const { search } = location
-  const values = queryString.parse(search)
+  // const { search } = location
+  // const values = queryString.parse(search)
 
-  const { p } = values || {}
+  // const { p } = values || {}
 
   const data = states?.result.getAllApprovedResults
   const load = states?.result.getAllApprovedResults_Loading
   // const error = states?.result.getAllResults_Error
 
-  useEffect(() => {
-    if (!p) {
-      getApprovedResultsAction(PAGE_SIZE, 1)
-    } else {
-      if (!data) {
-        getApprovedResultsAction(PAGE_SIZE, parseInt(p as string))
-      }
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (!p) {
+  //     getApprovedResultsAction(PAGE_SIZE, 1)
+  //   } else {
+  //     if (!data) {
+  //       getApprovedResultsAction(PAGE_SIZE, parseInt(p as string))
+  //     }
+  //   }
+  // }, [])
 
   const handlePagination = (selectedItem: { selected: number }) => {
     if ((selectedItem.selected + 1) !== data?.currentPage) {
@@ -106,23 +108,29 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({
           action: () => {}
         },
         {
-          value: i.presidingOfficer.name,
+          value: i.totalValidVotes,
+          isLink: false,
+          url: '',
+          action: () => {}
+        },
+        {
+          value: i.accreditedVoters,
           isLink: false,
           url: '',
           action: () => {}
         }
       ] as unknown as ICell[],
       rowActions: [
-        {
-          value: 'View Result',
-          isLink: true,
-          url: pageurl.APPROVED + '/' + i.id + '?p=' + data.currentPage,
-          action: () => {},
-          icon: 'fas fa-eye',
-          color: '#286439',
-          view: 'text',
-          background: '#D2E9D9'
-        }
+        // {
+        //   value: 'View Result',
+        //   isLink: true,
+        //   url: pageurl.APPROVED + '/' + i.id + '?p=' + data.currentPage,
+        //   action: () => {},
+        //   icon: 'fas fa-eye',
+        //   color: '#286439',
+        //   view: 'text',
+        //   background: '#D2E9D9'
+        // }
       ] as unknown as ICellAction[]
     }))
   }
@@ -172,9 +180,9 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({
   }
 
   const electionInfoData = {
-    Category: 'FEDERAL',
-    Election: 'PRESENTIAL ELECTION',
-    'Election Cycle': '2023'
+    Category: '___',
+    Election: '___',
+    'Election Cycle': '___'
   }
 
   const [toggle, setToggle] = useState<'chart' | 'table'>('table')
@@ -203,7 +211,7 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({
                       </BodySectionRight>
                   </BodySectionRow>
               ))}
-                        </BodySectionComponent>
+            </BodySectionComponent>
           </BodyContainer>}
 
           <BodyContainer>
@@ -223,6 +231,27 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({
                   toggleTextOn='Chart'
                   toggleTextOff='Table'
                 />
+                {toggle === 'chart' &&
+                <>
+                  <Separator customwidth={30} customheight={0} />
+                  <TypeSelect
+                    initoption={{ label: 'Select Chart', value: '' }}
+                    nomargin='true'
+                    minw={150}
+                    optionsdata={[
+                      {
+                        id: 1,
+                        label: 'Bar Chart',
+                        value: 'b-chart'
+                      },
+                      {
+                        id: 2,
+                        label: 'Pie Chart',
+                        value: 'p-chart'
+                      }
+                    ]}
+                  />
+                </>}
               </ToggleSection>
               <SelectedTableActionsSection>
                 <FilterButton>
@@ -242,7 +271,8 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({
             {toggle === 'table' &&
             <MainTable
               header={tableHeader}
-              record={recordData() || [] as Array<{ id: string, row: ICell[], rowActions: ICellAction[] }>}
+              // record={recordData() || [] as Array<{ id: string, row: ICell[], rowActions: ICellAction[] }>}
+              record={ [] as Array<{ id: string, row: ICell[], rowActions: ICellAction[] }> }
               checkedRows={checkedRows}
               handleCheckedRows={handleCheckedRows}
               clearCheckedRows={clearCheckedRows}

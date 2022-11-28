@@ -33,6 +33,13 @@ export const HeaderTextNumbers = styled(Typography)({
   padding: '0 8px'
 })
 
+export const Separator = styled('div')(({ customwidth, customheight }: { customheight?: number | string, customwidth?: number | string }) => ({
+  margin: '12px 0',
+  width: customwidth || 0,
+  background: '#F1F1F1',
+  height: customheight || 0
+}))
+
 export const HeaderBodyText = styled(Typography)({
   fontFamily: ['Outfit_Light', 'Arial', 'sans-serif'].join(','),
   textTransform: 'capitalize',
@@ -60,7 +67,9 @@ export const ToggleSection = styled('div')({
   margin: '0 auto',
   paddingTop: 3,
   flex: 1,
-  justifyContent: 'center'
+  justifyContent: 'center',
+  height: 53,
+  boxSizing: 'border-box'
 })
 
 export const TopMenuContainer = styled('div')(({ isselected }: { isselected?: 'true' | 'false' }) => ({
