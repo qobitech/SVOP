@@ -50,13 +50,7 @@ const Approved: React.FC = () => {
   )
 }
 
-const tableHeader = [
-  'Party',
-  'Candidate',
-  'Vice Candidate',
-  'Total Votes',
-  'Accredited Votes'
-]
+const tableHeader = ['Party', 'Total Votes', 'Accredited Votes']
 interface IApprovedPageChild {
   states?: IStates
 }

@@ -157,6 +157,7 @@ export const TypeAutoSelect = React.forwardRef(
           onFocus={() => setOpenOption(true)}
           onBlur={handleBlur}
           onChange={handleOptionFilter}
+          autoComplete="off"
           onClick={() => {
             if (!openOption) {
               setOpenOption(true)
