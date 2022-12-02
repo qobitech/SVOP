@@ -351,12 +351,12 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
                 ></i>
               )}
             </HeaderContainer>
-            <div className="fml-sm-grid pb-3">
+            <div className="fml-grid pb-3">
               {topfilterData.map(({ id, ...rest }, index) => (
                 <div key={id} className="d-flex w-100">
                   <TypeAutoSelect
                     nomargin="true"
-                    customwidth={210}
+                    customwidth={300}
                     customheight={50}
                     handlePagination={handleAutoSelectPagination}
                     handleParamValue={handleParamValue}
