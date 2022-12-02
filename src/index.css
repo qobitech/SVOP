@@ -40,9 +40,9 @@
 
 body {
   margin: 0;
-  font-family: 'Outfit_Regular', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Outfit_Regular', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -172,19 +172,19 @@ code {
 }
 
 .modal-header,
-.modal-body{
+.modal-body {
   background: #fff !important;
 }
 
-.modal-body{
+.modal-body {
   border-radius: 0 0 5px 5px;
 }
 
-.color-light{
+.color-light {
   color: #929292;
 }
 
-.font-small{
+.font-small {
   font-size: small;
 }
 
@@ -193,5 +193,13 @@ code {
   display: grid;
   grid-row: auto;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  justify-content: space-between;
+}
+
+.fml-sm-grid {
+  border-radius: 5px;
+  display: grid;
+  grid-row: auto;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   justify-content: space-between;
 }

@@ -7,9 +7,11 @@ interface IChart {
 
 const Chart: React.FC<IChart> = () => {
   return (
-        <ChartContainer>
-          <p className='margin-auto text-center py-4 color-light font-small'>No Data</p>
-        </ChartContainer>
+    <ChartContainer>
+      <p className="margin-auto text-center py-4 color-light font-small">
+        No Data
+      </p>
+    </ChartContainer>
   )
 }
 

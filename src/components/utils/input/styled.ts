@@ -21,16 +21,18 @@ export const InputError = styled('p')({
   margin: 0
 })
 
-export const TextInput = styled('input')(({ iserror }: { iserror?: string }) => ({
-  fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
-  fontSize: 16,
-  outline: '#286439',
-  borderRadius: 3,
-  marginBottom: 7,
-  height: 40,
-  paddingLeft: 10,
-  border: `1px solid ${iserror ? 'red' : '#e6e6e6'}`,
-  '&:focus': {
-    border: `1px solid ${iserror ? 'red' : '#286439'}`
-  }
-}))
+export const TextInput = styled('input')(
+  ({ iserror }: { iserror?: string }) => ({
+    fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
+    fontSize: 16,
+    outline: '#286439',
+    borderRadius: 3,
+    marginBottom: 7,
+    height: 40,
+    paddingLeft: 10,
+    border: `1px solid ${iserror ? 'red' : '#e6e6e6'}`,
+    '&:focus': {
+      border: `1px solid ${iserror ? 'red' : '#286439'}`
+    }
+  })
+)

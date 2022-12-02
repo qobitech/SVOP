@@ -75,33 +75,37 @@ export const LoggedUserSection = styled('div')({
   justifyContent: 'flex-start'
 })
 
-export const LoggedUserSectionRow = styled('div')(({ nomargin }: { nomargin?: 'true' | 'false' }) => ({
-  width: '100%',
-  height: 'auto',
-  boxSizing: 'border-box',
-  marginBottom: nomargin === 'true' ? 0 : 30,
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'flex-start',
-  justifyContent: 'flex-start'
-}))
+export const LoggedUserSectionRow = styled('div')(
+  ({ nomargin }: { nomargin?: 'true' | 'false' }) => ({
+    width: '100%',
+    height: 'auto',
+    boxSizing: 'border-box',
+    marginBottom: nomargin === 'true' ? 0 : 30,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start'
+  })
+)
 
-export const AboutSectionColumn = styled('div')(({ nomargin }: { nomargin?: 'true' | 'false' }) => ({
-  width: '100%',
-  height: 'auto',
-  boxSizing: 'border-box',
-  marginBottom: nomargin === 'true' ? 0 : 30,
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'flex-start',
-  justifyContent: 'flex-start',
-  paddingLeft: 30,
-  [down('md')]: {
-    justifyContent: 'center',
-    paddingLeft: 0,
-    marginBottom: 0
-  }
-}))
+export const AboutSectionColumn = styled('div')(
+  ({ nomargin }: { nomargin?: 'true' | 'false' }) => ({
+    width: '100%',
+    height: 'auto',
+    boxSizing: 'border-box',
+    marginBottom: nomargin === 'true' ? 0 : 30,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    paddingLeft: 30,
+    [down('md')]: {
+      justifyContent: 'center',
+      paddingLeft: 0,
+      marginBottom: 0
+    }
+  })
+)
 
 export const CTAApproveButton = styled('button')({
   width: 'max-content',
@@ -124,20 +128,22 @@ export const CTAApproveButton = styled('button')({
   }
 })
 
-export const AboutSectionRow = styled('div')(({ nomargin }: { nomargin?: 'true' | 'false' }) => ({
-  width: '100%',
-  height: 'auto',
-  boxSizing: 'border-box',
-  marginBottom: nomargin === 'true' ? 0 : 30,
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'flex-start',
-  justifyContent: 'flex-start',
-  [down('md')]: {
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
-}))
+export const AboutSectionRow = styled('div')(
+  ({ nomargin }: { nomargin?: 'true' | 'false' }) => ({
+    width: '100%',
+    height: 'auto',
+    boxSizing: 'border-box',
+    marginBottom: nomargin === 'true' ? 0 : 30,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    [down('md')]: {
+      justifyContent: 'center',
+      alignItems: 'center'
+    }
+  })
+)
 
 export const LoggedUserSectionRowHeaderText = styled(Typography)({
   fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
@@ -184,18 +190,20 @@ export const LoggedUserProfileSectionRowBodyText = styled(Typography)({
   fontSize: 16
 })
 
-export const OverViewSectionColumns = styled('div')(({ noborder }: { noborder?: 'true' | 'false' }) => ({
-  height: 'auto',
-  padding: 0,
-  boxSizing: 'border-box',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'flex-start',
-  [down('md')]: {
-    marginBottom: noborder === 'true' ? 0 : 40
-  }
-}))
+export const OverViewSectionColumns = styled('div')(
+  ({ noborder }: { noborder?: 'true' | 'false' }) => ({
+    height: 'auto',
+    padding: 0,
+    boxSizing: 'border-box',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    [down('md')]: {
+      marginBottom: noborder === 'true' ? 0 : 40
+    }
+  })
+)
 
 export const OverViewSectionColumnsHeaderText = styled(Typography)({
   fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),

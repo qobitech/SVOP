@@ -83,25 +83,27 @@ export const MenuContainer = styled('ul')({
   boxSizing: 'border-box'
 })
 
-export const ParentMenuContainer = styled('div')(({ isselected }: { isselected?: 'true' | 'false' }) => ({
-  height: 37,
-  borderRadius: 0,
-  background: isselected === 'true' ? '#286439' : '#fff',
-  borderBottom: '1px solid #e7e7e7',
-  display: 'flex',
-  alignItems: 'center',
-  padding: '0 10px',
-  cursor: 'pointer',
-  boxSizing: 'border-box',
-  transition: '.2s ease',
-  width: '100%',
-  '&:hover': {
-    background: '#F4FFF8'
-  },
-  [down('md')]: {
-    padding: '25px 10px 25px 25px'
-  }
-}))
+export const ParentMenuContainer = styled('div')(
+  ({ isselected }: { isselected?: 'true' | 'false' }) => ({
+    height: 37,
+    borderRadius: 0,
+    background: isselected === 'true' ? '#286439' : '#fff',
+    borderBottom: '1px solid #e7e7e7',
+    display: 'flex',
+    alignItems: 'center',
+    padding: '0 10px',
+    cursor: 'pointer',
+    boxSizing: 'border-box',
+    transition: '.2s ease',
+    width: '100%',
+    '&:hover': {
+      background: '#F4FFF8'
+    },
+    [down('md')]: {
+      padding: '25px 10px 25px 25px'
+    }
+  })
+)
 
 export const ParentMenuIcon = styled('img')({
   width: 12,
@@ -121,14 +123,16 @@ export const LogoutText = styled('p')({
   cursor: 'pointer'
 })
 
-export const ParentMenuText = styled(Typography)(({ isselected }: { isselected?: 'true' | 'false' }) => ({
-  fontFamily: ['Outfit_Medium', 'Arial', 'sans-serif'].join(','),
-  textTransform: 'capitalize',
-  fontSize: 16,
-  margin: 0,
-  color: isselected === 'true' ? '#fff' : '#286439',
-  transition: '.2s ease'
-}))
+export const ParentMenuText = styled(Typography)(
+  ({ isselected }: { isselected?: 'true' | 'false' }) => ({
+    fontFamily: ['Outfit_Medium', 'Arial', 'sans-serif'].join(','),
+    textTransform: 'capitalize',
+    fontSize: 16,
+    margin: 0,
+    color: isselected === 'true' ? '#fff' : '#286439',
+    transition: '.2s ease'
+  })
+)
 
 export const SubMenuContainer = styled('div')({
   width: 159,
@@ -145,13 +149,19 @@ export const SubMenuContainer = styled('div')({
   }
 })
 
-export const SubMenuText = styled(Typography)(({ selected }: { selected: boolean }) => ({
-  fontFamily: [selected ? 'Outfit_Light' : 'Outfit_Regular', 'Arial', 'sans-serif'].join(','),
-  textTransform: 'capitalize',
-  fontSize: 14,
-  margin: 0,
-  color: selected ? '#286439' : '#B7B7B7'
-}))
+export const SubMenuText = styled(Typography)(
+  ({ selected }: { selected: boolean }) => ({
+    fontFamily: [
+      selected ? 'Outfit_Light' : 'Outfit_Regular',
+      'Arial',
+      'sans-serif'
+    ].join(','),
+    textTransform: 'capitalize',
+    fontSize: 14,
+    margin: 0,
+    color: selected ? '#286439' : '#B7B7B7'
+  })
+)
 
 export const SubMenuNumbers = styled(Typography)({
   fontFamily: ['Outfit_Medium', 'Arial', 'sans-serif'].join(','),

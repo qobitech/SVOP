@@ -1,4 +1,3 @@
-
 export const wardoptionsdata = [
   { id: 1, label: 'Ward A', value: '1' },
   { id: 2, label: 'Ward B', value: '2' }
@@ -78,4 +77,7 @@ export const filterParamsData = [
   }
 ]
 
-export const infoData = filterParamsData.reduce((a, v) => ({ ...a, [v.text]: '' }), {})
+export const infoData = filterParamsData.reduce(
+  (a, v) => ({ ...a, [v.text]: '' }),
+  {}
+)

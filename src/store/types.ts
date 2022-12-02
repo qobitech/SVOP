@@ -1,4 +1,3 @@
-
 export const authType = {
   login: {
     dataAction: 'SIGN_IN',
@@ -12,36 +11,11 @@ export const authType = {
   }
 }
 
-export const resultType = {
-  getAllApproved: {
-    dataAction: 'GET_ALL_APPROVED_RESULTS',
-    dataLoading: 'GET_ALL_APPROVED_RESULTS_LOADING',
-    dataError: 'GET_ALL_APPROVED_RESULTS_ERROR'
-  },
-  getAllRejected: {
-    dataAction: 'GET_ALL_REJECTED_RESULTS',
-    dataLoading: 'GET_ALL_REJECTED_RESULTS_LOADING',
-    dataError: 'GET_ALL_REJECTED_RESULTS_ERROR'
-  },
-  getAllUnapproved: {
-    dataAction: 'GET_ALL_UNAPPROVED_RESULTS',
-    dataLoading: 'GET_ALL_UNAPPROVED_RESULTS_LOADING',
-    dataError: 'GET_ALL_UNAPPROVED_RESULTS_ERROR'
-  },
-  getById: {
-    dataAction: 'GET_RESULTS_BY_ID',
-    dataLoading: 'GET_RESULTS_BY_ID_LOADING',
-    dataError: 'GET_RESULTS_BY_ID_ERROR'
-  },
-  approve: {
-    dataAction: 'APPROVE_RESULT',
-    dataLoading: 'APPROVE_RESULT_LOADING',
-    dataError: 'APPROVE_RESULT_ERROR'
-  },
-  reject: {
-    dataAction: 'REJECT_RESULT',
-    dataLoading: 'REJECT_RESULT_LOADING',
-    dataError: 'REJECT_RESULT_ERROR'
+export const electionType = {
+  electionCycle: {
+    dataAction: 'GET_ALL_ELECTION_CYCLE_RESULTS',
+    dataLoading: 'GET_ALL_ELECTION_CYCLE_LOADING',
+    dataError: 'GET_ALL_ELECTION_CYCLE_ERROR'
   }
 }
 

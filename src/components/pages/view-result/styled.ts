@@ -16,21 +16,23 @@ export const HeaderContainer = styled('div')({
   flexWrap: 'wrap'
 })
 
-export const BodyContainer = styled('div')(({ nopadding }: { nopadding?: 'true' | 'false' }) => ({
-  width: '100%',
-  maxWidth: '100%',
-  height: 'auto',
-  borderRadius: 5,
-  background: '#fff',
-  padding: nopadding === 'true' ? 0 : 20,
-  boxSizing: 'border-box',
-  display: 'flex',
-  flexDirection: 'row',
-  flexWrap: 'wrap',
-  alignItems: 'stretch',
-  justifyContent: 'space-between',
-  paddingBottom: 140
-}))
+export const BodyContainer = styled('div')(
+  ({ nopadding }: { nopadding?: 'true' | 'false' }) => ({
+    width: '100%',
+    maxWidth: '100%',
+    height: 'auto',
+    borderRadius: 5,
+    background: '#fff',
+    padding: nopadding === 'true' ? 0 : 20,
+    boxSizing: 'border-box',
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'stretch',
+    justifyContent: 'space-between',
+    paddingBottom: 140
+  })
+)
 
 export const HeaderBodyText = styled(Typography)({
   fontFamily: ['Outfit_Light', 'Arial', 'sans-serif'].join(','),
@@ -66,31 +68,35 @@ export const HeaderText = styled(Typography)({
   flexWrap: 'wrap'
 })
 
-export const BodySection = styled('div')(({ width, isborder }: { width: string, isborder?: 'true' | 'false' }) => ({
-  width,
-  height: 'auto',
-  margin: 0,
-  textAlign: 'center',
-  border: isborder === 'true' ? '1px solid #DAEFE0' : 'none',
-  boxSizing: 'border-box',
-  display: 'flex',
-  flexDirection: 'column',
-  borderRadius: 5,
-  [down('md')]: {
-    width: '100%',
-    margin: '20px 0'
-  }
-}))
+export const BodySection = styled('div')(
+  ({ width, isborder }: { width: string; isborder?: 'true' | 'false' }) => ({
+    width,
+    height: 'auto',
+    margin: 0,
+    textAlign: 'center',
+    border: isborder === 'true' ? '1px solid #DAEFE0' : 'none',
+    boxSizing: 'border-box',
+    display: 'flex',
+    flexDirection: 'column',
+    borderRadius: 5,
+    [down('md')]: {
+      width: '100%',
+      margin: '20px 0'
+    }
+  })
+)
 
-export const BodySectionComponent = styled('div')(({ noborder }: { noborder?: 'true' | 'false' }) => ({
-  width: '100%',
-  height: 'auto',
-  border: '1px solid #DAEFE0',
-  borderRadius: 5,
-  marginBottom: noborder === 'true' ? 0 : 35,
-  boxSizing: 'border-box',
-  padding: 30
-}))
+export const BodySectionComponent = styled('div')(
+  ({ noborder }: { noborder?: 'true' | 'false' }) => ({
+    width: '100%',
+    height: 'auto',
+    border: '1px solid #DAEFE0',
+    borderRadius: 5,
+    marginBottom: noborder === 'true' ? 0 : 35,
+    boxSizing: 'border-box',
+    padding: 30
+  })
+)
 
 export const BodyCTASection = styled('div')({
   marginTop: '5px',
@@ -217,7 +223,6 @@ export const BodySectionProfileName = styled('p')({
   fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
   margin: 0,
   marginBottom: 3
-
 })
 
 export const BodySectionProfileRole = styled('p')({

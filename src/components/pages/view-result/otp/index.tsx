@@ -28,9 +28,7 @@ export interface IResultAssessment {
 interface IResultAssessmentOTP {
   openModal: boolean
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>
-  approveResultAction: (data: {
-    otp: string
-  }) => (dispatch: any) => void
+  approveResultAction: (data: { otp: string }) => (dispatch: any) => void
   rejectResultAction: (data: {
     otp: string
     comment: string
@@ -92,35 +90,44 @@ const ResultAssessmentOTP: React.FC<IResultAssessmentOTP> = ({
 
   return (
     <NotificationModal {...modalprops}>
-        <OTPForm onSubmit={handleSubmit(customeHandleSubmit)}>
+      <OTPForm onSubmit={handleSubmit(customeHandleSubmit)}>
+        <TypeInput
+          label="Enter OTP"
+          placeholder="****"
+          type="password"
+          error={errors.otp?.message}
+          {...register('otp')}
+        />
+        {!isApprove && (
           <TypeInput
-            label='Enter OTP'
-            placeholder='****'
-            type='password'
-            error={errors.otp?.message}
-            {...register('otp')}
-          />
-          {!isApprove && <TypeInput
-            label='Enter Comment'
+            label="Enter Comment"
             placeholder="Reason for rejection"
-            type='text'
+            type="text"
             error={errors.comment?.message}
             {...register('otp')}
-          />}
-          <CTABtnSection>
-            <CTAApproveButton type='submit'>
-                {states?.auth.signin_Loading ? <ButtonLoader /> : (isApprove ? 'Approve' : 'Reject')}
-            </CTAApproveButton>
-            <CTARejectButton onClick={() => {
+          />
+        )}
+        <CTABtnSection>
+          <CTAApproveButton type="submit">
+            {states?.auth.signin_Loading ? (
+              <ButtonLoader />
+            ) : isApprove ? (
+              'Approve'
+            ) : (
+              'Reject'
+            )}
+          </CTAApproveButton>
+          <CTARejectButton
+            onClick={() => {
               setOpenModal(false)
               clearErrors('otp')
               clearErrors('comment')
             }}
-            >
-                Cancel
-            </CTARejectButton>
-          </CTABtnSection>
-        </OTPForm>
+          >
+            Cancel
+          </CTARejectButton>
+        </CTABtnSection>
+      </OTPForm>
     </NotificationModal>
   )
 }

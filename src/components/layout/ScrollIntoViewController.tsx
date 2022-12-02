@@ -11,13 +11,13 @@ const ScrollIntoViewController = ({ children }: { children: any }) => {
       const body = document.querySelector('#root')
       body?.scrollIntoView({ behavior: 'smooth' })
       // eslint-disable-next-line
-	  setPrevLocation(() => pathname );
+      setPrevLocation(() => pathname)
     }
     return () => {
       setPrevLocation(() => null)
     }
-  // eslint-disable-next-line
-	}, [pathname]);
+    // eslint-disable-next-line
+  }, [pathname])
 
   return <>{children}</>
 }

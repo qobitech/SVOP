@@ -4,7 +4,7 @@ import { down } from '../../../assets/style/breakpointHelpers'
 export const HeaderContainer = styled('div')({
   display: 'flex',
   alignItems: 'center',
-  marginBottom: 20
+  marginBottom: 10
 })
 
 export const HeaderText = styled(Typography)({
@@ -33,12 +33,20 @@ export const HeaderTextNumbers = styled(Typography)({
   padding: '0 8px'
 })
 
-export const Separator = styled('div')(({ customwidth, customheight }: { customheight?: number | string, customwidth?: number | string }) => ({
-  margin: '12px 0',
-  width: customwidth || 0,
-  background: '#F1F1F1',
-  height: customheight || 0
-}))
+export const Separator = styled('div')(
+  ({
+    customwidth,
+    customheight
+  }: {
+    customheight?: number | string
+    customwidth?: number | string
+  }) => ({
+    margin: '12px 0',
+    width: customwidth || 0,
+    background: '#F1F1F1',
+    height: customheight || 0
+  })
+)
 
 export const HeaderBodyText = styled(Typography)({
   fontFamily: ['Outfit_Light', 'Arial', 'sans-serif'].join(','),
@@ -72,31 +80,35 @@ export const ToggleSection = styled('div')({
   boxSizing: 'border-box'
 })
 
-export const TopMenuContainer = styled('div')(({ isselected }: { isselected?: 'true' | 'false' }) => ({
-  height: 'auto',
-  MozBoxSizing: 'border-box',
-  borderRadius: '5px 5px 0 0',
-  background: isselected === 'true' ? '#fff' : 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  padding: '10px 20px',
-  boxSizing: 'border-box',
-  width: 'max-content',
-  cursor: 'pointer',
-  margin: '0 auto',
-  transition: '.2s ease-in'
-}))
+export const TopMenuContainer = styled('div')(
+  ({ isselected }: { isselected?: 'true' | 'false' }) => ({
+    height: 'auto',
+    MozBoxSizing: 'border-box',
+    borderRadius: '5px 5px 0 0',
+    background: isselected === 'true' ? '#fff' : 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '10px 20px',
+    boxSizing: 'border-box',
+    width: 'max-content',
+    cursor: 'pointer',
+    margin: '0 auto',
+    transition: '.2s ease-in'
+  })
+)
 
-export const TopMenuText = styled(Typography)(({ isselected }: { isselected?: 'true' | 'false' }) => ({
-  fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
-  textTransform: 'capitalize',
-  fontSize: 12,
-  margin: 0,
-  marginRight: 9,
-  color: isselected === 'true' ? '#fff' : '#286439',
-  transition: '.2s ease'
-}))
+export const TopMenuText = styled(Typography)(
+  ({ isselected }: { isselected?: 'true' | 'false' }) => ({
+    fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
+    textTransform: 'capitalize',
+    fontSize: 12,
+    margin: 0,
+    marginRight: 9,
+    color: isselected === 'true' ? '#fff' : '#286439',
+    transition: '.2s ease'
+  })
+)
 
 export const BodyContainer = styled('div')({
   width: '100%',

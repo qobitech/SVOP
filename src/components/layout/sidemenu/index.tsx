@@ -119,49 +119,45 @@ const SideMenu: React.FC<ISideMenu> = ({
   subMenuOpen
 }) => {
   return (
-        <MainMenuContainer className={!isOpen ? 'side_menu_close' : 'side_menu_open'}>
-          <SideMenuContainer>
-              <LinkContainer to={pageurl.PROFILE}>
-                <ProfileContainer>
-                  <ProfileImage src={imageSrc} />
-                  <ProfileName>
-                    {name}
-                  </ProfileName>
-                  <ProfileRole>
-                    {role}
-                  </ProfileRole>
-                </ProfileContainer>
-              </LinkContainer>
-              <MenuContainer>
-                  {menuData.map(i => (
-                      <MenuComponent
-                          id={i.id}
-                          title={i.title}
-                          sub={i.sub}
-                          url={i.url}
-                          key={i.id}
-                          isParent={i.isParent}
-                          icon={i.icon}
-                          setSubMenuOpen={setSubMenuOpen}
-                          subMenuOpen={subMenuOpen}
-                      />
-                  ))}
-              </MenuContainer>
-              <LogoutSection
-                      onClick={() => {
-                        localStorage.clear()
-                        window.open(pageurl.LOGIN, '_self')
-                      }}
-                  >
-                  <ParentMenuContainer>
-                    <i className='fa fa-sign-out mr-2' />
-                    <ParentMenuText>
-                        Logout
-                    </ParentMenuText>
-                  </ParentMenuContainer>
-              </LogoutSection>
-          </SideMenuContainer>
-        </MainMenuContainer>
+    <MainMenuContainer
+      className={!isOpen ? 'side_menu_close' : 'side_menu_open'}
+    >
+      <SideMenuContainer>
+        <LinkContainer to={pageurl.PROFILE}>
+          <ProfileContainer>
+            <ProfileImage src={imageSrc} />
+            <ProfileName>{name}</ProfileName>
+            <ProfileRole>{role}</ProfileRole>
+          </ProfileContainer>
+        </LinkContainer>
+        <MenuContainer>
+          {menuData.map((i) => (
+            <MenuComponent
+              id={i.id}
+              title={i.title}
+              sub={i.sub}
+              url={i.url}
+              key={i.id}
+              isParent={i.isParent}
+              icon={i.icon}
+              setSubMenuOpen={setSubMenuOpen}
+              subMenuOpen={subMenuOpen}
+            />
+          ))}
+        </MenuContainer>
+        <LogoutSection
+          onClick={() => {
+            localStorage.clear()
+            window.open(pageurl.LOGIN, '_self')
+          }}
+        >
+          <ParentMenuContainer>
+            <i className="fa fa-sign-out mr-2" />
+            <ParentMenuText>Logout</ParentMenuText>
+          </ParentMenuContainer>
+        </LogoutSection>
+      </SideMenuContainer>
+    </MainMenuContainer>
   )
 }
 
@@ -193,33 +189,38 @@ const MenuComponent: React.FC<IMenuComponent> = ({
   subMenuOpen
 }) => {
   return (
-        <MenuContainer key={id}>
-            {!isParent
-              ? <LinkContainer to={url}>
-              <ParentMenuContainer>
-                  <i className={icon} />
-                  <ParentMenuText>
-                      {title}
-                  </ParentMenuText>
-              </ParentMenuContainer>
+    <MenuContainer key={id}>
+      {!isParent ? (
+        <LinkContainer to={url}>
+          <ParentMenuContainer>
+            <i className={icon} />
+            <ParentMenuText>{title}</ParentMenuText>
+          </ParentMenuContainer>
+        </LinkContainer>
+      ) : (
+        <ParentMenuContainer
+          onClick={() => setSubMenuOpen(subMenuOpen === id ? 0 : id)}
+        >
+          <i className={icon} />
+          <ParentMenuText>{title}</ParentMenuText>
+          <i
+            className={
+              subMenuOpen === id
+                ? 'fa fa-angle-down toggle_open ml-auto mr-3'
+                : 'fa fa-angle-down toggle_close ml-auto mr-3'
+            }
+          />
+        </ParentMenuContainer>
+      )}
+      {subMenuOpen === id &&
+        sub.map((i) => (
+          <SubMenuContainer key={i.id}>
+            <LinkContainer to={i.url}>
+              <SubMenuText selected={i.selected}>{i.title}</SubMenuText>
             </LinkContainer>
-              : <ParentMenuContainer onClick={() => setSubMenuOpen(subMenuOpen === id ? 0 : id)}>
-                <i className={icon} />
-                <ParentMenuText>
-                    {title}
-                </ParentMenuText>
-                <i className={ subMenuOpen === id ? 'fa fa-angle-down toggle_open ml-auto mr-3' : 'fa fa-angle-down toggle_close ml-auto mr-3' } />
-              </ParentMenuContainer>}
-            {subMenuOpen === id && sub.map(i => (
-                <SubMenuContainer key={i.id}>
-                    <LinkContainer to={i.url}>
-                        <SubMenuText selected={i.selected}>
-                            {i.title}
-                        </SubMenuText>
-                    </LinkContainer>
-                </SubMenuContainer>
-            ))}
-        </MenuContainer>
+          </SubMenuContainer>
+        ))}
+    </MenuContainer>
   )
 }
 

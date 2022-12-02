@@ -34,7 +34,14 @@ type I_API_REQUEST = (
   validateStatus?: (status: number) => boolean
 ) => Promise<any>
 
-const apiRequest: I_API_REQUEST = async (url, headers, data, method, timeout, validateStatus) => {
+const apiRequest: I_API_REQUEST = async (
+  url,
+  headers,
+  data,
+  method,
+  timeout,
+  validateStatus
+) => {
   cancelRequest()
   // return await axios({
   //   url,
@@ -49,8 +56,9 @@ const apiRequest: I_API_REQUEST = async (url, headers, data, method, timeout, va
     mode: 'cors',
     method,
     body: data
-  }).then(async res => await res.json())
-    .then(res => res)
+  })
+    .then(async (res) => await res.json())
+    .then((res) => res)
 }
 
 export const getErrMsg = (error: any) => {
@@ -69,7 +77,12 @@ const statusFunction = (onStatus?: (res: any) => void, res?: any) => {
   if (typeof onStatus === 'function') onStatus(res)
 }
 
-const apiRespond = (dispatch: any, type: any, payload: any, onStatus?: (res: any) => void) => {
+const apiRespond = (
+  dispatch: any,
+  type: any,
+  payload: any,
+  onStatus?: (res: any) => void
+) => {
   // setTimeout(() => {
   dispatch({ type, payload })
   statusFunction(onStatus, payload)
@@ -100,28 +113,19 @@ export const httpGetMethod = ({
   onSuccess,
   onFailure
 }: I_HTTPMETHOD) => {
-  const requesturl = customurl != null ? customurl : (process.env.REACT_APP_BASE_URL + '' + url)
+  const requesturl =
+    customurl != null ? customurl : process.env.REACT_APP_BASE_URL + '' + url
   return (dispatch: any) => {
     dispatch({ type: dataLoading, payload: true })
     apiRequest(`${requesturl}`, header, null, 'get', null, () => true)
       .then((resp) => {
-        apiRespond(
-          dispatch,
-          dataAction,
-          resp,
-          onSuccess
-        )
+        apiRespond(dispatch, dataAction, resp, onSuccess)
       })
       .catch((error) => {
         if (axios.isCancel(error)) {
           console.log('Request canceled', error.message)
         } else {
-          apiRespond(
-            dispatch,
-            dataError,
-            getErrMsg(error),
-            onFailure
-          )
+          apiRespond(dispatch, dataError, getErrMsg(error), onFailure)
         }
       })
       .finally(() => {
@@ -136,7 +140,8 @@ export const httpPostMethod = ({
   onSuccess,
   onFailure
 }: I_HTTPMETHOD) => {
-  const requesturl = customurl != null ? customurl : (process.env.REACT_APP_BASE_URL + '' + url)
+  const requesturl =
+    customurl != null ? customurl : process.env.REACT_APP_BASE_URL + '' + url
   return (dispatch: any) => {
     dispatch({ type: dataLoading, payload: true })
     apiRequest(`${requesturl}`, header, data, 'post', TIMEOUT)
@@ -153,12 +158,7 @@ export const httpPostMethod = ({
         if (axios.isCancel(error)) {
           console.log('Request canceled', error.message)
         } else {
-          apiRespond(
-            dispatch,
-            dataError,
-            getErrMsg(error),
-            onFailure
-          )
+          apiRespond(dispatch, dataError, getErrMsg(error), onFailure)
         }
       })
       .finally(() => {
@@ -173,28 +173,19 @@ export const httpUploadMediaMethod = ({
   onSuccess,
   onFailure
 }: I_HTTPMETHOD) => {
-  const requesturl = customurl != null ? customurl : (process.env.REACT_APP_BASE_URL + '' + url)
+  const requesturl =
+    customurl != null ? customurl : process.env.REACT_APP_BASE_URL + '' + url
   return (dispatch: any) => {
     dispatch({ type: dataLoading, payload: true })
     apiRequest(`${requesturl}`, header, data, 'post', TIMEOUT)
       .then((resp) => {
-        apiRespond(
-          dispatch,
-          dataAction,
-          resp,
-          onSuccess
-        )
+        apiRespond(dispatch, dataAction, resp, onSuccess)
       })
       .catch((error) => {
         if (axios.isCancel(error)) {
           console.log('Request canceled', error.message)
         } else {
-          apiRespond(
-            dispatch,
-            dataError,
-            getErrMsg(error),
-            onFailure
-          )
+          apiRespond(dispatch, dataError, getErrMsg(error), onFailure)
         }
       })
       .finally(() => {
@@ -209,28 +200,19 @@ export const httpPutVideoMethod = ({
   onSuccess,
   onFailure
 }: I_HTTPMETHOD) => {
-  const requesturl = customurl != null ? customurl : (process.env.REACT_APP_BASE_URL + '' + url)
+  const requesturl =
+    customurl != null ? customurl : process.env.REACT_APP_BASE_URL + '' + url
   return (dispatch: any) => {
     dispatch({ type: dataLoading, payload: true })
     apiRequest(`${requesturl}`, header, data, 'put', TIMEOUT)
       .then((resp) => {
-        apiRespond(
-          dispatch,
-          dataAction,
-          resp,
-          onSuccess
-        )
+        apiRespond(dispatch, dataAction, resp, onSuccess)
       })
       .catch((error) => {
         if (axios.isCancel(error)) {
           console.log('Request canceled', error.message)
         } else {
-          apiRespond(
-            dispatch,
-            dataError,
-            getErrMsg(error),
-            onFailure
-          )
+          apiRespond(dispatch, dataError, getErrMsg(error), onFailure)
         }
       })
       .finally(() => {
@@ -240,12 +222,10 @@ export const httpPutVideoMethod = ({
 }
 
 export const clearHttp = ({
-  actionType: {
-    dataLoading,
-    dataAction,
-    dataError
-  }
-}: { actionType: I_ACTION_TYPE }) => {
+  actionType: { dataLoading, dataAction, dataError }
+}: {
+  actionType: I_ACTION_TYPE
+}) => {
   return (dispatch: any) => {
     dispatch({ type: dataLoading, payload: false })
     dispatch({ type: dataAction, payload: [] })
@@ -254,13 +234,12 @@ export const clearHttp = ({
 }
 
 export const clearHttpByValue = ({
-  actionType: {
-    dataLoading,
-    dataAction,
-    dataError
-  },
+  actionType: { dataLoading, dataAction, dataError },
   dataActionValue
-}: { actionType: I_ACTION_TYPE, dataActionValue: any }) => {
+}: {
+  actionType: I_ACTION_TYPE
+  dataActionValue: any
+}) => {
   return (dispatch: any) => {
     dispatch({ type: dataLoading, payload: false })
     dispatch({ type: dataAction, payload: dataActionValue })
@@ -274,28 +253,19 @@ export const httpPutMethod = ({
   onSuccess,
   onFailure
 }: I_HTTPMETHOD) => {
-  const requesturl = customurl != null ? customurl : (process.env.REACT_APP_BASE_URL + '' + url)
+  const requesturl =
+    customurl != null ? customurl : process.env.REACT_APP_BASE_URL + '' + url
   return (dispatch: any) => {
     dispatch({ type: dataLoading, payload: true })
     apiRequest(`${requesturl}`, header, data, 'put', TIMEOUT)
       .then((resp) => {
-        apiRespond(
-          dispatch,
-          dataAction,
-          resp,
-          onSuccess
-        )
+        apiRespond(dispatch, dataAction, resp, onSuccess)
       })
       .catch((error) => {
         if (axios.isCancel(error)) {
           console.log('Request canceled', error.message)
         } else {
-          apiRespond(
-            dispatch,
-            dataError,
-            getErrMsg(error),
-            onFailure
-          )
+          apiRespond(dispatch, dataError, getErrMsg(error), onFailure)
         }
       })
       .finally(() => {
@@ -310,28 +280,19 @@ export const httpPatchMethod = ({
   onSuccess,
   onFailure
 }: I_HTTPMETHOD) => {
-  const requesturl = customurl != null ? customurl : (process.env.REACT_APP_BASE_URL + '' + url)
+  const requesturl =
+    customurl != null ? customurl : process.env.REACT_APP_BASE_URL + '' + url
   return (dispatch: any) => {
     dispatch({ type: dataLoading, payload: true })
     apiRequest(`${requesturl}`, header, data, 'patch', TIMEOUT)
       .then((resp) => {
-        apiRespond(
-          dispatch,
-          dataAction,
-          resp,
-          onSuccess
-        )
+        apiRespond(dispatch, dataAction, resp, onSuccess)
       })
       .catch((error) => {
         if (axios.isCancel(error)) {
           console.log('Request canceled', error.message)
         } else {
-          apiRespond(
-            dispatch,
-            dataError,
-            getErrMsg(error),
-            onFailure
-          )
+          apiRespond(dispatch, dataError, getErrMsg(error), onFailure)
         }
       })
       .finally(() => {

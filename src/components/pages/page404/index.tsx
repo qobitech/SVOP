@@ -4,22 +4,15 @@ import { LinkContainer } from '../../utils/reusable/styled'
 
 import Icon from './page-illustration'
 
-import {
-  PageContainer,
-  TxtContainer
-} from './styled'
+import { PageContainer, TxtContainer } from './styled'
 
 const Page404 = () => {
   return (
-        <PageContainer>
-            <Icon />
-            <TxtContainer>
-                Sorry for the inconvenience
-            </TxtContainer>
-            <LinkContainer to={pageurl.APPROVED}>
-                Back to Home
-            </LinkContainer>
-        </PageContainer>
+    <PageContainer>
+      <Icon />
+      <TxtContainer>Sorry for the inconvenience</TxtContainer>
+      <LinkContainer to={pageurl.APPROVED}>Back to Home</LinkContainer>
+    </PageContainer>
   )
 }
 

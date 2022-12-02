@@ -29,7 +29,7 @@ export interface ICellAction extends ICell {
 
 interface IResultTable {
   header: string[]
-  record: Array<{ id: string, row: ICell[], rowActions: ICellAction[] }>
+  record: Array<{ id: string; row: ICell[]; rowActions: ICellAction[] }>
   checkedRows: { [key: string]: any }
   handleCheckedRows: ({ target }: { target: any }) => void
   clearCheckedRows: () => void
@@ -59,79 +59,97 @@ const ResultTable: React.FC<IResultTable> = ({
     }
   }
   return (
-        <TableContainer>
-            <table className='resultTable'>
-                <thead className='thead_blue'>
-                    <tr>
-                        <th></th>
-                        {header.map((i, index) => {
-                          if (index === 0) {
-                            return <th key={index} style={{ display: 'flex', alignItems: 'center' }}>
-                              <div style={{ marginRight: 25 }}>
-                                <TypeCheckbox
-                                  onChange={({ target }) => {
-                                    const { checked } = target || {}
-                                    setCheckAll(checked)
-                                    if (!checked) {
-                                      clearCheckedRows()
-                                    } else {
-                                      addAllCheckedRows()
-                                    }
-                                  }}
-                                  checked={checkAll}
-                                />
-                              </div>
-                              {i}
-                            </th>
+    <TableContainer>
+      <table className="resultTable">
+        <thead className="thead_blue">
+          <tr>
+            <th></th>
+            {header.map((i, index) => {
+              if (index === 0) {
+                return (
+                  <th
+                    key={index}
+                    style={{ display: 'flex', alignItems: 'center' }}
+                  >
+                    <div style={{ marginRight: 25 }}>
+                      <TypeCheckbox
+                        onChange={({ target }) => {
+                          const { checked } = target || {}
+                          setCheckAll(checked)
+                          if (!checked) {
+                            clearCheckedRows()
                           } else {
-                            return <th key={index}>
-                              {i}
-                            </th>
+                            addAllCheckedRows()
                           }
-                        })}
-                    </tr>
-                </thead>
-                <tbody>
-                    {isRecord &&
-                    record.map((i, jindex) => (
-                        <tr key={jindex} >
-                            <td style={{ padding: '10px 0px 10px 10px' }}><p style={{ margin: 0 }}>{(jindex + 1) + ((currentPage - 1) * PAGE_SIZE)}</p></td>
-                            {i?.row?.map((j, index) => {
-                              if (index === 0) {
-                                return <td key={index}>
-                                  <div style={{ display: 'flex', alignItems: 'center' }}>
-                                    <div style={{ marginRight: 25 }}>
-                                      <TypeCheckbox
-                                          onChange={handleCheckedRows}
-                                          checked={checkAll || isCheckedRow(i?.id)}
-                                          id={i.id}
-                                      />
-                                    </div>
-                                    <CellValueComponent {...j} />
-                                  </div>
-                                </td>
-                              } else {
-                                return <td key={index}>
-                                    <CellValueComponent {...j} />
-                                </td>
-                              }
-                            })}
-                            <td>
-                                <TableCellActionSection>
-                                    {i?.rowActions?.map((j, index) => (
-                                        <CellValueActionComponent
-                                            key={index} {...j}
-                                            nomargin={index === i?.rowActions.length - 1 ? 'true' : 'false'}
-                                        />
-                                    ))}
-                                </TableCellActionSection>
-                            </td>
-                        </tr>
+                        }}
+                        checked={checkAll}
+                      />
+                    </div>
+                    {i}
+                  </th>
+                )
+              } else {
+                return <th key={index}>{i}</th>
+              }
+            })}
+          </tr>
+        </thead>
+        <tbody>
+          {isRecord &&
+            record.map((i, jindex) => (
+              <tr key={jindex}>
+                <td style={{ padding: '10px 0px 10px 10px' }}>
+                  <p style={{ margin: 0 }}>
+                    {jindex + 1 + (currentPage - 1) * PAGE_SIZE}
+                  </p>
+                </td>
+                {i?.row?.map((j, index) => {
+                  if (index === 0) {
+                    return (
+                      <td key={index}>
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                          <div style={{ marginRight: 25 }}>
+                            <TypeCheckbox
+                              onChange={handleCheckedRows}
+                              checked={checkAll || isCheckedRow(i?.id)}
+                              id={i.id}
+                            />
+                          </div>
+                          <CellValueComponent {...j} />
+                        </div>
+                      </td>
+                    )
+                  } else {
+                    return (
+                      <td key={index}>
+                        <CellValueComponent {...j} />
+                      </td>
+                    )
+                  }
+                })}
+                <td>
+                  <TableCellActionSection>
+                    {i?.rowActions?.map((j, index) => (
+                      <CellValueActionComponent
+                        key={index}
+                        {...j}
+                        nomargin={
+                          index === i?.rowActions.length - 1 ? 'true' : 'false'
+                        }
+                      />
                     ))}
-                </tbody>
-            </table>
-            {!isRecord && <p className='margin-auto text-center py-4 color-light font-small'>No Data</p>}
-        </TableContainer>
+                  </TableCellActionSection>
+                </td>
+              </tr>
+            ))}
+        </tbody>
+      </table>
+      {!isRecord && (
+        <p className="margin-auto text-center py-4 color-light font-small">
+          No Data
+        </p>
+      )}
+    </TableContainer>
   )
 }
 
@@ -143,10 +161,11 @@ const CellValueComponent: React.FC<ICell> = ({
 }) => {
   return (
     <>
-        {isLink
-          ? <LinkContainer to={url || ''}>{value}</LinkContainer>
-          : <div onClick={action}>{value}</div>
-        }
+      {isLink ? (
+        <LinkContainer to={url || ''}>{value}</LinkContainer>
+      ) : (
+        <div onClick={action}>{value}</div>
+      )}
     </>
   )
 }
@@ -168,22 +187,31 @@ const CellValueActionComponent: React.FC<ICVAC> = ({
 }) => {
   return (
     <>
-        {isLink
-          ? <LinkContainer to={url || ''} title={value as string} nounderline='true'>
-              <TableButton nomargin={nomargin} color={color} background={background} >
-                {view === 'icon'
-                  ? <i className={icon} />
-                  : value}
-              </TableButton>
-            </LinkContainer>
-          : <div onClick={action} title={value as string}>
-              <TableButton nomargin={nomargin} color={color} background={background}>
-              {view === 'icon'
-                ? <i className={icon} />
-                : value}
-              </TableButton>
-            </div>
-        }
+      {isLink ? (
+        <LinkContainer
+          to={url || ''}
+          title={value as string}
+          nounderline="true"
+        >
+          <TableButton
+            nomargin={nomargin}
+            color={color}
+            background={background}
+          >
+            {view === 'icon' ? <i className={icon} /> : value}
+          </TableButton>
+        </LinkContainer>
+      ) : (
+        <div onClick={action} title={value as string}>
+          <TableButton
+            nomargin={nomargin}
+            color={color}
+            background={background}
+          >
+            {view === 'icon' ? <i className={icon} /> : value}
+          </TableButton>
+        </div>
+      )}
     </>
   )
 }

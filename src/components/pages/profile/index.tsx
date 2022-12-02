@@ -20,9 +20,9 @@ import { pageurl } from '../../../constants/pageurl'
 
 const Profile = () => {
   return (
-        <DataWrapper>
-            <ProfileChild />
-        </DataWrapper>
+    <DataWrapper>
+      <ProfileChild />
+    </DataWrapper>
   )
 }
 
@@ -51,32 +51,37 @@ const ProfileChild = () => {
   ]
 
   return (
-        <>
-            <BreadCrumb crumbs={[{ title: 'Profile', url: pageurl.PROFILE }]}/>
-            <BodyContainer>
-                <BodySection>
-                    <BodySectionComponent>
-                        <ProfileImageSection src={profile} />
-                    </BodySectionComponent>
-                </BodySection>
-                <BodySection>
-                    <BodySectionComponent>
-                        <ProfileUserSection>
-                          {usersectiondata.map((i, index) => (
-                          <LoggedUserSectionRow key={index} nomargin={index === (usersectiondata.length - 1) ? 'true' : 'false'}>
-                            <LoggedUserSectionRowHeaderText>
-                              {i.title}
-                            </LoggedUserSectionRowHeaderText>
-                            <LoggedUserSectionRowBodyText>
-                              {i.value}
-                            </LoggedUserSectionRowBodyText>
-                          </LoggedUserSectionRow>
-                          ))}
-                        </ProfileUserSection>
-                    </BodySectionComponent>
-                </BodySection>
-            </BodyContainer>
-        </>
+    <>
+      <BreadCrumb crumbs={[{ title: 'Profile', url: pageurl.PROFILE }]} />
+      <BodyContainer>
+        <BodySection>
+          <BodySectionComponent>
+            <ProfileImageSection src={profile} />
+          </BodySectionComponent>
+        </BodySection>
+        <BodySection>
+          <BodySectionComponent>
+            <ProfileUserSection>
+              {usersectiondata.map((i, index) => (
+                <LoggedUserSectionRow
+                  key={index}
+                  nomargin={
+                    index === usersectiondata.length - 1 ? 'true' : 'false'
+                  }
+                >
+                  <LoggedUserSectionRowHeaderText>
+                    {i.title}
+                  </LoggedUserSectionRowHeaderText>
+                  <LoggedUserSectionRowBodyText>
+                    {i.value}
+                  </LoggedUserSectionRowBodyText>
+                </LoggedUserSectionRow>
+              ))}
+            </ProfileUserSection>
+          </BodySectionComponent>
+        </BodySection>
+      </BodyContainer>
+    </>
   )
 }
 

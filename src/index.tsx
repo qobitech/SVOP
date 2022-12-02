@@ -8,11 +8,11 @@ import { HelmetProvider } from 'react-helmet-async'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
-    <Provider store={store()}>
-        <HelmetProvider>
-            <App />
-        </HelmetProvider>
-    </Provider>
+  <Provider store={store()}>
+    <HelmetProvider>
+      <App />
+    </HelmetProvider>
+  </Provider>
 )
 
 // If you want your app to work offline and load faster, you can change

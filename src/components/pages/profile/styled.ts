@@ -16,16 +16,18 @@ export const BodyContainer = styled('div')({
   paddingBottom: 140
 })
 
-export const LoggedUserSectionRow = styled('div')(({ nomargin }: { nomargin?: 'true' | 'false' }) => ({
-  width: '100%',
-  height: 'auto',
-  boxSizing: 'border-box',
-  marginBottom: nomargin === 'true' ? 0 : 30,
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'flex-start',
-  justifyContent: 'flex-start'
-}))
+export const LoggedUserSectionRow = styled('div')(
+  ({ nomargin }: { nomargin?: 'true' | 'false' }) => ({
+    width: '100%',
+    height: 'auto',
+    boxSizing: 'border-box',
+    marginBottom: nomargin === 'true' ? 0 : 30,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start'
+  })
+)
 
 export const LoggedUserSectionRowHeaderText = styled(Typography)({
   fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),

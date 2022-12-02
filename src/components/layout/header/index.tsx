@@ -27,18 +27,18 @@ interface IHeader {
 const Header = ({ setMenu }: IHeader) => {
   return (
     <HeaderContainer>
-      <LinkContainer to={pageurl.APPROVED} className='d-none d-md-block'>
+      <LinkContainer to={pageurl.APPROVED} className="d-none d-md-block">
         <Logo src={logo} />
       </LinkContainer>
       {/* <Hamburger src={hamburger} onClick={setMenu}/> */}
       {/* <ProfileContainer> */}
-        {/* <LinkContainer to={pageurl.PROFILE}> */}
-          {/* <ProfileImage
+      {/* <LinkContainer to={pageurl.PROFILE}> */}
+      {/* <ProfileImage
             src={profile}
             title={userData.user?.firstName + ' ' + userData.user?.lastName}
           />
         </LinkContainer> */}
-        {/* <LinkContainer to={pageurl.PROFILE}>
+      {/* <LinkContainer to={pageurl.PROFILE}>
           <ProfileSection>
             <ProfileName className='m-0'>
               {userData.user?.firstName + ' ' + userData.user?.lastName}
@@ -48,7 +48,7 @@ const Header = ({ setMenu }: IHeader) => {
             </ProfileRole>
           </ProfileSection>
         </LinkContainer> */}
-        {/* <ProfileEllippis src={ellipsis} title='More Options'/> */}
+      {/* <ProfileEllippis src={ellipsis} title='More Options'/> */}
       {/* </ProfileContainer> */}
     </HeaderContainer>
   )

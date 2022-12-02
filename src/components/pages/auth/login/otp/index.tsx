@@ -74,24 +74,22 @@ const LoginOTP: React.FC<ILoginOTP> = ({
 
   return (
     <NotificationModal {...modalprops}>
-        <OTPForm onSubmit={handleSubmit(customeHandleSubmit)}>
-          <TypeInput
-            label='Enter OTP'
-            placeholder='****'
-            type='password'
-            error={errors.otp?.message}
-            defaultValue={states?.auth?.sendOtp?.otp}
-            {...register('otp')}
-          />
-          <CTABtnSection>
-            <CTAApproveButton type='submit'>
-                {states?.auth.signin_Loading ? <ButtonLoader /> : 'Ok'}
-            </CTAApproveButton>
-            <CTARejectButton>
-                Cancel
-            </CTARejectButton>
-          </CTABtnSection>
-        </OTPForm>
+      <OTPForm onSubmit={handleSubmit(customeHandleSubmit)}>
+        <TypeInput
+          label="Enter OTP"
+          placeholder="****"
+          type="password"
+          error={errors.otp?.message}
+          defaultValue={states?.auth?.sendOtp?.otp}
+          {...register('otp')}
+        />
+        <CTABtnSection>
+          <CTAApproveButton type="submit">
+            {states?.auth.signin_Loading ? <ButtonLoader /> : 'Ok'}
+          </CTAApproveButton>
+          <CTARejectButton>Cancel</CTARejectButton>
+        </CTABtnSection>
+      </OTPForm>
     </NotificationModal>
   )
 }

@@ -3,11 +3,21 @@ import * as utils from '../utils'
 import { ILogin } from '../../../interface/IAuth'
 import { pageurl } from '../../../constants/pageurl'
 
-export const loginUserAction = (data: { email: string, password: string, otp: string }) => {
+export const loginUserAction = (data: {
+  email: string
+  password: string
+  otp: string
+}) => {
   return utils.httpPostMethod({
     apiData: {
       url: '',
-      customurl: 'https://core-erms.herokuapp.com/api/v1/Auth/VerifyOtp?email=' + data.email + '&otp=' + data.otp + '&password=' + data.password,
+      customurl:
+        'https://core-erms.herokuapp.com/api/v1/Auth/VerifyOtp?email=' +
+        data.email +
+        '&otp=' +
+        data.otp +
+        '&password=' +
+        data.password,
       header: utils.header()
     },
     actionType: authType.login,

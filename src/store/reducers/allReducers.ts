@@ -1,9 +1,5 @@
 import authReducer from './users/authReducer'
-import resultReducer from './resultReducer'
+import electionReducer from './electionReducer'
 import otherReducer from './otherReducers'
 
-export {
-  authReducer,
-  resultReducer,
-  otherReducer
-}
+export { authReducer, electionReducer, otherReducer }

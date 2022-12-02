@@ -1,5 +1,5 @@
 import { ILogin, IOTP } from './IAuth'
-import { IResult, IResults } from './IResults'
+import { IElectionCycles } from './IElectionCycle'
 
 export interface IAuthReducer {
   signin: ILogin
@@ -9,25 +9,10 @@ export interface IAuthReducer {
   sendOtp_Loading: boolean
   sendOtp_Error: any
 }
-export interface IResultsReducer {
-  getAllApprovedResults: IResults
-  getAllApprovedResults_Loading: boolean
-  getAllApprovedResults_Error: any
-  getAllRejectedResults: IResults
-  getAllRejectedResults_Loading: boolean
-  getAllRejectedResults_Error: any
-  getAllUnApprovedResults: IResults
-  getAllUnApprovedResults_Loading: boolean
-  getAllUnApprovedResults_Error: any
-  getResultById: IResult
-  getResultById_Loading: boolean
-  getResultById_Error: any
-  approveResult: IResult
-  approveResult_Loading: boolean
-  approveResult_Error: any
-  rejectResult: IResult
-  rejectResult_Loading: boolean
-  rejectResult_Error: any
+export interface IElectionReducer {
+  getAllElectionCycles: IElectionCycles
+  getAllElectionCycles_Loading: boolean
+  getAllElectionCycles_Error: any
 }
 export interface IOtherReducer {
   menuOpen: boolean
@@ -40,6 +25,6 @@ export interface IOtherReducer {
 
 export interface IStates {
   auth: IAuthReducer
-  result: IResultsReducer
+  election: IElectionReducer
   other: IOtherReducer
 }

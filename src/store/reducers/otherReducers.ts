@@ -3,7 +3,7 @@ import { IOtherReducer } from '../../interface/IReducer'
 
 const initialState = {} as IOtherReducer
 
-export default function otherReducer (state = initialState, action: any) {
+export default function otherReducer(state = initialState, action: any) {
   switch (action.type) {
     case otherType.menuOpen.dataAction:
       return {
