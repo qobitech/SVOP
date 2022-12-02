@@ -16,6 +16,11 @@ export const electionType = {
     dataAction: 'GET_ALL_ELECTION_CYCLE_RESULTS',
     dataLoading: 'GET_ALL_ELECTION_CYCLE_LOADING',
     dataError: 'GET_ALL_ELECTION_CYCLE_ERROR'
+  },
+  election: {
+    dataAction: 'GET_ALL_ELECTION_RESULTS',
+    dataLoading: 'GET_ALL_ELECTION_LOADING',
+    dataError: 'GET_ALL_ELECTION_ERROR'
   }
 }
 

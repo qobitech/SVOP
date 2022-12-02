@@ -20,6 +20,21 @@ export default function electionReducer(state = initialState, action: any) {
         ...state,
         getAllElectionCycles_Error: action.payload
       }
+    case electionType.election.dataAction:
+      return {
+        ...state,
+        getAllElections: action.payload
+      }
+    case electionType.election.dataLoading:
+      return {
+        ...state,
+        getAllElections_Loading: action.payload
+      }
+    case electionType.election.dataError:
+      return {
+        ...state,
+        getAllElections_Error: action.payload
+      }
     default:
       return state
   }

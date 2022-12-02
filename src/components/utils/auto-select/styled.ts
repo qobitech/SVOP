@@ -79,13 +79,13 @@ export const AutoSelectOptionContainer = styled('div')(
 
 export const AutoSelectOptionItemContainer = styled('div')({
   width: '100%',
-  height: 30,
+  height: 'auto',
   minHeight: 30,
   boxSizing: 'border-box',
   display: 'flex',
   alignItems: 'center',
   cursor: 'pointer',
-  padding: '0 10px',
+  padding: '5px 10px',
   '&:hover': {
     background: '#D2E9D9',
     color: '#286439'
@@ -106,7 +106,8 @@ export const AutoSelectOptionNoItemContainer = styled('div')({
 export const AutoSelectOptionItem = styled('p')({
   fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
   fontSize: 13,
-  margin: 0,
+  margin: '5px 0',
+  whiteSpace: 'nowrap',
   '&:hover': {
     color: '#286439'
   }

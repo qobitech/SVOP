@@ -62,7 +62,7 @@ interface IApprovedPageChild {
 }
 
 const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
-  const { getElectionCycle } = props as unknown as IActions
+  const { getElectionCycle, getElection } = props as unknown as IActions
 
   // const location = useLocation()
 
@@ -71,12 +71,16 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
 
   // const { p } = values || {}
 
-  const data = states?.election?.getAllElectionCycles
-  const load = states?.election?.getAllElectionCycles_Loading
-  // const error = states?.electionCycle.getAllElectionCycles_Error
+  const dataElectionCycle = states?.election?.getAllElectionCycles
+  const loadElectionCycle = states?.election?.getAllElectionCycles_Loading
+  const errorElectionCycle = states?.election?.getAllElectionCycles_Error
+  const dataElection = states?.election?.getAllElections
+  const loadElection = states?.election?.getAllElections_Loading
+  const errorElection = states?.election?.getAllElections_Error
 
   useEffect(() => {
     getElectionCycle(PAGE_SIZE)
+    getElection(PAGE_SIZE)
   }, [])
 
   const handlePagination = (selectedItem: { selected: number }) => {
@@ -220,7 +224,7 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
       inputId: 'electionCycle',
       inputValue: inputValue.electionCycle,
       disabled: false,
-      optionsdata: data?.data.map((i) => ({
+      optionsdata: dataElectionCycle?.data.map((i) => ({
         id: i.id,
         label: i.name,
         value: i.name
@@ -236,18 +240,11 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
       inputValue: inputValue.election,
       placeholder: 'Select Election',
       disabled: !electionParams.electionCycle,
-      optionsdata: [
-        {
-          id: 1,
-          label: 'Bar Chart',
-          value: 'b-chart'
-        },
-        {
-          id: 2,
-          label: 'Pie Chart',
-          value: 'p-chart'
-        }
-      ]
+      optionsdata: dataElection?.data.map((i) => ({
+        id: i.id,
+        label: i.name,
+        value: i.name
+      }))
     }
   ]
 
@@ -260,7 +257,7 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
     if (data !== undefined) {
       setFilteredOptions(data as Array<Array<{ [key: string]: any }>>)
     }
-  }, [data])
+  }, [dataElectionCycle, dataElection])
 
   const handleFilteredOption = (
     index: number,
@@ -299,133 +296,142 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
             : 'View Election Info'
         }
       />
-      {subMenuOpen.electionInfo && (
-        <BodyContainer>
-          <BodySectionComponent>
-            {Object.keys(electionInfoData).map((i, index) => (
-              <BodySectionRow key={index}>
-                <BodySectionLeft>{i}</BodySectionLeft>
-                <BodySectionRight>
-                  {Object.values(electionInfoData)[index] || '___'}
-                </BodySectionRight>
-              </BodySectionRow>
-            ))}
-          </BodySectionComponent>
-        </BodyContainer>
-      )}
-      <BodyContainer>
-        <HeaderContainer>
-          <HeaderBodyText>Election Results</HeaderBodyText>
-          {/* <HeaderTextNumbers>{data?.total}</HeaderTextNumbers> */}
-          {load && (
-            <i className="fa fa-spinner fa-spin ml-3" aria-hidden="true"></i>
+      {errorElectionCycle || errorElection ? (
+        <>Error fetching data...</>
+      ) : (
+        <>
+          {subMenuOpen.electionInfo && (
+            <BodyContainer>
+              <BodySectionComponent>
+                {Object.keys(electionInfoData).map((i, index) => (
+                  <BodySectionRow key={index}>
+                    <BodySectionLeft>{i}</BodySectionLeft>
+                    <BodySectionRight>
+                      {Object.values(electionInfoData)[index] || '___'}
+                    </BodySectionRight>
+                  </BodySectionRow>
+                ))}
+              </BodySectionComponent>
+            </BodyContainer>
           )}
-        </HeaderContainer>
-        <div className="fml-sm-grid pb-3">
-          {topfilterData.map(({ id, ...rest }, index) => (
-            <div key={id} className="d-flex w-100">
-              <TypeAutoSelect
-                nomargin="true"
-                customwidth={210}
-                customheight={50}
-                handlePagination={handleAutoSelectPagination}
-                handleParamValue={handleParamValue}
-                loading={load}
-                id={id}
-                handleInputValue={handleInputValue}
-                onAutoChange={handleSelectValues}
-                noPagination
-                setFilteredOptions={handleFilteredOption}
-                filteredOptions={filteredOptions[index]}
-                index={index}
-                {...rest}
-              />
+          <BodyContainer>
+            <HeaderContainer>
+              <HeaderBodyText>Election Results</HeaderBodyText>
+              {/* <HeaderTextNumbers>{data?.total}</HeaderTextNumbers> */}
+              {(loadElectionCycle || loadElection) && (
+                <i
+                  className="fa fa-spinner fa-spin ml-3"
+                  aria-hidden="true"
+                ></i>
+              )}
+            </HeaderContainer>
+            <div className="fml-sm-grid pb-3">
+              {topfilterData.map(({ id, ...rest }, index) => (
+                <div key={id} className="d-flex w-100">
+                  <TypeAutoSelect
+                    nomargin="true"
+                    customwidth={210}
+                    customheight={50}
+                    handlePagination={handleAutoSelectPagination}
+                    handleParamValue={handleParamValue}
+                    loading={loadElectionCycle || loadElection}
+                    id={id}
+                    handleInputValue={handleInputValue}
+                    onAutoChange={handleSelectValues}
+                    noPagination
+                    setFilteredOptions={handleFilteredOption}
+                    filteredOptions={filteredOptions[index]}
+                    index={index}
+                    {...rest}
+                  />
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-        <Filter>
-          <ToggleSection>
-            <ToggleButton
-              handleClick={handleToggle}
-              toggleTextOn="Chart"
-              toggleTextOff="Table"
-            />
-            {toggle === 'chart' && (
-              <>
-                <Separator customwidth={30} customheight={0} />
-                <TypeSelect
-                  initoption={{ label: 'Select Chart', value: '' }}
-                  nomargin="true"
-                  customwidth={150}
-                  optionsdata={[
-                    {
-                      id: 1,
-                      label: 'Bar Chart',
-                      value: 'b-chart'
-                    },
-                    {
-                      id: 2,
-                      label: 'Pie Chart',
-                      value: 'p-chart'
-                    }
-                  ]}
+            <Filter>
+              <ToggleSection>
+                <ToggleButton
+                  handleClick={handleToggle}
+                  toggleTextOn="Chart"
+                  toggleTextOff="Table"
                 />
-              </>
+                {toggle === 'chart' && (
+                  <>
+                    <Separator customwidth={30} customheight={0} />
+                    <TypeSelect
+                      initoption={{ label: 'Select Chart', value: '' }}
+                      nomargin="true"
+                      customwidth={150}
+                      optionsdata={[
+                        {
+                          id: 1,
+                          label: 'Bar Chart',
+                          value: 'b-chart'
+                        },
+                        {
+                          id: 2,
+                          label: 'Pie Chart',
+                          value: 'p-chart'
+                        }
+                      ]}
+                    />
+                  </>
+                )}
+              </ToggleSection>
+              <SelectedTableActionsSection>
+                <FilterButton>
+                  <i className="fas fa-share-alt" />
+                  &nbsp;&nbsp;Share
+                </FilterButton>
+                <FilterButton>
+                  <i className="fas fa-print" />
+                  &nbsp;&nbsp;Print
+                </FilterButton>
+                <FilterButton nomargin="true">
+                  <i className="fas fa-download" />
+                  &nbsp;&nbsp;Download
+                </FilterButton>
+              </SelectedTableActionsSection>
+            </Filter>
+            {toggle === 'table' && (
+              <MainTable
+                header={tableHeader}
+                // record={recordData() || [] as Array<{ id: string, row: ICell[], rowActions: ICellAction[] }>}
+                record={
+                  [] as Array<{
+                    id: string
+                    row: ICell[]
+                    rowActions: ICellAction[]
+                  }>
+                }
+                checkedRows={checkedRows}
+                handleCheckedRows={handleCheckedRows}
+                clearCheckedRows={clearCheckedRows}
+                addAllCheckedRows={addAllCheckedRows}
+                setCheckAll={setCheckAll}
+                checkAll={checkAll}
+                currentPage={1}
+              />
             )}
-          </ToggleSection>
-          <SelectedTableActionsSection>
-            <FilterButton>
-              <i className="fas fa-share-alt" />
-              &nbsp;&nbsp;Share
-            </FilterButton>
-            <FilterButton>
-              <i className="fas fa-print" />
-              &nbsp;&nbsp;Print
-            </FilterButton>
-            <FilterButton nomargin="true">
-              <i className="fas fa-download" />
-              &nbsp;&nbsp;Download
-            </FilterButton>
-          </SelectedTableActionsSection>
-        </Filter>
-        {toggle === 'table' && (
-          <MainTable
-            header={tableHeader}
-            // record={recordData() || [] as Array<{ id: string, row: ICell[], rowActions: ICellAction[] }>}
-            record={
-              [] as Array<{
-                id: string
-                row: ICell[]
-                rowActions: ICellAction[]
-              }>
-            }
-            checkedRows={checkedRows}
-            handleCheckedRows={handleCheckedRows}
-            clearCheckedRows={clearCheckedRows}
-            addAllCheckedRows={addAllCheckedRows}
-            setCheckAll={setCheckAll}
-            checkAll={checkAll}
-            currentPage={1}
-          />
-        )}
 
-        {toggle === 'chart' && <Chart />}
+            {toggle === 'chart' && <Chart />}
 
-        <PaginationContainer>
-          <ReactPaginate
-            breakLabel="..."
-            previousLabel="<<"
-            nextLabel=">>"
-            pageCount={1}
-            onPageChange={handlePagination}
-            containerClassName={'pagination'}
-            activeClassName={'active'}
-            renderOnZeroPageCount={undefined}
-            forcePage={1}
-          />
-        </PaginationContainer>
-      </BodyContainer>
-      <div style={{ paddingBottom: '100px' }} />
+            <PaginationContainer>
+              <ReactPaginate
+                breakLabel="..."
+                previousLabel="<<"
+                nextLabel=">>"
+                pageCount={1}
+                onPageChange={handlePagination}
+                containerClassName={'pagination'}
+                activeClassName={'active'}
+                renderOnZeroPageCount={undefined}
+                forcePage={1}
+              />
+            </PaginationContainer>
+          </BodyContainer>
+          <div style={{ paddingBottom: '100px' }} />
+        </>
+      )}
     </>
   )
 }

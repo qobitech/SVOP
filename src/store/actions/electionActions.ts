@@ -27,3 +27,25 @@ export const getElectionCycle = (
     actionType: electionType.electionCycle
   })
 }
+
+export const getElection = (
+  pageSize?: number,
+  pageNumber?: number,
+  sort?: string
+) => {
+  return utils.httpGetMethod({
+    apiData: {
+      url: '',
+      customurl:
+        'https://core-erms.herokuapp.com/api/v1/Election' +
+        checkReturned(
+          returnValue('pageSize=', pageSize) +
+            returnValue('&pageNumber=', pageNumber) +
+            returnValue('&sort=', sort)
+        ) +
+        '&status=pending',
+      header: utils.headerNoAuth()
+    },
+    actionType: electionType.election
+  })
+}

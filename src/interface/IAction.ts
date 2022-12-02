@@ -13,4 +13,9 @@ export interface IActions {
     pageNumber?: number,
     sort?: string
   ) => (dispatch: any) => void
+  getElection: (
+    pageSize?: number,
+    pageNumber?: number,
+    sort?: string
+  ) => (dispatch: any) => void
 }
