@@ -202,12 +202,14 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
 
   const [electionParams, setElectionParams] = useState({
     electionCycle: '',
-    election: ''
+    election: '',
+    electionCategory: ''
   })
 
   const [inputValue, setInputValue] = useState<{ [key: string]: any }>({
     electionCycle: '',
-    election: ''
+    election: '',
+    electionCategory: ''
   })
 
   const handleInputValue = (inputId: string, value: string) => {
@@ -247,7 +249,7 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
       totalPage: getTotalPage(dataElectionCategory?.data?.length),
       paramId: 'electionCategory',
       inputId: 'electionCategory',
-      inputValue: inputValue.election,
+      inputValue: inputValue.electionCategory,
       placeholder: 'Select Election Category',
       disabled: false,
       optionsdata: dataElectionCategory?.data.map((i) => ({
