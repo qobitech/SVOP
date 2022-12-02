@@ -52,6 +52,7 @@ export const AutoSelect = styled('input')(
 export const AutoSelectContainer = styled('div')(
   ({ customwidth }: { customwidth?: number }) => ({
     minWidth: customwidth || 280,
+    maxWidth: 500,
     border: `1px solid #e6e6e6`,
     borderRadius: 3,
     height: 200,

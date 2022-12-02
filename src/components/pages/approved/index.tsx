@@ -188,12 +188,6 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
     setSubMenuOpen({ ...subMenuOpen, electionInfo: !info })
   }
 
-  const electionInfoData = {
-    Category: '___',
-    Election: '___',
-    'Election Cycle': '___'
-  }
-
   const [toggle, setToggle] = useState<'chart' | 'table'>('table')
 
   const handleToggle = (status: boolean) => {
@@ -244,13 +238,13 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
     },
     {
       id: 'electionCategory',
-      initoption: { label: 'Select Election Category', value: '' },
+      initoption: { label: 'Select Elective Category', value: '' },
       pageNumber: 1,
       totalPage: getTotalPage(dataElectionCategory?.data?.length),
       paramId: 'electionCategory',
       inputId: 'electionCategory',
       inputValue: inputValue.electionCategory,
-      placeholder: 'Select Election Category',
+      placeholder: 'Select Elective Category',
       disabled: false,
       optionsdata: dataElectionCategory?.data.map((i) => ({
         id: i.id,
@@ -275,6 +269,12 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
       }))
     }
   ]
+
+  const electionInfoData = {
+    'Election Cycle': inputValue.electionCycle || 'All',
+    'Elective Category': inputValue.electionCategory || 'All',
+    Election: inputValue.election || 'All'
+  }
 
   const [filteredOptions, setFilteredOptions] = useState<
     Array<Array<{ [key: string]: any }>>
