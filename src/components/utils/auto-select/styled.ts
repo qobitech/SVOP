@@ -38,7 +38,7 @@ export const AutoSelect = styled('input')(
     fontSize: 16,
     outline: '#286439',
     borderRadius: 3,
-    // marginBottom: 7,
+    background: 'none',
     height: customheight || 40,
     paddingLeft: 10,
     minWidth: customwidth || 280,

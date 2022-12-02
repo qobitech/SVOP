@@ -49,3 +49,25 @@ export const getElection = (
     actionType: electionType.election
   })
 }
+
+export const getElectionCategory = (
+  pageSize?: number,
+  pageNumber?: number,
+  sort?: string
+) => {
+  return utils.httpGetMethod({
+    apiData: {
+      url: '',
+      customurl:
+        'https://core-erms.herokuapp.com/api/v1/ElectiveCategory' +
+        checkReturned(
+          returnValue('pageSize=', pageSize) +
+            returnValue('&pageNumber=', pageNumber) +
+            returnValue('&sort=', sort)
+        ) +
+        '&status=pending',
+      header: utils.headerNoAuth()
+    },
+    actionType: electionType.electionCategories
+  })
+}

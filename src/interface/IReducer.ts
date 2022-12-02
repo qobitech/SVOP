@@ -1,6 +1,7 @@
 import { ILogin, IOTP } from './IAuth'
 import { IElectionCycles } from './IElectionCycle'
 import { IElections } from './IElection'
+import { IElectionCategories } from './IElectionCategory'
 
 export interface IAuthReducer {
   signin: ILogin
@@ -17,6 +18,9 @@ export interface IElectionReducer {
   getAllElections: IElections
   getAllElections_Loading: boolean
   getAllElections_Error: any
+  getAllElectionCategory: IElectionCategories
+  getAllElectionCategory_Loading: boolean
+  getAllElectionCategory_Error: any
 }
 export interface IOtherReducer {
   menuOpen: boolean

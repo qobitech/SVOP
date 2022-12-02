@@ -62,7 +62,8 @@ interface IApprovedPageChild {
 }
 
 const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
-  const { getElectionCycle, getElection } = props as unknown as IActions
+  const { getElectionCycle, getElection, getElectionCategory } =
+    props as unknown as IActions
 
   // const location = useLocation()
 
@@ -77,10 +78,14 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
   const dataElection = states?.election?.getAllElections
   const loadElection = states?.election?.getAllElections_Loading
   const errorElection = states?.election?.getAllElections_Error
+  const dataElectionCategory = states?.election?.getAllElectionCategory
+  const loadElectionCategory = states?.election?.getAllElectionCategory_Loading
+  const errorElectionCategory = states?.election?.getAllElectionCategory_Error
 
   useEffect(() => {
     getElectionCycle(PAGE_SIZE)
     getElection(PAGE_SIZE)
+    getElectionCategory(PAGE_SIZE)
   }, [])
 
   const handlePagination = (selectedItem: { selected: number }) => {
@@ -213,12 +218,17 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
     setElectionParams({ ...electionParams, [paramId]: value })
   }
 
+  const getTotalPage = (totalPages: number | undefined) => {
+    const total = Math.round((totalPages || 1) / PAGE_SIZE)
+    return total > 0 ? total : 1
+  }
+
   const topfilterData = [
     {
       id: 'electionCycle',
       initoption: { label: 'Select Election Cycle', value: '' },
       pageNumber: 1,
-      totalPage: 24,
+      totalPage: getTotalPage(dataElectionCycle?.data?.length),
       placeholder: 'Select Election Cycle',
       paramId: 'electionCycle',
       inputId: 'electionCycle',
@@ -231,15 +241,31 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
       }))
     },
     {
+      id: 'electionCategory',
+      initoption: { label: 'Select Election Category', value: '' },
+      pageNumber: 1,
+      totalPage: getTotalPage(dataElectionCategory?.data?.length),
+      paramId: 'electionCategory',
+      inputId: 'electionCategory',
+      inputValue: inputValue.election,
+      placeholder: 'Select Election Category',
+      disabled: false,
+      optionsdata: dataElectionCategory?.data.map((i) => ({
+        id: i.id,
+        label: i.name,
+        value: i.name
+      }))
+    },
+    {
       id: 'election',
       initoption: { label: 'Select Election', value: '' },
       pageNumber: 1,
-      totalPage: 1,
+      totalPage: getTotalPage(dataElection?.data?.length),
       paramId: 'election',
       inputId: 'election',
       inputValue: inputValue.election,
       placeholder: 'Select Election',
-      disabled: !electionParams.electionCycle,
+      disabled: false,
       optionsdata: dataElection?.data.map((i) => ({
         id: i.id,
         label: i.name,
@@ -269,18 +295,18 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
   }
 
   const handleSelectValues = (e: ChangeEvent<HTMLInputElement>) => {
-    const { target } = e
-    const { id, value } = target
-    const temp = { ...inputValue }
-    const invalidIndex = Object.keys(temp).indexOf(id)
-    if (!value) {
-      Object.keys(temp).forEach((i, index) => {
-        if (index >= invalidIndex) {
-          temp[i] = ''
-        }
-      })
-      setInputValue({ ...temp })
-    }
+    // const { target } = e
+    // const { id, value } = target
+    // const temp = { ...inputValue }
+    // const invalidIndex = Object.keys(temp).indexOf(id)
+    // if (!value) {
+    //   Object.keys(temp).forEach((i, index) => {
+    //     if (index >= invalidIndex) {
+    //       temp[i] = ''
+    //     }
+    //   })
+    //   setInputValue({ ...temp })
+    // }
   }
 
   const handleAutoSelectPagination = (action: 'previous' | 'next') => {}
@@ -296,7 +322,7 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
             : 'View Election Info'
         }
       />
-      {errorElectionCycle || errorElection ? (
+      {errorElectionCycle || errorElection || errorElectionCategory ? (
         <>Error fetching data...</>
       ) : (
         <>
@@ -318,7 +344,7 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
             <HeaderContainer>
               <HeaderBodyText>Election Results</HeaderBodyText>
               {/* <HeaderTextNumbers>{data?.total}</HeaderTextNumbers> */}
-              {(loadElectionCycle || loadElection) && (
+              {(loadElectionCycle || loadElection || loadElectionCategory) && (
                 <i
                   className="fa fa-spinner fa-spin ml-3"
                   aria-hidden="true"
@@ -334,11 +360,13 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
                     customheight={50}
                     handlePagination={handleAutoSelectPagination}
                     handleParamValue={handleParamValue}
-                    loading={loadElectionCycle || loadElection}
+                    loading={
+                      loadElectionCycle || loadElection || loadElectionCategory
+                    }
                     id={id}
                     handleInputValue={handleInputValue}
                     onAutoChange={handleSelectValues}
-                    noPagination
+                    // noPagination={rest.inputId !== 'election'}
                     setFilteredOptions={handleFilteredOption}
                     filteredOptions={filteredOptions[index]}
                     index={index}

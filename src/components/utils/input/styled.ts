@@ -30,6 +30,7 @@ export const TextInput = styled('input')(
     marginBottom: 7,
     height: 40,
     paddingLeft: 10,
+    background: 'none',
     border: `1px solid ${iserror ? 'red' : '#e6e6e6'}`,
     '&:focus': {
       border: `1px solid ${iserror ? 'red' : '#286439'}`

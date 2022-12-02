@@ -164,7 +164,7 @@ export const TypeAutoSelect = React.forwardRef(
           }}
           value={inputValue}
         />
-        {(openOption || loading) && (
+        {loading && (
           <div
             className="position-absolute d-flex align-items-center justify-content-center px-2 bg-white"
             style={{
@@ -176,10 +176,7 @@ export const TypeAutoSelect = React.forwardRef(
               background: '#fff'
             }}
           >
-            <i
-              className={loading ? 'fa fa-spinner fa-spin' : 'fas fa-search'}
-              style={{ opacity: '.4' }}
-            />
+            <i className="fa fa-spinner fa-spin" style={{ opacity: '.4' }} />
           </div>
         )}
         {openOption && (
