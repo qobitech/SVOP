@@ -37,7 +37,7 @@ export const getElection = (
     apiData: {
       url: '',
       customurl:
-        'https://core-erms.herokuapp.com/api/v1/Election' +
+        'https://core-erms.herokuapp.com/api/v1/Election/paged' +
         checkReturned(
           returnValue('pageSize=', pageSize) +
             returnValue('&pageNumber=', pageNumber) +

@@ -10,6 +10,12 @@ export const FormControlContainer = styled('div')(
   })
 )
 
+export const AutoSelectRow = styled('div')({
+  display: 'flex',
+  width: 'max-content',
+  height: 'max-content'
+})
+
 export const InputLabelComponent = styled('label')({
   fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
   fontSize: 12,
@@ -43,11 +49,52 @@ export const AutoSelect = styled('input')(
     paddingLeft: 10,
     minWidth: customwidth || 280,
     border: `1px solid ${iserror ? 'red' : '#e6e6e6'}`,
-    '&:focus': {
-      border: `1px solid ${iserror ? 'red' : '#286439'}`
-    }
+    caretColor: 'transparent'
   })
 )
+
+export const AutoSelectCloseContainer = styled('div')({
+  position: 'relative',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  width: 30,
+  height: 50,
+  boxSizing: 'border-box'
+})
+
+export const AutoSelectCloseIcon = styled('i')(
+  ({ isvalue }: { isvalue: 'true' | 'false' }) => ({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    cursor: isvalue === 'true' ? 'pointer' : 'default',
+    opacity: isvalue === 'true' ? 1 : 0
+  })
+)
+
+export const AutoSelectSearchContainer = styled('div')({
+  position: 'relative',
+  display: 'flex',
+  alignItems: 'flex-start',
+  width: '100%',
+  height: 50
+})
+
+export const AutoSelectSearchInout = styled('input')({
+  fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
+  fontSize: 16,
+  outline: '#286439',
+  borderRadius: 3,
+  background: 'none',
+  height: 40,
+  paddingLeft: 10,
+  width: '100%',
+  border: `1px solid #e6e6e6`,
+  '&:focus': {
+    border: `1px solid #286439`
+  }
+})
 
 export const AutoSelectContainer = styled('div')(
   ({ customwidth }: { customwidth?: number }) => ({
@@ -55,7 +102,7 @@ export const AutoSelectContainer = styled('div')(
     maxWidth: 500,
     border: `1px solid #e6e6e6`,
     borderRadius: 3,
-    height: 200,
+    height: 300,
     boxSizing: 'border-box',
     display: 'flex',
     flexDirection: 'column',
@@ -63,20 +110,32 @@ export const AutoSelectContainer = styled('div')(
     left: 0,
     top: 60,
     zIndex: 2,
-    background: '#fff'
+    background: '#fff',
+    padding: 10
   })
 )
 
 export const AutoSelectOptionContainer = styled('div')(
   ({ customheight }: { customheight?: number }) => ({
     width: '100%',
-    height: customheight || 170,
+    height: customheight || 250,
     boxSizing: 'border-box',
     display: 'flex',
     flexDirection: 'column',
     overflow: 'auto'
   })
 )
+
+export const AutoSelectPaginationContainer = styled('div')({
+  width: '100%',
+  // borderTop: `1px solid #e6e6e6`,
+  height: 45,
+  boxSizing: 'border-box',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  marginTop: 'auto'
+})
 
 export const AutoSelectOptionItemContainer = styled('div')({
   width: '100%',
@@ -118,34 +177,4 @@ export const AutoSelectNoOptionItem = styled('p')({
   fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
   fontSize: 13,
   margin: 0
-})
-
-export const AutoSelectPaginationContainer = styled('div')({
-  width: '100%',
-  borderTop: `1px solid #e6e6e6`,
-  height: 35,
-  boxSizing: 'border-box',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  marginTop: 'auto'
-})
-
-export const AutoSelectPagination = styled('p')({
-  margin: 0,
-  fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
-  fontSize: 13
-})
-
-export const AutoSelectPaginationNav = styled('p')({
-  margin: 0,
-  fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
-  fontSize: 12,
-  cursor: 'pointer',
-  transition: '.1s ease-in-out',
-  padding: 10,
-  '&:hover': {
-    background: '#286439',
-    color: '#fff'
-  }
 })

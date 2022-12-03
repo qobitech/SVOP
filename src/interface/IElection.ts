@@ -13,5 +13,9 @@ export interface IElections {
   message: string
   statusCode: number
   isSuccessful: boolean
+  currentPage: number
+  pageSize: number
+  totalCount: number
+  totalPages: number
   data: IElection[]
 }

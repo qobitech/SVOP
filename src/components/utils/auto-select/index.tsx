@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState } from 'react'
-import { Separator } from '../../pages/approved/styled'
+import ReactPaginate from 'react-paginate'
 import {
   FormControlContainer,
   InputLabelComponent,
@@ -7,13 +7,16 @@ import {
   AutoSelect,
   AutoSelectContainer,
   AutoSelectPaginationContainer,
-  AutoSelectPagination,
   AutoSelectOptionContainer,
   AutoSelectOptionItemContainer,
   AutoSelectOptionItem,
-  AutoSelectPaginationNav,
   AutoSelectOptionNoItemContainer,
-  AutoSelectNoOptionItem
+  AutoSelectNoOptionItem,
+  AutoSelectSearchInout,
+  AutoSelectSearchContainer,
+  AutoSelectCloseContainer,
+  AutoSelectRow,
+  AutoSelectCloseIcon
 } from './styled'
 
 interface ISelect extends React.ComponentPropsWithoutRef<'input'> {
@@ -27,7 +30,7 @@ interface ISelect extends React.ComponentPropsWithoutRef<'input'> {
   pageNumber: number
   totalPage: number
   onAutoChange?: React.ChangeEventHandler<HTMLInputElement> | undefined
-  handlePagination?: (action: 'previous' | 'next') => void
+  handlePagination?: (selectedItem: { selected: number }) => void
   noPagination?: boolean
   loading?: boolean
   handleParamValue: (paramId: string, value: string) => void
@@ -35,6 +38,7 @@ interface ISelect extends React.ComponentPropsWithoutRef<'input'> {
   handleInputValue: (inputId: string, value: string) => void
   inputValue: string
   inputId: string
+  displayValue: string
   setFilteredOptions: (
     index: number,
     value: Array<{
@@ -70,6 +74,7 @@ export const TypeAutoSelect = React.forwardRef(
       inputId,
       index,
       onAutoChange,
+      displayValue,
       setFilteredOptions,
       filteredOptions,
       ...props
@@ -77,37 +82,60 @@ export const TypeAutoSelect = React.forwardRef(
     ref
   ) => {
     const [openOption, setOpenOption] = useState(false)
-    const isPagination = pageNumber !== totalPage
     const handleOptionFilter = (e: ChangeEvent<HTMLInputElement>) => {
       const { target } = e
       const { value } = target
       handleInputValue(inputId, value)
       handleFilteredValue(value)
       addParamValue(value)
-      if (onAutoChange !== undefined) {
-        onAutoChange(e)
-      }
+      // if (onAutoChange !== undefined) {
+      //   onAutoChange(e)
+      // }
+    }
+    const handleKeyboardOptionFilter = (
+      e: React.KeyboardEvent<HTMLInputElement>
+    ) => {
+      const { currentTarget } = e
+      const { value } = currentTarget
+      handleInputValue(inputId, value)
+      handleFilteredValue(value)
+      addParamValue(value)
     }
 
     const addParamValue = (value: string) => {
       if (!value) return
       if (optionsdata?.map((i) => i.label).includes(value)) {
         handleParamValue(paramId, value)
-      } else {
-        handleParamValue(paramId, '')
       }
     }
 
     const handleBlur = () => {
       document.addEventListener('click', ({ target }) => {
-        const { id } = target as HTMLElement
+        const { id, tagName } = target as HTMLElement
+        const allAElements = document.getElementsByTagName(tagName)
+        const paginationElement = document.querySelector(
+          '.select-pagination-nav-election'
+        )
+        function paginationCheck() {
+          if (tagName === 'A') {
+            Array(allAElements.length).forEach((i) => {
+              if (allAElements[i].parentElement !== paginationElement) {
+                setOpenOption(false)
+                handleSelect('')
+              }
+            })
+          } else {
+            setOpenOption(false)
+            handleSelect('')
+          }
+        }
         if (!id) {
-          setOpenOption(false)
+          paginationCheck()
         } else {
           const parent = document.querySelector('#form-controller-' + props.id)
           const child = document.querySelector('#' + id)
           if (!(parent === child || parent?.contains(child))) {
-            setOpenOption(false)
+            paginationCheck()
           }
         }
       })
@@ -132,7 +160,6 @@ export const TypeAutoSelect = React.forwardRef(
 
     const handleSelect = (value: string) => {
       handleInputValue(inputId, value)
-      handleFilteredValue(value)
       addParamValue(value)
     }
 
@@ -148,23 +175,37 @@ export const TypeAutoSelect = React.forwardRef(
             {label}
           </InputLabelComponent>
         )}
-        <AutoSelect
-          {...props}
-          iserror={error}
-          ref={ref as React.LegacyRef<HTMLInputElement> | undefined}
-          customwidth={customwidth}
-          customheight={customheight}
-          onFocus={() => setOpenOption(true)}
-          onBlur={handleBlur}
-          onChange={handleOptionFilter}
-          autoComplete="off"
-          onClick={() => {
-            if (!openOption) {
-              setOpenOption(true)
-            }
-          }}
-          value={inputValue}
-        />
+        <AutoSelectRow>
+          <AutoSelect
+            {...props}
+            iserror={error}
+            ref={ref as React.LegacyRef<HTMLInputElement> | undefined}
+            customwidth={customwidth}
+            customheight={customheight}
+            // onFocus={() => setOpenOption(true)}
+            onBlur={handleBlur}
+            autoComplete="off"
+            onClick={() => {
+              if (!openOption) {
+                setOpenOption(true)
+              }
+            }}
+            required={true}
+            defaultValue={displayValue}
+          />
+          <AutoSelectCloseContainer
+            id={'select-options-search-close-container-' + props.id}
+          >
+            {/* {displayValue && ( */}
+            <AutoSelectCloseIcon
+              className="fas fa-times"
+              id={'select-options-search-close-icon-' + props.id}
+              onClick={() => handleParamValue(paramId, '')}
+              isvalue={displayValue ? 'true' : 'false'}
+            />
+            {/* )} */}
+          </AutoSelectCloseContainer>
+        </AutoSelectRow>
         {loading && (
           <div
             className="position-absolute d-flex align-items-center justify-content-center px-2 bg-white"
@@ -185,9 +226,22 @@ export const TypeAutoSelect = React.forwardRef(
             customwidth={customwidth}
             id={'select-container-' + props.id}
           >
+            <AutoSelectSearchContainer
+              id={'select-options-search-input-container-' + props.id}
+            >
+              <AutoSelectSearchInout
+                placeholder="Search"
+                id={'select-options-search-input-' + props.id}
+                value={inputValue}
+                onChange={handleOptionFilter}
+                autoComplete="off"
+                onInput={handleOptionFilter}
+                onKeyUp={handleKeyboardOptionFilter}
+              />
+            </AutoSelectSearchContainer>
             <AutoSelectOptionContainer
               id={'select-options-container' + props.id}
-              customheight={noPagination ? 200 : 170}
+              customheight={noPagination ? 250 : 200}
             >
               {isOption ? (
                 filteredOptions?.map((i, index) => (
@@ -220,43 +274,30 @@ export const TypeAutoSelect = React.forwardRef(
               <AutoSelectPaginationContainer
                 id={'select-pagination-container-' + props.id}
               >
-                {isPagination && (
-                  <AutoSelectPaginationNav
-                    id={'select-pagination-nav-left-' + props.id}
-                    onClick={() => {
-                      if (typeof handlePagination === 'function') {
-                        handlePagination('previous')
-                      }
-                    }}
-                  >
+                <ReactPaginate
+                  breakLabel="..."
+                  previousLabel={
                     <i
                       className="fas fa-angle-left"
                       id={'select-pagination-nav-icon-left-' + props.id}
                     />
-                  </AutoSelectPaginationNav>
-                )}
-                {isPagination && <Separator customwidth={20} />}
-                <AutoSelectPagination
-                  id={'select-pagination-number-' + props.id}
-                >
-                  {pageNumber} of {totalPage}
-                </AutoSelectPagination>
-                {isPagination && <Separator customwidth={20} />}
-                {isPagination && (
-                  <AutoSelectPaginationNav
-                    id={'select-pagination-nav-right-' + props.id}
-                    onClick={() => {
-                      if (typeof handlePagination === 'function') {
-                        handlePagination('next')
-                      }
-                    }}
-                  >
+                  }
+                  nextLabel={
                     <i
                       className="fas fa-angle-right"
                       id={'select-pagination-nav-icon-right-' + props.id}
                     />
-                  </AutoSelectPaginationNav>
-                )}
+                  }
+                  pageCount={totalPage}
+                  onPageChange={handlePagination}
+                  containerClassName={'pagination'}
+                  activeClassName={'active'}
+                  renderOnZeroPageCount={undefined}
+                  forcePage={pageNumber - 1}
+                  className={
+                    'select-pagination-nav-' + props.id + ' pagination'
+                  }
+                />
               </AutoSelectPaginationContainer>
             )}
           </AutoSelectContainer>

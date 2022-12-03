@@ -78,7 +78,7 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
 
   useEffect(() => {
     getElectionCycle(PAGE_SIZE)
-    getElection(PAGE_SIZE)
+    getElection(PAGE_SIZE, dataElection?.currentPage)
     getElectionCategory(PAGE_SIZE)
   }, [])
 
@@ -174,6 +174,8 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
   //   }
   // })()
 
+  // console.log(dataElection, 'juju')
+
   const [subMenuOpen, setSubMenuOpen] = useState({
     electionInfo: false
   })
@@ -213,79 +215,110 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
     return total > 0 ? total : 1
   }
 
+  const [filteredOptions, setFilteredOptions] = useState<
+    Array<Array<{ [key: string]: any }>>
+  >([] as Array<Array<{ [key: string]: any }>>)
+
+  useEffect(() => {
+    const data = []
+    data[0] = dataElectionCycle?.data.map((i) => ({
+      id: i.id,
+      label: i.name,
+      value: i.name
+    }))
+    data[1] = dataElectionCategory?.data.map((i) => ({
+      id: i.id,
+      label: i.name,
+      value: i.name
+    }))
+    data[2] = dataElection?.data.map((i) => ({
+      id: i.id,
+      label: i.name,
+      value: i.name
+    }))
+    if (data !== undefined) {
+      setFilteredOptions(data as Array<Array<{ [key: string]: any }>>)
+    }
+  }, [dataElectionCycle, dataElection, dataElectionCategory])
+
   const topfilterData = [
     {
       id: 'electionCycle',
-      initoption: { label: 'Select Election Cycle', value: '' },
+      initoption: { label: 'Select Election Year', value: '' },
       pageNumber: 1,
       totalPage: getTotalPage(dataElectionCycle?.data?.length),
-      placeholder: 'Select Election Cycle',
+      placeholder: 'Select Election Year',
       paramId: 'electionCycle',
       inputId: 'electionCycle',
       inputValue: inputValue.electionCycle,
+      displayValue: electionParams.electionCycle,
       disabled: false,
       optionsdata: dataElectionCycle?.data.map((i) => ({
         id: i.id,
         label: i.name,
         value: i.name
-      }))
+      })),
+      loading: loadElectionCycle,
+      noPagination: true
     },
     {
       id: 'electionCategory',
-      initoption: { label: 'Select Elective Category', value: '' },
+      initoption: { label: 'Select Category', value: '' },
       pageNumber: 1,
       totalPage: getTotalPage(dataElectionCategory?.data?.length),
       paramId: 'electionCategory',
       inputId: 'electionCategory',
       inputValue: inputValue.electionCategory,
-      placeholder: 'Select Elective Category',
+      displayValue: electionParams.electionCategory,
+      placeholder: 'Select Category',
       disabled: false,
       optionsdata: dataElectionCategory?.data.map((i) => ({
         id: i.id,
         label: i.name,
         value: i.name
-      }))
+      })),
+      loading: loadElectionCategory,
+      noPagination: true
     },
     {
       id: 'election',
       initoption: { label: 'Select Election', value: '' },
-      pageNumber: 1,
-      totalPage: getTotalPage(dataElection?.data?.length),
+      pageNumber: dataElection?.currentPage || 1,
+      totalPage: getTotalPage(dataElection?.totalPages),
       paramId: 'election',
       inputId: 'election',
       inputValue: inputValue.election,
+      displayValue: electionParams.election,
       placeholder: 'Select Election',
       disabled: false,
       optionsdata: dataElection?.data.map((i) => ({
         id: i.id,
         label: i.name,
         value: i.name
-      }))
+      })),
+      handlePagination: (selectedItem: { selected: number }) => {
+        if (selectedItem.selected + 1 !== dataElection?.currentPage) {
+          getElection(PAGE_SIZE, selectedItem.selected + 1)
+        }
+      },
+      loading: loadElection,
+      noPagination: false
     }
   ]
 
   const electionInfoData = {
-    'Election Cycle': inputValue.electionCycle || 'All',
-    'Elective Category': inputValue.electionCategory || 'All',
-    Election: inputValue.election || 'All'
+    'Election Year': electionParams.electionCycle || 'All',
+    'Elective Category': electionParams.electionCategory || 'All',
+    Election: electionParams.election || 'All'
   }
-
-  const [filteredOptions, setFilteredOptions] = useState<
-    Array<Array<{ [key: string]: any }>>
-  >([] as Array<Array<{ [key: string]: any }>>)
-
-  useEffect(() => {
-    const data = topfilterData?.map((i) => i.optionsdata)
-    if (data !== undefined) {
-      setFilteredOptions(data as Array<Array<{ [key: string]: any }>>)
-    }
-  }, [dataElectionCycle, dataElection])
 
   const handleFilteredOption = (
     index: number,
     value: Array<{ [key: string]: any }>
   ) => {
-    const temp = [...filteredOptions]
+    const temp = [...topfilterData.map((i) => i.optionsdata)] as Array<
+      Array<{ [key: string]: any }>
+    >
     temp[index] = value
     setFilteredOptions(temp)
   }
@@ -304,8 +337,6 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
     //   setInputValue({ ...temp })
     // }
   }
-
-  const handleAutoSelectPagination = (action: 'previous' | 'next') => {}
 
   return (
     <>
@@ -354,15 +385,10 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
                     nomargin="true"
                     customwidth={300}
                     customheight={50}
-                    handlePagination={handleAutoSelectPagination}
                     handleParamValue={handleParamValue}
-                    loading={
-                      loadElectionCycle || loadElection || loadElectionCategory
-                    }
                     id={id}
                     handleInputValue={handleInputValue}
                     onAutoChange={handleSelectValues}
-                    // noPagination={rest.inputId !== 'election'}
                     setFilteredOptions={handleFilteredOption}
                     filteredOptions={filteredOptions[index]}
                     index={index}
@@ -371,52 +397,54 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
                 </div>
               ))}
             </div>
-            <Filter>
-              <ToggleSection>
-                <ToggleButton
-                  handleClick={handleToggle}
-                  toggleTextOn="Chart"
-                  toggleTextOff="Table"
-                />
-                {toggle === 'chart' && (
-                  <>
-                    <Separator customwidth={30} customheight={0} />
-                    <TypeSelect
-                      initoption={{ label: 'Select Chart', value: '' }}
-                      nomargin="true"
-                      customwidth={150}
-                      optionsdata={[
-                        {
-                          id: 1,
-                          label: 'Bar Chart',
-                          value: 'b-chart'
-                        },
-                        {
-                          id: 2,
-                          label: 'Pie Chart',
-                          value: 'p-chart'
-                        }
-                      ]}
-                    />
-                  </>
-                )}
-              </ToggleSection>
-              <SelectedTableActionsSection>
-                <FilterButton>
-                  <i className="fas fa-share-alt" />
-                  &nbsp;&nbsp;Share
-                </FilterButton>
-                <FilterButton>
-                  <i className="fas fa-print" />
-                  &nbsp;&nbsp;Print
-                </FilterButton>
-                <FilterButton nomargin="true">
-                  <i className="fas fa-download" />
-                  &nbsp;&nbsp;Download
-                </FilterButton>
-              </SelectedTableActionsSection>
-            </Filter>
-            {toggle === 'table' && (
+            {false && (
+              <Filter>
+                <ToggleSection>
+                  <ToggleButton
+                    handleClick={handleToggle}
+                    toggleTextOn="Chart"
+                    toggleTextOff="Table"
+                  />
+                  {toggle === 'chart' && (
+                    <>
+                      <Separator customwidth={30} customheight={0} />
+                      <TypeSelect
+                        initoption={{ label: 'Select Chart', value: '' }}
+                        nomargin="true"
+                        customwidth={150}
+                        optionsdata={[
+                          {
+                            id: 1,
+                            label: 'Bar Chart',
+                            value: 'b-chart'
+                          },
+                          {
+                            id: 2,
+                            label: 'Pie Chart',
+                            value: 'p-chart'
+                          }
+                        ]}
+                      />
+                    </>
+                  )}
+                </ToggleSection>
+                <SelectedTableActionsSection>
+                  <FilterButton>
+                    <i className="fas fa-share-alt" />
+                    &nbsp;&nbsp;Share
+                  </FilterButton>
+                  <FilterButton>
+                    <i className="fas fa-print" />
+                    &nbsp;&nbsp;Print
+                  </FilterButton>
+                  <FilterButton nomargin="true">
+                    <i className="fas fa-download" />
+                    &nbsp;&nbsp;Download
+                  </FilterButton>
+                </SelectedTableActionsSection>
+              </Filter>
+            )}
+            {toggle !== 'table' && (
               <MainTable
                 header={tableHeader}
                 // record={recordData() || [] as Array<{ id: string, row: ICell[], rowActions: ICellAction[] }>}
@@ -438,20 +466,21 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
             )}
 
             {toggle === 'chart' && <Chart />}
-
-            <PaginationContainer>
-              <ReactPaginate
-                breakLabel="..."
-                previousLabel="<<"
-                nextLabel=">>"
-                pageCount={1}
-                onPageChange={handlePagination}
-                containerClassName={'pagination'}
-                activeClassName={'active'}
-                renderOnZeroPageCount={undefined}
-                forcePage={1}
-              />
-            </PaginationContainer>
+            {false && (
+              <PaginationContainer>
+                <ReactPaginate
+                  breakLabel="..."
+                  previousLabel="<<"
+                  nextLabel=">>"
+                  pageCount={1}
+                  onPageChange={handlePagination}
+                  containerClassName={'pagination'}
+                  activeClassName={'active'}
+                  renderOnZeroPageCount={undefined}
+                  forcePage={1}
+                />
+              </PaginationContainer>
+            )}
           </BodyContainer>
           <div style={{ paddingBottom: '100px' }} />
         </>
