@@ -59,7 +59,7 @@ export const AutoSelectCloseContainer = styled('div')({
   alignItems: 'center',
   justifyContent: 'center',
   width: 30,
-  height: 50,
+  height: 70,
   boxSizing: 'border-box'
 })
 

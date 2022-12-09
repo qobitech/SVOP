@@ -195,7 +195,6 @@ export const TypeAutoSelect = React.forwardRef(
           <AutoSelectCloseContainer
             id={'select-options-search-close-container-' + props.id}
           >
-            {/* {displayValue && ( */}
             <AutoSelectCloseIcon
               className="fas fa-times"
               id={'select-options-search-close-icon-' + props.id}

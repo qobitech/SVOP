@@ -382,12 +382,7 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
     index: number,
     value: Array<{ [key: string]: any }>
   ) => {
-    const temp = primarySearchData.optionsdata as Array<{
-      [key: string]: any
-    }>
-
-    temp[index] = value
-    setFilteredPrimaryOptions(temp)
+    setFilteredPrimaryOptions(value)
   }
 
   const primaryRecordData = () => {
