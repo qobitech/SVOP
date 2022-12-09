@@ -59,13 +59,13 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
     getApprovedResultsAction
   } = props as unknown as IActions
 
-  const dataElectionCycle = states?.election?.getAllElectionCycles
+  // const dataElectionCycle = states?.election?.getAllElectionCycles
   const loadElectionCycle = states?.election?.getAllElectionCycles_Loading
   const errorElectionCycle = states?.election?.getAllElectionCycles_Error
   const dataElection = states?.election?.getAllElections
   const loadElection = states?.election?.getAllElections_Loading
   const errorElection = states?.election?.getAllElections_Error
-  const dataElectionCategory = states?.election?.getAllElectionCategory
+  // const dataElectionCategory = states?.election?.getAllElectionCategory
   const loadElectionCategory = states?.election?.getAllElectionCategory_Loading
   const errorElectionCategory = states?.election?.getAllElectionCategory_Error
   const dataApprovedResults = states?.election?.getAllApprovedResults
@@ -204,113 +204,113 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
     initState
   )
 
-  const handleInputValue = (inputId: string, value: string) => {
-    setInputValue({ ...inputValue, [inputId]: value })
-  }
+  // const handleInputValue = (inputId: string, value: string) => {
+  //   setInputValue({ ...inputValue, [inputId]: value })
+  // }
 
-  const handleParamValue = (paramId: string, value: string) => {
-    setElectionParams({ ...electionParams, [paramId]: value })
-  }
+  // const handleParamValue = (paramId: string, value: string) => {
+  //   setElectionParams({ ...electionParams, [paramId]: value })
+  // }
 
   const getTotalPage = (totalPages: number | undefined) => {
     const total = Math.round((totalPages || 1) / PAGE_SIZE)
     return total > 0 ? total : 1
   }
 
-  const [filteredOptions, setFilteredOptions] = useState<
-    Array<Array<{ [key: string]: any }>>
-  >([] as Array<Array<{ [key: string]: any }>>)
+  // const [filteredOptions, setFilteredOptions] = useState<
+  //   Array<Array<{ [key: string]: any }>>
+  // >([] as Array<Array<{ [key: string]: any }>>)
 
-  const topfilterData = [
-    {
-      id: 'electionCycle',
-      initoption: { label: 'Select Election Year', value: '' },
-      pageNumber: 1,
-      totalPage: getTotalPage(dataElectionCycle?.data?.length),
-      placeholder: 'Select Election Year',
-      paramId: 'electionCycle',
-      inputId: 'electionCycle',
-      inputValue: inputValue.electionCycle,
-      displayValue: electionParams.electionCycle,
-      disabled: false,
-      optionsdata: dataElectionCycle?.data.map((i) => ({
-        id: i.id,
-        label: i.name,
-        value: i.name
-      })),
-      loading: loadElectionCycle,
-      noPagination: true
-    },
-    {
-      id: 'electionCategory',
-      initoption: { label: 'Select Category', value: '' },
-      pageNumber: 1,
-      totalPage: getTotalPage(dataElectionCategory?.data?.length),
-      paramId: 'electionCategory',
-      inputId: 'electionCategory',
-      inputValue: inputValue.electionCategory,
-      displayValue: electionParams.electionCategory,
-      placeholder: 'Select Category',
-      disabled: false,
-      optionsdata: dataElectionCategory?.data.map((i) => ({
-        id: i.id,
-        label: i.name,
-        value: i.name
-      })),
-      loading: loadElectionCategory,
-      noPagination: true
-    }
-    // {
-    //   id: 'locationState',
-    //   initoption: { label: 'Select State', value: '' },
-    //   pageNumber: 1,
-    //   totalPage: getTotalPage(dataStates?.data?.length),
-    //   paramId: 'locationState',
-    //   inputId: 'locationState',
-    //   inputValue: inputValue.locationState,
-    //   displayValue: electionParams.locationState,
-    //   placeholder: 'Select State',
-    //   disabled: false,
-    //   optionsdata: dataStates?.data.map((i) => ({
-    //     id: i.id,
-    //     label: i.name,
-    //     value: i.name
-    //   })),
-    //   loading: loadStates,
-    //   noPagination: true
-    // }
-    // {
-    //   id: 'election',
-    //   initoption: { label: 'Select Election', value: '' },
-    //   pageNumber: dataElection?.currentPage || 1,
-    //   totalPage: getTotalPage(dataElection?.totalPages),
-    //   paramId: 'election',
-    //   inputId: 'election',
-    //   inputValue: inputValue.election,
-    //   displayValue: electionParams.election,
-    //   placeholder: 'Select Election',
-    //   disabled: false,
-    //   optionsdata: dataElection?.data.map((i) => ({
-    //     id: i.id,
-    //     label: i.name,
-    //     value: i.name
-    //   })),
-    //   handlePagination: (selectedItem: { selected: number }) => {
-    //     if (selectedItem.selected + 1 !== dataElection?.currentPage) {
-    //       getElection(PAGE_SIZE, selectedItem.selected + 1)
-    //     }
-    //   },
-    //   loading: loadElection,
-    //   noPagination: false
-    // }
-  ]
+  // const topfilterData = [
+  //   {
+  //     id: 'electionCycle',
+  //     initoption: { label: 'Select Election Year', value: '' },
+  //     pageNumber: 1,
+  //     totalPage: getTotalPage(dataElectionCycle?.data?.length),
+  //     placeholder: 'Select Election Year',
+  //     paramId: 'electionCycle',
+  //     inputId: 'electionCycle',
+  //     inputValue: inputValue.electionCycle,
+  //     displayValue: electionParams.electionCycle,
+  //     disabled: false,
+  //     optionsdata: dataElectionCycle?.data.map((i) => ({
+  //       id: i.id,
+  //       label: i.name,
+  //       value: i.name
+  //     })),
+  //     loading: loadElectionCycle,
+  //     noPagination: true
+  //   },
+  //   {
+  //     id: 'electionCategory',
+  //     initoption: { label: 'Select Category', value: '' },
+  //     pageNumber: 1,
+  //     totalPage: getTotalPage(dataElectionCategory?.data?.length),
+  //     paramId: 'electionCategory',
+  //     inputId: 'electionCategory',
+  //     inputValue: inputValue.electionCategory,
+  //     displayValue: electionParams.electionCategory,
+  //     placeholder: 'Select Category',
+  //     disabled: false,
+  //     optionsdata: dataElectionCategory?.data.map((i) => ({
+  //       id: i.id,
+  //       label: i.name,
+  //       value: i.name
+  //     })),
+  //     loading: loadElectionCategory,
+  //     noPagination: true
+  //   }
+  // {
+  //   id: 'locationState',
+  //   initoption: { label: 'Select State', value: '' },
+  //   pageNumber: 1,
+  //   totalPage: getTotalPage(dataStates?.data?.length),
+  //   paramId: 'locationState',
+  //   inputId: 'locationState',
+  //   inputValue: inputValue.locationState,
+  //   displayValue: electionParams.locationState,
+  //   placeholder: 'Select State',
+  //   disabled: false,
+  //   optionsdata: dataStates?.data.map((i) => ({
+  //     id: i.id,
+  //     label: i.name,
+  //     value: i.name
+  //   })),
+  //   loading: loadStates,
+  //   noPagination: true
+  // }
+  // {
+  //   id: 'election',
+  //   initoption: { label: 'Select Election', value: '' },
+  //   pageNumber: dataElection?.currentPage || 1,
+  //   totalPage: getTotalPage(dataElection?.totalPages),
+  //   paramId: 'election',
+  //   inputId: 'election',
+  //   inputValue: inputValue.election,
+  //   displayValue: electionParams.election,
+  //   placeholder: 'Select Election',
+  //   disabled: false,
+  //   optionsdata: dataElection?.data.map((i) => ({
+  //     id: i.id,
+  //     label: i.name,
+  //     value: i.name
+  //   })),
+  //   handlePagination: (selectedItem: { selected: number }) => {
+  //     if (selectedItem.selected + 1 !== dataElection?.currentPage) {
+  //       getElection(PAGE_SIZE, selectedItem.selected + 1)
+  //     }
+  //   },
+  //   loading: loadElection,
+  //   noPagination: false
+  // }
+  // ]
 
-  useEffect(() => {
-    const data = topfilterData.map((i) => i.optionsdata)
-    if (data !== undefined) {
-      setFilteredOptions(data as Array<Array<{ [key: string]: any }>>)
-    }
-  }, [dataElectionCycle, dataElection, dataElectionCategory])
+  // useEffect(() => {
+  //   const data = topfilterData.map((i) => i.optionsdata)
+  //   if (data !== undefined) {
+  //     setFilteredOptions(data as Array<Array<{ [key: string]: any }>>)
+  //   }
+  // }, [dataElectionCycle, dataElection, dataElectionCategory])
 
   const electionInfoData = {
     'Election Year': electionParams.electionCycle || 'All',
@@ -319,18 +319,18 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
     Election: electionParams.election || 'All'
   }
 
-  const handleFilteredOption = (
-    index: number,
-    value: Array<{ [key: string]: any }>
-  ) => {
-    const temp = [...topfilterData.map((i) => i.optionsdata)] as Array<
-      Array<{ [key: string]: any }>
-    >
-    temp[index] = value
-    setFilteredOptions(temp)
-  }
+  // const handleFilteredOption = (
+  //   index: number,
+  //   value: Array<{ [key: string]: any }>
+  // ) => {
+  //   const temp = [...topfilterData.map((i) => i.optionsdata)] as Array<
+  //     Array<{ [key: string]: any }>
+  //   >
+  //   temp[index] = value
+  //   setFilteredOptions(temp)
+  // }
 
-  const handleSelectValues = (e: ChangeEvent<HTMLInputElement>) => {}
+  // const handleSelectValues = (e: ChangeEvent<HTMLInputElement>) => {}
 
   // Primary functions
   const [filteredPrimaryOptions, setFilteredPrimaryOptions] = useState<
@@ -482,7 +482,7 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
                 <span>{advancedSearch ? 'On' : 'Off'}</span>
               </p>
             </div>
-            {advancedSearch && (
+            {/* {advancedSearch && (
               <div className="fml-grid pb-3">
                 {topfilterData.map(({ id, ...rest }, index) => (
                   <div key={id} className="d-flex w-100">
@@ -502,7 +502,7 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
                   </div>
                 ))}
               </div>
-            )}
+            )} */}
             {advancedSearch && (
               <Filter>
                 <ToggleSection>
