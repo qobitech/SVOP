@@ -182,7 +182,6 @@ export const TypeAutoSelect = React.forwardRef(
             ref={ref as React.LegacyRef<HTMLInputElement> | undefined}
             customwidth={customwidth}
             customheight={customheight}
-            // onFocus={() => setOpenOption(true)}
             onBlur={handleBlur}
             autoComplete="off"
             onClick={() => {

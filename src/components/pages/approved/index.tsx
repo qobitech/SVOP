@@ -340,7 +340,7 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
   const primarySearchData = {
     id: 'approvedResults',
     initoption: { label: 'Search Election', value: '' },
-    pageNumber: 1,
+    pageNumber: dataApprovedResults?.currentPage || 1,
     totalPage: getTotalPage(dataApprovedResults?.total),
     placeholder: 'Search Election',
     paramId: 'approvedResults',
@@ -465,7 +465,7 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
                 ></i>
               )}
             </HeaderContainer>
-            <div className="d-flex justify-content-between align-items-center w-100 mb-2 pb-2 border-bottom">
+            <div className="d-flex flex-wrap justify-content-between align-items-center w-100 mb-2 pb-2 border-bottom">
               <TypeAutoSelect
                 nomargin="true"
                 customwidth={700}
@@ -556,8 +556,6 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
               </Filter>
             )}
 
-            {/* {false && <MockTable />} */}
-
             {toggle === 'table' && (
               <MainTable
                 header={tableHeader}
@@ -569,13 +567,6 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
                     rowActions: ICellAction[]
                   }>)
                 }
-                // record={
-                //   [] as Array<{
-                //     id: string
-                //     row: ICell[]
-                //     rowActions: ICellAction[]
-                //   }>
-                // }
                 checkedRows={checkedRows}
                 handleCheckedRows={handleCheckedRows}
                 clearCheckedRows={clearCheckedRows}
