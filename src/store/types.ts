@@ -26,6 +26,19 @@ export const electionType = {
     dataAction: 'GET_ALL_ELECTION_RESULTS',
     dataLoading: 'GET_ALL_ELECTION_LOADING',
     dataError: 'GET_ALL_ELECTION_ERROR'
+  },
+  getAllApproved: {
+    dataAction: 'GET_ALL_APPROVED_RESULTS',
+    dataLoading: 'GET_ALL_APPROVED_RESULTS_LOADING',
+    dataError: 'GET_ALL_APPROVED_RESULTS_ERROR'
+  }
+}
+
+export const locationType = {
+  state: {
+    dataAction: 'GET_STATE',
+    dataLoading: 'GET_STATE_LOADING',
+    dataError: 'GET_STATE_ERROR'
   }
 }
 

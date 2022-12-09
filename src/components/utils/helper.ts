@@ -22,3 +22,23 @@ export const _separator = (name: string) => {
     .replace(/,/g, '')
   return arr.charAt(0).toUpperCase() + arr.slice(1).toLowerCase()
 }
+
+const joinS = (arr: string) => arr.toUpperCase()
+
+export const _joiner = (name: string) => {
+  const arr = name
+    .trim()
+    .split('_')
+    .map((item, index) => {
+      if (index !== 0) {
+        if (item === item.toUpperCase()) {
+          return ' ' + joinS(item)
+        } else {
+          return joinS(item)
+        }
+      } else return joinS(item)
+    })
+    .toString()
+    .replace(/,/g, '')
+  return arr
+}

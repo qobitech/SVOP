@@ -23,4 +23,14 @@ export interface IActions {
     pageNumber?: number,
     sort?: string
   ) => (dispatch: any) => void
+  getStates: (
+    pageSize?: number,
+    pageNumber?: number,
+    sort?: string
+  ) => (dispatch: any) => void
+  getApprovedResultsAction: (
+    pageSize?: number,
+    pageNumber?: number,
+    sort?: string
+  ) => (dispatch: any) => void
 }

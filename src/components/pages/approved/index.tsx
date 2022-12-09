@@ -1,12 +1,8 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import DataWrapper from '../../../wrapper/data-wrapper'
 import Filter from '../../filter'
-
-// import { useLocation } from 'react-router-dom'
-
 import {
   HeaderContainer,
-  // HeaderTextNumbers,
   HeaderBodyText,
   SelectedTableActionsSection,
   TopMenuContainer,
@@ -21,9 +17,6 @@ import MainTable, { ICell, ICellAction } from '../../table'
 
 import { IStates } from '../../../interface/IReducer'
 import { IActions } from '../../../interface/IAction'
-// import { pageurl } from '../../../constants/pageurl'
-
-// import queryString from 'query-string'
 import { PaginationContainer } from '../../table/styled'
 import { FilterButton } from '../../filter/styled'
 import ReactPaginate from 'react-paginate'
@@ -39,6 +32,8 @@ import { ToggleButton } from '../../utils/toggle'
 import Chart from '../../chart'
 import { TypeSelect } from '../../utils/select'
 import { TypeAutoSelect } from '../../utils/auto-select'
+// import MockTable from './mock-table'
+import { _joiner } from '../../utils/helper'
 
 export const PAGE_SIZE = 10
 
@@ -50,21 +45,19 @@ const Approved: React.FC = () => {
   )
 }
 
-const tableHeader = ['Party', 'Total Votes', 'Accredited Votes']
+const tableHeader = ['Party', 'Total Votes']
 interface IApprovedPageChild {
   states?: IStates
 }
 
 const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
-  const { getElectionCycle, getElection, getElectionCategory } =
-    props as unknown as IActions
-
-  // const location = useLocation()
-
-  // const { search } = location
-  // const values = queryString.parse(search)
-
-  // const { p } = values || {}
+  const {
+    getElectionCycle,
+    getElection,
+    getElectionCategory,
+    getStates,
+    getApprovedResultsAction
+  } = props as unknown as IActions
 
   const dataElectionCycle = states?.election?.getAllElectionCycles
   const loadElectionCycle = states?.election?.getAllElectionCycles_Loading
@@ -75,11 +68,17 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
   const dataElectionCategory = states?.election?.getAllElectionCategory
   const loadElectionCategory = states?.election?.getAllElectionCategory_Loading
   const errorElectionCategory = states?.election?.getAllElectionCategory_Error
+  const dataApprovedResults = states?.election?.getAllApprovedResults
+  const loadApprovedResults = states?.election?.getAllApprovedResults_Loading
+  // const errorApprovedResults = states?.election?.getAllApprovedResults_Error
+  const errorStates = states?.location?.getAllLocationStates_Error
 
   useEffect(() => {
     getElectionCycle(PAGE_SIZE)
     getElection(PAGE_SIZE, dataElection?.currentPage)
     getElectionCategory(PAGE_SIZE)
+    getStates(PAGE_SIZE)
+    getApprovedResultsAction(PAGE_SIZE)
   }, [])
 
   const handlePagination = (selectedItem: { selected: number }) => {
@@ -140,6 +139,7 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
 
   const [checkedRows, setCheckedRows] = useState<{ [key: string]: any }>({})
   const [checkAll, setCheckAll] = useState<boolean>(false)
+  const [advancedSearch, setAdvancedSearch] = useState<boolean>(false)
 
   const handleCheckedRows = ({ target }: { target: any }) => {
     const { checked, id } = target || {}
@@ -190,17 +190,19 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
     setToggle(status ? 'chart' : 'table')
   }
 
-  const [electionParams, setElectionParams] = useState({
+  const initState = {
     electionCycle: '',
     election: '',
-    electionCategory: ''
-  })
+    electionCategory: '',
+    locationState: '',
+    approvedResults: ''
+  }
 
-  const [inputValue, setInputValue] = useState<{ [key: string]: any }>({
-    electionCycle: '',
-    election: '',
-    electionCategory: ''
-  })
+  const [electionParams, setElectionParams] = useState(initState)
+
+  const [inputValue, setInputValue] = useState<{ [key: string]: any }>(
+    initState
+  )
 
   const handleInputValue = (inputId: string, value: string) => {
     setInputValue({ ...inputValue, [inputId]: value })
@@ -218,28 +220,6 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
   const [filteredOptions, setFilteredOptions] = useState<
     Array<Array<{ [key: string]: any }>>
   >([] as Array<Array<{ [key: string]: any }>>)
-
-  useEffect(() => {
-    const data = []
-    data[0] = dataElectionCycle?.data.map((i) => ({
-      id: i.id,
-      label: i.name,
-      value: i.name
-    }))
-    data[1] = dataElectionCategory?.data.map((i) => ({
-      id: i.id,
-      label: i.name,
-      value: i.name
-    }))
-    data[2] = dataElection?.data.map((i) => ({
-      id: i.id,
-      label: i.name,
-      value: i.name
-    }))
-    if (data !== undefined) {
-      setFilteredOptions(data as Array<Array<{ [key: string]: any }>>)
-    }
-  }, [dataElectionCycle, dataElection, dataElectionCategory])
 
   const topfilterData = [
     {
@@ -279,36 +259,63 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
       })),
       loading: loadElectionCategory,
       noPagination: true
-    },
-    {
-      id: 'election',
-      initoption: { label: 'Select Election', value: '' },
-      pageNumber: dataElection?.currentPage || 1,
-      totalPage: getTotalPage(dataElection?.totalPages),
-      paramId: 'election',
-      inputId: 'election',
-      inputValue: inputValue.election,
-      displayValue: electionParams.election,
-      placeholder: 'Select Election',
-      disabled: false,
-      optionsdata: dataElection?.data.map((i) => ({
-        id: i.id,
-        label: i.name,
-        value: i.name
-      })),
-      handlePagination: (selectedItem: { selected: number }) => {
-        if (selectedItem.selected + 1 !== dataElection?.currentPage) {
-          getElection(PAGE_SIZE, selectedItem.selected + 1)
-        }
-      },
-      loading: loadElection,
-      noPagination: false
     }
+    // {
+    //   id: 'locationState',
+    //   initoption: { label: 'Select State', value: '' },
+    //   pageNumber: 1,
+    //   totalPage: getTotalPage(dataStates?.data?.length),
+    //   paramId: 'locationState',
+    //   inputId: 'locationState',
+    //   inputValue: inputValue.locationState,
+    //   displayValue: electionParams.locationState,
+    //   placeholder: 'Select State',
+    //   disabled: false,
+    //   optionsdata: dataStates?.data.map((i) => ({
+    //     id: i.id,
+    //     label: i.name,
+    //     value: i.name
+    //   })),
+    //   loading: loadStates,
+    //   noPagination: true
+    // }
+    // {
+    //   id: 'election',
+    //   initoption: { label: 'Select Election', value: '' },
+    //   pageNumber: dataElection?.currentPage || 1,
+    //   totalPage: getTotalPage(dataElection?.totalPages),
+    //   paramId: 'election',
+    //   inputId: 'election',
+    //   inputValue: inputValue.election,
+    //   displayValue: electionParams.election,
+    //   placeholder: 'Select Election',
+    //   disabled: false,
+    //   optionsdata: dataElection?.data.map((i) => ({
+    //     id: i.id,
+    //     label: i.name,
+    //     value: i.name
+    //   })),
+    //   handlePagination: (selectedItem: { selected: number }) => {
+    //     if (selectedItem.selected + 1 !== dataElection?.currentPage) {
+    //       getElection(PAGE_SIZE, selectedItem.selected + 1)
+    //     }
+    //   },
+    //   loading: loadElection,
+    //   noPagination: false
+    // }
   ]
+
+  useEffect(() => {
+    const data = topfilterData.map((i) => i.optionsdata)
+    if (data !== undefined) {
+      setFilteredOptions(data as Array<Array<{ [key: string]: any }>>)
+    }
+  }, [dataElectionCycle, dataElection, dataElectionCategory])
 
   const electionInfoData = {
     'Election Year': electionParams.electionCycle || 'All',
     'Elective Category': electionParams.electionCategory || 'All',
+    State: electionParams.locationState || 'All',
     Election: electionParams.election || 'All'
   }
 
@@ -323,19 +330,87 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
     setFilteredOptions(temp)
   }
 
-  const handleSelectValues = (e: ChangeEvent<HTMLInputElement>) => {
-    // const { target } = e
-    // const { id, value } = target
-    // const temp = { ...inputValue }
-    // const invalidIndex = Object.keys(temp).indexOf(id)
-    // if (!value) {
-    //   Object.keys(temp).forEach((i, index) => {
-    //     if (index >= invalidIndex) {
-    //       temp[i] = ''
-    //     }
-    //   })
-    //   setInputValue({ ...temp })
-    // }
+  const handleSelectValues = (e: ChangeEvent<HTMLInputElement>) => {}
+
+  // Primary functions
+  const [filteredPrimaryOptions, setFilteredPrimaryOptions] = useState<
+    Array<{ [key: string]: any }>
+  >([] as Array<{ [key: string]: any }>)
+
+  const primarySearchData = {
+    id: 'approvedResults',
+    initoption: { label: 'Search Election', value: '' },
+    pageNumber: 1,
+    totalPage: getTotalPage(dataApprovedResults?.total),
+    placeholder: 'Search Election',
+    paramId: 'approvedResults',
+    inputId: 'approvedResults',
+    inputValue: inputValue.approvedResults,
+    displayValue: electionParams.approvedResults,
+    disabled: false,
+    optionsdata: dataApprovedResults?.data.map((i, index) => ({
+      id: index,
+      label: _joiner(i.election),
+      value: i.election
+    })),
+    loading: loadApprovedResults,
+    noPagination: false
+  }
+
+  useEffect(() => {
+    const data = primarySearchData.optionsdata
+    if (data !== undefined) {
+      setFilteredPrimaryOptions(data as Array<{ [key: string]: any }>)
+    }
+  }, [dataApprovedResults])
+
+  const handlePrimarySelectValues = (e: ChangeEvent<HTMLInputElement>) => {}
+  const handlePrimaryParamValue = (paramId: string, value: string) => {
+    setElectionParams({ ...electionParams, [paramId]: value })
+  }
+  const handlePrimaryInputValue = (inputId: string, value: string) => {
+    setInputValue({ ...inputValue, [inputId]: value })
+  }
+
+  const handlePrimaryPagination = (selectedItem: { selected: number }) => {
+    if (selectedItem.selected + 1 !== dataApprovedResults?.currentPage) {
+      getApprovedResultsAction(PAGE_SIZE, selectedItem.selected + 1)
+    }
+  }
+
+  const handlePrimaryFilteredOption = (
+    index: number,
+    value: Array<{ [key: string]: any }>
+  ) => {
+    const temp = primarySearchData.optionsdata as Array<{
+      [key: string]: any
+    }>
+
+    temp[index] = value
+    setFilteredPrimaryOptions(temp)
+  }
+
+  const primaryRecordData = () => {
+    return dataApprovedResults?.data
+      .filter((i) => _joiner(i.election) === electionParams?.approvedResults)
+      .map((i, index) => ({
+        id: i.id,
+        row: [
+          {
+            value: i.results[index]?.partyName,
+            isLink: false,
+            url: '',
+            action: () => {}
+          },
+          {
+            value: i.results[index]?.votes,
+            isLink: false,
+            url: '',
+            action: () => {}
+          }
+        ] as unknown as ICell[],
+        rowActions: [] as unknown as ICellAction[]
+      }))
   }
 
   return (
@@ -349,7 +424,10 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
             : 'View Election Info'
         }
       />
-      {errorElectionCycle || errorElection || errorElectionCategory ? (
+      {errorElectionCycle ||
+      errorElection ||
+      errorElectionCategory ||
+      errorStates ? (
         <>Error fetching data...</>
       ) : (
         <>
@@ -369,8 +447,17 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
           )}
           <BodyContainer>
             <HeaderContainer>
-              <HeaderBodyText>Election Results</HeaderBodyText>
-              {/* <HeaderTextNumbers>{data?.total}</HeaderTextNumbers> */}
+              <HeaderBodyText>
+                {electionParams.electionCategory
+                  ? electionParams.electionCategory +
+                    (electionParams.electionCycle ? ' - ' : '')
+                  : ''}
+                {electionParams.electionCycle || ''}
+                {!electionParams.electionCategory &&
+                !electionParams.electionCycle
+                  ? 'Election Results'
+                  : ''}
+              </HeaderBodyText>
               {(loadElectionCycle || loadElection || loadElectionCategory) && (
                 <i
                   className="fa fa-spinner fa-spin ml-3"
@@ -378,26 +465,50 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
                 ></i>
               )}
             </HeaderContainer>
-            <div className="fml-grid pb-3">
-              {topfilterData.map(({ id, ...rest }, index) => (
-                <div key={id} className="d-flex w-100">
-                  <TypeAutoSelect
-                    nomargin="true"
-                    customwidth={300}
-                    customheight={50}
-                    handleParamValue={handleParamValue}
-                    id={id}
-                    handleInputValue={handleInputValue}
-                    onAutoChange={handleSelectValues}
-                    setFilteredOptions={handleFilteredOption}
-                    filteredOptions={filteredOptions[index]}
-                    index={index}
-                    {...rest}
-                  />
-                </div>
-              ))}
+            <div className="d-flex justify-content-between align-items-center w-100 mb-2 pb-2 border-bottom">
+              <TypeAutoSelect
+                nomargin="true"
+                customwidth={700}
+                customheight={70}
+                onAutoChange={handlePrimarySelectValues}
+                handleParamValue={handlePrimaryParamValue}
+                handleInputValue={handlePrimaryInputValue}
+                index={0}
+                filteredOptions={filteredPrimaryOptions}
+                setFilteredOptions={handlePrimaryFilteredOption}
+                handlePagination={handlePrimaryPagination}
+                {...primarySearchData}
+              />
+              <p
+                className="cursor-pointer text-medium"
+                onClick={() => setAdvancedSearch(!advancedSearch)}
+              >
+                Advanced Search&nbsp;
+                <span>{advancedSearch ? 'On' : 'Off'}</span>
+              </p>
             </div>
-            {false && (
+            {advancedSearch && (
+              <div className="fml-grid pb-3">
+                {topfilterData.map(({ id, ...rest }, index) => (
+                  <div key={id} className="d-flex w-100">
+                    <TypeAutoSelect
+                      nomargin="true"
+                      customwidth={300}
+                      customheight={50}
+                      handleParamValue={handleParamValue}
+                      id={id}
+                      handleInputValue={handleInputValue}
+                      onAutoChange={handleSelectValues}
+                      setFilteredOptions={handleFilteredOption}
+                      filteredOptions={filteredOptions[index]}
+                      index={index}
+                      {...rest}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+            {advancedSearch && (
               <Filter>
                 <ToggleSection>
                   <ToggleButton
@@ -444,17 +555,27 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
                 </SelectedTableActionsSection>
               </Filter>
             )}
-            {toggle !== 'table' && (
+
+            {/* {false && <MockTable />} */}
+
+            {toggle === 'table' && (
               <MainTable
                 header={tableHeader}
-                // record={recordData() || [] as Array<{ id: string, row: ICell[], rowActions: ICellAction[] }>}
                 record={
-                  [] as Array<{
+                  primaryRecordData() ||
+                  ([] as Array<{
                     id: string
                     row: ICell[]
                     rowActions: ICellAction[]
-                  }>
+                  }>)
                 }
+                // record={
+                //   [] as Array<{
+                //     id: string
+                //     row: ICell[]
+                //     rowActions: ICellAction[]
+                //   }>
+                // }
                 checkedRows={checkedRows}
                 handleCheckedRows={handleCheckedRows}
                 clearCheckedRows={clearCheckedRows}

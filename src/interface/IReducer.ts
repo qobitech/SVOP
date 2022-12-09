@@ -1,7 +1,11 @@
 import { ILogin, IOTP } from './IAuth'
-import { IElectionCycles } from './IElectionCycle'
-import { IElections } from './IElection'
-import { IElectionCategories } from './IElectionCategory'
+import {
+  IElections,
+  IElectionCycles,
+  IElectionCategories,
+  IResults
+} from './IElection'
+import { ILocationStates } from './ILocation'
 
 export interface IAuthReducer {
   signin: ILogin
@@ -21,6 +25,14 @@ export interface IElectionReducer {
   getAllElectionCategory: IElectionCategories
   getAllElectionCategory_Loading: boolean
   getAllElectionCategory_Error: any
+  getAllApprovedResults: IResults
+  getAllApprovedResults_Loading: boolean
+  getAllApprovedResults_Error: any
+}
+export interface ILocationReducer {
+  getAllLocationStates: ILocationStates
+  getAllLocationStates_Loading: boolean
+  getAllLocationStates_Error: any
 }
 export interface IOtherReducer {
   menuOpen: boolean
@@ -34,5 +46,6 @@ export interface IOtherReducer {
 export interface IStates {
   auth: IAuthReducer
   election: IElectionReducer
+  location: ILocationReducer
   other: IOtherReducer
 }
