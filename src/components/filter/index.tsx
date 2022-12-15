@@ -56,47 +56,49 @@ const Filter: React.FC<IFilter> = ({
     }
   }
 
+  type dataType = Array<{ [key: string]: any }>
+
   const filterParamsData = [
     {
       id: 1,
       text: 'Region',
       isSelected: false,
-      data: getResponseData(dataZones as Array<{ [key: string]: any }>),
+      data: getResponseData(dataZones as dataType),
       query: 'region'
     },
     {
       id: 2,
       text: 'GEO Zone',
       isSelected: false,
-      data: getResponseData(dataGEOZones as Array<{ [key: string]: any }>),
+      data: getResponseData(dataGEOZones as dataType),
       query: 'zone'
     },
     {
       id: 3,
       text: 'State',
       isSelected: false,
-      data: getResponseData(dataStates as Array<{ [key: string]: any }>),
+      data: getResponseData(dataStates as dataType),
       query: 'state'
     },
     {
       id: 4,
       text: 'LGA',
       isSelected: false,
-      data: getResponseData(dataLGAs as Array<{ [key: string]: any }>),
+      data: getResponseData(dataLGAs as dataType),
       query: 'lga'
     },
     {
       id: 5,
-      text: 'Wards',
+      text: 'Ward',
       isSelected: false,
-      data: getResponseData(dataWards as Array<{ [key: string]: any }>),
+      data: getResponseData(dataWards as dataType),
       query: 'ward'
     },
     {
       id: 6,
       text: 'Polling Unit',
       isSelected: false,
-      data: getResponseData(dataPoolingUnits as Array<{ [key: string]: any }>),
+      data: getResponseData(dataPoolingUnits as dataType),
       query: 'pollingunit'
     }
   ]
@@ -110,8 +112,7 @@ const Filter: React.FC<IFilter> = ({
   const [isSort, setIsSort] = useState(false)
   const [checkId, setCheckId] = useState('')
   const [openFilterParam, setOpenFilterParam] = useState(false)
-  const [filterIndex, setFilterIndex] = useState<number[]>([])
-  const [subFilter, setSubFilters] = useState<
+  const [subFilter, setSubFilter] = useState<
     Array<{
       id: number
       text: string
@@ -123,10 +124,8 @@ const Filter: React.FC<IFilter> = ({
   const [customInfo, setCustomInfo] = useState<{ [key: string]: any }>(infoData)
   const [sortInfo, setSortInfo] = useState<{ [key: string]: any }>(infoData)
 
-  console.log(subFilter, 'juju')
-
   useEffect(() => {
-    setSubFilters(getSubFilter(filterParamsData, primarySearchParam))
+    setSubFilter(getSubFilter(filterParamsData, primarySearchParam))
   }, [dataStates, primarySearchParam])
 
   const queryKey = (name: string) => {
@@ -138,24 +137,11 @@ const Filter: React.FC<IFilter> = ({
   }
 
   const handleSubFilter = (index: number, value: boolean) => {
-    const tempIndex = [...filterIndex]
-    const ind = tempIndex.indexOf(index)
-    if (ind === -1) {
-      tempIndex.push(index)
-      setFilterIndex([...tempIndex])
-    } else {
-      tempIndex.splice(ind, 1)
-      setFilterIndex([...tempIndex])
-    }
     const arr = [...subFilter]
     arr[index].isSelected = value
-    setSubFilters([...arr])
-    const isEveryFalse = (i: {
-      id: number
-      text: string
-      isSelected: boolean
-    }) => !i.isSelected
-    setOpenFilterParam(!arr.every(isEveryFalse))
+    setSubFilter([...arr])
+    const isSelected = arr.map((j) => j.isSelected).includes(true)
+    setOpenFilterParam(isSelected)
   }
 
   const filterParams: IFilterParam[] = subFilter.map((i, index) => ({
@@ -166,7 +152,9 @@ const Filter: React.FC<IFilter> = ({
     initoption: { label: 'Select ' + subFilter[index].text, value: '' },
     placeholder: '',
     show: true,
-    hide: subFilter[index].isSelected
+    hide: subFilter[index].isSelected,
+    selected: [],
+    selectedNumber: 0
   }))
 
   const sendQuery = (state: { [key: string]: string }) => {

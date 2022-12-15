@@ -1,10 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { TypeCheckbox } from '../utils/checkbox'
 import { FilterItemContainer } from './styled'
-// import { TypeInput } from '../utils/input'
-// import { TypeSelect } from '../utils/select'
-// import { TypeRadio } from '../utils/radio'
-// import { InputLabelComponent } from '../utils/input/styled'
 
 export interface IFilterParam {
   id: number
@@ -15,6 +11,8 @@ export interface IFilterParam {
   placeholder: string
   show: boolean
   hide: boolean
+  selectedNumber: number
+  selected: any[]
 }
 
 interface ICustomFilter {
@@ -62,33 +60,7 @@ const CustomFilter: React.FC<ICustomFilter> = ({
         <div className="bg-white py-2" style={{ overflow: 'auto' }}>
           <div className="w-100 justify-content-center justify-content-md-between">
             {filterParams?.map((i) => (
-              <div
-                key={i.id}
-                className="border rounded px-2 py-2 w-100 mb-3"
-                style={{ boxSizing: 'border-box' }}
-              >
-                <div className="text-center pb-1 mb-2">
-                  <p className="m-0" style={{ fontSize: '13px' }}>
-                    <b>{i.title}</b>
-                  </p>
-                </div>
-                <div className="fml-filter-grid w-100">
-                  {i.show &&
-                    i.optionsdata?.map((j) => (
-                      <FilterItemContainer
-                        key={j.id}
-                        className="d-flex align-items-center justify-content-start px-1 py-1 w-100"
-                        title={j.label}
-                      >
-                        <TypeCheckbox />
-                        &nbsp;&nbsp;&nbsp;
-                        <p className="m-0" style={{ fontSize: '11px' }}>
-                          {j.label}
-                        </p>
-                      </FilterItemContainer>
-                    ))}
-                </div>
-              </div>
+              <CustomFilterItem i={i} key={i.id} />
             ))}
           </div>
         </div>
@@ -98,3 +70,57 @@ const CustomFilter: React.FC<ICustomFilter> = ({
 }
 
 export default CustomFilter
+
+interface ICustomFilterItem {
+  i: IFilterParam
+}
+
+const CustomFilterItem: React.FC<ICustomFilterItem> = ({ i }) => {
+  const [openTab, setOpenTab] = useState<boolean>(true)
+
+  return (
+    <div
+      key={i.id}
+      className="border rounded px-2 py-2 w-100 mb-3"
+      style={{ boxSizing: 'border-box' }}
+    >
+      <div
+        className={`d-flex align-items-center justify-content-between pb-1 ${
+          openTab ? 'border-bottom mb-2' : ''
+        }`}
+        style={{ cursor: 'pointer' }}
+        onClick={() => setOpenTab(!openTab)}
+      >
+        <p className="m-0 text-small" style={{ fontSize: '13px' }}>
+          <b>{i.title}</b>&nbsp;&nbsp;-&nbsp;&nbsp;
+          {i.selectedNumber === 0 || !i.selectedNumber
+            ? 'All'
+            : i.selectedNumber + ' selected'}
+        </p>
+        <p className="m-0 text-small">
+          <span>
+            <i className={`fas fa-${openTab ? 'minus' : 'plus'}`} />
+          </span>
+        </p>
+      </div>
+      {openTab && (
+        <div className="fml-filter-grid w-100">
+          {i.show &&
+            i.optionsdata?.map((j) => (
+              <FilterItemContainer
+                key={j.id}
+                className="d-flex align-items-center justify-content-start px-1 py-1 w-100"
+                title={j.label}
+              >
+                <TypeCheckbox />
+                &nbsp;&nbsp;&nbsp;
+                <p className="m-0" style={{ fontSize: '11px' }}>
+                  {j.label}
+                </p>
+              </FilterItemContainer>
+            ))}
+        </div>
+      )}
+    </div>
+  )
+}
