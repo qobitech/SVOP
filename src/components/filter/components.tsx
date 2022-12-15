@@ -5,7 +5,12 @@ import { FilterItemContainer } from './styled'
 export interface IFilterParam {
   id: number
   title: string
-  optionsdata?: Array<{ id: number; label: string; value: string | number }>
+  optionsdata?: Array<{
+    id: number
+    label: string
+    value: string | number
+    isChecked: boolean
+  }>
   show: boolean
   selectedNumber: number
   selected: any[]
@@ -19,6 +24,7 @@ interface ICustomFilter {
   isFilter: boolean
   setCustomInfo: React.Dispatch<React.SetStateAction<{ [key: string]: any }>>
   customInfo: { [key: string]: any }
+  handleItemSelect: (parentId: number, id: number, selected: boolean) => void
 }
 
 const CustomFilter: React.FC<ICustomFilter> = ({
@@ -26,7 +32,8 @@ const CustomFilter: React.FC<ICustomFilter> = ({
   sendQuery,
   isFilter,
   customInfo,
-  setCustomInfo
+  setCustomInfo,
+  handleItemSelect
 }) => {
   // const onHandleChange = ({
   //   target
@@ -58,7 +65,11 @@ const CustomFilter: React.FC<ICustomFilter> = ({
         <div className="bg-white py-2" style={{ overflow: 'auto' }}>
           <div className="w-100 justify-content-center justify-content-md-between">
             {filterParams?.map((i) => (
-              <CustomFilterItem i={i} key={i.id} />
+              <CustomFilterItem
+                i={i}
+                key={i.id}
+                handleItemSelect={handleItemSelect}
+              />
             ))}
           </div>
         </div>
@@ -71,9 +82,13 @@ export default CustomFilter
 
 interface ICustomFilterItem {
   i: IFilterParam
+  handleItemSelect: (parentId: number, id: number, selected: boolean) => void
 }
 
-const CustomFilterItem: React.FC<ICustomFilterItem> = ({ i }) => {
+const CustomFilterItem: React.FC<ICustomFilterItem> = ({
+  i,
+  handleItemSelect
+}) => {
   const [openTab, setOpenTab] = useState<boolean>(true)
 
   return (
@@ -109,8 +124,12 @@ const CustomFilterItem: React.FC<ICustomFilterItem> = ({ i }) => {
                 key={j.id}
                 className="d-flex align-items-center justify-content-start px-1 py-1 w-100"
                 title={j.label}
+                onClick={() => handleItemSelect(i.id, j.id, !j.isChecked)}
               >
-                <TypeCheckbox />
+                <TypeCheckbox
+                  checked={j.isChecked}
+                  onChange={() => handleItemSelect(i.id, j.id, !j.isChecked)}
+                />
                 &nbsp;&nbsp;&nbsp;
                 <p className="m-0" style={{ fontSize: '11px' }}>
                   {j.label}

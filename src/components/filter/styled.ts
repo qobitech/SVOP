@@ -33,6 +33,7 @@ export const FilterButtonSection = styled('div')({
   display: 'flex',
   flexWrap: 'wrap',
   alignItems: 'center',
+  justifyContent: 'space-between',
   [down('sm')]: {
     flexDirection: 'column-reverse',
     alignItems: 'flex-start'

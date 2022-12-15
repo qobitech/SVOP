@@ -103,6 +103,7 @@ const Filter: React.FC<IFilter> = ({
   const [isSort, setIsSort] = useState(false)
   const [checkId, setCheckId] = useState('')
   const [openFilterParam, setOpenFilterParam] = useState(false)
+  const [filterCollapse, setFilterCollapse] = useState(false)
   const [customInfo, setCustomInfo] = useState<{ [key: string]: any }>(infoData)
   const [sortInfo, setSortInfo] = useState<{ [key: string]: any }>(infoData)
   const [filterParams, setFilterParams] =
@@ -144,11 +145,10 @@ const Filter: React.FC<IFilter> = ({
     setOpenFilterParam(isSelected)
   }
 
+  // update table header when a filter param item is selected
   const handleTableHeader = (arr: IFilterParam[]) => {
-    // update table header when a filter param item is selected
     const th = arr.filter((i) => i.isSelected).map((i) => i.title.toUpperCase())
     th.unshift('PARTY')
-    th.push('TOTAL VOTES')
     setTableHeader((p) => [...th])
   }
 
@@ -159,6 +159,23 @@ const Filter: React.FC<IFilter> = ({
     setFilterParams([...arr])
     handleOpenFilter(arr)
     handleTableHeader(arr)
+  }
+
+  const handleItemSelect = (parentId: number, id: number, select: boolean) => {
+    const arr = [...filterParams]
+    if (arr) {
+      const arrItem = arr.map((i) => ({
+        ...i,
+        optionsdata:
+          i.id === parentId
+            ? i.optionsdata?.map((j) => ({
+                ...j,
+                isChecked: j.id === id ? select : j.isChecked
+              }))
+            : i.optionsdata
+      }))
+      setFilterParams([...arrItem])
+    }
   }
 
   const queryKey = (name: string) => {
@@ -221,17 +238,39 @@ const Filter: React.FC<IFilter> = ({
                 </FilterSubButton>
               ))}
             </FilterButtonLeftSection>
+            <div>
+              <p
+                className="m-0 font-small border rounded px-2 py-1 d-flex align-items-center justify-content-between"
+                style={{ cursor: 'pointer', width: '123px' }}
+                onClick={() => setFilterCollapse(!filterCollapse)}
+              >
+                {filterCollapse ? 'Expand' : 'Collapse'} Filter
+                <span>
+                  <i
+                    className={`fas fa-${filterCollapse ? 'plus' : 'minus'}`}
+                  />
+                </span>
+              </p>
+            </div>
           </FilterButtonSection>
         </>
       )}
       {openFilterParam && (
-        <FilterContentContainer>
+        <FilterContentContainer
+          style={{
+            height: filterCollapse ? '0px' : '',
+            overflow: filterCollapse ? 'hidden' : '',
+            padding: filterCollapse ? '0' : '',
+            border: filterCollapse ? '0' : ''
+          }}
+        >
           <CustomFilter
             filterParams={filterParams.filter((i) => i.isSelected)}
             sendQuery={sendQuery}
             isFilter={true}
             setCustomInfo={setCustomInfo}
             customInfo={customInfo}
+            handleItemSelect={handleItemSelect}
           />
         </FilterContentContainer>
       )}

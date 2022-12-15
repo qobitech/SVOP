@@ -7,6 +7,7 @@ export const getSubFilter = (
       id: number
       label: string
       value: string
+      isChecked: boolean
     }>
     query: string
   }>,
@@ -40,20 +41,21 @@ export const defaultFilterParam = [
     selectedNumber: 0,
     show: false,
     title: '',
-    optionsdata: [{ id: 0, label: '', value: '' }],
+    optionsdata: [{ id: 0, label: '', value: '', isChecked: false }],
     isSelected: false,
     query: ''
   }
 ]
 
-const tempData = [{ id: 0, label: '', value: '' }]
+const tempData = [{ id: 0, label: '', value: '', isChecked: false }]
 
 export const getResponseData = (data: Array<{ [key: string]: any }>) => {
   if (data) {
     return data?.map((i) => ({
       id: i.id,
       label: i.name,
-      value: i.id.toString()
+      value: i.id.toString(),
+      isChecked: i.isChecked
     }))
   } else {
     return tempData

@@ -154,10 +154,7 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
   const [checkedRows, setCheckedRows] = useState<{ [key: string]: any }>({})
   const [checkAll, setCheckAll] = useState<boolean>(false)
   const [advancedSearch, setAdvancedSearch] = useState<boolean>(false)
-  const [tableHeader, setTableHeader] = useState<string[]>([
-    'PARTY',
-    'TOTAL VOTES'
-  ])
+  const [tableHeader, setTableHeader] = useState<string[]>(['PARTY'])
 
   const handleCheckedRows = ({ target }: { target: any }) => {
     const { checked, id } = target || {}
