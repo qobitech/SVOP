@@ -336,7 +336,7 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
     initoption: { label: 'Click to Search Election', value: '' },
     pageNumber: dataElection?.currentPage || 1,
     totalPage: getTotalPage(dataElection?.totalPages),
-    placeholder: 'Search Election',
+    placeholder: 'Click to search Election records',
     paramId: 'election',
     inputId: 'election',
     inputValue: inputValue.election,
@@ -556,12 +556,12 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
                         &nbsp;&nbsp;
                       </span>
                       To use the advanced features, kindly search for an
-                      election above
+                      election record above
                     </p>
                   </div>
                 )}
 
-            {toggle === 'table' && (
+            {electionParams.election && toggle === 'table' && (
               <MainTable
                 header={tableHeader}
                 record={
@@ -582,7 +582,7 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
               />
             )}
 
-            {toggle === 'chart' && <Chart />}
+            {electionParams.election && toggle === 'chart' && <Chart />}
             {false && (
               <PaginationContainer>
                 <ReactPaginate
