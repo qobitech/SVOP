@@ -44,8 +44,6 @@ const Approved: React.FC = () => {
     </DataWrapper>
   )
 }
-
-const tableHeader = ['Party', 'Total Votes']
 interface IApprovedPageChild {
   states?: IStates
 }
@@ -156,6 +154,10 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
   const [checkedRows, setCheckedRows] = useState<{ [key: string]: any }>({})
   const [checkAll, setCheckAll] = useState<boolean>(false)
   const [advancedSearch, setAdvancedSearch] = useState<boolean>(false)
+  const [tableHeader, setTableHeader] = useState<string[]>([
+    'PARTY',
+    'TOTAL VOTES'
+  ])
 
   const handleCheckedRows = ({ target }: { target: any }) => {
     const { checked, id } = target || {}
@@ -531,6 +533,7 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
                     dataPoolingUnits={dataPoolingUnits?.data}
                     dataWards={dataWards?.data}
                     dataZones={dataZones?.data}
+                    setTableHeader={setTableHeader}
                   >
                     <ToggleSection>
                       <ToggleButton

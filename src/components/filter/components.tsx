@@ -4,15 +4,13 @@ import { FilterItemContainer } from './styled'
 
 export interface IFilterParam {
   id: number
-  type: 'select' | 'radio' | 'input'
   title: string
   optionsdata?: Array<{ id: number; label: string; value: string | number }>
-  initoption: { label: string; value: string | number }
-  placeholder: string
   show: boolean
-  hide: boolean
   selectedNumber: number
   selected: any[]
+  isSelected: boolean
+  query: string
 }
 
 interface ICustomFilter {

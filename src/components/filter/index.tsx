@@ -11,7 +11,12 @@ import {
 import CustomFilter, { IFilterParam } from './components'
 import SortComponent, { ISortParam } from './sort-component'
 import { Separator } from '../pages/approved/styled'
-import { getSubFilter } from './methods'
+import {
+  dataType,
+  defaultFilterParam,
+  getResponseData,
+  getSubFilter
+} from './methods'
 import {
   ILocationGeoZone,
   ILocationLGA,
@@ -30,6 +35,7 @@ interface IFilter {
   dataLGAs: ILocationLGA[] | undefined
   dataPoolingUnits: ILocationPollingUnit[] | undefined
   dataWards: ILocationWard[] | undefined
+  setTableHeader: React.Dispatch<React.SetStateAction<string[]>>
 }
 
 const Filter: React.FC<IFilter> = ({
@@ -40,24 +46,9 @@ const Filter: React.FC<IFilter> = ({
   dataLGAs,
   dataPoolingUnits,
   dataWards,
-  dataZones
+  dataZones,
+  setTableHeader
 }) => {
-  const tempData = [{ id: 0, label: '', value: '' }]
-
-  const getResponseData = (data: Array<{ [key: string]: any }>) => {
-    if (data) {
-      return data?.map((i) => ({
-        id: i.id,
-        label: i.name,
-        value: i.id.toString()
-      }))
-    } else {
-      return tempData
-    }
-  }
-
-  type dataType = Array<{ [key: string]: any }>
-
   const filterParamsData = [
     {
       id: 1,
@@ -112,50 +103,67 @@ const Filter: React.FC<IFilter> = ({
   const [isSort, setIsSort] = useState(false)
   const [checkId, setCheckId] = useState('')
   const [openFilterParam, setOpenFilterParam] = useState(false)
-  const [subFilter, setSubFilter] = useState<
-    Array<{
-      id: number
-      text: string
-      isSelected: boolean
-      data: any
-      query: string
-    }>
-  >([{ id: 0, text: '', isSelected: false, data: null, query: '' }])
   const [customInfo, setCustomInfo] = useState<{ [key: string]: any }>(infoData)
   const [sortInfo, setSortInfo] = useState<{ [key: string]: any }>(infoData)
+  const [filterParams, setFilterParams] =
+    useState<IFilterParam[]>(defaultFilterParam)
+  const [sortParams, setSortParams] = useState<ISortParam[]>([
+    { id: '', title: '' }
+  ])
 
   useEffect(() => {
-    setSubFilter(getSubFilter(filterParamsData, primarySearchParam))
+    setSortParams(
+      filterParams.map((i) => ({
+        id: i.title,
+        title: i.title
+      }))
+    )
+  }, [filterParams])
+
+  useEffect(() => {
+    const filterItems = getSubFilter(filterParamsData, primarySearchParam)
+    setFilterParams(
+      filterItems.map((i) => ({
+        id: i.id,
+        title: i.text,
+        optionsdata: i.data,
+        show: true,
+        selected: [],
+        isSelected: i.isSelected,
+        selectedNumber: 0,
+        query: i.query
+      }))
+    )
   }, [dataStates, primarySearchParam])
 
-  const queryKey = (name: string) => {
-    return subFilter.filter((i) => i.text === name)[0].query
-  }
-
-  const getParamsData = (text: string) => {
-    return { options: subFilter.filter((i) => i.text === text)[0].data }
-  }
-
-  const handleSubFilter = (index: number, value: boolean) => {
-    const arr = [...subFilter]
-    arr[index].isSelected = value
-    setSubFilter([...arr])
+  // update state responsible for opening and closing filter section
+  // the state is set to true if any of the filter params item property isSelected is treu
+  // the state is set to false when all filter params property isSelected is false
+  const handleOpenFilter = (arr: IFilterParam[]) => {
     const isSelected = arr.map((j) => j.isSelected).includes(true)
     setOpenFilterParam(isSelected)
   }
 
-  const filterParams: IFilterParam[] = subFilter.map((i, index) => ({
-    id: index + 1,
-    type: 'select',
-    title: i.text,
-    optionsdata: getParamsData(i.text).options,
-    initoption: { label: 'Select ' + subFilter[index].text, value: '' },
-    placeholder: '',
-    show: true,
-    hide: subFilter[index].isSelected,
-    selected: [],
-    selectedNumber: 0
-  }))
+  const handleTableHeader = (arr: IFilterParam[]) => {
+    // update table header when a filter param item is selected
+    const th = arr.filter((i) => i.isSelected).map((i) => i.title.toUpperCase())
+    th.unshift('PARTY')
+    th.push('TOTAL VOTES')
+    setTableHeader((p) => [...th])
+  }
+
+  const onFilterItemClick = (index: number, value: boolean) => {
+    const arr = [...filterParams]
+    arr[index].isSelected = value
+    // update filter params item property isSelected
+    setFilterParams([...arr])
+    handleOpenFilter(arr)
+    handleTableHeader(arr)
+  }
+
+  const queryKey = (name: string) => {
+    return filterParams.filter((i) => i.title === name)[0].query
+  }
 
   const sendQuery = (state: { [key: string]: string }) => {
     let temp = ''
@@ -174,11 +182,6 @@ const Filter: React.FC<IFilter> = ({
       }
     })
   }
-
-  const sortParams: ISortParam[] = subFilter.map((i) => ({
-    id: i.text,
-    title: i.text
-  }))
 
   return (
     <FilterContainer>
@@ -206,15 +209,15 @@ const Filter: React.FC<IFilter> = ({
           <Separator customheight={1} customwidth={'100%'} />
           <FilterButtonSection>
             <FilterButtonLeftSection>
-              {subFilter.map((i, index) => (
+              {filterParams.map((i, index) => (
                 <FilterSubButton
                   key={i.id}
-                  onClick={() =>
-                    handleSubFilter(index, !subFilter[index].isSelected)
-                  }
-                  isclicked={subFilter[index].isSelected ? 'true' : 'false'}
+                  onClick={() => {
+                    onFilterItemClick(index, !filterParams[index].isSelected)
+                  }}
+                  isclicked={filterParams[index].isSelected ? 'true' : 'false'}
                 >
-                  {i.text}
+                  {i.title}
                 </FilterSubButton>
               ))}
             </FilterButtonLeftSection>
@@ -224,7 +227,7 @@ const Filter: React.FC<IFilter> = ({
       {openFilterParam && (
         <FilterContentContainer>
           <CustomFilter
-            filterParams={filterParams.filter((i) => i.hide)}
+            filterParams={filterParams.filter((i) => i.isSelected)}
             sendQuery={sendQuery}
             isFilter={true}
             setCustomInfo={setCustomInfo}
