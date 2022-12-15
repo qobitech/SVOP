@@ -33,4 +33,21 @@ export interface IActions {
     pageNumber?: number,
     sort?: string
   ) => (dispatch: any) => void
+  getZone: () => (dispatch: any) => void
+  getGEOZone: () => (dispatch: any) => void
+  getPoolingUnit: (
+    pageSize?: number,
+    pageNumber?: number,
+    sort?: string
+  ) => (dispatch: any) => void
+  getWard: (
+    pageSize?: number,
+    pageNumber?: number,
+    sort?: string
+  ) => (dispatch: any) => void
+  getLGA: (
+    pageSize?: number,
+    pageNumber?: number,
+    sort?: string
+  ) => (dispatch: any) => void
 }

@@ -205,7 +205,7 @@ code {
   border-radius: 5px;
   display: grid;
   grid-row: auto;
-  grid-template-columns: repeat(auto-fill, minmax(335px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
   justify-content: space-between;
 }
 
@@ -214,6 +214,14 @@ code {
   display: grid;
   grid-row: auto;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  justify-content: space-between;
+}
+
+.fml-filter-grid {
+  border-radius: 5px;
+  display: grid;
+  grid-row: auto;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   justify-content: space-between;
 }
 

@@ -19,6 +19,16 @@ export const FilterContentContainer = styled('div')({
   margin: '20px 0'
 })
 
+export const FilterItemContainer = styled('div')({
+  boxSizing: 'border-box',
+  cursor: 'pointer',
+  transition: '.1s ease',
+  '&:hover': {
+    background: '#D2E9D9',
+    color: 'rgb(40, 100, 57)'
+  }
+})
+
 export const FilterButtonSection = styled('div')({
   display: 'flex',
   flexWrap: 'wrap',

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   FilterButton,
   FilterContainer,
@@ -11,48 +11,106 @@ import {
 import CustomFilter, { IFilterParam } from './components'
 import SortComponent, { ISortParam } from './sort-component'
 import { Separator } from '../pages/approved/styled'
-import {
-  filterParamsData,
-  infoData,
-  lgaoptionsdata,
-  pollingunitdata,
-  stateoptionsdata,
-  wardoptiondata,
-  wardoptionsdata,
-  zoneoptionsdata
-} from './mockdata'
+import { getSubFilter } from './methods'
+import { ILocationState } from '../../interface/ILocation'
 
 interface IFilter {
   children?: any
+  primarySearchParam: string
+  dataStates: ILocationState[] | undefined
 }
 
-const Filter: React.FC<IFilter> = ({ children }) => {
+const Filter: React.FC<IFilter> = ({
+  children,
+  primarySearchParam,
+  dataStates
+}) => {
+  const tempData = [{ id: 0, label: '', value: '' }]
+
+  const filterParamsData = [
+    {
+      id: 1,
+      text: 'Region',
+      isSelected: false,
+      data: tempData,
+      query: 'region'
+    },
+    {
+      id: 2,
+      text: 'GEO Zone',
+      isSelected: false,
+      data: tempData,
+      query: 'zone'
+    },
+    {
+      id: 3,
+      text: 'State',
+      isSelected: false,
+      data:
+        dataStates?.map((i) => ({
+          id: i.id,
+          label: i.name,
+          value: i.id.toString()
+        })) || tempData,
+      query: 'state'
+    },
+    {
+      id: 4,
+      text: 'LGA',
+      isSelected: false,
+      data: tempData,
+      query: 'lga'
+    },
+    {
+      id: 5,
+      text: 'Wards',
+      isSelected: false,
+      data: tempData,
+      query: 'ward'
+    },
+    {
+      id: 6,
+      text: 'Polling Unit',
+      isSelected: false,
+      data: tempData,
+      query: 'pollingunit'
+    }
+  ]
+
+  const infoData = filterParamsData.reduce(
+    (a, v) => ({ ...a, [v.text]: '' }),
+    {}
+  )
+
   const [isFilter, setIsFilter] = useState(false)
   const [isSort, setIsSort] = useState(false)
   const [checkId, setCheckId] = useState('')
   const [openFilterParam, setOpenFilterParam] = useState(false)
   const [filterIndex, setFilterIndex] = useState<number[]>([])
-  const [subFilters, setSubFilters] = useState(filterParamsData)
+  const [subFilter, setSubFilters] = useState<
+    Array<{
+      id: number
+      text: string
+      isSelected: boolean
+      data: any
+      query: string
+    }>
+  >([{ id: 0, text: '', isSelected: false, data: null, query: '' }])
   const [customInfo, setCustomInfo] = useState<{ [key: string]: any }>(infoData)
   const [sortInfo, setSortInfo] = useState<{ [key: string]: any }>(infoData)
 
+  console.log(subFilter, 'juju')
+
+  useEffect(() => {
+    setSubFilters(getSubFilter(filterParamsData, primarySearchParam))
+  }, [dataStates, primarySearchParam])
+
   const queryKey = (name: string) => {
-    switch (name) {
-      case subFilters[0].text:
-        return 'region'
-      case subFilters[1].text:
-        return 'zone'
-      case subFilters[2].text:
-        return 'state'
-      case subFilters[3].text:
-        return 'lga'
-      case subFilters[4].text:
-        return 'ward'
-      case subFilters[5].text:
-        return 'pollingunit'
-      default:
-        return ''
-    }
+    return subFilter.filter((i) => i.text === name)[0].query
+  }
+
+  const getParamsData = (text: string) => {
+    return { options: subFilter.filter((i) => i.text === text)[0].data }
   }
 
   const handleSubFilter = (index: number, value: boolean) => {
@@ -65,7 +123,7 @@ const Filter: React.FC<IFilter> = ({ children }) => {
       tempIndex.splice(ind, 1)
       setFilterIndex([...tempIndex])
     }
-    const arr = [...subFilters]
+    const arr = [...subFilter]
     arr[index].isSelected = value
     setSubFilters([...arr])
     const isEveryFalse = (i: {
@@ -76,34 +134,15 @@ const Filter: React.FC<IFilter> = ({ children }) => {
     setOpenFilterParam(!arr.every(isEveryFalse))
   }
 
-  const getParamsData = (text: string) => {
-    switch (text) {
-      case subFilters[0].text:
-        return { options: wardoptionsdata }
-      case subFilters[1].text:
-        return { options: zoneoptionsdata }
-      case subFilters[2].text:
-        return { options: stateoptionsdata }
-      case subFilters[3].text:
-        return { options: lgaoptionsdata }
-      case subFilters[4].text:
-        return { options: wardoptiondata }
-      case subFilters[5].text:
-        return { options: pollingunitdata }
-      default:
-        return { options: [] }
-    }
-  }
-
-  const filterParams: IFilterParam[] = subFilters.map((i, index) => ({
+  const filterParams: IFilterParam[] = subFilter.map((i, index) => ({
     id: index + 1,
     type: 'select',
     title: i.text,
     optionsdata: getParamsData(i.text).options,
-    initoption: { label: 'Select ' + subFilters[index].text, value: '' },
+    initoption: { label: 'Select ' + subFilter[index].text, value: '' },
     placeholder: '',
     show: true,
-    hide: subFilters[index].isSelected
+    hide: subFilter[index].isSelected
   }))
 
   const sendQuery = (state: { [key: string]: string }) => {
@@ -113,7 +152,6 @@ const Filter: React.FC<IFilter> = ({ children }) => {
         temp += (temp ? '&' : '?') + queryKey(i) + '=' + state[i]
       }
     })
-    console.log(temp, 'juju')
   }
 
   const sendSortQuery = (state: { [key: string]: string }) => {
@@ -123,10 +161,9 @@ const Filter: React.FC<IFilter> = ({ children }) => {
         temp += (temp ? '&' : '?') + queryKey(i) + '=' + state[i]
       }
     })
-    console.log(temp, 'juju')
   }
 
-  const sortParams: ISortParam[] = subFilters.map((i) => ({
+  const sortParams: ISortParam[] = subFilter.map((i) => ({
     id: i.text,
     title: i.text
   }))
@@ -157,13 +194,13 @@ const Filter: React.FC<IFilter> = ({ children }) => {
           <Separator customheight={1} customwidth={'100%'} />
           <FilterButtonSection>
             <FilterButtonLeftSection>
-              {subFilters.map((i, index) => (
+              {subFilter.map((i, index) => (
                 <FilterSubButton
                   key={i.id}
                   onClick={() =>
-                    handleSubFilter(index, !subFilters[index].isSelected)
+                    handleSubFilter(index, !subFilter[index].isSelected)
                   }
-                  isclicked={subFilters[index].isSelected ? 'true' : 'false'}
+                  isclicked={subFilter[index].isSelected ? 'true' : 'false'}
                 >
                   {i.text}
                 </FilterSubButton>

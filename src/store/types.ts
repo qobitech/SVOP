@@ -39,6 +39,31 @@ export const locationType = {
     dataAction: 'GET_STATE',
     dataLoading: 'GET_STATE_LOADING',
     dataError: 'GET_STATE_ERROR'
+  },
+  zone: {
+    dataAction: 'GET_ZONE',
+    dataLoading: 'GET_ZONE_LOADING',
+    dataError: 'GET_ZONE_ERROR'
+  },
+  geozone: {
+    dataAction: 'GET_GEO_ZONE',
+    dataLoading: 'GET_GEO_ZONE_LOADING',
+    dataError: 'GET_GEO_ZONE_ERROR'
+  },
+  pollingUnit: {
+    dataAction: 'GET_POOLING_UNIT',
+    dataLoading: 'GET_POOLING_UNIT_LOADING',
+    dataError: 'GET_POOLING_UNIT_ERROR'
+  },
+  ward: {
+    dataAction: 'GET_WARD',
+    dataLoading: 'GET_WARD_LOADING',
+    dataError: 'GET_WARD_ERROR'
+  },
+  lga: {
+    dataAction: 'GET_LGA',
+    dataLoading: 'GET_LGA_LOADING',
+    dataError: 'GET_LGA_ERROR'
   }
 }
 

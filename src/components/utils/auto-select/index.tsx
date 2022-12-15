@@ -23,32 +23,32 @@ interface ISelect extends React.ComponentPropsWithoutRef<'input'> {
   label?: string
   error?: string | undefined
   optionsdata?: Array<{ id: number; label: string; value: string }>
-  initoption: { label: string; value: string | number }
   nomargin?: 'true' | 'false'
   customwidth?: number
   customheight?: number
-  pageNumber: number
-  totalPage: number
   onAutoChange?: React.ChangeEventHandler<HTMLInputElement> | undefined
   handlePagination?: (selectedItem: { selected: number }) => void
   noPagination?: boolean
   loading?: boolean
   handleParamValue: (paramId: string, value: string) => void
-  paramId: string
   handleInputValue: (inputId: string, value: string) => void
-  inputValue: string
-  inputId: string
-  displayValue: string
+  index: number
+  filteredOptions: Array<{
+    [key: string]: any
+  }>
   setFilteredOptions: (
     index: number,
     value: Array<{
       [key: string]: any
     }>
   ) => void
-  index: number
-  filteredOptions: Array<{
-    [key: string]: any
-  }>
+  initoption: { label: string; value: string | number }
+  pageNumber: number
+  totalPage: number
+  paramId: string
+  inputValue: string
+  inputId: string
+  displayValue: string
 }
 
 // eslint-disable-next-line react/display-name
@@ -121,12 +121,12 @@ export const TypeAutoSelect = React.forwardRef(
             Array(allAElements.length).forEach((i) => {
               if (allAElements[i].parentElement !== paginationElement) {
                 setOpenOption(false)
-                handleSelect('')
+                // handleSelect('')
               }
             })
           } else {
             setOpenOption(false)
-            handleSelect('')
+            // handleSelect('')
           }
         }
         if (!id) {
@@ -185,9 +185,7 @@ export const TypeAutoSelect = React.forwardRef(
             onBlur={handleBlur}
             autoComplete="off"
             onClick={() => {
-              if (!openOption) {
-                setOpenOption(true)
-              }
+              setOpenOption(!openOption)
             }}
             required={true}
             defaultValue={displayValue}
@@ -198,7 +196,10 @@ export const TypeAutoSelect = React.forwardRef(
             <AutoSelectCloseIcon
               className="fas fa-times"
               id={'select-options-search-close-icon-' + props.id}
-              onClick={() => handleParamValue(paramId, '')}
+              onClick={() => {
+                handleParamValue(paramId, '')
+                handleSelect('')
+              }}
               isvalue={displayValue ? 'true' : 'false'}
             />
             {/* )} */}
@@ -245,11 +246,17 @@ export const TypeAutoSelect = React.forwardRef(
                 filteredOptions?.map((i, index) => (
                   <AutoSelectOptionItemContainer
                     key={i.id}
-                    onClick={() => handleSelect(i.label)}
+                    onClick={() => {
+                      handleSelect(i.label)
+                      setOpenOption(!openOption)
+                    }}
                     id={'select-options-item-container-' + props.id}
                   >
                     <AutoSelectOptionItem
-                      onClick={() => handleSelect(i.label)}
+                      onClick={() => {
+                        handleSelect(i.label)
+                        setOpenOption(!openOption)
+                      }}
                       id={'select-option-item-' + index + '-' + props.id}
                     >
                       {i.label}

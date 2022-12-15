@@ -3,6 +3,11 @@ export const wardoptionsdata = [
   { id: 2, label: 'Ward B', value: '2' }
 ]
 
+export const regionoptionsdata = [
+  { id: 1, label: 'South', value: '1' },
+  { id: 2, label: 'West', value: '2' }
+]
+
 export const zoneoptionsdata = [
   { id: 1, label: 'South South', value: '1' },
   { id: 2, label: 'South East', value: '2' },
@@ -43,41 +48,3 @@ export const pollingunitdata = [
   { id: 4, label: 'Rema Starr', value: '4' },
   { id: 5, label: 'Pheonix Williams', value: '5' }
 ]
-
-export const filterParamsData = [
-  {
-    id: 1,
-    text: 'Region',
-    isSelected: false
-  },
-  {
-    id: 2,
-    text: 'GEO Zone',
-    isSelected: false
-  },
-  {
-    id: 3,
-    text: 'State',
-    isSelected: false
-  },
-  {
-    id: 4,
-    text: 'LGA',
-    isSelected: false
-  },
-  {
-    id: 5,
-    text: 'Wards',
-    isSelected: false
-  },
-  {
-    id: 6,
-    text: 'Polling Unit',
-    isSelected: false
-  }
-]
-
-export const infoData = filterParamsData.reduce(
-  (a, v) => ({ ...a, [v.text]: '' }),
-  {}
-)

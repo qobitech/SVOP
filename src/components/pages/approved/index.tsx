@@ -69,9 +69,10 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
   const loadElectionCategory = states?.election?.getAllElectionCategory_Loading
   const errorElectionCategory = states?.election?.getAllElectionCategory_Error
   const dataApprovedResults = states?.election?.getAllApprovedResults
-  const loadApprovedResults = states?.election?.getAllApprovedResults_Loading
+  // const loadApprovedResults = states?.election?.getAllApprovedResults_Loading
   // const errorApprovedResults = states?.election?.getAllApprovedResults_Error
   const errorStates = states?.location?.getAllLocationStates_Error
+  const dataStates = states?.location?.getAllLocationStates
 
   useEffect(() => {
     getElectionCycle(PAGE_SIZE)
@@ -194,8 +195,7 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
     electionCycle: '',
     election: '',
     electionCategory: '',
-    locationState: '',
-    approvedResults: ''
+    locationState: ''
   }
 
   const [electionParams, setElectionParams] = useState(initState)
@@ -204,13 +204,7 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
     initState
   )
 
-  // const handleInputValue = (inputId: string, value: string) => {
-  //   setInputValue({ ...inputValue, [inputId]: value })
-  // }
-
-  // const handleParamValue = (paramId: string, value: string) => {
-  //   setElectionParams({ ...electionParams, [paramId]: value })
-  // }
+  console.log(inputValue)
 
   const getTotalPage = (totalPages: number | undefined) => {
     const total = Math.round((totalPages || 1) / PAGE_SIZE)
@@ -338,22 +332,22 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
   >([] as Array<{ [key: string]: any }>)
 
   const primarySearchData = {
-    id: 'approvedResults',
-    initoption: { label: 'Search Election', value: '' },
-    pageNumber: dataApprovedResults?.currentPage || 1,
-    totalPage: getTotalPage(dataApprovedResults?.total),
+    id: 'election',
+    initoption: { label: 'Click to Search Election', value: '' },
+    pageNumber: dataElection?.currentPage || 1,
+    totalPage: getTotalPage(dataElection?.totalPages),
     placeholder: 'Search Election',
-    paramId: 'approvedResults',
-    inputId: 'approvedResults',
-    inputValue: inputValue.approvedResults,
-    displayValue: electionParams.approvedResults,
+    paramId: 'election',
+    inputId: 'election',
+    inputValue: inputValue.election,
+    displayValue: electionParams.election,
     disabled: false,
-    optionsdata: dataApprovedResults?.data.map((i, index) => ({
+    optionsdata: dataElection?.data.map((i, index) => ({
       id: index,
-      label: _joiner(i.election),
-      value: i.election
+      label: _joiner(i.name),
+      value: i.id.toString()
     })),
-    loading: loadApprovedResults,
+    loading: loadElection,
     noPagination: false
   }
 
@@ -362,7 +356,7 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
     if (data !== undefined) {
       setFilteredPrimaryOptions(data as Array<{ [key: string]: any }>)
     }
-  }, [dataApprovedResults])
+  }, [dataElection])
 
   const handlePrimarySelectValues = (e: ChangeEvent<HTMLInputElement>) => {}
   const handlePrimaryParamValue = (paramId: string, value: string) => {
@@ -373,8 +367,8 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
   }
 
   const handlePrimaryPagination = (selectedItem: { selected: number }) => {
-    if (selectedItem.selected + 1 !== dataApprovedResults?.currentPage) {
-      getApprovedResultsAction(PAGE_SIZE, selectedItem.selected + 1)
+    if (selectedItem.selected + 1 !== dataElection?.currentPage) {
+      getElection(PAGE_SIZE, selectedItem.selected + 1)
     }
   }
 
@@ -387,7 +381,7 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
 
   const primaryRecordData = () => {
     return dataApprovedResults?.data
-      .filter((i) => _joiner(i.election) === electionParams?.approvedResults)
+      .filter((i) => _joiner(i.election) === electionParams?.election)
       .map((i, index) => ({
         id: i.id,
         row: [
@@ -478,7 +472,7 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
                 className="cursor-pointer text-medium"
                 onClick={() => setAdvancedSearch(!advancedSearch)}
               >
-                Advanced Search&nbsp;
+                Advanced Features&nbsp;
                 <span>{advancedSearch ? 'On' : 'Off'}</span>
               </p>
             </div>
@@ -503,53 +497,69 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
                 ))}
               </div>
             )} */}
-            {advancedSearch && (
-              <Filter>
-                <ToggleSection>
-                  <ToggleButton
-                    handleClick={handleToggle}
-                    toggleTextOn="Chart"
-                    toggleTextOff="Table"
-                  />
-                  {toggle === 'chart' && (
-                    <>
-                      <Separator customwidth={30} customheight={0} />
-                      <TypeSelect
-                        initoption={{ label: 'Select Chart', value: '' }}
-                        nomargin="true"
-                        customwidth={150}
-                        optionsdata={[
-                          {
-                            id: 1,
-                            label: 'Bar Chart',
-                            value: 'b-chart'
-                          },
-                          {
-                            id: 2,
-                            label: 'Pie Chart',
-                            value: 'p-chart'
-                          }
-                        ]}
+            {electionParams.election
+              ? advancedSearch && (
+                  <Filter
+                    primarySearchParam={electionParams.election}
+                    dataStates={dataStates?.data}
+                  >
+                    <ToggleSection>
+                      <ToggleButton
+                        handleClick={handleToggle}
+                        toggleTextOn="Chart"
+                        toggleTextOff="Table"
                       />
-                    </>
-                  )}
-                </ToggleSection>
-                <SelectedTableActionsSection>
-                  <FilterButton>
-                    <i className="fas fa-share-alt" />
-                    &nbsp;&nbsp;Share
-                  </FilterButton>
-                  <FilterButton>
-                    <i className="fas fa-print" />
-                    &nbsp;&nbsp;Print
-                  </FilterButton>
-                  <FilterButton nomargin="true">
-                    <i className="fas fa-download" />
-                    &nbsp;&nbsp;Download
-                  </FilterButton>
-                </SelectedTableActionsSection>
-              </Filter>
-            )}
+                      {toggle === 'chart' && (
+                        <>
+                          <Separator customwidth={30} customheight={0} />
+                          <TypeSelect
+                            initoption={{ label: 'Select Chart', value: '' }}
+                            nomargin="true"
+                            customwidth={150}
+                            optionsdata={[
+                              {
+                                id: 1,
+                                label: 'Bar Chart',
+                                value: 'b-chart'
+                              },
+                              {
+                                id: 2,
+                                label: 'Pie Chart',
+                                value: 'p-chart'
+                              }
+                            ]}
+                          />
+                        </>
+                      )}
+                    </ToggleSection>
+                    <SelectedTableActionsSection>
+                      <FilterButton>
+                        <i className="fas fa-share-alt" />
+                        &nbsp;&nbsp;Share
+                      </FilterButton>
+                      <FilterButton>
+                        <i className="fas fa-print" />
+                        &nbsp;&nbsp;Print
+                      </FilterButton>
+                      <FilterButton nomargin="true">
+                        <i className="fas fa-download" />
+                        &nbsp;&nbsp;Download
+                      </FilterButton>
+                    </SelectedTableActionsSection>
+                  </Filter>
+                )
+              : advancedSearch && (
+                  <div className="text-center py-3">
+                    <p className="color-light">
+                      <span>
+                        <i className="fas fa-bell" />
+                        &nbsp;&nbsp;
+                      </span>
+                      To use the advanced features, kindly search for an
+                      election above
+                    </p>
+                  </div>
+                )}
 
             {toggle === 'table' && (
               <MainTable
