@@ -56,7 +56,12 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
     getElection,
     getElectionCategory,
     getStates,
-    getApprovedResultsAction
+    getApprovedResultsAction,
+    getGEOZone,
+    getLGA,
+    getPoolingUnit,
+    getWard,
+    getZone
   } = props as unknown as IActions
 
   // const dataElectionCycle = states?.election?.getAllElectionCycles
@@ -73,6 +78,11 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
   // const errorApprovedResults = states?.election?.getAllApprovedResults_Error
   const errorStates = states?.location?.getAllLocationStates_Error
   const dataStates = states?.location?.getAllLocationStates
+  const dataZones = states?.location?.getAllLocationZones
+  const dataGEOZones = states?.location?.getAllLocationGEOZones
+  const dataLGAs = states?.location?.getAllLocationLGAs
+  const dataPoolingUnits = states?.location?.getAllLocationPollingUnits
+  const dataWards = states?.location?.getAllLocationWards
 
   useEffect(() => {
     getElectionCycle(PAGE_SIZE)
@@ -80,6 +90,11 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
     getElectionCategory(PAGE_SIZE)
     getStates(PAGE_SIZE)
     getApprovedResultsAction(PAGE_SIZE)
+    getGEOZone()
+    getLGA(PAGE_SIZE)
+    getPoolingUnit(PAGE_SIZE)
+    getWard(PAGE_SIZE)
+    getZone()
   }, [])
 
   const handlePagination = (selectedItem: { selected: number }) => {
@@ -447,6 +462,22 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
                   ? 'Election Results'
                   : ''}
               </HeaderBodyText>
+              <p
+                className="cursor-pointer text-small m-0 border rounded py-1 px-2"
+                onClick={() => setAdvancedSearch(!advancedSearch)}
+                style={{ transition: '.2s ease' }}
+              >
+                <span>
+                  <i
+                    className={`fas fa-circle ${
+                      advancedSearch ? 'text-success' : 'text-danger'
+                    }`}
+                  />
+                  &nbsp;&nbsp;
+                </span>
+                Advanced Features&nbsp;
+                <span>{advancedSearch ? 'On' : 'Off'}</span>
+              </p>
               {(loadElectionCycle || loadElection || loadElectionCategory) && (
                 <i
                   className="fa fa-spinner fa-spin ml-3"
@@ -468,13 +499,6 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
                 handlePagination={handlePrimaryPagination}
                 {...primarySearchData}
               />
-              <p
-                className="cursor-pointer text-medium"
-                onClick={() => setAdvancedSearch(!advancedSearch)}
-              >
-                Advanced Features&nbsp;
-                <span>{advancedSearch ? 'On' : 'Off'}</span>
-              </p>
             </div>
             {/* {advancedSearch && (
               <div className="fml-grid pb-3">
@@ -502,6 +526,11 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
                   <Filter
                     primarySearchParam={electionParams.election}
                     dataStates={dataStates?.data}
+                    dataGEOZones={dataGEOZones?.data}
+                    dataLGAs={dataLGAs?.data}
+                    dataPoolingUnits={dataPoolingUnits?.data}
+                    dataWards={dataWards?.data}
+                    dataZones={dataZones?.data}
                   >
                     <ToggleSection>
                       <ToggleButton

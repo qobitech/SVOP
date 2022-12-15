@@ -12,67 +12,91 @@ import CustomFilter, { IFilterParam } from './components'
 import SortComponent, { ISortParam } from './sort-component'
 import { Separator } from '../pages/approved/styled'
 import { getSubFilter } from './methods'
-import { ILocationState } from '../../interface/ILocation'
+import {
+  ILocationGeoZone,
+  ILocationLGA,
+  ILocationPollingUnit,
+  ILocationState,
+  ILocationWard,
+  ILocationZone
+} from '../../interface/ILocation'
 
 interface IFilter {
   children?: any
   primarySearchParam: string
   dataStates: ILocationState[] | undefined
+  dataZones: ILocationZone[] | undefined
+  dataGEOZones: ILocationGeoZone[] | undefined
+  dataLGAs: ILocationLGA[] | undefined
+  dataPoolingUnits: ILocationPollingUnit[] | undefined
+  dataWards: ILocationWard[] | undefined
 }
 
 const Filter: React.FC<IFilter> = ({
   children,
   primarySearchParam,
-  dataStates
+  dataStates,
+  dataGEOZones,
+  dataLGAs,
+  dataPoolingUnits,
+  dataWards,
+  dataZones
 }) => {
   const tempData = [{ id: 0, label: '', value: '' }]
+
+  const getResponseData = (data: Array<{ [key: string]: any }>) => {
+    if (data) {
+      return data?.map((i) => ({
+        id: i.id,
+        label: i.name,
+        value: i.id.toString()
+      }))
+    } else {
+      return tempData
+    }
+  }
 
   const filterParamsData = [
     {
       id: 1,
       text: 'Region',
       isSelected: false,
-      data: tempData,
+      data: getResponseData(dataZones as Array<{ [key: string]: any }>),
       query: 'region'
     },
     {
       id: 2,
       text: 'GEO Zone',
       isSelected: false,
-      data: tempData,
+      data: getResponseData(dataGEOZones as Array<{ [key: string]: any }>),
       query: 'zone'
     },
     {
       id: 3,
       text: 'State',
       isSelected: false,
-      data:
-        dataStates?.map((i) => ({
-          id: i.id,
-          label: i.name,
-          value: i.id.toString()
-        })) || tempData,
+      data: getResponseData(dataStates as Array<{ [key: string]: any }>),
       query: 'state'
     },
     {
       id: 4,
       text: 'LGA',
       isSelected: false,
-      data: tempData,
+      data: getResponseData(dataLGAs as Array<{ [key: string]: any }>),
       query: 'lga'
     },
     {
       id: 5,
       text: 'Wards',
       isSelected: false,
-      data: tempData,
+      data: getResponseData(dataWards as Array<{ [key: string]: any }>),
       query: 'ward'
     },
     {
       id: 6,
       text: 'Polling Unit',
       isSelected: false,
-      data: tempData,
+      data: getResponseData(dataPoolingUnits as Array<{ [key: string]: any }>),
       query: 'pollingunit'
     }
   ]
