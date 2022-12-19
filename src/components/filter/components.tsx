@@ -1,19 +1,26 @@
 import React, { useState } from 'react'
+import { filterItemType } from '../pages/approved'
 import { TypeCheckbox } from '../utils/checkbox'
 import { FilterItemContainer } from './styled'
+
+export interface optionDataType {
+  id: number
+  label: string
+  value: string | number
+  isChecked: boolean
+  parentId: number
+  parentKey: string
+  hidden: boolean
+}
 
 export interface IFilterParam {
   id: number
   title: string
-  optionsdata?: Array<{
-    id: number
-    label: string
-    value: string | number
-    isChecked: boolean
-  }>
+  optionsdata: optionDataType[]
+  type: filterItemType
   show: boolean
   selectedNumber: number
-  selected: any[]
+  selected: { type: filterItemType; items: number[] }
   isSelected: boolean
   query: string
 }
@@ -22,43 +29,21 @@ interface ICustomFilter {
   filterParams: IFilterParam[]
   sendQuery: (state: { [key: string]: string }) => void
   isFilter: boolean
-  setCustomInfo: React.Dispatch<React.SetStateAction<{ [key: string]: any }>>
-  customInfo: { [key: string]: any }
-  handleItemSelect: (parentId: number, id: number, selected: boolean) => void
+  // setCustomInfo: React.Dispatch<React.SetStateAction<{ [key: string]: any }>>
+  // customInfo: { [key: string]: any }
+  handleItemSelect: (
+    parentId: number,
+    id: number,
+    selected: boolean,
+    type: filterItemType
+  ) => void
 }
 
 const CustomFilter: React.FC<ICustomFilter> = ({
   filterParams,
-  sendQuery,
   isFilter,
-  customInfo,
-  setCustomInfo,
   handleItemSelect
 }) => {
-  // const onHandleChange = ({
-  //   target
-  // }: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-  //   const { name, value } = target
-  //   const temp = customInfo
-  //   if (!value) {
-  //     const invalidIndex = Object.keys(temp).indexOf(name)
-  //     Object.keys(temp).forEach((i, index) => {
-  //       if (index >= invalidIndex) {
-  //         temp[i] = ''
-  //       }
-  //     })
-  //     setCustomInfo({ ...temp })
-  //     sendQuery({ ...temp })
-  //   } else {
-  //     sendQuery({ ...customInfo, [name]: value })
-  //     setCustomInfo({ ...customInfo, [name]: value })
-  //   }
-  // }
-
-  // const onHandleClick = (value: string, title: string) => {
-  //   setCustomInfo({ ...customInfo, [title]: value })
-  // }
-
   return (
     <div className="w-100">
       {isFilter && (
@@ -82,7 +67,12 @@ export default CustomFilter
 
 interface ICustomFilterItem {
   i: IFilterParam
-  handleItemSelect: (parentId: number, id: number, selected: boolean) => void
+  handleItemSelect: (
+    parentId: number,
+    id: number,
+    selected: boolean,
+    type: filterItemType
+  ) => void
 }
 
 const CustomFilterItem: React.FC<ICustomFilterItem> = ({
@@ -90,6 +80,11 @@ const CustomFilterItem: React.FC<ICustomFilterItem> = ({
   handleItemSelect
 }) => {
   const [openTab, setOpenTab] = useState<boolean>(true)
+
+  const selectedNumber = i.optionsdata?.reduce((total, item) => {
+    const temp = item.isChecked ? 1 : 0
+    return (total += temp)
+  }, 0)
 
   return (
     <div
@@ -106,9 +101,9 @@ const CustomFilterItem: React.FC<ICustomFilterItem> = ({
       >
         <p className="m-0 text-small" style={{ fontSize: '13px' }}>
           <b>{i.title}</b>&nbsp;&nbsp;-&nbsp;&nbsp;
-          {i.selectedNumber === 0 || !i.selectedNumber
+          {selectedNumber === 0 || !selectedNumber
             ? 'All'
-            : i.selectedNumber + ' selected'}
+            : selectedNumber + ' selected'}
         </p>
         <p className="m-0 text-small">
           <span>
@@ -122,13 +117,18 @@ const CustomFilterItem: React.FC<ICustomFilterItem> = ({
             i.optionsdata?.map((j) => (
               <FilterItemContainer
                 key={j.id}
-                className="d-flex align-items-center justify-content-start px-1 py-1 w-100"
+                className="align-items-center justify-content-start px-1 py-1 w-100"
                 title={j.label}
-                onClick={() => handleItemSelect(i.id, j.id, !j.isChecked)}
+                hide={j.hidden ? 'true' : 'false'}
+                onClick={() =>
+                  handleItemSelect(i.id, j.id, !j.isChecked, i.type)
+                }
               >
                 <TypeCheckbox
-                  checked={j.isChecked}
-                  onChange={() => handleItemSelect(i.id, j.id, !j.isChecked)}
+                  checked={j.isChecked || false}
+                  onChange={() =>
+                    handleItemSelect(i.id, j.id, !j.isChecked, i.type)
+                  }
                 />
                 &nbsp;&nbsp;&nbsp;
                 <p className="m-0" style={{ fontSize: '11px' }}>

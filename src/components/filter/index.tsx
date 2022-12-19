@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import {
   FilterButton,
   FilterContainer,
@@ -9,133 +9,50 @@ import {
 } from './styled'
 
 import CustomFilter, { IFilterParam } from './components'
-import SortComponent, { ISortParam } from './sort-component'
+// import SortComponent, { ISortParam } from './sort-component'
 import { Separator } from '../pages/approved/styled'
-import {
-  dataType,
-  defaultFilterParam,
-  getResponseData,
-  getSubFilter
-} from './methods'
-import {
-  ILocationGeoZone,
-  ILocationLGA,
-  ILocationPollingUnit,
-  ILocationState,
-  ILocationWard,
-  ILocationZone
-} from '../../interface/ILocation'
+import { filterItemType } from '../pages/approved'
 
 interface IFilter {
   children?: any
-  primarySearchParam: string
-  dataStates: ILocationState[] | undefined
-  dataZones: ILocationZone[] | undefined
-  dataGEOZones: ILocationGeoZone[] | undefined
-  dataLGAs: ILocationLGA[] | undefined
-  dataPoolingUnits: ILocationPollingUnit[] | undefined
-  dataWards: ILocationWard[] | undefined
   setTableHeader: React.Dispatch<React.SetStateAction<string[]>>
+  // filterParamsData: IFilterParam[]
+  setFilterParams: React.Dispatch<React.SetStateAction<IFilterParam[]>>
+  filterParams: IFilterParam[]
 }
 
 const Filter: React.FC<IFilter> = ({
   children,
-  primarySearchParam,
-  dataStates,
-  dataGEOZones,
-  dataLGAs,
-  dataPoolingUnits,
-  dataWards,
-  dataZones,
-  setTableHeader
+  setTableHeader,
+  // filterParamsData,
+  setFilterParams,
+  filterParams
 }) => {
-  const filterParamsData = [
-    {
-      id: 1,
-      text: 'Region',
-      isSelected: false,
-      data: getResponseData(dataZones as dataType),
-      query: 'region'
-    },
-    {
-      id: 2,
-      text: 'GEO Zone',
-      isSelected: false,
-      data: getResponseData(dataGEOZones as dataType),
-      query: 'zone'
-    },
-    {
-      id: 3,
-      text: 'State',
-      isSelected: false,
-      data: getResponseData(dataStates as dataType),
-      query: 'state'
-    },
-    {
-      id: 4,
-      text: 'LGA',
-      isSelected: false,
-      data: getResponseData(dataLGAs as dataType),
-      query: 'lga'
-    },
-    {
-      id: 5,
-      text: 'Ward',
-      isSelected: false,
-      data: getResponseData(dataWards as dataType),
-      query: 'ward'
-    },
-    {
-      id: 6,
-      text: 'Polling Unit',
-      isSelected: false,
-      data: getResponseData(dataPoolingUnits as dataType),
-      query: 'pollingunit'
-    }
-  ]
-
-  const infoData = filterParamsData.reduce(
-    (a, v) => ({ ...a, [v.text]: '' }),
-    {}
-  )
+  // const infoData = filterParamsData.reduce(
+  //   (a, v) => ({ ...a, [v.text]: '' }),
+  //   {}
+  // )
 
   const [isFilter, setIsFilter] = useState(false)
   const [isSort, setIsSort] = useState(false)
-  const [checkId, setCheckId] = useState('')
+  // const [checkId, setCheckId] = useState('')
   const [openFilterParam, setOpenFilterParam] = useState(false)
   const [filterCollapse, setFilterCollapse] = useState(false)
-  const [customInfo, setCustomInfo] = useState<{ [key: string]: any }>(infoData)
-  const [sortInfo, setSortInfo] = useState<{ [key: string]: any }>(infoData)
-  const [filterParams, setFilterParams] =
-    useState<IFilterParam[]>(defaultFilterParam)
-  const [sortParams, setSortParams] = useState<ISortParam[]>([
-    { id: '', title: '' }
-  ])
+  // const [customInfo, setCustomInfo] = useState<{ [key: string]: any }>(infoData)
+  // const [sortInfo, setSortInfo] = useState<{ [key: string]: any }>(infoData)
 
-  useEffect(() => {
-    setSortParams(
-      filterParams.map((i) => ({
-        id: i.title,
-        title: i.title
-      }))
-    )
-  }, [filterParams])
+  // const [sortParams, setSortParams] = useState<ISortParam[]>([
+  //   { id: '', title: '' }
+  // ])
 
-  useEffect(() => {
-    const filterItems = getSubFilter(filterParamsData, primarySearchParam)
-    setFilterParams(
-      filterItems.map((i) => ({
-        id: i.id,
-        title: i.text,
-        optionsdata: i.data,
-        show: true,
-        selected: [],
-        isSelected: i.isSelected,
-        selectedNumber: 0,
-        query: i.query
-      }))
-    )
-  }, [dataStates, primarySearchParam])
+  // useEffect(() => {
+  //   setSortParams(
+  //     filterParams.map((i) => ({
+  //       id: i.title,
+  //       title: i.title
+  //     }))
+  //   )
+  // }, [filterParams])
 
   // update state responsible for opening and closing filter section
   // the state is set to true if any of the filter params item property isSelected is treu
@@ -161,19 +78,75 @@ const Filter: React.FC<IFilter> = ({
     handleTableHeader(arr)
   }
 
-  const handleItemSelect = (parentId: number, id: number, select: boolean) => {
-    const arr = [...filterParams]
-    if (arr) {
-      const arrItem = arr.map((i) => ({
+  const handleItemSelect = (
+    parentId: number,
+    id: number,
+    isChecked: boolean,
+    type: filterItemType
+  ) => {
+    if (filterParams) {
+      let arrItem = filterParams.map((i) => ({
         ...i,
-        optionsdata:
-          i.id === parentId
-            ? i.optionsdata?.map((j) => ({
-                ...j,
-                isChecked: j.id === id ? select : j.isChecked
-              }))
-            : i.optionsdata
+        optionsdata: (() => {
+          if (i.id === parentId) {
+            return i.optionsdata?.map((j) => ({
+              ...j,
+              isChecked: j.id === id ? isChecked : j.isChecked
+            }))
+          } else {
+            return i.optionsdata
+          }
+        })(),
+        selected: (() => {
+          if (i.id === parentId) {
+            const ids = [...i.selected.items]
+            const index = ids.indexOf(id)
+            // console.log(index, 'index')
+            if (index === -1) ids.push(id)
+            else ids.splice(index, 1)
+            return {
+              type,
+              items: [...ids]
+            }
+          } else {
+            return i.selected
+          }
+        })()
       }))
+
+      arrItem = arrItem.map((i) => ({
+        ...i,
+        optionsdata: (() => {
+          if (i.id > parentId) {
+            return i?.optionsdata?.map((j) => ({
+              ...j,
+              hidden: (() => {
+                return (
+                  arrItem?.reduce((total, p) => {
+                    if (p.type === j.parentKey) {
+                      if (p.selected.items.length > 0) {
+                        console.log(p.type, j.parentKey)
+                        if (p.selected.items.includes(j.parentId)) {
+                          return 1
+                        } else {
+                          return 0
+                        }
+                      } else {
+                        return 1
+                      }
+                    } else {
+                      return total
+                    }
+                  }, 0) !== 1
+                )
+              })()
+            }))
+          } else {
+            return i.optionsdata
+          }
+        })()
+      }))
+
       setFilterParams([...arrItem])
     }
   }
@@ -191,14 +164,14 @@ const Filter: React.FC<IFilter> = ({
     })
   }
 
-  const sendSortQuery = (state: { [key: string]: string }) => {
-    let temp = ''
-    Object.keys(state).forEach((i) => {
-      if (state[i]) {
-        temp += (temp ? '&' : '?') + queryKey(i) + '=' + state[i]
-      }
-    })
-  }
+  // const sendSortQuery = (state: { [key: string]: string }) => {
+  //   let temp = ''
+  //   Object.keys(state).forEach((i) => {
+  //     if (state[i]) {
+  //       temp += (temp ? '&' : '?') + queryKey(i) + '=' + state[i]
+  //     }
+  //   })
+  // }
 
   return (
     <FilterContainer>
@@ -268,25 +241,25 @@ const Filter: React.FC<IFilter> = ({
             filterParams={filterParams.filter((i) => i.isSelected)}
             sendQuery={sendQuery}
             isFilter={true}
-            setCustomInfo={setCustomInfo}
-            customInfo={customInfo}
+            // setCustomInfo={setCustomInfo}
+            // customInfo={customInfo}
             handleItemSelect={handleItemSelect}
           />
         </FilterContentContainer>
       )}
-      {isSort && (
+      {/* {isSort && (
         <FilterContentContainer>
           <SortComponent
             checkId={checkId}
             isSort={true}
             sendQuery={sendSortQuery}
             setCheckId={setCheckId}
-            setSortInfo={setSortInfo}
-            sortInfo={sortInfo}
+            // setSortInfo={setSortInfo}
+            // sortInfo={sortInfo}
             sortParams={sortParams}
           />
         </FilterContentContainer>
-      )}
+      )} */}
     </FilterContainer>
   )
 }
