@@ -17,9 +17,9 @@ import {
 
 import { IStates } from '../../../interface/IReducer'
 import { IActions } from '../../../interface/IAction'
-import { PaginationContainer } from '../../table/styled'
+// import { PaginationContainer } from '../../table/styled'
 import { FilterButton } from '../../filter/styled'
-import ReactPaginate from 'react-paginate'
+// import ReactPaginate from 'react-paginate'
 
 import MockTable from './table'
 
@@ -123,6 +123,7 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
   // const [checkAll, setCheckAll] = useState<boolean>(false)
   const [advancedSearch, setAdvancedSearch] = useState<boolean>(false)
   const [tableHeader, setTableHeader] = useState<string[]>(['PARTY'])
+  const [mainTableHeader, setMainTableHeader] = useState<string[]>(['PARTY'])
   const [filterParams, setFilterParams] =
     useState<IFilterParam[]>(defaultFilterParam)
   const [subMenuOpen, setSubMenuOpen] = useState({
@@ -133,6 +134,19 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
   const [inputValue, setInputValue] = useState<{ [key: string]: any }>(
     initState
   )
+  const [tableGenerated, setTableGenerated] = useState<boolean>(false)
+  const [tableGeneratedLoading, setTableGeneratedLoading] =
+    useState<boolean>(false)
+
+  const generateTable = () => {
+    setTableGeneratedLoading(true)
+    setTableGenerated(false)
+    setTimeout(() => {
+      setTableGenerated(true)
+      setTableGeneratedLoading(false)
+      setMainTableHeader(tableHeader)
+    }, 2000)
+  }
 
   const handleElectionInfo = (info: boolean) => {
     setSubMenuOpen({ ...subMenuOpen, electionInfo: !info })
@@ -345,11 +359,11 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
   // setCheckedRows({ ...temp })
   // }
 
-  const handlePagination = (selectedItem: { selected: number }) => {
-    // if (selectedItem.selected + 1 !== data?.currentPage) {
-    //   getElectionCycle(PAGE_SIZE, selectedItem.selected + 1)
-    // }
-  }
+  // const handlePagination = (selectedItem: { selected: number }) => {
+  // if (selectedItem.selected + 1 !== data?.currentPage) {
+  //   getElectionCycle(PAGE_SIZE, selectedItem.selected + 1)
+  // }
+  // }
 
   return (
     <>
@@ -500,32 +514,38 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
                 )}
 
             {electionParams.election && toggle === 'table' && (
-              // <MainTable
-              //   header={tableHeader}
-              //   record={
-              //     primaryRecordData() ||
-              //     ([] as Array<{
-              //       id: string
-              //       row: ICell[]
-              //       rowActions: ICellAction[]
-              //     }>)
-              //   }
-              //   checkedRows={checkedRows}
-              //   handleCheckedRows={handleCheckedRows}
-              //   clearCheckedRows={clearCheckedRows}
-              //   addAllCheckedRows={addAllCheckedRows}
-              //   setCheckAll={setCheckAll}
-              //   checkAll={checkAll}
-              //   currentPage={1}
-              // />
-              <MockTable
-                party={dataParties?.data as IParty[]}
-                tableHeader={tableHeader}
-              />
+              <>
+                <button
+                  className="border px-2 mb-3"
+                  style={{
+                    width: 'max-content',
+                    height: '40px',
+                    fontFamily: 'Outfit_Medium',
+                    fontSize: '13px',
+                    background: 'none'
+                  }}
+                  onClick={generateTable}
+                >
+                  Generate Table
+                  {tableGeneratedLoading && (
+                    <span>
+                      &nbsp;&nbsp;&nbsp;
+                      <i className="fa fa-spinner fa-spin" />
+                    </span>
+                  )}
+                </button>
+
+                {tableGenerated && (
+                  <MockTable
+                    party={dataParties?.data as IParty[]}
+                    tableHeader={mainTableHeader}
+                  />
+                )}
+              </>
             )}
 
             {electionParams.election && toggle === 'chart' && <Chart />}
-            {false && (
+            {/* {false && (
               <PaginationContainer>
                 <ReactPaginate
                   breakLabel="..."
@@ -539,7 +559,7 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
                   forcePage={1}
                 />
               </PaginationContainer>
-            )}
+            )} */}
           </BodyContainer>
           <div style={{ paddingBottom: '100px' }} />
         </>

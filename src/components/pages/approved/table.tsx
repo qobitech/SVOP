@@ -34,7 +34,7 @@ const MockTable: React.FC<IMockTable> = ({ party, tableHeader }) => {
   const data = filteredElectionResultParser(tableData, tableHeader)
 
   return (
-    <div className="w-100">
+    <div className="w-100" style={{ overflow: 'auto' }}>
       <table className="resultTable border-left w-100">
         <tbody>
           {header?.map((i, index) => (
