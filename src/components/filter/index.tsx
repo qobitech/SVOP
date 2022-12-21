@@ -101,7 +101,6 @@ const Filter: React.FC<IFilter> = ({
           if (i.id === parentId) {
             const ids = [...i.selected.items]
             const index = ids.indexOf(id)
-            // console.log(index, 'index')
             if (index === -1) ids.push(id)
             else ids.splice(index, 1)
             return {

@@ -30,8 +30,6 @@ const MockTable: React.FC<IMockTable> = ({ party, tableHeader }) => {
     return nestedResult
   }
 
-  console.log(party, 'juju')
-
   const header = parseTableHeaderData(tableHeader, 1)
   const data = filteredElectionResultParser(tableData, tableHeader)
 
