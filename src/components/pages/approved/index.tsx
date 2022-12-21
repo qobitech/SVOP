@@ -13,13 +13,15 @@ import {
   Separator
 } from './styled'
 
-import MainTable, { ICell, ICellAction } from '../../table'
+// import MainTable, { ICell, ICellAction } from '../../table'
 
 import { IStates } from '../../../interface/IReducer'
 import { IActions } from '../../../interface/IAction'
 import { PaginationContainer } from '../../table/styled'
 import { FilterButton } from '../../filter/styled'
 import ReactPaginate from 'react-paginate'
+
+import MockTable from './table'
 
 import '../../layout/sidemenu/style.scss'
 import {
@@ -40,6 +42,7 @@ import {
   filterByPrimarySearch
 } from '../../filter/methods'
 import { IFilterParam, optionDataType } from '../../filter/components'
+import { IParty } from '../../../interface/ILocation'
 
 export const PAGE_SIZE = 10
 
@@ -81,7 +84,8 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
     getLGA,
     getPoolingUnit,
     getWard,
-    getZone
+    getZone,
+    getPartyAction
   } = props as unknown as IActions
 
   const loadElectionCycle = states?.election?.getAllElectionCycles_Loading
@@ -91,7 +95,7 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
   const errorElection = states?.election?.getAllElections_Error
   const loadElectionCategory = states?.election?.getAllElectionCategory_Loading
   const errorElectionCategory = states?.election?.getAllElectionCategory_Error
-  const dataApprovedResults = states?.election?.getAllApprovedResults
+  // const dataApprovedResults = states?.election?.getAllApprovedResults
   const errorStates = states?.location?.getAllLocationStates_Error
   const dataStates = states?.location?.getAllLocationStates
   const dataZones = states?.location?.getAllLocationZones
@@ -99,6 +103,7 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
   const dataLGAs = states?.location?.getAllLocationLGAs
   const dataPoolingUnits = states?.location?.getAllLocationPollingUnits
   const dataWards = states?.location?.getAllLocationWards
+  const dataParties = states?.location?.getAllParties
 
   useEffect(() => {
     getElectionCycle(PAGE_SIZE)
@@ -111,10 +116,11 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
     getPoolingUnit(PAGE_SIZE)
     getWard(PAGE_SIZE)
     getZone()
+    getPartyAction()
   }, [])
 
-  const [checkedRows, setCheckedRows] = useState<{ [key: string]: any }>({})
-  const [checkAll, setCheckAll] = useState<boolean>(false)
+  // const [checkedRows, setCheckedRows] = useState<{ [key: string]: any }>({})
+  // const [checkAll, setCheckAll] = useState<boolean>(false)
   const [advancedSearch, setAdvancedSearch] = useState<boolean>(false)
   const [tableHeader, setTableHeader] = useState<string[]>(['PARTY'])
   const [filterParams, setFilterParams] =
@@ -291,53 +297,53 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
     setFilteredPrimaryOptions(value)
   }
 
-  const primaryRecordData = () => {
-    return dataApprovedResults?.data
-      .filter((i) => _joiner(i.election) === electionParams?.election)
-      .map((i, index) => ({
-        id: i.id,
-        row: [
-          {
-            value: i.results[index]?.partyName,
-            isLink: false,
-            url: '',
-            action: () => {}
-          },
-          {
-            value: i.results[index]?.votes,
-            isLink: false,
-            url: '',
-            action: () => {}
-          }
-        ] as unknown as ICell[],
-        rowActions: [] as unknown as ICellAction[]
-      }))
-  }
+  // const primaryRecordData = () => {
+  //   return dataApprovedResults?.data
+  //     .filter((i) => _joiner(i.election) === electionParams?.election)
+  //     .map((i, index) => ({
+  //       id: i.id,
+  //       row: [
+  //         {
+  //           value: i.results[index]?.partyName,
+  //           isLink: false,
+  //           url: '',
+  //           action: () => {}
+  //         },
+  //         {
+  //           value: i.results[index]?.votes,
+  //           isLink: false,
+  //           url: '',
+  //           action: () => {}
+  //         }
+  //       ] as unknown as ICell[],
+  //       rowActions: [] as unknown as ICellAction[]
+  //     }))
+  // }
 
-  const handleCheckedRows = ({ target }: { target: any }) => {
-    const { checked, id } = target || {}
-    setCheckAll(false)
-    if (checked) {
-      setCheckedRows({ ...checkedRows, [id]: id })
-    } else {
-      const temp = checkedRows
-      // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
-      delete temp[id]
-      setCheckedRows({ ...temp })
-    }
-  }
+  // const handleCheckedRows = ({ target }: { target: any }) => {
+  //   const { checked, id } = target || {}
+  //   setCheckAll(false)
+  //   if (checked) {
+  //     setCheckedRows({ ...checkedRows, [id]: id })
+  //   } else {
+  //     const temp = checkedRows
+  //     // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+  //     delete temp[id]
+  //     setCheckedRows({ ...temp })
+  //   }
+  // }
 
-  const clearCheckedRows = () => {
-    setCheckedRows({})
-  }
+  // const clearCheckedRows = () => {
+  //   setCheckedRows({})
+  // }
 
-  const addAllCheckedRows = () => {
-    // const temp = recordData()?.reduce(function (acc, cur) {
-    //   acc = { ...acc, [cur.id]: cur.id }
-    //   return acc
-    // }, {})
-    // setCheckedRows({ ...temp })
-  }
+  // const addAllCheckedRows = () => {
+  // const temp = recordData()?.reduce(function (acc, cur) {
+  //   acc = { ...acc, [cur.id]: cur.id }
+  //   return acc
+  // }, {})
+  // setCheckedRows({ ...temp })
+  // }
 
   const handlePagination = (selectedItem: { selected: number }) => {
     // if (selectedItem.selected + 1 !== data?.currentPage) {
@@ -494,25 +500,28 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
                 )}
 
             {electionParams.election && toggle === 'table' && (
-              <MainTable
-                header={tableHeader}
-                record={
-                  primaryRecordData() ||
-                  ([] as Array<{
-                    id: string
-                    row: ICell[]
-                    rowActions: ICellAction[]
-                  }>)
-                }
-                checkedRows={checkedRows}
-                handleCheckedRows={handleCheckedRows}
-                clearCheckedRows={clearCheckedRows}
-                addAllCheckedRows={addAllCheckedRows}
-                setCheckAll={setCheckAll}
-                checkAll={checkAll}
-                currentPage={1}
+              // <MainTable
+              //   header={tableHeader}
+              //   record={
+              //     primaryRecordData() ||
+              //     ([] as Array<{
+              //       id: string
+              //       row: ICell[]
+              //       rowActions: ICellAction[]
+              //     }>)
+              //   }
+              //   checkedRows={checkedRows}
+              //   handleCheckedRows={handleCheckedRows}
+              //   clearCheckedRows={clearCheckedRows}
+              //   addAllCheckedRows={addAllCheckedRows}
+              //   setCheckAll={setCheckAll}
+              //   checkAll={checkAll}
+              //   currentPage={1}
+              // />
+              <MockTable
+                party={dataParties?.data as IParty[]}
+                tableHeader={tableHeader}
               />
-              // <MockTable />
             )}
 
             {electionParams.election && toggle === 'chart' && <Chart />}

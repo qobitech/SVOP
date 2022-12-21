@@ -95,6 +95,21 @@ export default function locationReducer(state = initialState, action: any) {
         ...state,
         getAllLocationLGAs_Error: action.payload
       }
+    case locationType.party.dataAction:
+      return {
+        ...state,
+        getAllParties: action.payload
+      }
+    case locationType.party.dataLoading:
+      return {
+        ...state,
+        getAllParties_Loading: action.payload
+      }
+    case locationType.party.dataError:
+      return {
+        ...state,
+        getAllParties_Error: action.payload
+      }
     default:
       return state
   }

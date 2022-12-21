@@ -103,3 +103,15 @@ export interface ILocationPollingUnits {
   totalPages: number
   data: ILocationPollingUnit[]
 }
+export interface IParty {
+  id: number
+  shortName: string
+  longName: string
+  logo: string
+}
+export interface IParties {
+  message: string
+  statusCode: number
+  isSuccessful: boolean
+  data: IParty[]
+}

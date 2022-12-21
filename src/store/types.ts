@@ -64,6 +64,11 @@ export const locationType = {
     dataAction: 'GET_LGA',
     dataLoading: 'GET_LGA_LOADING',
     dataError: 'GET_LGA_ERROR'
+  },
+  party: {
+    dataAction: 'GET_PARTY',
+    dataLoading: 'GET_PARTY_LOADING',
+    dataError: 'GET_PARTY_ERROR'
   }
 }
 

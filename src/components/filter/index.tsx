@@ -125,7 +125,6 @@ const Filter: React.FC<IFilter> = ({
                   arrItem?.reduce((total, p) => {
                     if (p.type === j.parentKey) {
                       if (p.selected.items.length > 0) {
-                        console.log(p.type, j.parentKey)
                         if (p.selected.items.includes(j.parentId)) {
                           return 1
                         } else {

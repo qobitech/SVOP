@@ -11,7 +11,8 @@ import {
   ILocationPollingUnits,
   ILocationStates,
   ILocationWards,
-  ILocationZones
+  ILocationZones,
+  IParties
 } from './ILocation'
 
 export interface IAuthReducer {
@@ -55,6 +56,9 @@ export interface ILocationReducer {
   getAllLocationLGAs: ILocationLGAS
   getAllLocationLGAs_Loading: boolean
   getAllLocationLGAs_Error: any
+  getAllParties: IParties
+  getAllParties_Loading: boolean
+  getAllParties_Error: any
 }
 export interface IOtherReducer {
   menuOpen: boolean

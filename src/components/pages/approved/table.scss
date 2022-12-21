@@ -1,11 +1,11 @@
 .resultTable {
-  border-collapse: collapse;
-  border-spacing: 0 8px;
+  border-collapse: separate;
+  border-spacing: 0;
   width: 100%;
   height: 100%;
   padding: 0;
-  border: 1px solid #000;
-  border-radius: 5px;
+  border: 0px solid #000;
+  // border-radius: 5px;
   // table-layout:unset;
   // @media only screen and (min-width: 1000px){
   //     table-layout: fixed;
@@ -13,7 +13,7 @@
   tr {
     border-radius: 6px;
     display: table-row;
-    border-bottom: 1px solid #daefe0;
+    // border-bottom: 1px solid #daefe0;
     text-align: left;
   }
   td {
@@ -27,13 +27,13 @@
     border-collapse: collapse;
     display: table-cell;
     vertical-align: middle;
-    padding: 10px 15px;
+    padding: 0px;
     font-size: 13;
-    border: 1px solid #000;
+    border: 0px solid #000;
     // border-bottom: 1px solid #daefe0;
   }
   th {
-    padding: 15px;
+    padding: 0;
     font-size: 13px;
     white-space: nowrap;
     text-transform: uppercase;
@@ -45,11 +45,11 @@
     min-width: 100%;
     margin: 0;
     padding: 0;
-    border: 1px solid black;
+    border: 0px solid black;
   }
   tbody tr {
     background-color: #fff;
-    box-shadow: 0px 4px 4px rgba(240, 235, 235, 0.25);
+    // box-shadow: 0px 4px 4px rgba(240, 235, 235, 0.25);
   }
   .notactive {
     background-color: green !important;

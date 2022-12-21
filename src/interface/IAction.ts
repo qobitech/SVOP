@@ -50,4 +50,5 @@ export interface IActions {
     pageNumber?: number,
     sort?: string
   ) => (dispatch: any) => void
+  getPartyAction: () => (dispatch: any) => void
 }

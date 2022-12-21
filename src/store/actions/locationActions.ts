@@ -115,3 +115,14 @@ export const getStates = (
     actionType: locationType.state
   })
 }
+
+export const getPartyAction = () => {
+  return utils.httpGetMethod({
+    apiData: {
+      url: '',
+      customurl: 'https://core-erms.herokuapp.com/api/v1/party',
+      header: utils.headerNoAuth()
+    },
+    actionType: locationType.party
+  })
+}
