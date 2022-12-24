@@ -314,7 +314,10 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
     let arr: any[] = []
     arr = filterParams.map((i, filterIndex) => {
       if (index - 1 === filterIndex) {
-        return filterData
+        return {
+          ...filterData,
+          isSelected: i.isSelected
+        }
       } else {
         return i
       }
@@ -328,28 +331,10 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
   }, [])
 
   useEffect(() => {
-    // let arr: any[] = []
-    // arr = filterParams.map((i, index) => {
-    //   if (index === 3) {
-    //     return resetSpecificFilterData(4)
-    //   } else {
-    //     return i
-    //   }
-    // })
-    // setFilterParams([...arr])
     resetSpecificFilterData(4)
   }, [dataLGAs])
 
   useEffect(() => {
-    // let arr: any[] = []
-    // arr = filterParams.map((i, index) => {
-    //   if (index === 4) {
-    //     return resetSpecificFilterData(5)
-    //   } else {
-    //     return i
-    //   }
-    // })
-    // setFilterParams([...arr])
     resetSpecificFilterData(5)
   }, [dataWards])
 

@@ -34,31 +34,10 @@ const Filter: React.FC<IFilter> = ({
   getLGAsInState,
   getWardsInLGA
 }) => {
-  // const infoData = filterParamsData.reduce(
-  //   (a, v) => ({ ...a, [v.text]: '' }),
-  //   {}
-  // )
-
   const [isFilter, setIsFilter] = useState(false)
   const [isSort, setIsSort] = useState(false)
-  // const [checkId, setCheckId] = useState('')
   const [openFilterParam, setOpenFilterParam] = useState(false)
   const [filterCollapse, setFilterCollapse] = useState(false)
-  // const [customInfo, setCustomInfo] = useState<{ [key: string]: any }>(infoData)
-  // const [sortInfo, setSortInfo] = useState<{ [key: string]: any }>(infoData)
-
-  // const [sortParams, setSortParams] = useState<ISortParam[]>([
-  //   { id: '', title: '' }
-  // ])
-
-  // useEffect(() => {
-  //   setSortParams(
-  //     filterParams.map((i) => ({
-  //       id: i.title,
-  //       title: i.title
-  //     }))
-  //   )
-  // }, [filterParams])
 
   // update state responsible for opening and closing filter section
   // the state is set to true if any of the filter params item property isSelected is treu
