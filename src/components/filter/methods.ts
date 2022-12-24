@@ -1,4 +1,4 @@
-import { filterItemType } from '../pages/approved'
+import { filterEnums, filterItemType } from '../pages/approved'
 import { IFilterParam, optionDataType } from './components'
 
 export const filterByPrimarySearch = (
@@ -43,8 +43,8 @@ export const defaultFilterParam: IFilterParam[] = [
         value: '',
         isChecked: false,
         hidden: false,
-        parentKey: '',
-        parentId: 0
+        parentKey: [''],
+        parentIds: null
       }
     ] as optionDataType[],
     type: 'geozone' as filterItemType,
@@ -59,16 +59,17 @@ const tempData: optionDataType[] = [
     label: '',
     value: '',
     isChecked: false,
-    parentKey: '',
-    parentId: 0,
+    parentKey: [''],
+    parentIds: null,
     hidden: false
   }
 ]
 
 export const getResponseData = (
   data: Array<{ [key: string]: any }>,
-  parentKey: string,
-  filterItem: string
+  parentKey: string[],
+  filterItems: string[],
+  type: string
 ): optionDataType[] => {
   if (data) {
     return data?.map((i) => ({
@@ -78,7 +79,28 @@ export const getResponseData = (
       isChecked: i.isChecked,
       parentKey,
       hidden: false,
-      parentId: i?.[filterItem] || 0
+      parentIds: (() => {
+        switch (type) {
+          case filterEnums.STATE:
+            return filterItems.map((filterItem) => {
+              if (filterItem === 'zoneId') {
+                return {
+                  ...i.parentIds,
+                  region: i?.geographicalZone?.[filterItem] || 0
+                }
+              } else {
+                return { ...i.parentIds, geozone: i?.[filterItem] || 0 }
+              }
+            })
+          case filterEnums.GEOZONE:
+            return filterItems.map((filterItem) => ({
+              ...i.parentIds,
+              region: i?.[filterItem] || 0
+            }))
+          default:
+            return null
+        }
+      })()
     }))
   } else {
     return tempData

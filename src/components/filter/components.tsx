@@ -8,8 +8,8 @@ export interface optionDataType {
   label: string
   value: string | number
   isChecked: boolean
-  parentId: number
-  parentKey: string
+  parentIds: Array<{ region: number; geozone: number }> | null
+  parentKey: string[]
   hidden: boolean
 }
 
@@ -25,18 +25,20 @@ export interface IFilterParam {
   query: string
 }
 
+export type handleItemSelectType = (
+  filterParam: number,
+  id: number,
+  selected: boolean,
+  type: filterItemType
+) => void
+
 interface ICustomFilter {
   filterParams: IFilterParam[]
   sendQuery: (state: { [key: string]: string }) => void
   isFilter: boolean
   // setCustomInfo: React.Dispatch<React.SetStateAction<{ [key: string]: any }>>
   // customInfo: { [key: string]: any }
-  handleItemSelect: (
-    parentId: number,
-    id: number,
-    selected: boolean,
-    type: filterItemType
-  ) => void
+  handleItemSelect: handleItemSelectType
 }
 
 const CustomFilter: React.FC<ICustomFilter> = ({
@@ -51,7 +53,7 @@ const CustomFilter: React.FC<ICustomFilter> = ({
           <div className="w-100 justify-content-center justify-content-md-between">
             {filterParams?.map((i) => (
               <CustomFilterItem
-                i={i}
+                filterParam={i}
                 key={i.id}
                 handleItemSelect={handleItemSelect}
               />
@@ -66,29 +68,24 @@ const CustomFilter: React.FC<ICustomFilter> = ({
 export default CustomFilter
 
 interface ICustomFilterItem {
-  i: IFilterParam
-  handleItemSelect: (
-    parentId: number,
-    id: number,
-    selected: boolean,
-    type: filterItemType
-  ) => void
+  filterParam: IFilterParam
+  handleItemSelect: handleItemSelectType
 }
 
 const CustomFilterItem: React.FC<ICustomFilterItem> = ({
-  i,
+  filterParam,
   handleItemSelect
 }) => {
   const [openTab, setOpenTab] = useState<boolean>(true)
 
-  const selectedNumber = i.optionsdata?.reduce((total, item) => {
+  const selectedNumber = filterParam.optionsdata?.reduce((total, item) => {
     const temp = item.isChecked ? 1 : 0
     return (total += temp)
   }, 0)
 
   return (
     <div
-      key={i.id}
+      key={filterParam.id}
       className="border rounded px-2 py-2 w-100 mb-3"
       style={{ boxSizing: 'border-box' }}
     >
@@ -100,7 +97,7 @@ const CustomFilterItem: React.FC<ICustomFilterItem> = ({
         onClick={() => setOpenTab(!openTab)}
       >
         <p className="m-0 text-small" style={{ fontSize: '13px' }}>
-          <b>{i.title}</b>&nbsp;&nbsp;-&nbsp;&nbsp;
+          <b>{filterParam.title}</b>&nbsp;&nbsp;-&nbsp;&nbsp;
           {selectedNumber === 0 || !selectedNumber
             ? 'All'
             : selectedNumber + ' selected'}
@@ -113,26 +110,36 @@ const CustomFilterItem: React.FC<ICustomFilterItem> = ({
       </div>
       {openTab && (
         <div className="fml-filter-grid w-100">
-          {i.show &&
-            i.optionsdata?.map((j) => (
+          {filterParam.show &&
+            filterParam.optionsdata?.map((optionData) => (
               <FilterItemContainer
-                key={j.id}
+                key={optionData.id}
                 className="align-items-center justify-content-start px-1 py-1 w-100"
-                title={j.label}
-                hide={j.hidden ? 'true' : 'false'}
+                title={optionData.label}
+                hide={optionData.hidden ? 'true' : 'false'}
                 onClick={() =>
-                  handleItemSelect(i.id, j.id, !j.isChecked, i.type)
+                  handleItemSelect(
+                    filterParam.id,
+                    optionData.id,
+                    !optionData.isChecked,
+                    filterParam.type
+                  )
                 }
               >
                 <TypeCheckbox
-                  checked={j.isChecked || false}
+                  checked={optionData.isChecked || false}
                   onChange={() =>
-                    handleItemSelect(i.id, j.id, !j.isChecked, i.type)
+                    handleItemSelect(
+                      filterParam.id,
+                      optionData.id,
+                      !optionData.isChecked,
+                      filterParam.type
+                    )
                   }
                 />
                 &nbsp;&nbsp;&nbsp;
                 <p className="m-0" style={{ fontSize: '11px' }}>
-                  {j.label}
+                  {optionData.label}
                 </p>
               </FilterItemContainer>
             ))}

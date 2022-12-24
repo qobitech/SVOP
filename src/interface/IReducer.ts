@@ -8,6 +8,7 @@ import {
 import {
   ILocationGeoZones,
   ILocationLGAS,
+  ILocationLGAsInState,
   ILocationPollingUnits,
   ILocationStates,
   ILocationWards,
@@ -53,9 +54,15 @@ export interface ILocationReducer {
   getAllLocationWards: ILocationWards
   getAllLocationWards_Loading: boolean
   getAllLocationWards_Error: any
+  getAllLocationWardsInLGA: ILocationLGAsInState
+  getAllLocationWardsInLGA_Loading: boolean
+  getAllLocationWardsInLGA_Error: any
   getAllLocationLGAs: ILocationLGAS
   getAllLocationLGAs_Loading: boolean
   getAllLocationLGAs_Error: any
+  getAllLocationLGAsInState: ILocationLGAsInState
+  getAllLocationLGAsInState_Loading: boolean
+  getAllLocationLGAsInState_Error: any
   getAllParties: IParties
   getAllParties_Loading: boolean
   getAllParties_Error: any

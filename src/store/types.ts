@@ -60,10 +60,20 @@ export const locationType = {
     dataLoading: 'GET_WARD_LOADING',
     dataError: 'GET_WARD_ERROR'
   },
+  wardsInLGA: {
+    dataAction: 'GET_WARDS_IN_LGA',
+    dataLoading: 'GET_WARDS_IN_LGA_LOADING',
+    dataError: 'GET_WARDS_IN_LGA_ERROR'
+  },
   lga: {
     dataAction: 'GET_LGA',
     dataLoading: 'GET_LGA_LOADING',
     dataError: 'GET_LGA_ERROR'
+  },
+  lgasInState: {
+    dataAction: 'GET_LGAS_IN_STATE',
+    dataLoading: 'GET_LGAS_IN_STATE_LOADING',
+    dataError: 'GET_LGAS_IN_STATE_ERROR'
   },
   party: {
     dataAction: 'GET_PARTY',

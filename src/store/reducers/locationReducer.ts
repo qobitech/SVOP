@@ -80,6 +80,21 @@ export default function locationReducer(state = initialState, action: any) {
         ...state,
         getAllLocationWards_Error: action.payload
       }
+    case locationType.wardsInLGA.dataAction:
+      return {
+        ...state,
+        getAllLocationWardsInLGA: action.payload
+      }
+    case locationType.wardsInLGA.dataLoading:
+      return {
+        ...state,
+        getAllLocationWardsInLGA_Loading: action.payload
+      }
+    case locationType.wardsInLGA.dataError:
+      return {
+        ...state,
+        getAllLocationWardsInLGA_Error: action.payload
+      }
     case locationType.lga.dataAction:
       return {
         ...state,
@@ -94,6 +109,21 @@ export default function locationReducer(state = initialState, action: any) {
       return {
         ...state,
         getAllLocationLGAs_Error: action.payload
+      }
+    case locationType.lgasInState.dataAction:
+      return {
+        ...state,
+        getAllLocationLGAsInState: action.payload
+      }
+    case locationType.lgasInState.dataLoading:
+      return {
+        ...state,
+        getAllLocationLGAsInState_Loading: action.payload
+      }
+    case locationType.lgasInState.dataError:
+      return {
+        ...state,
+        getAllLocationLGAsInState_Error: action.payload
       }
     case locationType.party.dataAction:
       return {

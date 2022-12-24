@@ -1,7 +1,7 @@
 export const pageurl = {
   // UNAPPROVED: '/unapproved',
   APPROVED: '/approved',
-  LOGIN: '/',
+  HOME: '/',
   PROFILE: '/view-profile',
   // OVERVIEW: '/overview',
   // UPLOAD: '/upload',

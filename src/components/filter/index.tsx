@@ -16,17 +16,23 @@ import { filterItemType } from '../pages/approved'
 interface IFilter {
   children?: any
   setTableHeader: React.Dispatch<React.SetStateAction<string[]>>
-  // filterParamsData: IFilterParam[]
   setFilterParams: React.Dispatch<React.SetStateAction<IFilterParam[]>>
   filterParams: IFilterParam[]
+  setFilterPrompt: React.Dispatch<React.SetStateAction<string>>
+  filterPrompt: string
+  getLGAsInState: (data: { stateIds: number[] }) => (dispatch: any) => void
+  getWardsInLGA: (data: { lgaIds: number[] }) => (dispatch: any) => void
 }
 
 const Filter: React.FC<IFilter> = ({
   children,
   setTableHeader,
-  // filterParamsData,
   setFilterParams,
-  filterParams
+  filterParams,
+  setFilterPrompt,
+  filterPrompt,
+  getLGAsInState,
+  getWardsInLGA
 }) => {
   // const infoData = filterParamsData.reduce(
   //   (a, v) => ({ ...a, [v.text]: '' }),
@@ -69,9 +75,23 @@ const Filter: React.FC<IFilter> = ({
     setTableHeader((p) => [...th])
   }
 
-  const onFilterItemClick = (index: number, value: boolean) => {
+  const onFilterItemClick = (index: number, status: boolean) => {
+    setFilterPrompt('')
     const arr = [...filterParams]
-    arr[index].isSelected = value
+    // if lga button or ward button is clicked
+    if (index === 3 || index === 4) {
+      const isFilterItemOptionNotChecked = arr[index - 1].optionsdata.every(
+        (i) => !i.isChecked
+      )
+      // if any previous filter item option is not checked
+      if (isFilterItemOptionNotChecked) {
+        setFilterPrompt(`Select ${index === 3 ? 'State' : 'LGA'}`)
+      } else {
+        arr[index].isSelected = status
+      }
+    } else {
+      arr[index].isSelected = status
+    }
     // update filter params item property isSelected
     setFilterParams([...arr])
     handleOpenFilter(arr)
@@ -79,74 +99,149 @@ const Filter: React.FC<IFilter> = ({
   }
 
   const handleItemSelect = (
-    parentId: number,
+    filterParamId: number,
     id: number,
     isChecked: boolean,
     type: filterItemType
   ) => {
-    if (filterParams) {
-      let arrItem = filterParams.map((i) => ({
-        ...i,
-        optionsdata: (() => {
-          if (i.id === parentId) {
-            return i.optionsdata?.map((j) => ({
-              ...j,
-              isChecked: j.id === id ? isChecked : j.isChecked
-            }))
-          } else {
-            return i.optionsdata
-          }
-        })(),
-        selected: (() => {
-          if (i.id === parentId) {
-            const ids = [...i.selected.items]
-            const index = ids.indexOf(id)
-            if (index === -1) ids.push(id)
-            else ids.splice(index, 1)
+    if (!filterParams.length) return
+    let tempFilterParams = [...filterParams]
+    // get current section where item is checked
+    const indexSelectedItem = tempFilterParams
+      .map((i) => i.id)
+      .indexOf(filterParamId)
+
+    tempFilterParams = tempFilterParams.map((tempFilterParam) => ({
+      ...tempFilterParam,
+      optionsdata: (() => {
+        if (filterParamId === tempFilterParam.id) {
+          return tempFilterParam.optionsdata?.map(
+            (tempFilterParamOptionData) => ({
+              ...tempFilterParamOptionData,
+              isChecked: (() => {
+                setFilterPrompt('')
+                if (tempFilterParamOptionData.hidden) return false
+                if (tempFilterParamOptionData.id === id) {
+                  return isChecked
+                } else {
+                  return tempFilterParamOptionData.isChecked
+                }
+              })()
+            })
+          )
+        } else if (filterParamId < tempFilterParam.id) {
+          return tempFilterParam.optionsdata?.map(
+            (tempFilterParamOptionData) => ({
+              ...tempFilterParamOptionData,
+              isChecked: (() => {
+                setFilterPrompt('')
+                if (tempFilterParamOptionData.hidden) {
+                  return false
+                } else {
+                  return tempFilterParamOptionData.isChecked
+                }
+              })()
+            })
+          )
+        } else {
+          return tempFilterParam.optionsdata
+        }
+      })()
+    }))
+
+    tempFilterParams = tempFilterParams.map((tempFilterParam) => ({
+      ...tempFilterParam,
+      selected: (() => {
+        if (filterParamId === tempFilterParam.id) {
+          const selectedItems = [...tempFilterParam.selected.items]
+          const index = selectedItems.indexOf(id)
+          if (index > -1) {
+            selectedItems.splice(index, 1)
             return {
               type,
-              items: [...ids]
+              items: Array.from(new Set(selectedItems))
             }
           } else {
-            return i.selected
+            selectedItems.push(id)
+            return {
+              type,
+              items: Array.from(new Set(selectedItems))
+            }
           }
-        })()
-      }))
-
-      arrItem = arrItem.map((i) => ({
-        ...i,
-        optionsdata: (() => {
-          if (i.id > parentId) {
-            return i?.optionsdata?.map((j) => ({
-              ...j,
-              hidden: (() => {
-                return (
-                  arrItem?.reduce((total, p) => {
-                    if (p.type === j.parentKey) {
-                      if (p.selected.items.length > 0) {
-                        if (p.selected.items.includes(j.parentId)) {
-                          return 1
-                        } else {
-                          return 0
-                        }
-                      } else {
-                        return 1
-                      }
-                    } else {
-                      return total
-                    }
-                  }, 0) !== 1
-                )
-              })()
-            }))
+        } else {
+          const selectedItems = [...tempFilterParam.selected.items]
+          const index = selectedItems.indexOf(id)
+          if (index > -1) {
+            selectedItems.splice(index, 1)
+            return {
+              type,
+              items: Array.from(new Set(selectedItems))
+            }
           } else {
-            return i.optionsdata
+            selectedItems.push(
+              ...tempFilterParam.optionsdata
+                .filter((i) => i.isChecked)
+                .map((i) => i.id)
+            )
+            return {
+              type,
+              items: Array.from(new Set(selectedItems))
+            }
           }
-        })()
-      }))
+        }
+      })()
+    }))
 
-      setFilterParams([...arrItem])
+    tempFilterParams = tempFilterParams.map((tempFilterParam) => ({
+      ...tempFilterParam,
+      optionsdata: (() => {
+        if (tempFilterParam.id > filterParamId) {
+          return tempFilterParam?.optionsdata?.map(
+            (tempFilterParamOptionData) => ({
+              ...tempFilterParamOptionData,
+              hidden: (() => {
+                if (type === 'geozone' || type === 'region') {
+                  if (
+                    !tempFilterParams[indexSelectedItem].selected.items.length
+                  )
+                    return false
+                  return (
+                    tempFilterParamOptionData?.parentIds?.filter((parentId) =>
+                      tempFilterParams[
+                        indexSelectedItem
+                      ].selected.items.includes(parentId[type])
+                    ).length === 0
+                  )
+                } else {
+                  return tempFilterParamOptionData.hidden
+                }
+              })()
+            })
+          )
+        } else {
+          return tempFilterParam.optionsdata
+        }
+      })()
+    }))
+
+    if (type === 'state') {
+      if (!tempFilterParams[2].selected.items.length) {
+        tempFilterParams[3].isSelected = false
+        tempFilterParams[4].isSelected = false
+      } else {
+        getLGAsInState({ stateIds: tempFilterParams[2].selected.items })
+      }
     }
+
+    if (type === 'lga') {
+      if (!tempFilterParams[3].selected.items.length) {
+        tempFilterParams[4].isSelected = false
+      } else {
+        getWardsInLGA({ lgaIds: tempFilterParams[3].selected.items })
+      }
+    }
+
+    setFilterParams([...tempFilterParams])
   }
 
   const queryKey = (name: string) => {
@@ -208,6 +303,15 @@ const Filter: React.FC<IFilter> = ({
                   {i.title}
                 </FilterSubButton>
               ))}
+              {filterPrompt && (
+                <p className="m-0 text-danger text-little">
+                  <span>
+                    <i className="fas fa-info-circle" />
+                    &nbsp;&nbsp;
+                  </span>
+                  {filterPrompt}
+                </p>
+              )}
             </FilterButtonLeftSection>
             <div>
               <p

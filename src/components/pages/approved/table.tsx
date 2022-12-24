@@ -69,8 +69,8 @@ const TableCell = ({
 }) => {
   return (
     <div
-      style={{ width: '220px', height: '45px' }}
-      className={`d-flex align-items-center py-2 pl-2 ${
+      style={{ width: '220px', minHeight: '45px', wordBreak: 'break-all' }}
+      className={`d-flex align-items-center p-2 ${
         tableHeader.length === 1 ? 'm-auto' : ''
       }`}
     >

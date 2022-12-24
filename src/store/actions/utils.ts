@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 export const header = () => ({
-  'Content-type': 'application/json',
-  'Access-Control-Allow-Origin': '*'
+  'Content-type': 'application/json'
+  // 'Access-Control-Allow-Origin': '*'
 })
 
 export const headerNoAuth = () => ({

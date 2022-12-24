@@ -72,6 +72,42 @@ export const getWard = (
   })
 }
 
+// export const sendOtpAction = (data: { userName: string }) => {
+//   return utils.httpPostMethod({
+//     apiData: {
+//       url: '',
+//       customurl: 'https://core-erms.herokuapp.com/api/v1/Auth/SendOtp',
+//       header: utils.header(),
+//       data: JSON.stringify(data)
+//     },
+//     actionType: authType.sendOtp
+//   })
+// }
+
+export const getWardsInLGA = (data: { lgaIds: number[] }) => {
+  return utils.httpPostMethod({
+    apiData: {
+      url: '',
+      customurl: 'https://core-erms.herokuapp.com/api/v1/Ward/getWardsInLga',
+      header: utils.header(),
+      data: JSON.stringify(data)
+    },
+    actionType: locationType.wardsInLGA
+  })
+}
+
+export const getLGAsInState = (data: { stateIds: number[] }) => {
+  return utils.httpPostMethod({
+    apiData: {
+      url: '',
+      customurl: 'https://core-erms.herokuapp.com/api/v1/LGA/getLgasInState',
+      header: utils.header(),
+      data: JSON.stringify(data)
+    },
+    actionType: locationType.lgasInState
+  })
+}
+
 export const getLGA = (
   pageSize?: number,
   pageNumber?: number,

@@ -13,7 +13,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 // import ViewResult from './components/pages/view-result'
 import Approved from './components/pages/approved'
 // import Login from './components/pages/auth/login'
-import Profile from './components/pages/profile'
+// import Profile from './components/pages/profile'
 // import Instruction from './components/pages/instruction'
 import Page404 from './components/pages/page404'
 
@@ -36,12 +36,12 @@ function App() {
           {/* <Route path={pageurl.UPLOAD} element={<ProtectedRoute />} >
             <Route path={pageurl.UPLOAD} element={<UploadDocument />} />
           </Route> */}
-          <Route path={pageurl.LOGIN} element={<ProtectedRoute />}>
-            <Route path={pageurl.LOGIN} element={<Approved />} />
+          <Route path={pageurl.HOME} element={<ProtectedRoute />}>
+            <Route path={pageurl.HOME} element={<Approved />} />
           </Route>
-          <Route path={pageurl.PROFILE} element={<ProtectedRoute />}>
+          {/* <Route path={pageurl.PROFILE} element={<ProtectedRoute />}>
             <Route path={pageurl.PROFILE} element={<Profile />} />
-          </Route>
+          </Route> */}
           {/* <Route path={pageurl.INSTRUCTIONS} element={<ProtectedRoute />}>
             <Route path={pageurl.INSTRUCTIONS} element={<Instruction />} />
           </Route> */}

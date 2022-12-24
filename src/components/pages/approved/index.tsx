@@ -23,7 +23,7 @@ import { FilterButton } from '../../filter/styled'
 
 import MockTable from './table'
 
-import '../../layout/sidemenu/style.scss'
+import './style.scss'
 import {
   BodySectionRow,
   BodySectionLeft,
@@ -62,6 +62,15 @@ const Approved: React.FC = () => {
     </DataWrapper>
   )
 }
+
+export const filterEnums = {
+  REGION: 'region',
+  GEOZONE: 'geozone',
+  STATE: 'state',
+  LGA: 'lga',
+  WARD: 'ward',
+  POLLINGUNIT: 'pollingunit'
+}
 interface IApprovedPageChild {
   states?: IStates
 }
@@ -81,11 +90,11 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
     getStates,
     getApprovedResultsAction,
     getGEOZone,
-    getLGA,
     getPoolingUnit,
-    getWard,
     getZone,
-    getPartyAction
+    getPartyAction,
+    getLGAsInState,
+    getWardsInLGA
   } = props as unknown as IActions
 
   const loadElectionCycle = states?.election?.getAllElectionCycles_Loading
@@ -95,14 +104,13 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
   const errorElection = states?.election?.getAllElections_Error
   const loadElectionCategory = states?.election?.getAllElectionCategory_Loading
   const errorElectionCategory = states?.election?.getAllElectionCategory_Error
-  // const dataApprovedResults = states?.election?.getAllApprovedResults
   const errorStates = states?.location?.getAllLocationStates_Error
   const dataStates = states?.location?.getAllLocationStates
   const dataZones = states?.location?.getAllLocationZones
   const dataGEOZones = states?.location?.getAllLocationGEOZones
-  const dataLGAs = states?.location?.getAllLocationLGAs
+  const dataLGAs = states?.location.getAllLocationLGAsInState
   const dataPoolingUnits = states?.location?.getAllLocationPollingUnits
-  const dataWards = states?.location?.getAllLocationWards
+  const dataWards = states?.location?.getAllLocationWardsInLGA
   const dataParties = states?.location?.getAllParties
 
   useEffect(() => {
@@ -112,9 +120,7 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
     getStates(PAGE_SIZE)
     getApprovedResultsAction(PAGE_SIZE)
     getGEOZone()
-    getLGA(PAGE_SIZE)
     getPoolingUnit(PAGE_SIZE)
-    getWard(PAGE_SIZE)
     getZone()
     getPartyAction()
   }, [])
@@ -137,6 +143,7 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
   const [tableGenerated, setTableGenerated] = useState<boolean>(false)
   const [tableGeneratedLoading, setTableGeneratedLoading] =
     useState<boolean>(false)
+  const [filterPrompt, setFilterPrompt] = useState<string>('')
 
   const generateTable = () => {
     setTableGeneratedLoading(true)
@@ -198,56 +205,74 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
       case 1:
         return {
           text: 'Region',
-          data: getResponseData(dataZones?.data as dataType, '', ''),
-          query: 'region',
-          type: 'region'
+          data: getResponseData(
+            dataZones?.data as dataType,
+            [''],
+            [''],
+            filterEnums.REGION
+          ),
+          query: filterEnums.REGION,
+          type: filterEnums.REGION
         }
       case 2:
         return {
           text: 'GEO Zone',
           data: getResponseData(
             dataGEOZones?.data as dataType,
-            'region',
-            'zoneId'
+            ['region'],
+            ['zoneId'],
+            filterEnums.GEOZONE
           ),
-          query: 'geozone',
-          type: 'geozone'
+          query: filterEnums.GEOZONE,
+          type: filterEnums.GEOZONE
         }
       case 3:
         return {
           text: 'State',
           data: getResponseData(
             dataStates?.data as dataType,
-            'geozone',
-            'geographicalZoneId'
+            ['geozone', 'region'],
+            ['zoneId', 'geographicalZoneId'],
+            filterEnums.STATE
           ),
-          query: 'state',
-          type: 'state'
+          query: filterEnums.STATE,
+          type: filterEnums.STATE
         }
       case 4:
         return {
           text: 'LGA',
-          data: getResponseData(dataLGAs?.data as dataType, 'state', 'stateId'),
-          query: 'lga',
-          type: 'lga'
+          data: getResponseData(
+            dataLGAs?.data as dataType,
+            ['geozone', 'region', 'state'],
+            ['zoneId', 'geographicalZoneId', 'stateId'],
+            filterEnums.LGA
+          ),
+          query: filterEnums.LGA,
+          type: filterEnums.LGA
         }
       case 5:
         return {
           text: 'Ward',
-          data: getResponseData(dataWards?.data as dataType, 'lga', 'lgaId'),
-          query: 'ward',
-          type: 'ward'
+          data: getResponseData(
+            dataWards?.data as dataType,
+            ['geozone', 'region', 'state', 'lga'],
+            ['zoneId', 'geographicalZoneId', 'stateId', 'lgaId'],
+            filterEnums.WARD
+          ),
+          query: filterEnums.WARD,
+          type: filterEnums.WARD
         }
       case 6:
         return {
           text: 'Polling Unit',
           data: getResponseData(
             dataPoolingUnits?.data as dataType,
-            'ward',
-            'wardId'
+            ['geozone', 'region', 'state', 'lga', 'ward'],
+            ['zoneId', 'geographicalZoneId', 'stateId', 'lgaId', 'wardId'],
+            filterEnums.POLLINGUNIT
           ),
-          query: 'pollingunit',
-          type: 'pollingunit'
+          query: filterEnums.POLLINGUNIT,
+          type: filterEnums.POLLINGUNIT
         }
       default:
         return { text: '', data: [] as optionDataType[], query: '', type: '' }
@@ -273,10 +298,60 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
       })
   }
 
+  const resetSpecificFilterData = (index: number) => {
+    const data = getData(index)
+    const filterData = {
+      id: index,
+      title: data.text,
+      isSelected: false,
+      optionsdata: data.data,
+      show: true,
+      selected: { items: [], type: data.type as filterItemType },
+      selectedNumber: 0,
+      query: data.query,
+      type: data.type as filterItemType
+    }
+    let arr: any[] = []
+    arr = filterParams.map((i, filterIndex) => {
+      if (index - 1 === filterIndex) {
+        return filterData
+      } else {
+        return i
+      }
+    })
+    setFilterParams([...arr])
+  }
+
   useEffect(() => {
     const resetData = resetFilterData()
     setFilterParams(resetData)
   }, [])
+
+  useEffect(() => {
+    // let arr: any[] = []
+    // arr = filterParams.map((i, index) => {
+    //   if (index === 3) {
+    //     return resetSpecificFilterData(4)
+    //   } else {
+    //     return i
+    //   }
+    // })
+    // setFilterParams([...arr])
+    resetSpecificFilterData(4)
+  }, [dataLGAs])
+
+  useEffect(() => {
+    // let arr: any[] = []
+    // arr = filterParams.map((i, index) => {
+    //   if (index === 4) {
+    //     return resetSpecificFilterData(5)
+    //   } else {
+    //     return i
+    //   }
+    // })
+    // setFilterParams([...arr])
+    resetSpecificFilterData(5)
+  }, [dataWards])
 
   useEffect(() => {
     const data = primarySearchData.optionsdata
@@ -454,6 +529,10 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
                     setTableHeader={setTableHeader}
                     setFilterParams={setFilterParams}
                     filterParams={filterParams}
+                    setFilterPrompt={setFilterPrompt}
+                    filterPrompt={filterPrompt}
+                    getLGAsInState={getLGAsInState}
+                    getWardsInLGA={getWardsInLGA}
                   >
                     <ToggleSection>
                       <ToggleButton
@@ -543,23 +622,7 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
                 )}
               </>
             )}
-
             {electionParams.election && toggle === 'chart' && <Chart />}
-            {/* {false && (
-              <PaginationContainer>
-                <ReactPaginate
-                  breakLabel="..."
-                  previousLabel="<<"
-                  nextLabel=">>"
-                  pageCount={1}
-                  onPageChange={handlePagination}
-                  containerClassName={'pagination'}
-                  activeClassName={'active'}
-                  renderOnZeroPageCount={undefined}
-                  forcePage={1}
-                />
-              </PaginationContainer>
-            )} */}
           </BodyContainer>
           <div style={{ paddingBottom: '100px' }} />
         </>

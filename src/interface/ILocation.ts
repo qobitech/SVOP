@@ -51,7 +51,6 @@ export interface ILocationLGA {
   stateId: number
   state: null | string
 }
-
 export interface ILocationLGAS {
   message: string
   statusCode: number
@@ -61,6 +60,19 @@ export interface ILocationLGAS {
   totalCount: number
   totalPages: number
   data: ILocationLGA[]
+}
+
+export interface ILocationLGAInState {
+  id: number
+  name: string
+  lgaCode: string
+  stateId: number
+}
+export interface ILocationLGAsInState {
+  message: string
+  statusCode: number
+  isSuccessful: boolean
+  data: ILocationLGAInState[]
 }
 export interface ILocationWard {
   id: number
