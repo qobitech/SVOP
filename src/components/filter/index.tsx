@@ -75,9 +75,31 @@ const Filter: React.FC<IFilter> = ({
     setTableHeader((p) => [...th])
   }
 
+  const unCheckItems = (arr: IFilterParam[], index: 3 | 4) => {
+    return arr.map((i, optIndex) => {
+      const isIndex =
+        index === 3 ? optIndex === 3 || optIndex === 4 : optIndex === 4
+      if (index === 3) {
+        if (isIndex) {
+          return {
+            ...i,
+            optionsdata: i.optionsdata.map((j) => ({
+              ...j,
+              isChecked: false
+            }))
+          }
+        } else {
+          return i
+        }
+      } else {
+        return i
+      }
+    })
+  }
+
   const onFilterItemClick = (index: number, status: boolean) => {
     setFilterPrompt('')
-    const arr = [...filterParams]
+    let arr = [...filterParams]
     // if lga button or ward button is clicked
     if (index === 3 || index === 4) {
       const isFilterItemOptionNotChecked = arr[index - 1].optionsdata.every(
@@ -89,6 +111,7 @@ const Filter: React.FC<IFilter> = ({
       } else {
         arr[index].isSelected = status
       }
+      arr = unCheckItems(arr, index)
     } else {
       arr[index].isSelected = status
     }
