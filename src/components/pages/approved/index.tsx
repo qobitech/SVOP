@@ -94,7 +94,8 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
     getZone,
     getPartyAction,
     getLGAsInState,
-    getWardsInLGA
+    getWardsInLGA,
+    clearAction
   } = props as unknown as IActions
 
   const loadElectionCycle = states?.election?.getAllElectionCycles_Loading
@@ -518,6 +519,7 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
                     filterPrompt={filterPrompt}
                     getLGAsInState={getLGAsInState}
                     getWardsInLGA={getWardsInLGA}
+                    clearAction={clearAction}
                   >
                     <ToggleSection>
                       <ToggleButton
