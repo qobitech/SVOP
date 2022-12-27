@@ -49,7 +49,7 @@ const CustomFilter: React.FC<ICustomFilter> = ({
   return (
     <div className="w-100">
       {isFilter && (
-        <div className="bg-white py-2" style={{ overflow: 'auto' }}>
+        <div className="bg-white pt-2" style={{ overflow: 'auto' }}>
           <div className="w-100 justify-content-center justify-content-md-between">
             {filterParams?.map((i) => (
               <CustomFilterItem
