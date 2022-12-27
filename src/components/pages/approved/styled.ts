@@ -61,7 +61,7 @@ export const HeaderBodyText = styled(Typography)({
 export const SelectedTableActionsSection = styled('div')({
   display: 'flex',
   alignItems: 'center',
-  marginLeft: 'auto',
+  // marginLeft: 'auto',
   paddingTop: 3,
   [down('md')]: {
     marginLeft: 0,

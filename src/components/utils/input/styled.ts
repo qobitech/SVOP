@@ -22,12 +22,18 @@ export const InputError = styled('p')({
 })
 
 export const TextInput = styled('input')(
-  ({ iserror }: { iserror?: string }) => ({
+  ({
+    iserror,
+    nomargin
+  }: {
+    iserror?: string
+    nomargin?: 'true' | 'false'
+  }) => ({
     fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
     fontSize: 16,
     outline: '#286439',
     borderRadius: 3,
-    marginBottom: 7,
+    marginBottom: nomargin === 'true' ? 0 : 7,
     height: 40,
     paddingLeft: 10,
     background: 'none',

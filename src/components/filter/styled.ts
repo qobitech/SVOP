@@ -7,7 +7,7 @@ export const FilterContainer = styled('div')({
   width: '100%',
   boxSizing: 'border-box',
   padding: 0,
-  marginBottom: 20
+  marginBottom: 10
 })
 
 export const FilterContentContainer = styled('div')({

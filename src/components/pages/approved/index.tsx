@@ -43,6 +43,7 @@ import {
 } from '../../filter/methods'
 import { IFilterParam, optionDataType } from '../../filter/components'
 import { IParty } from '../../../interface/ILocation'
+import SendEmail from './sendEmail'
 
 export const PAGE_SIZE = 10
 
@@ -550,20 +551,6 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
                         </>
                       )}
                     </ToggleSection>
-                    <SelectedTableActionsSection>
-                      <FilterButton>
-                        <i className="fas fa-share-alt" />
-                        &nbsp;&nbsp;Share
-                      </FilterButton>
-                      <FilterButton>
-                        <i className="fas fa-print" />
-                        &nbsp;&nbsp;Print
-                      </FilterButton>
-                      <FilterButton nomargin="true">
-                        <i className="fas fa-download" />
-                        &nbsp;&nbsp;Download
-                      </FilterButton>
-                    </SelectedTableActionsSection>
                   </Filter>
                 )
               : advancedSearch && (
@@ -581,26 +568,45 @@ const ApprovedChild: React.FC<IApprovedPageChild> = ({ states, ...props }) => {
 
             {electionParams.election && toggle === 'table' && (
               <>
-                <button
-                  className="border px-2 mb-3"
-                  style={{
-                    width: 'max-content',
-                    height: '40px',
-                    fontFamily: 'Outfit_Medium',
-                    fontSize: '13px',
-                    background: 'none'
-                  }}
-                  onClick={generateTable}
-                >
-                  Generate Table
-                  {tableGeneratedLoading && (
-                    <span>
-                      &nbsp;&nbsp;&nbsp;
-                      <i className="fa fa-spinner fa-spin" />
-                    </span>
-                  )}
-                </button>
+                <Separator customheight={1} customwidth={'100%'} />
+                <div className="mb-3 d-flex align-items-center justify-content-between w-100">
+                  <button
+                    className="border px-2"
+                    style={{
+                      width: 'max-content',
+                      height: '40px',
+                      fontFamily: 'Outfit_Medium',
+                      fontSize: '13px',
+                      background: 'none'
+                    }}
+                    onClick={generateTable}
+                  >
+                    Generate Table
+                    {tableGeneratedLoading && (
+                      <span>
+                        &nbsp;&nbsp;&nbsp;
+                        <i className="fa fa-spinner fa-spin" />
+                      </span>
+                    )}
+                  </button>
 
+                  <SendEmail />
+
+                  <SelectedTableActionsSection>
+                    <FilterButton>
+                      <i className="fas fa-share-alt" />
+                      &nbsp;&nbsp;Share
+                    </FilterButton>
+                    <FilterButton>
+                      <i className="fas fa-print" />
+                      &nbsp;&nbsp;Print
+                    </FilterButton>
+                    <FilterButton nomargin="true">
+                      <i className="fas fa-download" />
+                      &nbsp;&nbsp;Download
+                    </FilterButton>
+                  </SelectedTableActionsSection>
+                </div>
                 {tableGenerated && (
                   <MockTable
                     party={dataParties?.data as IParty[]}

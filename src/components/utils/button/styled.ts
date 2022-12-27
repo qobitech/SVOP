@@ -16,6 +16,7 @@ export const Button = styled('button')(
     fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
     fontSize: 16,
     cursor: 'pointer',
-    borderRadius: 3
+    borderRadius: 3,
+    padding: '0 20px'
   })
 )

@@ -238,6 +238,18 @@ const Filter: React.FC<IFilter> = ({
           </FilterButton>
         </FilterButtonLeftSection>
         {children}
+        <div>
+          <p
+            className="m-0 font-small border rounded px-2 py-1 d-flex align-items-center justify-content-between"
+            style={{ cursor: 'pointer', width: '123px' }}
+            onClick={() => setFilterCollapse(!filterCollapse)}
+          >
+            {filterCollapse ? 'Expand' : 'Collapse'} Filter
+            <span>
+              <i className={`fas fa-${filterCollapse ? 'plus' : 'minus'}`} />
+            </span>
+          </p>
+        </div>
       </FilterButtonSection>
       {isFilter && (
         <>
@@ -265,20 +277,6 @@ const Filter: React.FC<IFilter> = ({
                 </p>
               )}
             </FilterButtonLeftSection>
-            <div>
-              <p
-                className="m-0 font-small border rounded px-2 py-1 d-flex align-items-center justify-content-between"
-                style={{ cursor: 'pointer', width: '123px' }}
-                onClick={() => setFilterCollapse(!filterCollapse)}
-              >
-                {filterCollapse ? 'Expand' : 'Collapse'} Filter
-                <span>
-                  <i
-                    className={`fas fa-${filterCollapse ? 'plus' : 'minus'}`}
-                  />
-                </span>
-              </p>
-            </div>
           </FilterButtonSection>
         </>
       )}
@@ -288,7 +286,8 @@ const Filter: React.FC<IFilter> = ({
             height: filterCollapse ? '0px' : '',
             overflow: filterCollapse ? 'hidden' : '',
             padding: filterCollapse ? '0' : '',
-            border: filterCollapse ? '0' : ''
+            border: filterCollapse ? '0' : '',
+            margin: filterCollapse ? '0' : ''
           }}
         >
           <CustomFilter
