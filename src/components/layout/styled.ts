@@ -15,22 +15,19 @@ export const HeaderBackgroundOverLay = styled('div')({
   position: 'fixed',
   width: '100%',
   height: 345,
-  background: '#E5F9EB',
+  background: '#fff',
   top: 0,
   left: 0
 })
 
-export const MainContainer = styled('div')(({ bgimg }: { bgimg: string }) => ({
+export const MainContainer = styled('div')({
   width: '100%',
   height: '100vh',
-  background: '#E5F9EB',
+  background: '#fff',
   overflow: 'auto',
   display: 'flex',
   flexDirection: 'column'
-  // backgroundImage: 'url(' + bgimg + ')',
-  // backgroundRepeat: 'no-repeat',
-  // backgroundPosition: 'top',
-}))
+})
 
 export const ChildrenContainer = styled('div')({
   zIndex: 2,

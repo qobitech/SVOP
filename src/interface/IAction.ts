@@ -8,61 +8,17 @@ interface IAuthActions {
   }) => (dispatch: any) => void
   sendOtpAction: (data: { userName: string }) => (dispatch: any) => void
 }
-interface IElectionActions {
-  getElectionCycle: (
+interface IVotingActions {
+  voteAction: (
     pageSize?: number,
     pageNumber?: number,
     sort?: string
   ) => (dispatch: any) => void
-  getElection: (
-    pageSize?: number,
-    pageNumber?: number,
-    sort?: string
-  ) => (dispatch: any) => void
-  getElectionCategory: (
-    pageSize?: number,
-    pageNumber?: number,
-    sort?: string
-  ) => (dispatch: any) => void
-  getApprovedResultsAction: (
-    pageSize?: number,
-    pageNumber?: number,
-    sort?: string
-  ) => (dispatch: any) => void
-}
-interface ILocationActions {
-  getZone: () => (dispatch: any) => void
-  getGEOZone: () => (dispatch: any) => void
-  getStates: (
-    pageSize?: number,
-    pageNumber?: number,
-    sort?: string
-  ) => (dispatch: any) => void
-  getLGA: (
-    pageSize?: number,
-    pageNumber?: number,
-    sort?: string
-  ) => (dispatch: any) => void
-  getLGAsInState: (data: { stateIds: number[] }) => (dispatch: any) => void
-  getWard: (
-    pageSize?: number,
-    pageNumber?: number,
-    sort?: string
-  ) => (dispatch: any) => void
-  getWardsInLGA: (data: { lgaIds: number[] }) => (dispatch: any) => void
-  getPoolingUnit: (
-    pageSize?: number,
-    pageNumber?: number,
-    sort?: string
-  ) => (dispatch: any) => void
-  getPartyAction: () => (dispatch: any) => void
 }
 interface IOtherActions {
   clearAction: (actionType: I_ACTION_TYPE) => (dispatch: any) => void
+  setMenuOpen: (menuOpen: boolean) => (dispatch: any) => void
+  setSubMenuOpen: (subMenuOpen: number) => (dispatch: any) => void
 }
 
-export interface IActions
-  extends IAuthActions,
-    IElectionActions,
-    ILocationActions,
-    IOtherActions {}
+export interface IActions extends IAuthActions, IVotingActions, IOtherActions {}

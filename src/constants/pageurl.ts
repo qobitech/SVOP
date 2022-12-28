@@ -1,10 +1,6 @@
 export const pageurl = {
-  // UNAPPROVED: '/unapproved',
-  APPROVED: '/approved',
-  HOME: '/',
+  LANDINGPAGE: '/',
   PROFILE: '/view-profile',
-  // OVERVIEW: '/overview',
-  // UPLOAD: '/upload',
-  // REJECTED: '/rejected'
+  LOGIN: '/login',
   INSTRUCTIONS: '/instructions'
 }

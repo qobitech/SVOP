@@ -11,7 +11,7 @@ const Page404 = () => {
     <PageContainer>
       <Icon />
       <TxtContainer>Sorry for the inconvenience</TxtContainer>
-      <LinkContainer to={pageurl.APPROVED}>Back to Home</LinkContainer>
+      <LinkContainer to={pageurl.LANDINGPAGE}>Back to Home</LinkContainer>
     </PageContainer>
   )
 }

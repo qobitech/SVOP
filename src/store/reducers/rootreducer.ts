@@ -1,17 +1,11 @@
 import { combineReducers } from 'redux'
 
-import {
-  authReducer,
-  electionReducer,
-  otherReducer,
-  locationReducer
-} from './allReducers'
+import { authReducer, votingReducer, otherReducer } from './allReducers'
 
 const rootreducer = combineReducers({
   auth: authReducer,
-  election: electionReducer,
-  other: otherReducer,
-  location: locationReducer
+  voting: votingReducer,
+  other: otherReducer
 })
 
 export default rootreducer

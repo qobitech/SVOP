@@ -1,20 +1,22 @@
 import React from 'react'
-import dai from '../../../assets/images/logo.svg'
+import { Separator } from '../../pages/landing/styled'
 
-import { Copyright, FooterContainer, Logo } from './styled'
-
-import { LinkContainer } from '../../utils/reusable/styled'
-import { pageurl } from '../../../constants/pageurl'
+import {
+  Copyright,
+  CopyRightContainer,
+  FooterContainer,
+  MaxWidthContainer
+} from './styled'
 
 const Footer = () => {
   return (
     <FooterContainer>
-      <div>
-        <Copyright>Copyright &#169; {new Date().getFullYear()}</Copyright>
-      </div>
-      <LinkContainer to={pageurl.APPROVED}>
-        <Logo src={dai} />
-      </LinkContainer>
+      <MaxWidthContainer>
+        <Separator customwidth="100%" customheight={1} />
+        <CopyRightContainer>
+          <Copyright>&#169; {new Date().getFullYear()}</Copyright>
+        </CopyRightContainer>
+      </MaxWidthContainer>
     </FooterContainer>
   )
 }

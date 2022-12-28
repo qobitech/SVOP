@@ -4,23 +4,43 @@ import { down } from '../../../assets/style/breakpointHelpers'
 
 export const HeaderContainer = styled('div')({
   display: 'flex',
-  padding: '10px 15px',
+  padding: '10px 35px',
   alignItems: 'center',
   zIndex: 4,
   position: 'fixed',
-  background: '#E5F9EB',
+  background: '#FFF',
   width: '100%',
   top: 0,
-  left: 0
+  left: 0,
+  [down('sm')]: {
+    padding: 10
+  }
 })
 
 export const Logo = styled('img')({
-  marginRight: 20
+  marginRight: 20,
+  width: 30
 })
 
-export const Hamburger = styled('img')({
+export const Hamburger = styled('div')({
   marginRight: 10,
   cursor: 'pointer'
+})
+
+export const LinkMenu = styled('ul')({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'flex-end',
+  height: 40,
+  margin: 0,
+  padding: 0
+})
+export const LinkMenuLi = styled('li')({
+  listStyleType: 'none',
+  fontSize: 14,
+  fontFamily: 'Outfit_Medium',
+  marginLeft: 20,
+  textTransform: 'uppercase'
 })
 
 export const ProfileContainer = styled('div')({

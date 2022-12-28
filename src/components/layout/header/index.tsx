@@ -1,21 +1,13 @@
 import React from 'react'
-import logo from '../../../assets/images/inec.svg'
-// import hamburger from '../../../assets/images/hamburger.svg'
-// import profile from '../../../assets/images/user.svg'
-// import ellipsis from '../../../assets/images/ellipsis.svg'
-// import { userData } from '../../../constants/global'
+import logo from '../../../assets/images/logo.svg'
 
 import {
   HeaderContainer,
   Logo,
-  // Hamburger,
-  // ProfileContainer,
-  // ProfileImage,
-  // ProfileEllippis,
-  // ProfileName,
-  // ProfileRole,
-  // ProfileSection,
-  LinkContainer
+  Hamburger,
+  LinkContainer,
+  LinkMenuLi,
+  LinkMenu
 } from './styled'
 
 import { pageurl } from '../../../constants/pageurl'
@@ -27,29 +19,27 @@ interface IHeader {
 const Header = ({ setMenu }: IHeader) => {
   return (
     <HeaderContainer>
-      <LinkContainer to={pageurl.APPROVED} className="d-none d-md-block">
+      <LinkContainer to={pageurl.LANDINGPAGE}>
         <Logo src={logo} />
       </LinkContainer>
-      {/* <Hamburger src={hamburger} onClick={setMenu}/> */}
-      {/* <ProfileContainer> */}
-      {/* <LinkContainer to={pageurl.PROFILE}> */}
-      {/* <ProfileImage
-            src={profile}
-            title={userData.user?.firstName + ' ' + userData.user?.lastName}
-          />
-        </LinkContainer> */}
-      {/* <LinkContainer to={pageurl.PROFILE}>
-          <ProfileSection>
-            <ProfileName className='m-0'>
-              {userData.user?.firstName + ' ' + userData.user?.lastName}
-            </ProfileName>
-            <ProfileRole>
-              {userData?.token?.role}
-            </ProfileRole>
-          </ProfileSection>
-        </LinkContainer> */}
-      {/* <ProfileEllippis src={ellipsis} title='More Options'/> */}
-      {/* </ProfileContainer> */}
+      <Hamburger onClick={setMenu} className="d-flex d-lg-none">
+        <p className="m-0">
+          <span>
+            <i className="fa fa-bars mr-2" />
+          </span>
+          Menu
+        </p>
+      </Hamburger>
+      <div className="ml-auto d-none d-lg-flex align-items-center">
+        <LinkMenu>
+          <LinkMenuLi>
+            <LinkContainer to={''}>About</LinkContainer>
+          </LinkMenuLi>
+          <LinkMenuLi>
+            <LinkContainer to={''}>How To Vote</LinkContainer>
+          </LinkMenuLi>
+        </LinkMenu>
+      </div>
     </HeaderContainer>
   )
 }

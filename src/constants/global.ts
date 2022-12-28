@@ -23,3 +23,5 @@ export const isLogged = userData.token?.exp
 export const userRole = {
   PRESIDING_OFFICER: 'Presiding Officer'
 }
+
+export const MAXWIDTH = 1248

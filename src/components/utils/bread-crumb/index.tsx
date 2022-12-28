@@ -22,7 +22,7 @@ const BreadCrumb: React.FC<IBreadCrumb> = ({ crumbs }) => {
     <>
       <HeaderContainer>
         <HeaderText>
-          <LinkContainer to={pageurl.APPROVED}>
+          <LinkContainer to={pageurl.LANDINGPAGE}>
             <HeaderImage src={homeicon} />
           </LinkContainer>
           &nbsp;&nbsp;
