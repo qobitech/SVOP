@@ -50,8 +50,8 @@ export const AboutBody = styled(Typography)(
     marginRight: ismr === 'true' ? 25 : 0,
     marginLeft: isml === 'true' ? 25 : 0,
     [down('md')]: {
-      fontSize: 10,
-      lineHeight: '15px'
+      fontSize: 13,
+      lineHeight: '19px'
     }
   })
 )
