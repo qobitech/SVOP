@@ -39,7 +39,7 @@ export const LinkMenuLi = styled('li')({
   listStyleType: 'none',
   fontSize: 14,
   fontFamily: 'Outfit_Medium',
-  marginLeft: 20,
+  marginLeft: 40,
   textTransform: 'uppercase'
 })
 

@@ -25,3 +25,4 @@ export const userRole = {
 }
 
 export const MAXWIDTH = 1248
+export const COLOR = '#7F1AFF'

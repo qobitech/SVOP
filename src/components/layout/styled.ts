@@ -32,7 +32,7 @@ export const MainContainer = styled('div')({
 export const ChildrenContainer = styled('div')({
   zIndex: 2,
   position: 'relative',
-  padding: 15,
+  padding: 0,
   height: '100vh',
   margin: '0 auto',
   boxSizing: 'border-box',
