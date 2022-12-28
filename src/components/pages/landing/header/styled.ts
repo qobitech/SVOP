@@ -41,3 +41,29 @@ export const Text = styled(Typography)({
     lineHeight: '30px'
   }
 })
+
+export const StatsContainer = styled('div')({
+  width: '100%',
+  background: '#fff',
+  height: 'max-content',
+  boxSizing: 'border-box',
+  padding: '25px 0 0',
+  textAlign: 'left',
+  display: 'flex',
+  alignItems: 'center'
+})
+
+export const StatsItem = styled(Typography)(
+  ({ isml, ismr }: { isml?: 'true' | 'false'; ismr?: 'true' | 'false' }) => ({
+    fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
+    fontSize: 12,
+    lineHeight: '20px',
+    margin: 0,
+    marginRight: ismr === 'true' ? 25 : 0,
+    marginLeft: isml === 'true' ? 25 : 0,
+    [down('md')]: {
+      fontSize: 10,
+      lineHeight: '15px'
+    }
+  })
+)
