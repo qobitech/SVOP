@@ -22,16 +22,16 @@ export const HeaderBackgroundOverLay = styled('div')({
 
 export const MainContainer = styled('div')({
   width: '100%',
-  height: '100vh',
+  // height: '100vh',
   background: '#fff',
-  overflow: 'auto',
+  // overflow: 'auto',
   display: 'flex',
   flexDirection: 'column'
 })
 
 export const ChildrenContainer = styled('div')({
   zIndex: 2,
-  position: 'relative',
+  // position: 'relative',
   padding: 0,
   height: '100vh',
   margin: '0 auto',

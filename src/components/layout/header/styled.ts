@@ -31,13 +31,13 @@ export const LinkMenu = styled('ul')({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'flex-end',
-  height: 40,
+  height: 35,
   margin: 0,
   padding: 0
 })
 export const LinkMenuLi = styled('li')({
   listStyleType: 'none',
-  fontSize: 14,
+  fontSize: 13,
   fontFamily: 'Outfit_Medium',
   marginLeft: 40,
   textTransform: 'uppercase'

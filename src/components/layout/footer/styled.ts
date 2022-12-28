@@ -2,13 +2,9 @@ import { styled, Typography } from '@material-ui/core'
 import { down } from '../../../assets/style/breakpointHelpers'
 import { MAXWIDTH } from '../../../constants/global'
 
-export const FooterContainer = styled('div')({
-  zIndex: 4,
-  // position: 'fixed',
+export const FooterContainer = styled('footer')({
   background: '#FFF',
   width: '100%'
-  // bottom: 0,
-  // left: 0
 })
 
 export const MaxWidthContainer = styled('div')({

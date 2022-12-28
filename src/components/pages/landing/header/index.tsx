@@ -23,9 +23,12 @@ const Header: React.FC<IHeader> = ({
 }) => {
   return (
     <HeaderContainer>
+      <Separator customheight={20} className="d-none d-md-flex" />
+      <Separator customheight={0} className="d-flex d-md-none" />
       <TextContainer>
         <Text>{title}</Text>
       </TextContainer>
+      <Separator customheight={0} />
       <StatsContainer>
         <StatsItem ismr="true">
           TOTAL VOTES&nbsp;&nbsp;&nbsp;

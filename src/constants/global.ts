@@ -26,3 +26,5 @@ export const userRole = {
 
 export const MAXWIDTH = 1248
 export const COLOR = '#7F1AFF'
+export const COLOR_SECONDARY = '#FF3232'
+export const COLOR_SECONDARY_HOVER = '#D22323'

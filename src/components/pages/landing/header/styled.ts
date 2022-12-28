@@ -15,15 +15,7 @@ export const TextContainer = styled('div')({
   width: '100%',
   background: '#fff',
   height: 'max-content',
-  boxSizing: 'border-box',
-  padding: '56px 0 0',
-  textAlign: 'left',
-  [down('md')]: {
-    padding: '36px 0 0'
-  },
-  [down('sm')]: {
-    padding: '20px 0 0'
-  }
+  boxSizing: 'border-box'
 })
 
 export const Text = styled(Typography)({
@@ -47,7 +39,6 @@ export const StatsContainer = styled('div')({
   background: '#fff',
   height: 'max-content',
   boxSizing: 'border-box',
-  padding: '25px 0 0',
   textAlign: 'left',
   display: 'flex',
   alignItems: 'center'
