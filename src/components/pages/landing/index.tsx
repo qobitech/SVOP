@@ -8,6 +8,7 @@ import About from './about'
 import Instructions from './instructions'
 import CTA from './cta'
 import Organisers from './organisers'
+import { pageurl } from '../../../constants/pageurl'
 // import { IActions } from '../../../interface/IAction'
 
 const LandingPage: React.FC = () => {
@@ -53,7 +54,7 @@ const LandingPageChild: React.FC<ILandingPageChild> = ({
     {
       id: 1,
       title: 'Get Started',
-      url: '',
+      url: pageurl.GETSTARTED,
       isExternal: false
     }
   ]

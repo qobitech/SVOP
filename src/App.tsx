@@ -10,6 +10,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import LandingPage from './components/pages/landing'
 import Page404 from './components/pages/page404'
 import { pageurl } from './constants/pageurl'
+import GetStarted from './components/pages/getstarted'
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
         <Routes>
           <Route path={pageurl.LANDINGPAGE} element={<ProtectedRoute />}>
             <Route path={pageurl.LANDINGPAGE} element={<LandingPage />} />
+          </Route>
+          <Route path={pageurl.GETSTARTED} element={<ProtectedRoute />}>
+            <Route path={pageurl.GETSTARTED} element={<GetStarted />} />
           </Route>
           <Route path="*" element={<Page404 />} />
         </Routes>

@@ -12,7 +12,11 @@ const CTA: React.FC<ICTA> = ({ ctas }) => {
       <Separator customheight={0} />
       <CTAButtonContainer>
         {ctas.map((cta) => (
-          <CTAButton key={cta.id} target={cta.isExternal ? '_blank' : '_self'}>
+          <CTAButton
+            key={cta.id}
+            target={cta.isExternal ? '_blank' : '_self'}
+            href={cta.url}
+          >
             {cta.title}{' '}
             {cta.isExternal ? (
               <span>

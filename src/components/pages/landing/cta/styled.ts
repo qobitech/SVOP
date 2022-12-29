@@ -39,8 +39,10 @@ export const CTAButton = styled('a')(
     marginRight: ismr === 'true' ? 25 : 0,
     marginLeft: isml === 'true' ? 25 : 0,
     transition: '.2s ease-in-out',
+    textDecoration: 'none',
     '&:hover': {
-      background: COLOR_SECONDARY_HOVER
+      background: COLOR_SECONDARY_HOVER,
+      textDecoration: 'none'
     }
   })
 )
