@@ -1,5 +1,5 @@
 import { styled, Typography } from '@material-ui/core'
-import { MAXWIDTH } from '../../../../constants/global'
+import { COLOR, MAXWIDTH } from '../../../../constants/global'
 import { down } from '../../../../assets/style/breakpointHelpers'
 
 export const AboutContainer = styled('div')({
@@ -34,17 +34,37 @@ export const AboutHeader = styled(Typography)(
   })
 )
 
-export const AboutBody = styled(Typography)(
+export const AboutBody = styled('div')(
   ({ isml, ismr }: { isml?: 'true' | 'false'; ismr?: 'true' | 'false' }) => ({
-    fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
-    fontSize: 14,
-    lineHeight: '25px',
-    margin: 0,
-    marginRight: ismr === 'true' ? 25 : 0,
-    marginLeft: isml === 'true' ? 25 : 0,
-    [down('md')]: {
-      fontSize: 13,
-      lineHeight: '19px'
+    '& p': {
+      fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
+      fontSize: 14,
+      lineHeight: '28px',
+      margin: 0,
+      marginRight: ismr === 'true' ? 25 : 0,
+      marginLeft: isml === 'true' ? 25 : 0,
+      [down('md')]: {
+        fontSize: 13,
+        lineHeight: '19px'
+      }
     }
   })
 )
+
+export const Sponsorship = styled(Typography)({
+  fontFamily: ['Outfit_Bold', 'Arial', 'sans-serif'].join(','),
+  fontSize: 14,
+  lineHeight: '25px',
+  margin: 0,
+  [down('md')]: {
+    fontSize: 13
+  },
+  '& span a': {
+    fontFamily: ['Outfit_Medium', 'Arial', 'sans-serif'].join(','),
+    color: COLOR + ' !important',
+    cursor: 'pointer'
+  },
+  '& span a:hover': {
+    textDecoration: 'underline !important'
+  }
+})
