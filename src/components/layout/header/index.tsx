@@ -33,10 +33,16 @@ const Header = ({ setMenu }: IHeader) => {
       <div className="ml-auto d-none d-lg-flex align-items-center">
         <LinkMenu>
           <LinkMenuLi>
+            <LinkContainer to={pageurl.LANDINGPAGE}>Home</LinkContainer>
+          </LinkMenuLi>
+          <LinkMenuLi>
             <LinkContainer to={''}>About</LinkContainer>
           </LinkMenuLi>
           <LinkMenuLi>
             <LinkContainer to={''}>How To Vote</LinkContainer>
+          </LinkMenuLi>
+          <LinkMenuLi>
+            <LinkContainer to={pageurl.SPONSORSHIP}>Sponsorship</LinkContainer>
           </LinkMenuLi>
         </LinkMenu>
       </div>

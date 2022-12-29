@@ -22,7 +22,7 @@ export const HeaderBackgroundOverLay = styled('div')({
 
 export const MainContainer = styled('div')({
   width: '100%',
-  // height: '100vh',
+  height: '100vh',
   background: '#fff',
   // overflow: 'auto',
   display: 'flex',
@@ -38,6 +38,8 @@ export const ChildrenContainer = styled('div')({
   boxSizing: 'border-box',
   paddingTop: 70,
   maxWidth: 1440,
-  width: '100%'
+  width: '100%',
+  display: 'flex',
+  flexDirection: 'column'
   // marginBottom: 400
 })

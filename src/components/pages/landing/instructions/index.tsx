@@ -13,7 +13,7 @@ interface IInstruction {
 
 const Instructions: React.FC<IInstruction> = ({ instructions, title }) => {
   return (
-    <InstructionContainer>
+    <InstructionContainer id="instructions">
       <Separator customheight={0} />
       <InstructionHeader>{title || 'INSTRUCTION'}</InstructionHeader>
       <Separator customheight={5} className="d-none d-md-flex" />

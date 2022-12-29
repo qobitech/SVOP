@@ -1,6 +1,6 @@
 import React from 'react'
 import DataWrapper from '../../../wrapper/data-wrapper'
-import { GetStartedContainer } from './styled'
+import { FormContainer, GetStartedContainer } from './styled'
 import { IStates } from '../../../interface/IReducer'
 // import { IActions } from '../../../interface/IAction'
 
@@ -17,7 +17,11 @@ interface IGetStartedChild {
 }
 
 const GetStartedChild: React.FC<IGetStartedChild> = ({ states, ...props }) => {
-  return <GetStartedContainer>Get started</GetStartedContainer>
+  return (
+    <GetStartedContainer>
+      <FormContainer>Get started</FormContainer>
+    </GetStartedContainer>
+  )
 }
 
 export default GetStarted

@@ -42,8 +42,8 @@ const menuData = [
   },
   {
     id: 3,
-    title: 'How To Vote',
-    url: '',
+    title: 'Sponsorship',
+    url: pageurl.SPONSORSHIP,
     sub: [],
     isParent: false,
     icon: 'fas fa-pen mr-2'

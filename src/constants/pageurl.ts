@@ -3,5 +3,6 @@ export const pageurl = {
   PROFILE: '/view-profile',
   LOGIN: '/login',
   INSTRUCTIONS: '/instructions',
-  GETSTARTED: '/get-started'
+  GETSTARTED: '/get-started',
+  SPONSORSHIP: '/sponsorship'
 }

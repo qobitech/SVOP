@@ -54,7 +54,7 @@ export const OrganisersBodyContainer = styled('div')({
     }
   },
   '& span a:hover': {
-    textDecoration: 'underline !important'
+    textDecoration: 'none !important'
   }
 })
 

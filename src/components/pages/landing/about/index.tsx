@@ -1,4 +1,5 @@
 import React from 'react'
+import { pageurl } from '../../../../constants/pageurl'
 import { Separator } from '../styled'
 import {
   AboutContainer,
@@ -14,7 +15,7 @@ interface IAbout {
 
 const About: React.FC<IAbout> = ({ description }) => {
   return (
-    <AboutContainer>
+    <AboutContainer id="about">
       <Separator customheight={40} />
       <AboutHeader>ABOUT</AboutHeader>
       <Separator customheight={5} className="d-none d-md-flex" />
@@ -26,7 +27,7 @@ const About: React.FC<IAbout> = ({ description }) => {
       <Sponsorship>
         Would you like to sponsor this event ? &nbsp;&nbsp;
         <span>
-          <a>Click here</a>
+          <a href={pageurl.SPONSORSHIP}>Click here</a>
         </span>
       </Sponsorship>
       <Separator customheight={30} />

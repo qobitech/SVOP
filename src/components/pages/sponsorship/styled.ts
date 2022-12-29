@@ -1,7 +1,7 @@
 import { styled } from '@material-ui/core'
 import { MAXWIDTH } from '../../../constants/global'
 
-export const GetStartedContainer = styled('div')({
+export const SponsorshipContainer = styled('div')({
   width: '100%',
   background: '#fff'
 })

@@ -11,6 +11,7 @@ import LandingPage from './components/pages/landing'
 import Page404 from './components/pages/page404'
 import { pageurl } from './constants/pageurl'
 import GetStarted from './components/pages/getstarted'
+import Sponsorship from './components/pages/sponsorship'
 
 function App() {
   return (
@@ -22,6 +23,9 @@ function App() {
           </Route>
           <Route path={pageurl.GETSTARTED} element={<ProtectedRoute />}>
             <Route path={pageurl.GETSTARTED} element={<GetStarted />} />
+          </Route>
+          <Route path={pageurl.SPONSORSHIP} element={<ProtectedRoute />}>
+            <Route path={pageurl.SPONSORSHIP} element={<Sponsorship />} />
           </Route>
           <Route path="*" element={<Page404 />} />
         </Routes>

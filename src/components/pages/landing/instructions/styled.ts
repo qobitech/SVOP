@@ -54,7 +54,7 @@ export const InstructionBodyContainer = styled('div')({
     }
   },
   '& span a:hover': {
-    textDecoration: 'underline !important'
+    textDecoration: 'none !important'
   }
 })
 
