@@ -19,7 +19,7 @@ interface IHeader {
 const Header = ({ setMenu }: IHeader) => {
   return (
     <HeaderContainer>
-      <LinkContainer to={pageurl.LANDINGPAGE}>
+      <LinkContainer to={pageurl.LANDINGPAGE} className="d-none d-lg-flex">
         <Logo src={logo} />
       </LinkContainer>
       <Hamburger onClick={setMenu} className="d-flex d-lg-none">
@@ -30,6 +30,12 @@ const Header = ({ setMenu }: IHeader) => {
           Menu
         </p>
       </Hamburger>
+      <LinkContainer
+        to={pageurl.LANDINGPAGE}
+        className="d-flex d-lg-none mx-auto p-0"
+      >
+        <Logo src={logo} />
+      </LinkContainer>
       <div className="ml-auto d-none d-lg-flex align-items-center">
         <LinkMenu>
           <LinkMenuLi>

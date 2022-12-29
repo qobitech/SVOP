@@ -30,7 +30,7 @@ const menuData = [
     url: pageurl.LANDINGPAGE,
     sub: [],
     isParent: false,
-    icon: 'fa fa-home mr-2'
+    icon: ''
   },
   {
     id: 2,
@@ -38,7 +38,7 @@ const menuData = [
     url: '',
     sub: [],
     isParent: false,
-    icon: 'fas fa-check-circle mr-2'
+    icon: ''
   },
   {
     id: 3,
@@ -46,7 +46,7 @@ const menuData = [
     url: pageurl.SPONSORSHIP,
     sub: [],
     isParent: false,
-    icon: 'fas fa-pen mr-2'
+    icon: ''
   }
 ]
 

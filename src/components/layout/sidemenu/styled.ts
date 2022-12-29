@@ -95,9 +95,6 @@ export const ParentMenuContainer = styled('div')(
     boxSizing: 'border-box',
     transition: '.2s ease',
     width: '100%',
-    '&:hover': {
-      background: '#F4FFF8'
-    },
     padding: '35px 10px 35px 25px'
   })
 )
