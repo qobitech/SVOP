@@ -4,7 +4,8 @@ import { MAXWIDTH } from '../../../constants/global'
 
 export const FooterContainer = styled('footer')({
   background: '#FFF',
-  width: '100%'
+  width: '100%',
+  marginTop: 'auto'
 })
 
 export const MaxWidthContainer = styled('div')({

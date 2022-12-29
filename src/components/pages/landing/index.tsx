@@ -7,7 +7,6 @@ import Header from './header'
 import About from './about'
 import Instructions from './instructions'
 import CTA from './cta'
-import Footer from '../../layout/footer'
 // import { IActions } from '../../../interface/IAction'
 
 const LandingPage: React.FC = () => {
@@ -53,7 +52,6 @@ const LandingPageChild: React.FC<ILandingPageChild> = ({
       <About description={description} />
       <Instructions title="How To Vote" instructions={instructions} />
       <CTA ctas={ctas} />
-      <Footer />
     </LandingPageContainer>
   )
 }

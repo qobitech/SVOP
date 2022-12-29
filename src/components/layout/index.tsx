@@ -12,11 +12,15 @@ import ScrollIntoViewController from './ScrollIntoViewController'
 import DataWrapper from '../../wrapper/data-wrapper'
 import { IStates } from '../../interface/IReducer'
 import { IActions } from '../../interface/IAction'
+import Footer from './footer'
 
 const Dashboard = ({ children }: { children?: any }) => {
   return (
     <DataWrapper nowrapper="true">
-      <DashboardChild>{children}</DashboardChild>
+      <DashboardChild>
+        {children}
+        <Footer />
+      </DashboardChild>
     </DataWrapper>
   )
 }
