@@ -2,7 +2,7 @@ import { styled, Typography } from '@material-ui/core'
 import { COLOR, MAXWIDTH } from '../../../../constants/global'
 import { down } from '../../../../assets/style/breakpointHelpers'
 
-export const InstructionContainer = styled('div')({
+export const OrganisersContainer = styled('div')({
   width: '90%',
   maxWidth: MAXWIDTH,
   background: '#fff',
@@ -11,7 +11,7 @@ export const InstructionContainer = styled('div')({
   margin: '0 auto'
 })
 
-export const InstructionBodyContainer = styled('div')({
+export const OrganisersBodyContainer = styled('div')({
   width: '100%',
   background: '#fff',
   height: 'max-content',
@@ -27,7 +27,7 @@ export const InstructionBodyContainer = styled('div')({
       lineHeight: '19px'
     }
   },
-  '& ol': {
+  '& ul': {
     paddingLeft: 15
   },
   '& li': {
@@ -58,7 +58,7 @@ export const InstructionBodyContainer = styled('div')({
   }
 })
 
-export const InstructionHeader = styled(Typography)(
+export const OrganisersHeader = styled(Typography)(
   ({ isml, ismr }: { isml?: 'true' | 'false'; ismr?: 'true' | 'false' }) => ({
     fontFamily: ['Outfit_Bold', 'Arial', 'sans-serif'].join(','),
     fontSize: 12,

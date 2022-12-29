@@ -7,6 +7,7 @@ import Header from './header'
 import About from './about'
 import Instructions from './instructions'
 import CTA from './cta'
+import Organisers from './organisers'
 // import { IActions } from '../../../interface/IAction'
 
 const LandingPage: React.FC = () => {
@@ -27,7 +28,8 @@ const LandingPageChild: React.FC<ILandingPageChild> = ({
 }) => {
   const title =
     'The National Association Of Students Of English And Literary Studies (NASELS) Dinner/Award Night Elections.'
-  const description = `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`
+  const description = `NASELS AWARD AND DINNER NIGHT is an annual event hosted by the National Association of Students of English and Literary Studies(NASELS). This edition is proudly sponsored by Nasels Uniport. It may interest you to know that NASELS is the umbrella body created to cater for the welfare and needs of every student of English studies Department.
+  A good thing to know is that this year’s Nasels dinner night will feature two exciting events; award presentations to outstanding students and pageantry for Mr/Miss Nasels uniport.`
   const instructions = `
   <ol>
     <li>Click on the <span><a>Get Started</a></span> button.</li>
@@ -35,6 +37,17 @@ const LandingPageChild: React.FC<ILandingPageChild> = ({
     <li>Select the category.</li>
     <li>Vote your preferred candidate.</li>
   </ol>
+  `
+  const organizers = `
+  <ul>
+    <li>Gad Baridoma <span><a>(Nasels Uniport President)</a></span>.</li>
+    <li>Destiny Owegwem <span><a>(Chairman Nasels dinner night Planning committee)</a></span>.</li>
+    <li>Jane Enyeribe <span><a>(Ag Director of Socials)</a></span>.</li>
+    <li>Joy Abolarin <span><a>(Secretary planning committee)</a></span>.</li>
+    <li>Chinenye Nwachukwu <span><a>(member)</a></span>.</li>
+    <li>Mr Valentine Onwugbolu <span><a>(member)</a></span>.</li>
+    <li>Success Godwin <span><a>(member)</a></span>.</li>
+  </ul>
   `
   const ctas = [
     {
@@ -50,6 +63,7 @@ const LandingPageChild: React.FC<ILandingPageChild> = ({
       <Jumbotron />
       <Header title={title} categories={5} shareLinks={[]} totalVotes={4500} />
       <About description={description} />
+      <Organisers organisers={organizers} />
       <Instructions title="How To Vote" instructions={instructions} />
       <CTA ctas={ctas} />
     </LandingPageContainer>

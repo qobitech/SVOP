@@ -7,7 +7,7 @@ import {
 } from './styled'
 
 interface IInstruction {
-  title: string
+  title?: string
   instructions: string
 }
 
