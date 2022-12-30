@@ -90,7 +90,7 @@ const VotingChild: React.FC<IVotingChild> = ({ states, ...props }) => {
             {error ? <StatusErrorText>{error}</StatusErrorText> : null}
           </StatusSection>
           <InputLabelComponent htmlFor="">
-            Click to Select Candidate&apos;s in different levels
+            Click to Select Candidates in different levels
           </InputLabelComponent>
           <Separator />
           <TypeSelect
