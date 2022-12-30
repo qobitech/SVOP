@@ -36,7 +36,7 @@ export const ChildrenContainer = styled('div')({
   height: '100vh',
   margin: '0 auto',
   boxSizing: 'border-box',
-  paddingTop: 40,
+  paddingTop: 0,
   maxWidth: 1440,
   width: '100%',
   display: 'flex',
