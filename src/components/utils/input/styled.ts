@@ -8,10 +8,10 @@ export const FormControlContainer = styled('div')({
 })
 
 export const InputLabelComponent = styled('label')({
-  fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
-  fontSize: 12,
-  color: '#286439',
-  marginBottom: 10
+  fontFamily: ['Outfit_Medium', 'Arial', 'sans-serif'].join(','),
+  fontSize: 14,
+  color: '#000',
+  marginBottom: 15
 })
 
 export const InputError = styled('p')({
