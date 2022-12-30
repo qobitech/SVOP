@@ -24,7 +24,15 @@ export const TypeInput = React.forwardRef(
           iserror={error}
           ref={ref as React.LegacyRef<HTMLInputElement> | undefined}
         />
-        {!!error && <InputError>{error}</InputError>}
+        {!!error && (
+          <InputError>
+            <span>
+              <i className="fas fa-info-circle" />
+              &nbsp;&nbsp;
+            </span>
+            {error}
+          </InputError>
+        )}
       </FormControlContainer>
     )
   }

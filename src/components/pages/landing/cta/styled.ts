@@ -28,7 +28,7 @@ export const CTAButton = styled('a')(
   ({ isml, ismr }: { isml?: 'true' | 'false'; ismr?: 'true' | 'false' }) => ({
     fontFamily: ['Outfit_SemiBold', 'Arial', 'sans-serif'].join(','),
     width: 'max-content',
-    height: 'max-content',
+    height: 45,
     padding: '12px 20px',
     borderRadius: '3px',
     background: COLOR_SECONDARY,

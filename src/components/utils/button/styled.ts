@@ -9,12 +9,12 @@ export const FormControlContainer = styled('div')({
 
 export const Button = styled('button')(
   ({ btntype }: { btntype?: 'bold' | 'outlined' | undefined }) => ({
-    height: 40,
+    height: 45,
     background: !btntype || btntype === 'bold' ? '#A966FF' : '#fff',
     color: !btntype || btntype === 'bold' ? '#fff' : '#286439',
     border: !btntype || btntype === 'bold' ? 'none' : '1px solid #286439',
-    fontFamily: ['Outfit_Bold', 'Arial', 'sans-serif'].join(','),
-    fontSize: 16,
+    fontFamily: ['Outfit_SemiBold', 'Arial', 'sans-serif'].join(','),
+    fontSize: 14,
     cursor: 'pointer',
     borderRadius: 3,
     padding: '0 20px',
