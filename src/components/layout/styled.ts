@@ -24,19 +24,22 @@ export const MainContainer = styled('div')({
   width: '100%',
   height: '100vh',
   background: '#fff',
+  // overflow: 'auto',
   display: 'flex',
   flexDirection: 'column'
 })
 
 export const ChildrenContainer = styled('div')({
   zIndex: 2,
+  // position: 'relative',
   padding: 0,
   height: '100vh',
   margin: '0 auto',
   boxSizing: 'border-box',
-  paddingTop: 0,
+  paddingTop: 30,
   maxWidth: 1440,
   width: '100%',
   display: 'flex',
   flexDirection: 'column'
+  // marginBottom: 400
 })
