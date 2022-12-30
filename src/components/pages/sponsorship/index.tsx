@@ -80,9 +80,7 @@ const SponsorshipChild: React.FC<ISponsorshipChild> = ({
           <StatusSection>
             {error ? <StatusErrorText>{error}</StatusErrorText> : null}
           </StatusSection>
-          <InputLabelComponent htmlFor="">
-            Sponsors&apos;s Details
-          </InputLabelComponent>
+          <InputLabelComponent htmlFor="">Sponsor Details</InputLabelComponent>
           <FormGroup>
             <TypeInput
               label=""
