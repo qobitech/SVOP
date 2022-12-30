@@ -14,7 +14,6 @@ import {
   CategoryBodyText
 } from './styled'
 import { IStates } from '../../../interface/IReducer'
-import { TypeButton } from '../../utils/button'
 // import { IActions } from '../../../interface/IAction'
 
 import { useForm } from 'react-hook-form'
@@ -60,7 +59,7 @@ const ResultsChild: React.FC<IResultsChild> = ({ states, ...props }) => {
   const submitOtp = (data: IResults) => {}
 
   const error = ''
-  const load = false
+  // const load = false
 
   const optionsData = [
     { id: 1, label: 'Year 1 (100 Level)', value: 'Year 1' },
@@ -128,12 +127,7 @@ const ResultsChild: React.FC<IResultsChild> = ({ states, ...props }) => {
                 )}
               </CategorySection>
             ))}
-
-          <Separator customheight={40} />
-          {watch().level && (
-            <TypeButton title="Submit" type="submit" load={load} />
-          )}
-          <Separator customheight={40} />
+          <Separator customheight={60} />
         </LoginForm>
       </FormContainer>
     </GetStartedContainer>
