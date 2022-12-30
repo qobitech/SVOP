@@ -17,9 +17,9 @@ export const FormContainer = styled('div')({
 })
 
 export const FormTitle = styled(Typography)({
-  fontFamily: ['Outfit_SemiBold', 'Arial', 'sans-serif'].join(','),
-  fontSize: 14,
-  lineHeight: '25px'
+  fontFamily: ['Outfit_Medium', 'Arial', 'sans-serif'].join(','),
+  fontSize: 13,
+  lineHeight: '24px'
 })
 
 export const ImageSection = styled('div')(({ imgsrc }: { imgsrc: string }) => ({

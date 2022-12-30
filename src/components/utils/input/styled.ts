@@ -8,7 +8,7 @@ export const FormControlContainer = styled('div')({
 })
 
 export const InputLabelComponent = styled('label')({
-  fontFamily: ['Outfit_Medium', 'Arial', 'sans-serif'].join(','),
+  fontFamily: ['Outfit_SemiBold', 'Arial', 'sans-serif'].join(','),
   fontSize: 14,
   color: '#000',
   marginBottom: 15
