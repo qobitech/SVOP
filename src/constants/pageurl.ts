@@ -5,5 +5,6 @@ export const pageurl = {
   INSTRUCTIONS: '/instructions',
   GETSTARTED: '/get-started',
   SPONSORSHIP: '/sponsorship',
-  VOTE: '/vote'
+  VOTE: '/vote',
+  RESULTS: '/results'
 }

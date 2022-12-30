@@ -13,6 +13,7 @@ import { pageurl } from './constants/pageurl'
 import GetStarted from './components/pages/getstarted'
 import Sponsorship from './components/pages/sponsorship'
 import Voting from './components/pages/voting'
+import Results from './components/pages/results'
 
 function App() {
   return (
@@ -30,6 +31,9 @@ function App() {
           </Route>
           <Route path={`${pageurl.VOTE}/:id`} element={<ProtectedRoute />}>
             <Route path={`${pageurl.VOTE}/:id`} element={<Voting />} />
+          </Route>
+          <Route path={`${pageurl.RESULTS}/:id`} element={<ProtectedRoute />}>
+            <Route path={`${pageurl.RESULTS}/:id`} element={<Results />} />
           </Route>
           <Route path="*" element={<Page404 />} />
         </Routes>
