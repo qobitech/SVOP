@@ -19,8 +19,8 @@ export const HeaderContainer = styled('div')({
 })
 
 export const Logo = styled('img')({
-  width: 30,
-  height: 30
+  width: 25,
+  height: 25
 })
 
 export const Hamburger = styled('div')({

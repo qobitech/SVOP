@@ -54,8 +54,8 @@ export const ProfileContainer = styled('div')({
 
 export const Logo = styled('img')({
   borderRadius: '50%',
-  width: 30,
-  height: 30,
+  width: 25,
+  height: 25,
   marginBottom: 35,
   marginLeft: 20,
   marginTop: 30
