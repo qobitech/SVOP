@@ -4,5 +4,6 @@ export const pageurl = {
   LOGIN: '/login',
   INSTRUCTIONS: '/instructions',
   GETSTARTED: '/get-started',
-  SPONSORSHIP: '/sponsorship'
+  SPONSORSHIP: '/sponsorship',
+  VOTE: '/vote'
 }

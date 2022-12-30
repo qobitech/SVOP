@@ -1,6 +1,6 @@
 import { styled, Typography } from '@material-ui/core'
 import { down } from '../../../assets/style/breakpointHelpers'
-import { MAXWIDTH } from '../../../constants/global'
+import { COLOR, COLOR_LIGHT, MAXWIDTH } from '../../../constants/global'
 
 export const GetStartedContainer = styled('div')({
   width: '100%',
@@ -12,7 +12,7 @@ export const InputLabelComponent = styled('label')({
   fontSize: 14,
   color: '#000',
   position: 'relative',
-  top: 14
+  top: 0
 })
 
 export const FormContainer = styled('div')({
@@ -22,6 +22,43 @@ export const FormContainer = styled('div')({
   height: 'max-content',
   boxSizing: 'border-box',
   margin: '0 auto'
+})
+
+export const CategorySection = styled('div')({
+  width: '100%',
+  background: '#fff',
+  height: 'max-content',
+  boxSizing: 'border-box',
+  margin: '0 auto'
+})
+
+export const CategoryHeader = styled(Typography)({
+  fontFamily: ['Outfit_SemiBold', 'Arial', 'sans-serif'].join(','),
+  fontSize: 11,
+  lineHeight: '24px',
+  textTransform: 'uppercase'
+})
+
+export const CategoryBody = styled('div')({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'flex-start',
+  width: '100%',
+  borderRadius: 3,
+  cursor: 'pointer',
+  transition: '.2s ease-in-out',
+  padding: '0 5px',
+  '&:hover': {
+    background: COLOR_LIGHT,
+    color: COLOR
+  }
+})
+
+export const CategoryBodyText = styled(Typography)({
+  fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
+  fontSize: 13,
+  lineHeight: '20px',
+  margin: 0
 })
 
 export const FormTitle = styled(Typography)({

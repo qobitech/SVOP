@@ -35,14 +35,16 @@ export const HeaderTextNumbers = styled(Typography)({
 export const Separator = styled('div')(
   ({
     customwidth,
-    customheight
+    customheight,
+    nobg
   }: {
     customheight?: number | string
     customwidth?: number | string
+    nobg?: 'true' | 'false'
   }) => ({
     margin: '12px 0',
     width: customwidth || 0,
-    background: '#CCCCCC',
+    background: nobg === 'true' ? 'none' : '#CCCCCC',
     height: customheight || 0
   })
 )

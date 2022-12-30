@@ -12,6 +12,7 @@ import Page404 from './components/pages/page404'
 import { pageurl } from './constants/pageurl'
 import GetStarted from './components/pages/getstarted'
 import Sponsorship from './components/pages/sponsorship'
+import Voting from './components/pages/voting'
 
 function App() {
   return (
@@ -26,6 +27,9 @@ function App() {
           </Route>
           <Route path={pageurl.SPONSORSHIP} element={<ProtectedRoute />}>
             <Route path={pageurl.SPONSORSHIP} element={<Sponsorship />} />
+          </Route>
+          <Route path={`${pageurl.VOTE}/:id`} element={<ProtectedRoute />}>
+            <Route path={`${pageurl.VOTE}/:id`} element={<Voting />} />
           </Route>
           <Route path="*" element={<Page404 />} />
         </Routes>

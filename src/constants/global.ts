@@ -26,6 +26,7 @@ export const userRole = {
 
 export const MAXWIDTH = 1248
 export const COLOR = '#7F1AFF'
+export const COLOR_LIGHT = '#EDE0FF'
 export const COLOR_SECONDARY = '#FF3232'
 export const COLOR_SECONDARY_HOVER = '#D22323'
 
@@ -55,3 +56,69 @@ export const ORGANIZERS = `
   <li>Success Godwin <span><a>(member)</a></span>.</li>
 </ul>
 `
+
+export const CATEGORIES = [
+  {
+    id: 1,
+    title: 'Best Dressed (Female Category)',
+    contestants: [
+      { name: 'Akaforonye Paula Nmesoma' },
+      { name: 'Anthony Chidera Anita' },
+      { name: 'Ndiongo George' }
+    ]
+  },
+  {
+    id: 2,
+    title: 'Best Dressed (Male Category)',
+    contestants: [
+      { name: 'Princelight Michael' },
+      { name: 'Olasanmi Ayodele Godswill' },
+      { name: 'Obiukwu Ifechukwu Ifeanyi' }
+    ]
+  },
+  {
+    id: 3,
+    title: 'Entrepreneur Of The Year',
+    contestants: [
+      { name: 'Anita Lewis ' },
+      { name: 'Janet' },
+      { name: 'Fortune ClementTelimoye' }
+    ]
+  },
+  {
+    id: 4,
+    title: 'Most Popular',
+    contestants: [
+      { name: 'Bassey Nyong' },
+      { name: 'Anuforo Serwaa Chigozie' },
+      { name: 'Saint' }
+    ]
+  },
+  {
+    id: 5,
+    title: 'Most Influential',
+    contestants: [
+      { name: 'Ekesiba Praise Chukwumeniem' },
+      { name: 'Anuforo Serwaa Chigozie' },
+      { name: 'Irene' }
+    ]
+  },
+  {
+    id: 5,
+    title: 'Most Intelligent',
+    contestants: [
+      { name: 'Chimsimdi Stephanie Onyeakaruru' },
+      { name: 'Ndiongno George Udo' },
+      { name: 'Chituru' }
+    ]
+  },
+  {
+    id: 6,
+    title: 'Comic Of The Year',
+    contestants: [
+      { name: 'Chimsimdi Stephanie Onyeakaruru' },
+      { name: 'Ndiongno George Udo' },
+      { name: 'Chituru' }
+    ]
+  }
+]
