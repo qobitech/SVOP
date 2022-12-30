@@ -1,5 +1,4 @@
 import { styled, Typography } from '@material-ui/core'
-import { down } from '../../../assets/style/breakpointHelpers'
 import { MAXWIDTH } from '../../../constants/global'
 
 export const GetStartedContainer = styled('div')({
@@ -56,8 +55,5 @@ export const LoginForm = styled('form')({
   width: '90%',
   maxWidth: 500,
   margin: '0 auto',
-  marginTop: 170,
-  [down('md')]: {
-    marginTop: 150
-  }
+  marginTop: 50
 })
