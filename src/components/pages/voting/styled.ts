@@ -39,6 +39,14 @@ export const CategoryHeader = styled(Typography)({
   textTransform: 'uppercase'
 })
 
+export const PageDescription = styled(Typography)({
+  fontFamily: ['Outfit_Thin', 'Arial', 'sans-serif'].join(','),
+  fontSize: 16,
+  lineHeight: '24px',
+  margin: 0,
+  color: COLOR
+})
+
 export const CategoryBody = styled('div')({
   display: 'flex',
   alignItems: 'center',

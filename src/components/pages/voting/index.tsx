@@ -11,7 +11,8 @@ import {
   CategorySection,
   CategoryHeader,
   CategoryBody,
-  CategoryBodyText
+  CategoryBodyText,
+  PageDescription
 } from './styled'
 import { IStates } from '../../../interface/IReducer'
 import { TypeButton } from '../../utils/button'
@@ -85,10 +86,12 @@ const VotingChild: React.FC<IVotingChild> = ({ states, ...props }) => {
           <PageTitle title="WELCOME, GREAT NASELSITE!" />
           <Separator customheight={25} />
           <FormTitle>{TITLE}</FormTitle>
-          <Separator customheight={25} />
+          <Separator customheight={0} />
           <StatusSection>
             {error ? <StatusErrorText>{error}</StatusErrorText> : null}
           </StatusSection>
+          <PageDescription>Cast Your Vote !!!</PageDescription>
+          <Separator customheight={10} />
           <InputLabelComponent htmlFor="">
             Click to Select Candidates in different levels
           </InputLabelComponent>
