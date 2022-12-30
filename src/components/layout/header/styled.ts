@@ -1,6 +1,7 @@
 import { styled, Typography } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import { down } from '../../../assets/style/breakpointHelpers'
+import { COLOR } from '../../../constants/global'
 
 export const HeaderContainer = styled('div')({
   display: 'flex',
@@ -18,8 +19,8 @@ export const HeaderContainer = styled('div')({
 })
 
 export const Logo = styled('img')({
-  marginRight: 20,
-  width: 30
+  width: 30,
+  height: 30
 })
 
 export const Hamburger = styled('div')({
@@ -53,6 +54,14 @@ export const ProfileContainer = styled('div')({
 export const ProfileSection = styled('div')({
   display: 'flex',
   flexDirection: 'column'
+})
+
+export const MenuTitle = styled(Typography)({
+  fontFamily: ['Outfit_SemiBold', 'Arial', 'sans-serif'].join(','),
+  fontSize: 14,
+  margin: 0,
+  letterSpacing: 5,
+  color: COLOR
 })
 
 export const ProfileName = styled(Typography)({

@@ -1,4 +1,4 @@
-import { styled } from '@material-ui/core'
+import { styled, Typography } from '@material-ui/core'
 import { down } from '../../../assets/style/breakpointHelpers'
 import { MAXWIDTH } from '../../../constants/global'
 
@@ -14,6 +14,12 @@ export const FormContainer = styled('div')({
   height: 'max-content',
   boxSizing: 'border-box',
   margin: '0 auto'
+})
+
+export const FormTitle = styled(Typography)({
+  fontFamily: ['Outfit_SemiBold', 'Arial', 'sans-serif'].join(','),
+  fontSize: 14,
+  lineHeight: '25px'
 })
 
 export const ImageSection = styled('div')(({ imgsrc }: { imgsrc: string }) => ({
@@ -48,7 +54,7 @@ export const LoginForm = styled('form')({
   display: 'flex',
   flexDirection: 'column',
   maxWidth: '90%',
-  width: 350,
+  width: 500,
   margin: '0 auto',
   marginTop: 170,
   [down('md')]: {

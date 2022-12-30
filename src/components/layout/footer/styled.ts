@@ -20,7 +20,10 @@ export const MaxWidthContainer = styled('div')({
 
 export const CopyRightContainer = styled('div')({
   textAlign: 'center',
-  padding: '10px 0 25px'
+  padding: '10px 0 25px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center'
 })
 
 export const Copyright = styled(Typography)({
@@ -30,4 +33,9 @@ export const Copyright = styled(Typography)({
   [down('md')]: {
     fontSize: 12
   }
+})
+
+export const CopyrightImage = styled('img')({
+  width: 25,
+  height: 25
 })

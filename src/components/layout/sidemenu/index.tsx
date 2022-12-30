@@ -9,13 +9,16 @@ import {
   SubMenuText,
   LinkContainer,
   Logo,
-  MainMenuContainer
+  MainMenuContainer,
+  MenuTitle
 } from './styled'
 
 import { pageurl } from '../../../constants/pageurl'
 import logo from '../../../assets/images/logo.svg'
 
 import './style.scss'
+import { ORGANIZATION, ORGANIZATION_FULL } from '../../../constants/global'
+import { Separator } from '../../pages/landing/styled'
 
 interface ISideMenu {
   isOpen: boolean
@@ -63,8 +66,14 @@ const SideMenu: React.FC<ISideMenu> = ({
       className={!isOpen ? 'side_menu_close' : 'side_menu_open'}
     >
       <SideMenuContainer>
-        <LinkContainer to={pageurl.PROFILE}>
+        <LinkContainer
+          to={pageurl.PROFILE}
+          className="d-flex align-items-center"
+          title={ORGANIZATION_FULL}
+        >
           <Logo src={logo} />
+          <Separator customwidth={8} />
+          <MenuTitle className="m-0">{ORGANIZATION}</MenuTitle>
         </LinkContainer>
         <MenuContainer>
           {menuData.map((i) => (

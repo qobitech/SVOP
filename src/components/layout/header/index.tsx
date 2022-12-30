@@ -7,10 +7,13 @@ import {
   Hamburger,
   LinkContainer,
   LinkMenuLi,
-  LinkMenu
+  LinkMenu,
+  MenuTitle
 } from './styled'
 
 import { pageurl } from '../../../constants/pageurl'
+import { ORGANIZATION, ORGANIZATION_FULL } from '../../../constants/global'
+import { Separator } from '../../pages/landing/styled'
 
 interface IHeader {
   setMenu: () => void
@@ -19,8 +22,14 @@ interface IHeader {
 const Header = ({ setMenu }: IHeader) => {
   return (
     <HeaderContainer>
-      <LinkContainer to={pageurl.LANDINGPAGE} className="d-none d-lg-flex">
+      <LinkContainer
+        to={pageurl.LANDINGPAGE}
+        className="d-none d-lg-flex align-items-center"
+        title={ORGANIZATION_FULL}
+      >
         <Logo src={logo} />
+        <Separator customwidth={8} />
+        <MenuTitle className="m-0">{ORGANIZATION}</MenuTitle>
       </LinkContainer>
       <Hamburger onClick={setMenu} className="d-flex d-lg-none">
         <p className="m-0">

@@ -5,7 +5,8 @@ import {
   GetStartedContainer,
   StatusSection,
   StatusErrorText,
-  LoginForm
+  LoginForm,
+  FormTitle
 } from './styled'
 import { IStates } from '../../../interface/IReducer'
 import { TypeInput } from '../../utils/input'
@@ -15,6 +16,9 @@ import { TypeButton } from '../../utils/button'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import { TITLE } from '../../../constants/global'
+import { Separator } from '../landing/styled'
+import { PageTitle } from '../../utils/page-title'
 
 const GetStarted: React.FC = () => {
   return (
@@ -53,6 +57,10 @@ const GetStartedChild: React.FC<IGetStartedChild> = ({ states, ...props }) => {
     <GetStartedContainer>
       <FormContainer>
         <LoginForm onSubmit={handleSubmit(submitOtp)}>
+          <PageTitle title="GET STARTED" />
+          <Separator customheight={25} />
+          <FormTitle>{TITLE}</FormTitle>
+          <Separator customheight={25} />
           <StatusSection>
             {error ? <StatusErrorText>{error}</StatusErrorText> : null}
           </StatusSection>

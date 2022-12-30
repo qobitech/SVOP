@@ -2,6 +2,7 @@ import { styled, Typography } from '@material-ui/core'
 import { down } from '../../../assets/style/breakpointHelpers'
 
 import { Link } from 'react-router-dom'
+import { COLOR } from '../../../constants/global'
 
 export const LinkContainer = styled(Link)({
   fontFamily: 'inherit',
@@ -53,8 +54,8 @@ export const ProfileContainer = styled('div')({
 
 export const Logo = styled('img')({
   borderRadius: '50%',
-  width: 40,
-  height: 40,
+  width: 30,
+  height: 30,
   marginBottom: 35,
   marginLeft: 20,
   marginTop: 30
@@ -98,6 +99,14 @@ export const ParentMenuContainer = styled('div')(
     padding: '35px 10px 35px 25px'
   })
 )
+
+export const MenuTitle = styled(Typography)({
+  fontFamily: ['Outfit_SemiBold', 'Arial', 'sans-serif'].join(','),
+  fontSize: 14,
+  margin: 0,
+  letterSpacing: 5,
+  color: COLOR
+})
 
 export const ParentMenuIcon = styled('img')({
   width: 12,
