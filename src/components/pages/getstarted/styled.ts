@@ -53,8 +53,8 @@ export const StatusErrorText = styled('p')({
 export const LoginForm = styled('form')({
   display: 'flex',
   flexDirection: 'column',
-  maxWidth: '90%',
-  width: 500,
+  width: '90%',
+  maxWidth: 500,
   margin: '0 auto',
   marginTop: 170,
   [down('md')]: {

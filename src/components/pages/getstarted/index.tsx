@@ -29,7 +29,9 @@ const GetStarted: React.FC = () => {
 }
 
 const loginSchema = yup.object().shape({
-  matriculationNumber: yup.string().required('Matricluation Number is required')
+  matriculationNumber: yup
+    .string()
+    .required('Matricluation Number is required to vote')
 })
 export interface ILogin {
   matriculationNumber: string
