@@ -78,3 +78,18 @@ export const LoginForm = styled('form')({
   margin: '0 auto',
   marginTop: 50
 })
+
+export const AccountNumberText = styled(Typography)({
+  fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
+  fontSize: 17,
+  lineHeight: '20px',
+  margin: 0,
+  letterSpacing: 4
+})
+
+export const CategoryBodyText = styled(Typography)({
+  fontFamily: ['Outfit_Regular', 'Arial', 'sans-serif'].join(','),
+  fontSize: 13,
+  lineHeight: '20px',
+  margin: 0
+})

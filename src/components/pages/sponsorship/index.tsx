@@ -8,7 +8,8 @@ import {
   LoginForm,
   FormTitle,
   InputLabelComponent,
-  FormGroup
+  FormGroup,
+  AccountNumberText
 } from './styled'
 import { IStates } from '../../../interface/IReducer'
 import { TypeInput } from '../../utils/input'
@@ -18,9 +19,10 @@ import { TypeButton } from '../../utils/button'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import { TITLE } from '../../../constants/global'
+import { COLOR, ISPAYMENTGATEWAY, TITLE } from '../../../constants/global'
 import { Separator } from '../landing/styled'
 import { PageTitle } from '../../utils/page-title'
+import { CategoryBodyText, CategoryHeader } from '../voting/styled'
 
 const Sponsorship: React.FC = () => {
   return (
@@ -76,53 +78,86 @@ const SponsorshipChild: React.FC<ISponsorshipChild> = ({
           <PageTitle title="SPONSORSHIP" />
           <Separator customheight={25} />
           <FormTitle>{TITLE}</FormTitle>
-          <Separator customheight={25} />
-          <StatusSection>
-            {error ? <StatusErrorText>{error}</StatusErrorText> : null}
-          </StatusSection>
-          <InputLabelComponent htmlFor="">Sponsor Details</InputLabelComponent>
-          <FormGroup>
-            <TypeInput
-              label=""
-              placeholder="First Name"
-              type="text"
-              error={errors.firstName?.message}
-              {...register('firstName')}
-            />
-            <TypeInput
-              label=""
-              placeholder="Last Name"
-              type="text"
-              error={errors.lastName?.message}
-              {...register('lastName')}
-            />
-          </FormGroup>
-          <FormGroup>
-            <TypeInput
-              label=""
-              placeholder="Email"
-              type="text"
-              error={errors.email?.message}
-              {...register('email')}
-            />
-            <TypeInput
-              label=""
-              placeholder="Phone Number"
-              type="text"
-              error={errors.phoneNumber?.message}
-              {...register('phoneNumber')}
-            />
-          </FormGroup>
-          <Separator />
-          <TypeInput
-            label="Sponsorship Amount"
-            placeholder="Amount"
-            type="text"
-            error={errors.amount?.message}
-            {...register('amount')}
-          />
-          <TypeButton title="Submit" type="submit" load={load} />
-          <Separator customheight={40} />
+          {ISPAYMENTGATEWAY ? (
+            <>
+              <Separator customheight={25} />
+              <StatusSection>
+                {error ? <StatusErrorText>{error}</StatusErrorText> : null}
+              </StatusSection>
+              <InputLabelComponent htmlFor="">
+                Sponsor Details
+              </InputLabelComponent>
+              <FormGroup>
+                <TypeInput
+                  label=""
+                  placeholder="First Name"
+                  type="text"
+                  error={errors.firstName?.message}
+                  {...register('firstName')}
+                />
+                <TypeInput
+                  label=""
+                  placeholder="Last Name"
+                  type="text"
+                  error={errors.lastName?.message}
+                  {...register('lastName')}
+                />
+              </FormGroup>
+              <FormGroup>
+                <TypeInput
+                  label=""
+                  placeholder="Email"
+                  type="text"
+                  error={errors.email?.message}
+                  {...register('email')}
+                />
+                <TypeInput
+                  label=""
+                  placeholder="Phone Number"
+                  type="text"
+                  error={errors.phoneNumber?.message}
+                  {...register('phoneNumber')}
+                />
+              </FormGroup>
+              <Separator />
+              <TypeInput
+                label="Sponsorship Amount"
+                placeholder="Amount"
+                type="text"
+                error={errors.amount?.message}
+                {...register('amount')}
+              />
+              <TypeButton title="Submit" type="submit" load={load} />
+              <Separator customheight={40} />
+            </>
+          ) : (
+            <div>
+              <Separator customheight={40} />
+
+              <div className="d-flex justify-content-between align-items-center w-100">
+                <div>
+                  <CategoryHeader>Account Number</CategoryHeader>
+                  <AccountNumberText>1224447437</AccountNumberText>
+                </div>
+                <i
+                  className="fas fa-copy"
+                  title="Copy"
+                  style={{ cursor: 'pointer', color: COLOR }}
+                />
+              </div>
+              <Separator customheight={10} />
+              <Separator customheight={1} customwidth={'100%'} />
+              <Separator customheight={10} />
+              <CategoryHeader>Account Name</CategoryHeader>
+              <CategoryBodyText>Dibabari Baridoma</CategoryBodyText>
+              <Separator customheight={10} />
+              <Separator customheight={1} customwidth={'100%'} />
+              <Separator customheight={10} />
+              <CategoryHeader>Bank</CategoryHeader>
+              <CategoryBodyText>Access Bank</CategoryBodyText>
+              <Separator customheight={40} />
+            </div>
+          )}
         </LoginForm>
       </FormContainer>
     </GetStartedContainer>

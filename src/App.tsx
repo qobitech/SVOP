@@ -14,6 +14,7 @@ import GetStarted from './components/pages/getstarted'
 import Sponsorship from './components/pages/sponsorship'
 import Voting from './components/pages/voting'
 import Results from './components/pages/results'
+import VoteSuccess from './components/pages/vote-success'
 
 function App() {
   return (
@@ -34,6 +35,15 @@ function App() {
           </Route>
           <Route path={`${pageurl.RESULTS}/:id`} element={<ProtectedRoute />}>
             <Route path={`${pageurl.RESULTS}/:id`} element={<Results />} />
+          </Route>
+          <Route
+            path={`${pageurl.VOTE_SUCCESS}/:id`}
+            element={<ProtectedRoute />}
+          >
+            <Route
+              path={`${pageurl.VOTE_SUCCESS}/:id`}
+              element={<VoteSuccess />}
+            />
           </Route>
           <Route path="*" element={<Page404 />} />
         </Routes>

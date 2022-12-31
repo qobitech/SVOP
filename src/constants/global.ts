@@ -30,6 +30,8 @@ export const COLOR_LIGHT = '#EDE0FF'
 export const COLOR_SECONDARY = '#FF3232'
 export const COLOR_SECONDARY_HOVER = '#D22323'
 
+export const ISPAYMENTGATEWAY = false
+
 export const ORGANIZATION = 'NASELS'
 export const ORGANIZATION_FULL =
   'The National Association Of Students Of English And Literary Studies'
