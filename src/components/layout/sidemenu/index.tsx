@@ -10,14 +10,19 @@ import {
   LinkContainer,
   Logo,
   MainMenuContainer,
-  MenuTitle
+  MenuTitle,
+  LogoutSection
 } from './styled'
 
 import { pageurl } from '../../../constants/pageurl'
 import logo from '../../../assets/images/logo.svg'
 
 import './style.scss'
-import { ORGANIZATION, ORGANIZATION_FULL } from '../../../constants/global'
+import {
+  ORGANIZATION,
+  ORGANIZATION_FULL,
+  userData
+} from '../../../constants/global'
 import { Separator } from '../../pages/landing/styled'
 
 interface ISideMenu {
@@ -38,7 +43,7 @@ const menuData = [
   {
     id: 2,
     title: 'View Results',
-    url: '',
+    url: pageurl.RESULTS + '/' + userData?._doc?._id,
     sub: [],
     isParent: false,
     icon: ''
@@ -61,6 +66,9 @@ const SideMenu: React.FC<ISideMenu> = ({
   setSubMenuOpen,
   subMenuOpen
 }) => {
+  const shortenName = (name: string) =>
+    name.length > 30 ? name.substring(0, 22) + '...' : name
+
   return (
     <MainMenuContainer
       className={!isOpen ? 'side_menu_close' : 'side_menu_open'}
@@ -75,6 +83,11 @@ const SideMenu: React.FC<ISideMenu> = ({
           <Separator customwidth={8} />
           <MenuTitle className="m-0">{ORGANIZATION}</MenuTitle>
         </LinkContainer>
+        <div className="pl-4 mb-3">
+          <p style={{ fontSize: '16px' }}>
+            <b>{shortenName(userData?._doc?.name || '')}</b>
+          </p>
+        </div>
         <MenuContainer>
           {menuData.map((i) => (
             <MenuComponent
@@ -90,6 +103,17 @@ const SideMenu: React.FC<ISideMenu> = ({
             />
           ))}
         </MenuContainer>
+        <LogoutSection
+          onClick={() => {
+            localStorage.clear()
+            window.open(pageurl.LOGIN, '_self')
+          }}
+        >
+          <ParentMenuContainer>
+            <i className="fa fa-sign-out mr-2" />
+            <ParentMenuText>Logout</ParentMenuText>
+          </ParentMenuContainer>
+        </LogoutSection>
       </SideMenuContainer>
     </MainMenuContainer>
   )

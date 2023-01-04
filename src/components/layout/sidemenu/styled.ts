@@ -130,7 +130,7 @@ export const ParentMenuText = styled(Typography)(
   ({ isselected }: { isselected?: 'true' | 'false' }) => ({
     fontFamily: ['Outfit_Medium', 'Arial', 'sans-serif'].join(','),
     textTransform: 'capitalize',
-    fontSize: 16,
+    fontSize: 14,
     transition: '.2s ease'
   })
 )
