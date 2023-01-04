@@ -21,7 +21,7 @@ export const COLOR_LIGHT = '#EDE0FF'
 export const COLOR_SECONDARY = '#FF3232'
 export const COLOR_SECONDARY_HOVER = '#D22323'
 
-export const BASE_URL = 'http://localhost:7000/api/v1'
+export const BASE_URL = 'https://svop-be-qobitech.vercel.app/api/v1'
 
 export const ISPAYMENTGATEWAY = false
 
