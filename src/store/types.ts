@@ -11,6 +11,14 @@ export const authType = {
   }
 }
 
+export const categoryType = {
+  getAll: {
+    dataAction: 'GET_ALL_CATEGORIES',
+    dataLoading: 'GET_ALL_CATEGORIES_LOADING',
+    dataError: 'GET_ALL_CATEGORIES_ERROR'
+  }
+}
+
 export const votingType = {
   vote: {
     dataAction: 'MENU_OPEN',

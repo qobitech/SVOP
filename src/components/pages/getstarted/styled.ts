@@ -40,7 +40,7 @@ export const LogoSection = styled('img')({
 export const StatusSection = styled('div')({
   textAlign: 'center',
   height: 20,
-  marginBottom: 10
+  marginBottom: 15
 })
 
 export const StatusErrorText = styled('p')({

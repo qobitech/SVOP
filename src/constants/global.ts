@@ -1,23 +1,14 @@
-import { ILogin, IToken, IUser } from '../interface/IAuth'
+import { IToken } from '../interface/IAuth'
 
 import jwtDecode from 'jwt-decode'
-interface IResponse {
-  user: IUser
-  token: IToken
-}
 
-const data = localStorage.getItem('userData')
-const user: ILogin = data ? JSON.parse(data) : ({} as ILogin)
+const data = localStorage.getItem('token')
+const token = data ? JSON.parse(data) : null
 
-const { token, ...userDataProps } = user
+export const userData: IToken = token ? jwtDecode(token) : ({} as IToken)
 
-export const userData: IResponse = {
-  user: userDataProps,
-  token: token ? jwtDecode(token) : ({} as IToken)
-}
-
-export const isLogged = userData.token?.exp
-  ? !(userData?.token?.exp * 1000 < Date.now())
+export const isLogged = userData?.exp
+  ? !(userData?.exp * 1000 < Date.now())
   : false
 
 export const userRole = {
@@ -29,6 +20,8 @@ export const COLOR = '#7F1AFF'
 export const COLOR_LIGHT = '#EDE0FF'
 export const COLOR_SECONDARY = '#FF3232'
 export const COLOR_SECONDARY_HOVER = '#D22323'
+
+export const BASE_URL = 'http://localhost:7000/api/v1'
 
 export const ISPAYMENTGATEWAY = false
 

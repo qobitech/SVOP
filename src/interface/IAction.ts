@@ -1,15 +1,19 @@
 import { I_ACTION_TYPE } from '../store/actions/utils'
 
 interface IAuthActions {
-  loginUserAction: (data: {
-    email: string
-    password: string
-    otp: string
+  loginAction: (data: {
+    matriculationNumber: string
   }) => (dispatch: any) => void
-  sendOtpAction: (data: { userName: string }) => (dispatch: any) => void
 }
 interface IVotingActions {
   voteAction: (
+    pageSize?: number,
+    pageNumber?: number,
+    sort?: string
+  ) => (dispatch: any) => void
+}
+interface ICategoryActions {
+  getCategories: (
     pageSize?: number,
     pageNumber?: number,
     sort?: string
@@ -21,4 +25,8 @@ interface IOtherActions {
   setSubMenuOpen: (subMenuOpen: number) => (dispatch: any) => void
 }
 
-export interface IActions extends IAuthActions, IVotingActions, IOtherActions {}
+export interface IActions
+  extends IAuthActions,
+    IVotingActions,
+    ICategoryActions,
+    IOtherActions {}

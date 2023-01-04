@@ -11,7 +11,7 @@ import {
 import { IStates } from '../../../interface/IReducer'
 import { TypeInput } from '../../utils/input'
 import { TypeButton } from '../../utils/button'
-// import { IActions } from '../../../interface/IAction'
+import { IActions } from '../../../interface/IAction'
 
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -42,6 +42,11 @@ interface IGetStartedChild {
 }
 
 const GetStartedChild: React.FC<IGetStartedChild> = ({ states, ...props }) => {
+  const { loginAction } = props as unknown as IActions
+
+  const loadLogin = states?.auth?.signin_Loading
+  const errorLogin = states?.auth?.signin_Error
+
   const {
     formState: { errors },
     handleSubmit,
@@ -50,10 +55,9 @@ const GetStartedChild: React.FC<IGetStartedChild> = ({ states, ...props }) => {
     resolver: yupResolver(loginSchema)
   })
 
-  const submitOtp = (data: ILogin) => {}
-
-  const error = ''
-  const load = false
+  const submitOtp = (data: ILogin) => {
+    loginAction(data)
+  }
 
   return (
     <GetStartedContainer>
@@ -64,16 +68,24 @@ const GetStartedChild: React.FC<IGetStartedChild> = ({ states, ...props }) => {
           <FormTitle>{TITLE}</FormTitle>
           <Separator customheight={25} />
           <StatusSection>
-            {error ? <StatusErrorText>{error}</StatusErrorText> : null}
+            {errorLogin?.message ? (
+              <StatusErrorText>
+                <span>
+                  <i className="fas fa-info-circle" />
+                  &nbsp;
+                </span>
+                {errorLogin?.message}
+              </StatusErrorText>
+            ) : null}
           </StatusSection>
           <TypeInput
             label="Input your Matriculation Number"
-            placeholder="Matriculation Number"
+            placeholder="U0000/0000000"
             type="text"
             error={errors.matriculationNumber?.message}
             {...register('matriculationNumber')}
           />
-          <TypeButton title="Enter" type="submit" load={load} />
+          <TypeButton title="Enter" type="submit" load={loadLogin} />
         </LoginForm>
       </FormContainer>
     </GetStartedContainer>

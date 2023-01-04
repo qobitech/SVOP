@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import DataWrapper from '../../../wrapper/data-wrapper'
 import { LandingPageContainer } from './styled'
 import { IStates } from '../../../interface/IReducer'
@@ -15,7 +15,7 @@ import {
   ORGANIZERS,
   TITLE
 } from '../../../constants/global'
-// import { IActions } from '../../../interface/IAction'
+import { IActions } from '../../../interface/IAction'
 
 const LandingPage: React.FC = () => {
   return (
@@ -33,6 +33,7 @@ const LandingPageChild: React.FC<ILandingPageChild> = ({
   states,
   ...props
 }) => {
+  const { getCategories } = props as unknown as IActions
   const ctas = [
     {
       id: 1,
@@ -42,10 +43,21 @@ const LandingPageChild: React.FC<ILandingPageChild> = ({
     }
   ]
 
+  const dataCategories = states?.categories?.allCategories
+
+  useEffect(() => {
+    getCategories()
+  }, [])
+
   return (
     <LandingPageContainer>
       <Jumbotron />
-      <Header title={TITLE} categories={5} shareLinks={[]} totalVotes={4500} />
+      <Header
+        title={TITLE}
+        categories={dataCategories?.data?.categories.length || 0}
+        shareLinks={[]}
+        totalVotes={4500}
+      />
       <About description={DESCRIPTION} />
       <Organisers organisers={ORGANIZERS} />
       <Instructions title="How To Vote" instructions={INSTRUCTIONS} />

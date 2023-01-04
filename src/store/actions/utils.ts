@@ -83,10 +83,8 @@ const apiRespond = (
   payload: any,
   onStatus?: (res: any) => void
 ) => {
-  // setTimeout(() => {
   dispatch({ type, payload })
   statusFunction(onStatus, payload)
-  // }, 1000)
 }
 
 export interface I_ACTION_TYPE {
@@ -146,11 +144,11 @@ export const httpPostMethod = ({
     dispatch({ type: dataLoading, payload: true })
     apiRequest(`${requesturl}`, header, data, 'post', TIMEOUT)
       .then((resp) => {
-        const isSuccess = !resp.status
+        const isSuccess = resp.status === 'success'
         apiRespond(
           dispatch,
           isSuccess ? dataAction : dataError,
-          isSuccess ? resp : resp.title,
+          resp,
           isSuccess ? onSuccess : onFailure
         )
       })
