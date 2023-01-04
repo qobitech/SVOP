@@ -15,6 +15,7 @@ import { PageTitle } from '../../utils/page-title'
 
 import likeimg from '../../../assets/images/like-icon.svg'
 import { pageurl } from '../../../constants/pageurl'
+import { userData } from '../../../constants/global'
 
 const VoteSuccess: React.FC = () => {
   return (
@@ -48,9 +49,14 @@ const VoteSuccessChild: React.FC<IVoteSuccessChild> = ({
         <SuccessImage src={likeimg} />
         <Separator customheight={40} />
         <ContentText>
-          Exit or Go Back To{' '}
           <span>
-            <LinkTxt href={pageurl.LANDINGPAGE}>HomePage</LinkTxt>
+            <LinkTxt href={pageurl.LANDINGPAGE}>Exit</LinkTxt>
+          </span>{' '}
+          or Go Back To{' '}
+          <span>
+            <LinkTxt href={pageurl.VOTE + `/${userData._doc._id}`}>
+              Vote Page
+            </LinkTxt>
           </span>{' '}
           To Cast More Votes.
         </ContentText>

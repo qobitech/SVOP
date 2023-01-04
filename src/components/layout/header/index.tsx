@@ -81,11 +81,9 @@ const Header = ({ setMenu }: IHeader) => {
           </LinkMenu>
         ) : (
           <ProfileContainer>
-            <LinkContainer to={pageurl.PROFILE}>
-              <ProfileName className="m-0">
-                {userData?._doc?.name?.toLowerCase()}
-              </ProfileName>
-            </LinkContainer>
+            <ProfileName className="m-0">
+              {userData?._doc?.name?.toLowerCase()}
+            </ProfileName>
             <div className="dropdown">
               <ProfileEllippisContainer
                 className="dropdown-toggle"
@@ -106,9 +104,20 @@ const Header = ({ setMenu }: IHeader) => {
                   onClick={() => {
                     window.open(pageurl.VOTE + `/${userData._doc._id}`, '_self')
                   }}
+                  style={{ fontSize: '13px' }}
                 >
                   <i className="fa fa-check-circle" />
                   &nbsp;&nbsp;Vote
+                </DropdownItem>
+                <DropdownItem
+                  className="dropdown-item"
+                  onClick={() => {
+                    window.open(pageurl.SPONSORSHIP, '_self')
+                  }}
+                  style={{ fontSize: '13px' }}
+                >
+                  <i className="fa fa-money" />
+                  &nbsp;&nbsp;Sponsorship
                 </DropdownItem>
 
                 <DropdownItem
@@ -117,6 +126,7 @@ const Header = ({ setMenu }: IHeader) => {
                     localStorage.clear()
                     window.open(pageurl.LANDINGPAGE, '_self')
                   }}
+                  style={{ fontSize: '13px' }}
                 >
                   <i className="fa fa-sign-out" />
                   &nbsp;&nbsp;Log out

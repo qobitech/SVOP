@@ -5,14 +5,16 @@ import {
   authReducer,
   votingReducer,
   otherReducer,
-  categoryReducer
+  categoryReducer,
+  candidatesReducer
 } from './allReducers'
 
 const rootreducer = combineReducers<IStates>({
   auth: authReducer,
   voting: votingReducer,
   other: otherReducer,
-  categories: categoryReducer
+  categories: categoryReducer,
+  candidates: candidatesReducer
 })
 
 export default rootreducer

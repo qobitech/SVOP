@@ -19,11 +19,19 @@ export const categoryType = {
   }
 }
 
+export const candidatesType = {
+  getAll: {
+    dataAction: 'GET_ALL_CANDIDATES',
+    dataLoading: 'GET_ALL_CANDIDATES_LOADING',
+    dataError: 'GET_ALL_CANDIDATES_ERROR'
+  }
+}
+
 export const votingType = {
   vote: {
-    dataAction: 'MENU_OPEN',
-    dataLoading: 'MENU_OPEN_LOADING',
-    dataError: 'MENU_OPEN_ERROR'
+    dataAction: 'VOTE',
+    dataLoading: 'VOTE_LOADING',
+    dataError: 'VOTE_ERROR'
   }
 }
 

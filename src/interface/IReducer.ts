@@ -1,5 +1,7 @@
 import { ILogin } from './IAuth'
+import { ICandidates } from './ICandidates'
 import { ICategories } from './ICategory'
+import { IVotes } from './IVotes'
 
 interface IError {
   status: string
@@ -21,7 +23,7 @@ export interface IOtherReducer {
 }
 
 export interface IVotingReducer {
-  vote: boolean
+  vote: IVotes
   vote_Loading: boolean
   vote_Error: IError
 }
@@ -30,10 +32,16 @@ export interface ICategoryReducer {
   allCategories_Loading: boolean
   allCategories_Error: IError
 }
+export interface ICandidatesReducer {
+  allCandidates: ICandidates
+  allCandidates_Loading: boolean
+  allCandidates_Error: IError
+}
 
 export interface IStates {
   auth: IAuthReducer
   voting: IVotingReducer
   other: IOtherReducer
   categories: ICategoryReducer
+  candidates: ICandidatesReducer
 }

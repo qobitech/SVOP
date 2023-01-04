@@ -32,7 +32,15 @@ export const TITLE =
   'The National Association Of Students Of English And Literary Studies (NASELS) Dinner/Award Night Elections.'
 export const DESCRIPTION = `NASELS AWARD AND DINNER NIGHT is an annual event hosted by the National Association of Students of English and Literary Studies(NASELS). <br/>This edition is proudly sponsored by Nasels Uniport. It may interest you to know that NASELS is the umbrella body created to cater for the welfare and needs of every student of English studies Department.
 A good thing to know is that this year’s Nasels dinner night will feature two exciting events; award presentations to outstanding students and pageantry for Mr/Miss Nasels uniport.`
-export const INSTRUCTIONS = `
+export const INSTRUCTIONS = isLogged
+  ? `
+<ol>
+  <li>Click on the <span><a>Vote</a></span> button.</li>
+  <li>Select the category.</li>
+  <li>Vote your preferred candidate.</li>
+</ol>
+`
+  : `
 <ol>
   <li>Click on the <span><a>Get Started</a></span> button.</li>
   <li>Input your <span><a>matriculation number</a></span>.</li>

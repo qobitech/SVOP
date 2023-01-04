@@ -111,7 +111,7 @@ export const FormGroup = styled('div')({
 
 export const StatusErrorText = styled('p')({
   color: 'red',
-  fontSize: 14,
+  fontSize: 13,
   margin: 0
 })
 

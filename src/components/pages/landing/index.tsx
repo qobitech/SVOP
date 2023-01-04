@@ -39,7 +39,7 @@ const LandingPageChild: React.FC<ILandingPageChild> = ({
   const ctas = [
     {
       id: 1,
-      title: 'Get Started',
+      title: isLogged ? 'Vote' : 'Get Started',
       url: isLogged
         ? pageurl.VOTE + `/${userData._doc._id}`
         : pageurl.GETSTARTED,
