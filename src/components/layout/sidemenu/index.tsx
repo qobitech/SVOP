@@ -19,6 +19,7 @@ import logo from '../../../assets/images/logo.svg'
 
 import './style.scss'
 import {
+  isLogged,
   ORGANIZATION,
   ORGANIZATION_FULL,
   userData
@@ -42,8 +43,10 @@ const menuData = [
   },
   {
     id: 2,
-    title: 'View Results',
-    url: pageurl.RESULTS + '/' + userData?._doc?._id,
+    title: 'Vote',
+    url: isLogged
+      ? pageurl.VOTE + '/' + userData?._doc?._id
+      : pageurl.GETSTARTED,
     sub: [],
     isParent: false,
     icon: ''
