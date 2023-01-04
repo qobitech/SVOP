@@ -1,10 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import DataWrapper from '../../../wrapper/data-wrapper'
 import {
   FormContainer,
   GetStartedContainer,
-  StatusSection,
-  StatusErrorText,
   LoginForm,
   FormTitle,
   InputLabelComponent,
@@ -14,17 +12,19 @@ import {
   CategoryBodyText
 } from './styled'
 import { IStates } from '../../../interface/IReducer'
-// import { IActions } from '../../../interface/IAction'
+import { IActions } from '../../../interface/IAction'
 
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import { CATEGORIES, TITLE } from '../../../constants/global'
+import { TITLE } from '../../../constants/global'
 import { Separator } from '../landing/styled'
 import { PageTitle } from '../../utils/page-title'
 import { TypeSelect } from '../../utils/select'
 
 import './style.scss'
+import { ICandidate } from '../../../interface/ICandidates'
+import { TypeInput } from '../../utils/input'
 
 const Results: React.FC = () => {
   return (
@@ -47,88 +47,173 @@ interface IResultsChild {
 }
 
 const ResultsChild: React.FC<IResultsChild> = ({ states, ...props }) => {
+  const { getCategories, getCandidates } = props as unknown as IActions
+
+  const dataCategories = states?.categories.allCategories?.data?.categories
+  const dataCandidates = states?.candidates?.allCandidates?.data?.candidates
+
   const {
     formState: { errors },
     watch,
-    handleSubmit,
     register
   } = useForm<IResults>({
     resolver: yupResolver(resultsSchema)
   })
 
-  const submitOtp = (data: IResults) => {}
+  function getCandidatesPerCategory(id: string) {
+    return (
+      dataCandidates
+        ?.filter((i) => i.categories.map((i) => i.id).includes(id))
+        .filter((i) => i.level === parseInt(watch().level)) ||
+      ([] as ICandidate[])
+    )
+  }
 
-  const error = ''
-  // const load = false
+  console.log(dataCandidates)
+
+  useEffect(() => {
+    getCategories()
+    getCandidates()
+  }, [])
 
   const optionsData = [
-    { id: 1, label: 'Year 1 (100 Level)', value: 'Year 1' },
-    { id: 2, label: 'Year 2 (200 Level)', value: 'Year 2' },
-    { id: 3, label: 'Year 3 (300 Level)', value: 'Year 3' },
-    { id: 4, label: 'Year 4 (400 Level)', value: 'Year 4' }
+    { id: 1, label: 'Year 1 (100 Level)', value: 100 },
+    { id: 2, label: 'Year 2 (200 Level)', value: 200 },
+    { id: 3, label: 'Year 3 (300 Level)', value: 300 },
+    { id: 4, label: 'Year 4 (400 Level)', value: 400 }
   ]
+
+  const groupVoteAccumulator = (
+    candidates: ICandidate[],
+    categoryId: string,
+    vote: number
+  ) => {
+    const totalVotes = candidates
+      .filter((i) => i.categories.map((i) => i.id).includes(categoryId))
+      .reduce((total, item) => {
+        total += item.categories.reduce((t, i) => {
+          return (t += i.votes)
+        }, 0)
+        return total
+      }, 0)
+    return (vote * 100) / totalVotes
+  }
+
+  const isAdmin = true
+
+  const handleOnChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = target
+    console.log(value)
+  }
 
   return (
     <GetStartedContainer>
       <FormContainer>
-        <LoginForm onSubmit={handleSubmit(submitOtp)}>
-          <PageTitle title="RESULTS" />
-          <Separator customheight={25} />
-          <FormTitle>{TITLE}</FormTitle>
-          <Separator customheight={25} />
-          <StatusSection>
-            {error ? <StatusErrorText>{error}</StatusErrorText> : null}
-          </StatusSection>
-          <InputLabelComponent htmlFor="">
-            Click to Select Candidates in different levels
-          </InputLabelComponent>
-          <Separator />
-          <TypeSelect
-            initoption={{ label: 'Select Level', value: '' }}
-            optionsdata={optionsData}
-            error={errors.level?.message}
-            {...register('level')}
-          />
-          <Separator customheight={40} />
+        {isAdmin ? (
+          <LoginForm>
+            <PageTitle title="RESULTS" />
+            <Separator customheight={25} />
+            <FormTitle>{TITLE}</FormTitle>
+            <Separator customheight={25} />
 
-          {watch().level && (
             <InputLabelComponent htmlFor="">
-              Select Your Preferred Candidate In Each Category
+              Click to Select Candidates in different levels
             </InputLabelComponent>
-          )}
-          {watch().level && <Separator customheight={10} />}
+            <Separator />
+            <TypeSelect
+              initoption={{ label: 'Select Level', value: '' }}
+              optionsdata={optionsData}
+              error={errors.level?.message}
+              {...register('level')}
+            />
+            <Separator customheight={40} />
 
-          {watch().level &&
-            CATEGORIES.map((i, index) => (
-              <CategorySection key={i.id}>
-                <CategoryHeader>
-                  <span>{index + 1}.</span>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  {i.title}
-                </CategoryHeader>
-                <Separator />
-                {i.contestants.map((contestant, ci) => (
-                  <CategoryBody key={ci}>
-                    <Separator customwidth={10} customheight={10} nobg="true" />
-                    <CategoryBodyText>{contestant.name}</CategoryBodyText>
-                    <div className={`progress_section w-100 m-0 p-0`}>
-                      <progress max="100" value={30} className="w-100" />
-                    </div>
-                  </CategoryBody>
+            {watch().level && (
+              <InputLabelComponent htmlFor="">
+                Select Your Preferred Candidate In Each Category
+              </InputLabelComponent>
+            )}
+            {watch().level && <Separator customheight={10} />}
+
+            {watch().level &&
+              dataCategories
+                ?.filter((i) => getCandidatesPerCategory(i._id)?.length > 0)
+                ?.map((category, index) => (
+                  <CategorySection key={category._id}>
+                    <CategoryHeader>
+                      <span>{index + 1}.</span>
+                      &nbsp;&nbsp;&nbsp;&nbsp;
+                      {category.name}
+                    </CategoryHeader>
+                    <Separator />
+                    {getCandidatesPerCategory(category._id)?.map(
+                      (contestant, ci) => (
+                        <CategoryBody key={ci}>
+                          <Separator
+                            customwidth={10}
+                            customheight={10}
+                            nobg="true"
+                          />
+                          <div className="d-flex justify-content-between w-100">
+                            <CategoryBodyText>
+                              {contestant.name}
+                            </CategoryBodyText>
+                            {/* <p className="text-little  m-0">
+                            {
+                              contestant.categories.filter(
+                                (i) => i.id === category._id
+                              )[0].votes
+                            }{' '}
+                            vote
+                            {contestant.categories.filter(
+                              (i) => i.id === category._id
+                            )[0].votes === 1
+                              ? ''
+                              : 's'}
+                          </p> */}
+                          </div>
+                          <div className={`progress_section w-100 m-0 p-0`}>
+                            <progress
+                              max="100"
+                              value={groupVoteAccumulator(
+                                getCandidatesPerCategory(category._id),
+                                category._id,
+                                contestant.categories.filter(
+                                  (i) => i.id === category._id
+                                )[0].votes
+                              )}
+                              className="w-100"
+                            />
+                          </div>
+                        </CategoryBody>
+                      )
+                    )}
+                    {dataCategories.length !== index + 1 && (
+                      <Separator customheight={20} />
+                    )}
+                    {dataCategories.length !== index + 1 && (
+                      <Separator customheight={1} customwidth={'100%'} />
+                    )}
+                    {dataCategories.length !== index + 1 && (
+                      <Separator customheight={20} />
+                    )}
+                  </CategorySection>
                 ))}
-                {CATEGORIES.length !== index + 1 && (
-                  <Separator customheight={20} />
-                )}
-                {CATEGORIES.length !== index + 1 && (
-                  <Separator customheight={1} customwidth={'100%'} />
-                )}
-                {CATEGORIES.length !== index + 1 && (
-                  <Separator customheight={20} />
-                )}
-              </CategorySection>
-            ))}
-          <Separator customheight={60} />
-        </LoginForm>
+            <Separator customheight={60} />
+          </LoginForm>
+        ) : (
+          <LoginForm>
+            <PageTitle title="RESULTS" />
+            <Separator customheight={25} />
+            <FormTitle>{TITLE}</FormTitle>
+            <Separator customheight={25} />
+            <TypeInput
+              label="Enter your email to view results"
+              placeholder="Email address"
+              onChange={handleOnChange}
+            />
+          </LoginForm>
+        )}
       </FormContainer>
     </GetStartedContainer>
   )
