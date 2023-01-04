@@ -17,14 +17,13 @@ import { IActions } from '../../../interface/IAction'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import { TITLE } from '../../../constants/global'
+import { SHOWRESULTPAGE, TITLE } from '../../../constants/global'
 import { Separator } from '../landing/styled'
 import { PageTitle } from '../../utils/page-title'
 import { TypeSelect } from '../../utils/select'
 
 import './style.scss'
 import { ICandidate } from '../../../interface/ICandidates'
-import { TypeInput } from '../../utils/input'
 
 const Results: React.FC = () => {
   return (
@@ -99,17 +98,10 @@ const ResultsChild: React.FC<IResultsChild> = ({ states, ...props }) => {
     return (vote * 100) / totalVotes
   }
 
-  const isAdmin = true
-
-  const handleOnChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = target
-    console.log(value)
-  }
-
   return (
     <GetStartedContainer>
       <FormContainer>
-        {isAdmin ? (
+        {SHOWRESULTPAGE ? (
           <LoginForm>
             <PageTitle title="RESULTS" />
             <Separator customheight={25} />
@@ -207,11 +199,7 @@ const ResultsChild: React.FC<IResultsChild> = ({ states, ...props }) => {
             <Separator customheight={25} />
             <FormTitle>{TITLE}</FormTitle>
             <Separator customheight={25} />
-            <TypeInput
-              label="Enter your email to view results"
-              placeholder="Email address"
-              onChange={handleOnChange}
-            />
+            <p>You are not authorized to view this page</p>
           </LoginForm>
         )}
       </FormContainer>

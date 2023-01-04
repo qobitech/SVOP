@@ -22,6 +22,7 @@ import {
   isLogged,
   ORGANIZATION,
   ORGANIZATION_FULL,
+  SHOWRESULTPAGE,
   userData
 } from '../../../constants/global'
 import { Separator } from '../../pages/landing/styled'
@@ -39,7 +40,8 @@ const menuData = [
     url: pageurl.LANDINGPAGE,
     sub: [],
     isParent: false,
-    icon: ''
+    icon: '',
+    show: true
   },
   {
     id: 2,
@@ -49,7 +51,8 @@ const menuData = [
       : pageurl.GETSTARTED,
     sub: [],
     isParent: false,
-    icon: ''
+    icon: '',
+    show: true
   },
   {
     id: 3,
@@ -57,7 +60,17 @@ const menuData = [
     url: pageurl.SPONSORSHIP,
     sub: [],
     isParent: false,
-    icon: ''
+    icon: '',
+    show: true
+  },
+  {
+    id: 3,
+    title: 'View Results',
+    url: pageurl.RESULTS + '/' + userData?._doc?._id,
+    sub: [],
+    isParent: false,
+    icon: '',
+    show: SHOWRESULTPAGE
   }
 ]
 
@@ -92,19 +105,21 @@ const SideMenu: React.FC<ISideMenu> = ({
           </p>
         </div>
         <MenuContainer>
-          {menuData.map((i) => (
-            <MenuComponent
-              id={i.id}
-              title={i.title}
-              sub={i.sub}
-              url={i.url}
-              key={i.id}
-              isParent={i.isParent}
-              icon={i.icon}
-              setSubMenuOpen={setSubMenuOpen}
-              subMenuOpen={subMenuOpen}
-            />
-          ))}
+          {menuData
+            .filter((i) => i.show)
+            .map((i) => (
+              <MenuComponent
+                id={i.id}
+                title={i.title}
+                sub={i.sub}
+                url={i.url}
+                key={i.id}
+                isParent={i.isParent}
+                icon={i.icon}
+                setSubMenuOpen={setSubMenuOpen}
+                subMenuOpen={subMenuOpen}
+              />
+            ))}
         </MenuContainer>
         <LogoutSection
           onClick={() => {
