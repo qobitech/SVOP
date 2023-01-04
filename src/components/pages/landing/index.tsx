@@ -13,7 +13,9 @@ import {
   DESCRIPTION,
   INSTRUCTIONS,
   ORGANIZERS,
-  TITLE
+  TITLE,
+  isLogged,
+  userData
 } from '../../../constants/global'
 import { IActions } from '../../../interface/IAction'
 
@@ -38,7 +40,9 @@ const LandingPageChild: React.FC<ILandingPageChild> = ({
     {
       id: 1,
       title: 'Get Started',
-      url: pageurl.GETSTARTED,
+      url: isLogged
+        ? pageurl.VOTE + `/${userData._doc._id}`
+        : pageurl.GETSTARTED,
       isExternal: false
     }
   ]

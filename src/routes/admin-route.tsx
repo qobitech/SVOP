@@ -3,7 +3,7 @@ import { Navigate, Outlet } from 'react-router-dom'
 import { isLogged } from '../constants/global'
 import { pageurl } from '../constants/pageurl'
 
-const ProtectedRoute = () => {
+const AdminRoute = () => {
   if (!isLogged) {
     localStorage.clear()
     return <Navigate to={pageurl.GETSTARTED} />
@@ -12,4 +12,4 @@ const ProtectedRoute = () => {
   }
 }
 
-export default ProtectedRoute
+export default AdminRoute

@@ -8,12 +8,23 @@ import {
   LinkContainer,
   LinkMenuLi,
   LinkMenu,
-  MenuTitle
+  MenuTitle,
+  ProfileContainer,
+  ProfileEllippis,
+  ProfileName,
+  ProfileEllippisContainer
 } from './styled'
 
 import { pageurl } from '../../../constants/pageurl'
-import { ORGANIZATION, ORGANIZATION_FULL } from '../../../constants/global'
+import {
+  isLogged,
+  ORGANIZATION,
+  ORGANIZATION_FULL,
+  userData
+} from '../../../constants/global'
 import { Separator } from '../../pages/landing/styled'
+import DropdownItem from 'react-bootstrap/esm/DropdownItem'
+import ellipsis from '../../../assets/images/ellipsis.svg'
 
 interface IHeader {
   setMenu: () => void
@@ -46,20 +57,74 @@ const Header = ({ setMenu }: IHeader) => {
         <Logo src={logo} />
       </LinkContainer>
       <div className="ml-auto d-none d-lg-flex align-items-center">
-        <LinkMenu>
-          <LinkMenuLi>
-            <LinkContainer to={pageurl.LANDINGPAGE}>Home</LinkContainer>
-          </LinkMenuLi>
-          <LinkMenuLi>
-            <LinkContainer to={''}>About</LinkContainer>
-          </LinkMenuLi>
-          <LinkMenuLi>
-            <LinkContainer to={''}>How To Vote</LinkContainer>
-          </LinkMenuLi>
-          <LinkMenuLi>
-            <LinkContainer to={pageurl.SPONSORSHIP}>Sponsorship</LinkContainer>
-          </LinkMenuLi>
-        </LinkMenu>
+        {!isLogged ? (
+          <LinkMenu>
+            <LinkMenuLi>
+              <LinkContainer to={pageurl.LANDINGPAGE}>HOME</LinkContainer>
+            </LinkMenuLi>
+            <LinkMenuLi>
+              <LinkContainer
+                to={
+                  !isLogged
+                    ? pageurl.GETSTARTED
+                    : pageurl.VOTE + `/${userData._doc._id}`
+                }
+              >
+                Vote
+              </LinkContainer>
+            </LinkMenuLi>
+            <LinkMenuLi>
+              <LinkContainer to={pageurl.SPONSORSHIP}>
+                Sponsorship
+              </LinkContainer>
+            </LinkMenuLi>
+          </LinkMenu>
+        ) : (
+          <ProfileContainer>
+            <LinkContainer to={pageurl.PROFILE}>
+              <ProfileName className="m-0">
+                {userData?._doc?.name?.toLowerCase()}
+              </ProfileName>
+            </LinkContainer>
+            <div className="dropdown">
+              <ProfileEllippisContainer
+                className="dropdown-toggle"
+                id="dropdownMenuButton"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <ProfileEllippis src={ellipsis} title="More Options" />
+              </ProfileEllippisContainer>
+
+              <ul
+                className="dropdown-menu"
+                aria-labelledby="dropdownMenuButton"
+              >
+                <DropdownItem
+                  className="dropdown-item"
+                  onClick={() => {
+                    window.open(pageurl.VOTE + `/${userData._doc._id}`, '_self')
+                  }}
+                >
+                  <i className="fa fa-check-circle" />
+                  &nbsp;&nbsp;Vote
+                </DropdownItem>
+
+                <DropdownItem
+                  className="dropdown-item"
+                  onClick={() => {
+                    localStorage.clear()
+                    window.open(pageurl.LANDINGPAGE, '_self')
+                  }}
+                >
+                  <i className="fa fa-sign-out" />
+                  &nbsp;&nbsp;Log out
+                </DropdownItem>
+              </ul>
+            </div>
+          </ProfileContainer>
+        )}
       </div>
     </HeaderContainer>
   )

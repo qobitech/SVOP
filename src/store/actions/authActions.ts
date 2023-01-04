@@ -12,8 +12,11 @@ export const loginAction = (data: { matriculationNumber: string }) => {
       data: JSON.stringify(data)
     },
     onSuccess: (res: any) => {
-      localStorage.setItem('token', JSON.stringify(res?.token))
-      window.open(pageurl.VOTE, '_self')
+      const { token, data } = res
+      localStorage.setItem('token', JSON.stringify(token))
+
+      const { voter } = data || {}
+      window.open(pageurl.VOTE + `/${voter._id}`, '_self')
     },
     actionType: authType.login
   })

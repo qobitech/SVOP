@@ -244,3 +244,7 @@ code {
 .text-medium {
   font-size: 16px;
 }
+
+.dropdown-toggle::after {
+  display: none !important;
+}

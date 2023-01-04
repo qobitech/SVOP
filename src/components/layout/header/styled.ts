@@ -23,6 +23,15 @@ export const Logo = styled('img')({
   height: 25
 })
 
+export const ProfileEllippisContainer = styled('div')({
+  width: 30,
+  height: 40,
+  cursor: 'pointer',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'flex-end'
+})
+
 export const Hamburger = styled('div')({
   marginRight: 10,
   cursor: 'pointer'
@@ -66,9 +75,10 @@ export const MenuTitle = styled(Typography)({
 
 export const ProfileName = styled(Typography)({
   fontFamily: ['Outfit_Medium', 'Arial', 'sans-serif'].join(','),
-  fontSize: 16,
+  fontSize: 14,
   margin: 0,
-  paddingRight: 30
+  paddingRight: 10,
+  textTransform: 'capitalize'
 })
 
 export const ProfileRole = styled(Typography)({
