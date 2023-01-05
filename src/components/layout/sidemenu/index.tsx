@@ -103,7 +103,7 @@ const SideMenu: React.FC<ISideMenu> = ({
           <MenuTitle className="m-0">{ORGANIZATION}</MenuTitle>
         </LinkContainer>
         <div className="pl-4 mb-3">
-          <p style={{ fontSize: '16px', textTransform: 'capitalize' }}>
+          <p style={{ fontSize: '14px', textTransform: 'capitalize' }}>
             <b>
               <div
                 dangerouslySetInnerHTML={{
