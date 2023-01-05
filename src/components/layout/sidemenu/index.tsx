@@ -83,8 +83,8 @@ const SideMenu: React.FC<ISideMenu> = ({
   subMenuOpen
 }) => {
   const shortenName = (name: string) => {
-    return name.length > 30
-      ? name.toLowerCase().substring(0, 22) + '...'
+    return name.length > 40
+      ? name.toLowerCase().substring(0, 35) + '...'
       : name.toLowerCase()
   }
 
