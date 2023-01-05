@@ -83,9 +83,9 @@ const SideMenu: React.FC<ISideMenu> = ({
   subMenuOpen
 }) => {
   const shortenName = (name: string) => {
-    const temp = name.split(' ')
-    const result = temp[0].trim()
-    return result.length > 30 ? result.substring(0, 22) + '...' : result
+    return name.length > 30
+      ? name.toLowerCase().substring(0, 22) + '...'
+      : name.toLowerCase()
   }
 
   return (
@@ -103,7 +103,7 @@ const SideMenu: React.FC<ISideMenu> = ({
           <MenuTitle className="m-0">{ORGANIZATION}</MenuTitle>
         </LinkContainer>
         <div className="pl-4 mb-3">
-          <p style={{ fontSize: '16px' }}>
+          <p style={{ fontSize: '16px', textTransform: 'capitalize' }}>
             <b>
               <div
                 dangerouslySetInnerHTML={{
