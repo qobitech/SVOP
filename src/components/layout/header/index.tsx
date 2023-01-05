@@ -82,7 +82,11 @@ const Header = ({ setMenu }: IHeader) => {
         ) : (
           <ProfileContainer>
             <ProfileName className="m-0">
-              {userData?._doc?.name?.toLowerCase()}
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: userData?._doc?.name?.toLowerCase() || ''
+                }}
+              />
             </ProfileName>
             <div className="dropdown">
               <ProfileEllippisContainer
