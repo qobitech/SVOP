@@ -130,4 +130,4 @@ export const SHOWRESULTPAGE =
   isLogged &&
   (userData._doc.matriculationNumber === 'U2017/1810067' ||
     userData._doc.matriculationNumber === 'U2017/1810086' ||
-    userData._doc.matriculationNumber === 'U2017/1810067')
+    userData._doc.matriculationNumber === 'U2018/1810128')
