@@ -82,8 +82,11 @@ const SideMenu: React.FC<ISideMenu> = ({
   setSubMenuOpen,
   subMenuOpen
 }) => {
-  const shortenName = (name: string) =>
-    name.length > 30 ? name.substring(0, 22) + '...' : name
+  const shortenName = (name: string) => {
+    const temp = name.split(' ')
+    const result = temp[0].trim() + temp[1][0].trim() + '.'
+    return result.length > 30 ? result.substring(0, 22) + '...' : name
+  }
 
   return (
     <MainMenuContainer
