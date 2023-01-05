@@ -101,7 +101,13 @@ const SideMenu: React.FC<ISideMenu> = ({
         </LinkContainer>
         <div className="pl-4 mb-3">
           <p style={{ fontSize: '16px' }}>
-            <b>{shortenName(userData?._doc?.name || '')}</b>
+            <b>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: shortenName(userData?._doc?.name || '')
+                }}
+              />
+            </b>
           </p>
         </div>
         <MenuContainer>
