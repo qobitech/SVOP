@@ -121,17 +121,19 @@ const SideMenu: React.FC<ISideMenu> = ({
               />
             ))}
         </MenuContainer>
-        <LogoutSection
-          onClick={() => {
-            localStorage.clear()
-            window.open(pageurl.LOGIN, '_self')
-          }}
-        >
-          <ParentMenuContainer>
-            <i className="fa fa-sign-out mr-2" />
-            <ParentMenuText>Logout</ParentMenuText>
-          </ParentMenuContainer>
-        </LogoutSection>
+        {isLogged && (
+          <LogoutSection
+            onClick={() => {
+              localStorage.clear()
+              window.open(pageurl.LOGIN, '_self')
+            }}
+          >
+            <ParentMenuContainer>
+              <i className="fa fa-sign-out mr-2" />
+              <ParentMenuText>Logout</ParentMenuText>
+            </ParentMenuContainer>
+          </LogoutSection>
+        )}
       </SideMenuContainer>
     </MainMenuContainer>
   )
