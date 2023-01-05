@@ -134,7 +134,7 @@ const SideMenu: React.FC<ISideMenu> = ({
           <LogoutSection
             onClick={() => {
               localStorage.clear()
-              window.open(pageurl.LOGIN, '_self')
+              window.open(pageurl.LANDINGPAGE, '_self')
             }}
           >
             <ParentMenuContainer>
