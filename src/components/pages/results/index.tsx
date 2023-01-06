@@ -63,12 +63,13 @@ const ResultsChild: React.FC<IResultsChild> = ({ states, ...props }) => {
     return (
       dataCandidates
         ?.filter((i) => i.categories.map((i) => i.id).includes(id))
-        .filter((i) => i.level === parseInt(watch().level)) ||
-      ([] as ICandidate[])
+        .filter((i) => i.level === parseInt(watch().level))
+        .map((i) => ({
+          ...i,
+          categories: i.categories.filter((j) => j.id === id)
+        })) || ([] as ICandidate[])
     )
   }
-
-  console.log(dataCandidates)
 
   useEffect(() => {
     getCategories()

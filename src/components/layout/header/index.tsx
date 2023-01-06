@@ -20,6 +20,7 @@ import {
   isLogged,
   ORGANIZATION,
   ORGANIZATION_FULL,
+  SHOWRESULTPAGE,
   userData
 } from '../../../constants/global'
 import { Separator } from '../../pages/landing/styled'
@@ -123,7 +124,21 @@ const Header = ({ setMenu }: IHeader) => {
                   <i className="fa fa-money" />
                   &nbsp;&nbsp;Sponsorship
                 </DropdownItem>
-
+                {SHOWRESULTPAGE && (
+                  <DropdownItem
+                    className="dropdown-item"
+                    onClick={() => {
+                      window.open(
+                        pageurl.RESULTS + `/${userData._doc._id}`,
+                        '_self'
+                      )
+                    }}
+                    style={{ fontSize: '13px' }}
+                  >
+                    <i className="fa fa-list-alt" />
+                    &nbsp;&nbsp;View Results
+                  </DropdownItem>
+                )}
                 <DropdownItem
                   className="dropdown-item"
                   onClick={() => {
