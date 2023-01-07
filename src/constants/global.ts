@@ -128,7 +128,7 @@ export const CATEGORIES = [
 
 export const ADMIN = 'qobi-admin'
 
-export const ISADMIN = userData._doc.matriculationNumber === ADMIN
+export const ISADMIN = userData?._doc?.matriculationNumber === ADMIN
 
 export const SHOWRESULTPAGE =
   isLogged &&
