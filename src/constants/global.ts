@@ -128,11 +128,13 @@ export const CATEGORIES = [
 
 export const ADMIN = 'qobi-admin'
 
-export const ISADMIN = userData?._doc?.matriculationNumber === ADMIN
+const matNum = userData?._doc?.matriculationNumber
+
+export const ISADMIN = matNum === ADMIN
 
 export const SHOWRESULTPAGE =
   isLogged &&
-  (userData._doc.matriculationNumber === 'U2017/1810067' ||
-    userData._doc.matriculationNumber === 'U2017/1810086' ||
-    userData._doc.matriculationNumber === ADMIN ||
-    userData._doc.matriculationNumber === 'U2018/1810128')
+  (matNum === 'U2017/1810067' ||
+    matNum === 'U2017/1810086' ||
+    matNum === ADMIN ||
+    matNum === 'U2018/1810128')
