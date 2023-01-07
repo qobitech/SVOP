@@ -94,7 +94,7 @@ const SideMenu: React.FC<ISideMenu> = ({
     >
       <SideMenuContainer>
         <LinkContainer
-          to={pageurl.PROFILE}
+          to={pageurl.LANDINGPAGE}
           className="d-flex align-items-center"
           title={ORGANIZATION_FULL}
         >
