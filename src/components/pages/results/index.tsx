@@ -17,7 +17,7 @@ import { IActions } from '../../../interface/IAction'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import { SHOWRESULTPAGE, TITLE } from '../../../constants/global'
+import { ISADMIN, SHOWRESULTPAGE, TITLE } from '../../../constants/global'
 import { Separator } from '../landing/styled'
 import { PageTitle } from '../../utils/page-title'
 import { TypeSelect } from '../../utils/select'
@@ -151,19 +151,21 @@ const ResultsChild: React.FC<IResultsChild> = ({ states, ...props }) => {
                             <CategoryBodyText>
                               {contestant.name}
                             </CategoryBodyText>
-                            {/* <p className="text-little  m-0">
-                            {
-                              contestant.categories.filter(
-                                (i) => i.id === category._id
-                              )[0].votes
-                            }{' '}
-                            vote
-                            {contestant.categories.filter(
-                              (i) => i.id === category._id
-                            )[0].votes === 1
-                              ? ''
-                              : 's'}
-                          </p> */}
+                            {ISADMIN && (
+                              <p className="text-little  m-0">
+                                {
+                                  contestant.categories.filter(
+                                    (i) => i.id === category._id
+                                  )[0].votes
+                                }{' '}
+                                vote
+                                {contestant.categories.filter(
+                                  (i) => i.id === category._id
+                                )[0].votes === 1
+                                  ? ''
+                                  : 's'}
+                              </p>
+                            )}
                           </div>
                           <div className={`progress_section w-100 m-0 p-0`}>
                             <progress
