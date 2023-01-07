@@ -20,6 +20,21 @@ export default function voteReducer(state = initialState, action: any) {
         ...state,
         allCandidates_Error: action.payload
       }
+    case candidatesType.getTotalVotes.dataAction:
+      return {
+        ...state,
+        totalVotes: action.payload
+      }
+    case candidatesType.getTotalVotes.dataLoading:
+      return {
+        ...state,
+        totalVotes_Loading: action.payload
+      }
+    case candidatesType.getTotalVotes.dataError:
+      return {
+        ...state,
+        totalVotes_Error: action.payload
+      }
     default:
       return state
   }

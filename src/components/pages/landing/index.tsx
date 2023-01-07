@@ -35,7 +35,7 @@ const LandingPageChild: React.FC<ILandingPageChild> = ({
   states,
   ...props
 }) => {
-  const { getCategories } = props as unknown as IActions
+  const { getCategories, getTotalVotes } = props as unknown as IActions
   const ctas = [
     {
       id: 1,
@@ -48,9 +48,11 @@ const LandingPageChild: React.FC<ILandingPageChild> = ({
   ]
 
   const dataCategories = states?.categories?.allCategories
+  const dataTotalVotes = states?.candidates?.totalVotes?.data?.totalVotes
 
   useEffect(() => {
     getCategories()
+    getTotalVotes()
   }, [])
 
   return (
@@ -60,7 +62,7 @@ const LandingPageChild: React.FC<ILandingPageChild> = ({
         title={TITLE}
         categories={dataCategories?.data?.categories.length || 0}
         shareLinks={[]}
-        totalVotes={4500}
+        totalVotes={dataTotalVotes || 0}
       />
       <About description={DESCRIPTION} />
       <Organisers organisers={ORGANIZERS} />

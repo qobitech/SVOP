@@ -16,3 +16,10 @@ export interface ICandidates {
     candidates: ICandidate[]
   }
 }
+export interface ITotalVotes {
+  status: string
+  requestedAt: string
+  data: {
+    totalVotes: number
+  }
+}

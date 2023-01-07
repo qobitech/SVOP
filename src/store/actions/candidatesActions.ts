@@ -12,3 +12,14 @@ export const getCandidates = () => {
     actionType: candidatesType.getAll
   })
 }
+
+export const getTotalVotes = () => {
+  return utils.httpGetMethod({
+    apiData: {
+      url: '',
+      customurl: BASE_URL + '/candidates/total-votes',
+      header: utils.headerNoAuth()
+    },
+    actionType: candidatesType.getTotalVotes
+  })
+}

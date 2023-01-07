@@ -18,6 +18,7 @@ interface ICategoryActions {
 }
 interface ICandidatesActions {
   getCandidates: () => (dispatch: any) => void
+  getTotalVotes: () => (dispatch: any) => void
 }
 interface IOtherActions {
   clearAction: (actionType: I_ACTION_TYPE) => (dispatch: any) => void

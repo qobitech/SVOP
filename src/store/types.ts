@@ -24,6 +24,11 @@ export const candidatesType = {
     dataAction: 'GET_ALL_CANDIDATES',
     dataLoading: 'GET_ALL_CANDIDATES_LOADING',
     dataError: 'GET_ALL_CANDIDATES_ERROR'
+  },
+  getTotalVotes: {
+    dataAction: 'GET_TOTAL_VOTES',
+    dataLoading: 'GET_TOTAL_VOTES_LOADING',
+    dataError: 'GET_TOTAL_VOTES_ERROR'
   }
 }
 

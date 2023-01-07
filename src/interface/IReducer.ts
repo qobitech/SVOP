@@ -1,5 +1,5 @@
 import { ILogin } from './IAuth'
-import { ICandidates } from './ICandidates'
+import { ICandidates, ITotalVotes } from './ICandidates'
 import { ICategories } from './ICategory'
 import { IVotes } from './IVotes'
 
@@ -36,6 +36,9 @@ export interface ICandidatesReducer {
   allCandidates: ICandidates
   allCandidates_Loading: boolean
   allCandidates_Error: IError
+  totalVotes: ITotalVotes
+  totalVotes_Loading: boolean
+  totalVotes_Error: IError
 }
 
 export interface IStates {
