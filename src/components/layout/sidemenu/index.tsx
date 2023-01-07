@@ -31,6 +31,7 @@ interface ISideMenu {
   isOpen: boolean
   setSubMenuOpen: (subMenuOpen: number) => (dispatch: any) => void
   subMenuOpen: number
+  setMenu: () => void
 }
 
 const menuData = [
@@ -80,7 +81,8 @@ const SideMenu: React.FC<ISideMenu> = ({
   // imageSrc,
   isOpen,
   setSubMenuOpen,
-  subMenuOpen
+  subMenuOpen,
+  setMenu
 }) => {
   const shortenName = (name: string) => {
     return name.length > 40
@@ -127,6 +129,7 @@ const SideMenu: React.FC<ISideMenu> = ({
                 icon={i.icon}
                 setSubMenuOpen={setSubMenuOpen}
                 subMenuOpen={subMenuOpen}
+                setMenu={setMenu}
               />
             ))}
         </MenuContainer>
@@ -163,6 +166,7 @@ interface IMenuComponent {
   icon: string
   setSubMenuOpen: (subMenuOpen: number) => (dispatch: any) => void
   subMenuOpen: number
+  setMenu: () => void
 }
 
 const MenuComponent: React.FC<IMenuComponent> = ({
@@ -173,12 +177,13 @@ const MenuComponent: React.FC<IMenuComponent> = ({
   url,
   icon,
   setSubMenuOpen,
-  subMenuOpen
+  subMenuOpen,
+  setMenu
 }) => {
   return (
     <MenuContainer key={id}>
       {!isParent ? (
-        <LinkContainer to={url}>
+        <LinkContainer to={url} onClick={setMenu}>
           <ParentMenuContainer>
             <i className={icon} />
             <ParentMenuText>{title}</ParentMenuText>
@@ -186,7 +191,9 @@ const MenuComponent: React.FC<IMenuComponent> = ({
         </LinkContainer>
       ) : (
         <ParentMenuContainer
-          onClick={() => setSubMenuOpen(subMenuOpen === id ? 0 : id)}
+          onClick={() => {
+            setSubMenuOpen(subMenuOpen === id ? 0 : id)
+          }}
         >
           <i className={icon} />
           <ParentMenuText>{title}</ParentMenuText>

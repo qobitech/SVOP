@@ -58,6 +58,7 @@ const DashboardChild: React.FC<IDashboardChild> = ({
           isOpen={menuOpen || false}
           setSubMenuOpen={setSubMenuOpen}
           subMenuOpen={subMenuOpen || 0}
+          setMenu={setMenu}
         />
         {menuOpen ? <OverLay onClick={setMenu} /> : null}
       </MainContainer>
