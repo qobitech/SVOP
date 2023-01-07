@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import DataWrapper from '../../../wrapper/data-wrapper'
 import {
   FormContainer,
@@ -71,6 +71,31 @@ const SponsorshipChild: React.FC<ISponsorshipChild> = ({
   const error = ''
   const load = false
 
+  const [copySuccess, setCopySuccess] = useState(false)
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout
+    if (copySuccess) {
+      timer = setTimeout(() => {
+        setCopySuccess(() => false)
+      }, 4000)
+    }
+    return () => {
+      clearTimeout(timer)
+    }
+  }, [copySuccess])
+
+  const shareURLRef = useRef<HTMLTextAreaElement>(null)
+
+  const copyToClipboard = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    e.preventDefault()
+    shareURLRef?.current?.select()
+    document.execCommand('copy')
+    setCopySuccess(true)
+  }
+
+  const url = '1224447437'
+
   return (
     <GetStartedContainer>
       <FormContainer>
@@ -133,16 +158,37 @@ const SponsorshipChild: React.FC<ISponsorshipChild> = ({
           ) : (
             <div>
               <Separator customheight={40} />
-
+              <div className="text-center" style={{ height: '15px' }}>
+                {copySuccess && (
+                  <p className="text-success m-0 text-little">
+                    <span>
+                      <i className="fas fa-check-circle mr-1" />
+                    </span>
+                    Copied
+                  </p>
+                )}
+              </div>
+              <Separator customheight={0} />
               <div className="d-flex justify-content-between align-items-center w-100">
                 <div>
                   <CategoryHeader>Account Number</CategoryHeader>
-                  <AccountNumberText>1224447437</AccountNumberText>
+                  <AccountNumberText>{url}</AccountNumberText>
                 </div>
+                <textarea
+                  value={url}
+                  style={{
+                    width: 0,
+                    height: 0,
+                    opacity: 0
+                  }}
+                  ref={shareURLRef}
+                  readOnly
+                />
                 <i
                   className="fas fa-copy"
                   title="Copy"
                   style={{ cursor: 'pointer', color: COLOR }}
+                  onClick={(e) => copyToClipboard(e)}
                 />
               </div>
               <Separator customheight={10} />
