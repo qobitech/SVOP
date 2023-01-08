@@ -44,7 +44,7 @@ export const ShareBlogComponentData = ({ title, description, url }: ISBCD) => {
     },
     {
       id: 4,
-      href: `mailto:?subject=${title} ${cta} : ${url}`,
+      href: `mailto:?subject=${title}&body=${desc} ${cta} : ${url}`,
       title,
       dataAction: '',
       name: 'Email',
