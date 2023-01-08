@@ -65,7 +65,9 @@ const Share: React.FC<ISC> = ({
 
   return (
     <>
-      <div onClick={() => setOpenModal(true)}>{children}</div>
+      <div style={{ cursor: 'pointer' }} onClick={() => setOpenModal(true)}>
+        {children}
+      </div>
       {openModal && (
         <NotificationModal {...modalprops}>
           <div
