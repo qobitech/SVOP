@@ -126,6 +126,8 @@ export const CATEGORIES = [
   }
 ]
 
+export const URL = 'https://naselsuniport.com/'
+
 export const ADMIN = 'qobi-admin'
 
 const matNum = userData?._doc?.matriculationNumber

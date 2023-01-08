@@ -1,4 +1,6 @@
 import React from 'react'
+import { DESCRIPTION, URL } from '../../../../constants/global'
+import Share from '../../../utils/share'
 import { Separator } from '../styled'
 import {
   HeaderContainer,
@@ -44,14 +46,21 @@ const Header: React.FC<IHeader> = ({
           </span>
         </StatsItem>
         <Separator customheight={20} customwidth={1} />
-        <StatsItem isml="true">
-          Share&nbsp;&nbsp;&nbsp;
-          <span>
-            <strong>
-              <i className="fas fa-share-alt" />
-            </strong>
-          </span>
-        </StatsItem>
+        <Share
+          baseurl={URL}
+          description={DESCRIPTION}
+          title={'NASELS'}
+          url={URL}
+        >
+          <StatsItem isml="true">
+            Share&nbsp;&nbsp;&nbsp;
+            <span>
+              <strong>
+                <i className="fas fa-share-alt" />
+              </strong>
+            </span>
+          </StatsItem>
+        </Share>
       </StatsContainer>
     </HeaderContainer>
   )
