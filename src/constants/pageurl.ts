@@ -7,5 +7,6 @@ export const pageurl = {
   SPONSORSHIP: '/sponsorship',
   VOTE: '/vote',
   VOTE_SUCCESS: '/vote-success',
+  VOTE_EXPIRED: '/vote-expired',
   RESULTS: '/results'
 }

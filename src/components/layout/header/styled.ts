@@ -4,15 +4,18 @@ import { down } from '../../../assets/style/breakpointHelpers'
 import { COLOR } from '../../../constants/global'
 
 export const HeaderContainer = styled('div')({
-  display: 'flex',
-  padding: '10px 35px',
-  alignItems: 'center',
   zIndex: 4,
   position: 'fixed',
   background: '#FFF',
+  width: '100%'
+})
+
+export const HeaderContainerInner = styled('div')({
+  display: 'flex',
+  padding: '10px 35px',
+  alignItems: 'center',
+  background: '#FFF',
   width: '100%',
-  top: 0,
-  left: 0,
   [down('sm')]: {
     padding: 10
   }
@@ -71,6 +74,26 @@ export const MenuTitle = styled(Typography)({
   margin: 0,
   letterSpacing: 5,
   color: COLOR
+})
+
+export const HeaderNoticeComponent = styled('div')({
+  width: '100%',
+  height: 'auto',
+  background: '#d51b1b',
+  textAlign: 'center',
+  padding: '3px 0',
+  '& p': {
+    fontFamily: ['Outfit_SemiBold', 'Arial', 'sans-serif'].join(','),
+    fontSize: 13,
+    margin: 0,
+    color: '#fff',
+    textTransform: 'capitalize'
+  },
+  [down('sm')]: {
+    '& p': {
+      fontSize: 11
+    }
+  }
 })
 
 export const ProfileName = styled(Typography)({

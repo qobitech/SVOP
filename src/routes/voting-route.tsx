@@ -1,14 +1,14 @@
 import React from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
-import { isLogged, VOTINGEXPIRED } from '../constants/global'
+import { ISADMIN, isLogged, VOTINGEXPIRED } from '../constants/global'
 import { pageurl } from '../constants/pageurl'
 
-const AdminRoute = () => {
+const VotingRoute = () => {
   if (!isLogged) {
     localStorage.clear()
     return <Navigate to={pageurl.GETSTARTED} />
   } else {
-    if (VOTINGEXPIRED) {
+    if (VOTINGEXPIRED && !ISADMIN) {
       return <Navigate to={pageurl.VOTE_EXPIRED} />
     } else {
       return <Outlet />
@@ -16,4 +16,4 @@ const AdminRoute = () => {
   }
 }
 
-export default AdminRoute
+export default VotingRoute

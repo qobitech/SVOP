@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 import ProtectedRoute from './routes/protected-route'
 import AuthRoute from './routes/auth-route'
-import AdminRoute from './routes/admin-route'
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
@@ -16,6 +15,9 @@ import Sponsorship from './components/pages/sponsorship'
 import Voting from './components/pages/voting'
 import Results from './components/pages/results'
 import VoteSuccess from './components/pages/vote-success'
+import VoteExpired from './components/pages/vote-expired'
+import VotingRoute from './routes/voting-route'
+import ResultRoute from './routes/result-route'
 
 function App() {
   return (
@@ -24,13 +26,14 @@ function App() {
         <Routes>
           <Route path={pageurl.LANDINGPAGE} element={<LandingPage />} />
           <Route path={pageurl.SPONSORSHIP} element={<Sponsorship />} />
+          <Route path={pageurl.VOTE_EXPIRED} element={<VoteExpired />} />
           <Route path={pageurl.GETSTARTED} element={<AuthRoute />}>
             <Route path={pageurl.GETSTARTED} element={<GetStarted />} />
           </Route>
-          <Route path={`${pageurl.VOTE}/:id`} element={<ProtectedRoute />}>
+          <Route path={`${pageurl.VOTE}/:id`} element={<VotingRoute />}>
             <Route path={`${pageurl.VOTE}/:id`} element={<Voting />} />
           </Route>
-          <Route path={`${pageurl.RESULTS}/:id`} element={<AdminRoute />}>
+          <Route path={`${pageurl.RESULTS}/:id`} element={<ResultRoute />}>
             <Route path={`${pageurl.RESULTS}/:id`} element={<Results />} />
           </Route>
           <Route
