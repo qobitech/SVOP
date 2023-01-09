@@ -18,6 +18,7 @@ import VoteSuccess from './components/pages/vote-success'
 import VoteExpired from './components/pages/vote-expired'
 import VotingRoute from './routes/voting-route'
 import ResultRoute from './routes/result-route'
+import VotingExpiredRoute from './routes/voting-expired-route'
 
 function App() {
   return (
@@ -26,12 +27,15 @@ function App() {
         <Routes>
           <Route path={pageurl.LANDINGPAGE} element={<LandingPage />} />
           <Route path={pageurl.SPONSORSHIP} element={<Sponsorship />} />
-          <Route path={pageurl.VOTE_EXPIRED} element={<VoteExpired />} />
+
           <Route path={pageurl.GETSTARTED} element={<AuthRoute />}>
             <Route path={pageurl.GETSTARTED} element={<GetStarted />} />
           </Route>
           <Route path={`${pageurl.VOTE}/:id`} element={<VotingRoute />}>
             <Route path={`${pageurl.VOTE}/:id`} element={<Voting />} />
+          </Route>
+          <Route path={pageurl.VOTE_EXPIRED} element={<VotingExpiredRoute />}>
+            <Route path={pageurl.VOTE_EXPIRED} element={<VoteExpired />} />
           </Route>
           <Route path={`${pageurl.RESULTS}/:id`} element={<ResultRoute />}>
             <Route path={`${pageurl.RESULTS}/:id`} element={<Results />} />
