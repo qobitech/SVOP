@@ -158,3 +158,5 @@ export const NOTICE = NOTICEPERIOD
   : POSTNOTICEPERIOD
   ? `Voting has ended`
   : ''
+
+export const UNDER_CONSTRUCTION = false

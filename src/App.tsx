@@ -21,6 +21,7 @@ import ResultRoute from './routes/result-route'
 import VotingExpiredRoute from './routes/voting-expired-route'
 import UnderConstruction from './components/pages/under-construction'
 import PublicRoute from './routes/public-route'
+import { UNDER_CONSTRUCTION } from './constants/global'
 
 function App() {
   return (
@@ -39,10 +40,12 @@ function App() {
             <Route path={pageurl.GETSTARTED} element={<GetStarted />} />
           </Route>
 
-          <Route
-            path={pageurl.UNDER_CONSTRUCTION}
-            element={<UnderConstruction />}
-          />
+          {UNDER_CONSTRUCTION && (
+            <Route
+              path={pageurl.UNDER_CONSTRUCTION}
+              element={<UnderConstruction />}
+            />
+          )}
 
           <Route path={pageurl.GETSTARTED} element={<AuthRoute />}>
             <Route path={pageurl.GETSTARTED} element={<GetStarted />} />
