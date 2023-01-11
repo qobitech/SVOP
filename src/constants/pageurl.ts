@@ -8,5 +8,6 @@ export const pageurl = {
   VOTE: '/vote',
   VOTE_SUCCESS: '/vote-success',
   VOTE_EXPIRED: '/vote-expired',
+  UNDER_CONSTRUCTION: '/under-construction',
   RESULTS: '/results'
 }

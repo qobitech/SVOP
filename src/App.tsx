@@ -19,14 +19,30 @@ import VoteExpired from './components/pages/vote-expired'
 import VotingRoute from './routes/voting-route'
 import ResultRoute from './routes/result-route'
 import VotingExpiredRoute from './routes/voting-expired-route'
+import UnderConstruction from './components/pages/under-construction'
+import PublicRoute from './routes/public-route'
 
 function App() {
   return (
     <Router basename={process.env.PUBLIC_URL}>
       <Suspense fallback={<></>}>
         <Routes>
-          <Route path={pageurl.LANDINGPAGE} element={<LandingPage />} />
-          <Route path={pageurl.SPONSORSHIP} element={<Sponsorship />} />
+          <Route path={pageurl.LANDINGPAGE} element={<PublicRoute />}>
+            <Route path={pageurl.LANDINGPAGE} element={<LandingPage />} />
+          </Route>
+
+          <Route path={pageurl.SPONSORSHIP} element={<PublicRoute />}>
+            <Route path={pageurl.SPONSORSHIP} element={<Sponsorship />} />
+          </Route>
+
+          <Route path={pageurl.GETSTARTED} element={<PublicRoute />}>
+            <Route path={pageurl.GETSTARTED} element={<GetStarted />} />
+          </Route>
+
+          <Route
+            path={pageurl.UNDER_CONSTRUCTION}
+            element={<UnderConstruction />}
+          />
 
           <Route path={pageurl.GETSTARTED} element={<AuthRoute />}>
             <Route path={pageurl.GETSTARTED} element={<GetStarted />} />
